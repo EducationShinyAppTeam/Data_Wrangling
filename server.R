@@ -30,7 +30,7 @@ shinyServer(function(input, output, session) {
     )
   })
   observeEvent(input$go2, {
-    updateTabItems(session, 'tabs', 'exp4')
+    updateTabItems(session, 'tabs', 'exp1')
   })
   
 ############ Reshaping Data ############
