@@ -13,7 +13,7 @@ library(plot3D)
 library(ggmap)
 
 
-header = dashboardHeader(title = 'Data Science',
+header = dashboardHeader(title = 'Data Wrangling',
                          tags$li(class = "dropdown",
                                  tags$a(href = "https://shinyapps.science.psu.edu/",
                                         icon("home"))),
@@ -50,7 +50,7 @@ body = dashboardBody(
             br(),
             
             h3(strong('Instructions:')),
-            h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
+            #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
             h4(tags$li('In the Reshaping Data section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
             h4(tags$li('In the Combining Data Set section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
