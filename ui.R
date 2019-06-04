@@ -80,12 +80,17 @@ body = dashboardBody(
             tabsetPanel(type = 'tabs',
                         tabPanel('unite',
                                  br(),
-                                 box(title = 'View An Example', width = NULL, style = 'background-color: #ff8a80',
+                                 box(title = 'View An Example',
+                                     width = NULL,
+                                     style = 'background-color: #ff8a80',
                                      tableOutput('uniteOutput1'),
-                                     checkboxGroupInput(inputId = 'unite1', label = 'Select Columns to Unite', inline = T,
-                                                        choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec', 'vs', 'am', 'gear', 'carb')
-                                                        ),
-                                     materialSwitch(inputId = 'unite3', label = 'View the Transformed Data Set', value = FALSE),
+                                     checkboxGroupInput(inputId = 'unite1',
+                                                        label = 'Select Columns to Unite',
+                                                        inline = T,
+                                                        choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec', 'vs', 'am', 'gear', 'carb')),
+                                     materialSwitch(inputId = 'unite3',
+                                                    label = 'View the Transformed Data Set',
+                                                    value = FALSE),
                                      uiOutput('uniteUI'),
                                      br(),
                                      tableOutput('uniteOutput2')
@@ -94,8 +99,12 @@ body = dashboardBody(
                         
                         tabPanel('gather',
                                  br(),
-                                 box(title = 'View An Example', width = NULL, style = 'background-color: #f8bbd0',
-                                     materialSwitch(inputId = 'dw1', label = 'View the Transformed Data Set', value = FALSE),
+                                 box(title = 'View An Example',
+                                     width = NULL,
+                                     style = 'background-color: #f8bbd0',
+                                     materialSwitch(inputId = 'dw1',
+                                                    label = 'View the Transformed Data Set',
+                                                    value = FALSE),
                                      tableOutput('dwTable1'),
                                      tags$strong(div('Gather columns into rows.', style = 'color: purple')),
                                      tags$code('tidyr::gather(cases, "year", "n", 2:4)'),
@@ -116,7 +125,9 @@ body = dashboardBody(
                         #          ),
                         tabPanel('spread',
                                  br(),
-                                 box(title = 'View An Example', width = NULL, style = 'background-color: #e0f7fa',
+                                 box(title = 'View An Example',
+                                     width = NULL,
+                                     style = 'background-color: #e0f7fa',
                                      materialSwitch(inputId = 'dw3',
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
@@ -131,15 +142,19 @@ body = dashboardBody(
                        
                         tabPanel('arrange',
                                  br(),
-                                 box(title = 'View An Example', width = NULL, style = 'background-color: #b2dfdb',
-                                     sliderTextInput(inputId = 'dwSTI2', label = 'Select Your Sorting Option',
+                                 box(title = 'View An Example',
+                                     width = NULL,
+                                     style = 'background-color: #b2dfdb',
+                                     sliderTextInput(inputId = 'dwSTI2',
+                                                     label = 'Select Your Sorting Option',
                                                      choices = c('Random', 'Low to High', 'High to Low'),
-                                                     grid = TRUE, force_edges = TRUE
-                                                     ),
-                                     sliderTextInput(inputId = 'dwSTI1', label = 'Select the Variable to Sort By', 
+                                                     grid = TRUE,
+                                                     force_edges = TRUE),
+                                     sliderTextInput(inputId = 'dwSTI1',
+                                                     label = 'Select the Variable to Sort By', 
                                                      choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec'), 
-                                                     grid = TRUE, force_edges = TRUE
-                                     ),
+                                                     grid = TRUE,
+                                                     force_edges = TRUE),
                                      tags$strong('R code: '),
                                      tags$li('Order rows by values of a column (low to high)'),
                                      uiOutput('code1'),
@@ -158,7 +173,10 @@ body = dashboardBody(
            
             fluidRow(
               column(width = 12,
-                     box(title = NULL, style = 'background-color: #b2dfdb', width = NULL, height = NULL,
+                     box(title = NULL,
+                         style = 'background-color: #b2dfdb',
+                         width = NULL,
+                         height = NULL,
                          tags$h2('Data Wrangling --- Combining Data Sets'),
                          
                          #div(style="display: inline-block;vertical-align:top;",
@@ -167,7 +185,11 @@ body = dashboardBody(
                          #div(style="display: inline-block;vertical-align:top;",
                         #     circleButton("info1",icon = icon("info"), status = "myClass",size = "xs")
                          #),
-                         bsPopover(id = 'info1', title = " ", content = 'Exercise! Within each box is a transformed dataset. Click on the green label on the upper left corner to select the correct transformation.', placement = 'buttom'),
+                         bsPopover(id = 'info1',
+                                   title = " ",
+                                   content = 'Exercise! Within each box is a transformed dataset.
+                                   Click on the green label on the upper left corner to select the correct transformation.',
+                                   placement = 'buttom'),
                          div(style = 'text-align: center', tags$img(src = 'cds.png', width = '300px', height = NULL)),
                          br(),
                          br()
@@ -177,44 +199,72 @@ body = dashboardBody(
             
             fluidRow(#theme = "bootstrap.css",
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffe0b2', width = NULL, height = '220px',
-                         dropdownButton(
-                           circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                           up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd1', label = 'Mutating Joins Option', force_edges = TRUE, grid = TRUE,
-                                           choices = c('left join', 'right join', 'inner join', 'full join')
-                                           ),
-                           textOutput('cdExp1')
-                         ),
+                     box(title = NULL,
+                         style = 'background-color: #ffe0b2',
+                         width = NULL,
+                         height = '220px',
+                         dropdownButton(circle = TRUE,
+                                        status = 'success',
+                                        size = 'xs',
+                                        icon = icon('cogs'),
+                                        up = TRUE,
+                                        right = TRUE,
+                                        tooltip = tooltipOptions(title = "Select Your Answer"),
+                                        sliderTextInput(inputId = 'cd1',
+                                                        label = 'Mutating Joins Option',
+                                                        force_edges = TRUE,
+                                                        grid = TRUE,
+                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
+                                        textOutput('cdExp1')),
                          tableOutput('cdTable1'),
-                         bsButton(inputId = 'check1', label = 'Check', size = 'median')
+                         bsButton(inputId = 'check1',
+                                  label = 'Check',
+                                  size = 'median')
                          )
                      ),
               
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffe0b2', width = NULL, height = '220px',
-                         dropdownButton(
-                           circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                           up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd2', label = 'Mutating Joins Option', force_edges = TRUE, grid = TRUE,
-                                           choices = c('left join', 'right join', 'inner join', 'full join')),
-                           textOutput('cdExp2')
-                         ),
+                     box(title = NULL,
+                         style = 'background-color: #ffe0b2',
+                         width = NULL,
+                         height = '220px',
+                         dropdownButton(circle = TRUE,
+                                        status = 'success',
+                                        size = 'xs',
+                                        icon = icon('cogs'),
+                                        up = TRUE,
+                                        right = TRUE,
+                                        tooltip = tooltipOptions(title = "Select Your Answer"),
+                                        sliderTextInput(inputId = 'cd2',
+                                                        label = 'Mutating Joins Option',
+                                                        force_edges = TRUE,
+                                                        grid = TRUE,
+                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
+                           textOutput('cdExp2')),
                          tableOutput('cdTable2'),
                          br(),
-                         bsButton(inputId = 'check2', label = 'Check', size = 'median')
+                         bsButton(inputId = 'check2',
+                                  label = 'Check',
+                                  size = 'median')
                          )
               ),
               
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffccbc', width = NULL, height = '180px',
-                         dropdownButton(
-                           circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                           up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd5', label = 'Filtering Joins Option', force_edges = TRUE,
-                                           choices = c('semi join', 'anti join')
-                                           )
-                         ),
+                     box(title = NULL,
+                         style = 'background-color: #ffccbc',
+                         width = NULL,
+                         height = '180px',
+                         dropdownButton(circle = TRUE,
+                                        status = 'success',
+                                        size = 'xs',
+                                        icon = icon('cogs'),
+                                        up = TRUE,
+                                        right = TRUE,
+                                        tooltip = tooltipOptions(title = "Select Your Answer"),
+                                        sliderTextInput(inputId = 'cd5',
+                                                        label = 'Filtering Joins Option',
+                                                        force_edges = TRUE,
+                                                        choices = c('semi join', 'anti join'))),
                          tableOutput('cdTable5'),
                          br(),
                          bsButton(inputId = 'check5', label = 'Check', size = 'median')
@@ -222,36 +272,55 @@ body = dashboardBody(
                      ),
               
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffccbc', width = NULL, height = '180px',
-                         dropdownButton(
-                           circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                           up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd6', label = 'Filtering Joins Option', force_edges = TRUE,
-                                           choices = c('semi join', 'anti join')
-                           )
+                     box(title = NULL,
+                         style = 'background-color: #ffccbc',
+                         width = NULL,
+                         height = '180px',
+                         dropdownButton(circle = TRUE,
+                                        status = 'success',
+                                        size = 'xs',
+                                        icon = icon('cogs'),
+                                        up = TRUE,
+                                        right = TRUE,
+                                        tooltip = tooltipOptions(title = "Select Your Answer"),
+                                        sliderTextInput(inputId = 'cd6',
+                                                        label = 'Filtering Joins Option',
+                                                        force_edges = TRUE,
+                                                        choices = c('semi join', 'anti join'))
                          ),
                          tableOutput('cdTable6'),
-                         bsButton(inputId = 'check6', label = 'Check', size = 'median')
+                         bsButton(inputId = 'check6',
+                                  label = 'Check',
+                                  size = 'median')
                          )
                      ),
               
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffe0b2', width = NULL, height = NULL,
-                         dropdownButton(
-                           circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                           up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd3', label = 'Mutating Joins Option', force_edges = TRUE, grid = T,
-                                           choices = c('left join', 'right join', 'inner join', 'full join')
-                                           ),
+                     box(title = NULL,
+                         style = 'background-color: #ffe0b2',
+                         width = NULL,
+                         height = NULL,
+                         dropdownButton(circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
+                                        up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
+                                        sliderTextInput(inputId = 'cd3',
+                                                        label = 'Mutating Joins Option',
+                                                        force_edges = TRUE,
+                                                        grid = T,
+                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
                            textOutput('cdExp3')
                          ),
                          tableOutput('cdTable3'),
-                         bsButton(inputId = 'check3', label = 'Check', size = 'median')
+                         bsButton(inputId = 'check3',
+                                  label = 'Check',
+                                  size = 'median')
                          )
                      ),
               
               column(width = 6,
-                     box(title = NULL, style = 'background-color: #ffe0b2', width = NULL, height = NULL,
+                     box(title = NULL,
+                         style = 'background-color: #ffe0b2',
+                         width = NULL,
+                         height = NULL,
                          dropdownButton(
                            circle = TRUE,
                            status = 'success',
@@ -270,7 +339,9 @@ body = dashboardBody(
                          ),
                          tableOutput('cdTable4'),
                          br(),
-                         bsButton(inputId = 'check4', label = 'Check', size = 'median')
+                         bsButton(inputId = 'check4',
+                                  label = 'Check',
+                                  size = 'median')
                          )
                      )
             )
