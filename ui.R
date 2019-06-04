@@ -13,7 +13,12 @@ library(plot3D)
 library(ggmap)
 
 
-header = dashboardHeader(title = 'Data Science')
+header = dashboardHeader(title = 'Data Science',
+                         tags$li(class = "dropdown",
+                                 tags$a(href = "https://shinyapps.science.psu.edu/",
+                                        icon("home"))),
+                         tags$li(class = "dropdown",
+                                 actionLink("info", icon("info"), class = "myClass")))
 
 sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs',
@@ -149,12 +154,12 @@ body = dashboardBody(
                      box(title = NULL, style = 'background-color: #b2dfdb', width = NULL, height = NULL,
                          tags$h2('Data Wrangling --- Combining Data Sets'),
                          
-                         div(style="display: inline-block;vertical-align:top;",
-                             tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 19))
-                         ),
-                         div(style="display: inline-block;vertical-align:top;",
-                             circleButton("info1",icon = icon("info"), status = "myClass",size = "xs")
-                         ),
+                         #div(style="display: inline-block;vertical-align:top;",
+                          #   tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 19))
+                         #),
+                         #div(style="display: inline-block;vertical-align:top;",
+                        #     circleButton("info1",icon = icon("info"), status = "myClass",size = "xs")
+                         #),
                          bsPopover(id = 'info1', title = " ", content = 'Exercise! Within each box is a transformed dataset. Click on the green label on the upper left corner to select the correct transformation.', placement = 'buttom'),
                          div(style = 'text-align: center', tags$img(src = 'cds.png', width = '300px', height = NULL)),
                          br(),
