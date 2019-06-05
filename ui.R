@@ -81,9 +81,12 @@ body = dashboardBody(
           br(),
           
           fluidRow(
-            box(title = 'Original Table', background = "green", width = 5,
-                tableOutput("original1"))
-          )),
+            box(title = 'Original Table', background = "green",
+                width = 5, tableOutput("original1"))),
+          
+          fluidRow(
+            box(title = NULL, background = "green", width = 5)
+            )),
 
         
     
