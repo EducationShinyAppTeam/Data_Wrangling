@@ -11,6 +11,7 @@ library(plot3D)
 library(plotly)
 library(ggplot2)
 library(ggmap)
+library(tidyr)
 
 shinyServer(function(input, output, session) {
   observeEvent(input$info0,{
@@ -33,6 +34,17 @@ shinyServer(function(input, output, session) {
     updateTabItems(session, 'tabs', 'exp1')
   })
   
+ ############## Tidy Data #################
+  
+output$original1 <- renderPlot({
+  plot(table4a)
+})
+  
+  
+  
+  
+  
+  
 ############ Reshaping Data ############
   # observeEvent(input$knob1, {
   #   updateKnobInput(session, inputId = 'knob2', label = 'Select the Maximum Value for the First Column', value = input$knob1)
@@ -40,7 +52,7 @@ shinyServer(function(input, output, session) {
   # 
   # observe(updateKnobInput(session, inputId = 'knob4', value = input$knob3 + input$knob2 - input$knob1))
   
-  #unite
+  # unite
   output$uniteUI <- renderUI ({
     if (input$unite3 == T) {
       tags$code('R code: tidyr::unite(mtcars, "New_Column_Name", c(input$unite1))') 
@@ -57,7 +69,7 @@ shinyServer(function(input, output, session) {
     }
   })
   
-  #arrange: default setting is low to high
+  # arrange: default setting is low to high
   output$dwTable8 <- renderTable ({
     if (input$dwSTI2 == 'Low to High') {
       head(dplyr::arrange(mtcars, mtcars[ , input$dwSTI1]))

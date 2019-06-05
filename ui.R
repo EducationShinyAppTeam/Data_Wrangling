@@ -11,6 +11,7 @@ library(ggplot2)
 library(EDAWR)
 library(plot3D)
 library(ggmap)
+library(tidyr)
 
 
 header = dashboardHeader(title = 'Data Wrangling',
@@ -23,7 +24,7 @@ header = dashboardHeader(title = 'Data Wrangling',
 sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs',
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
-              menuItem('Tidy Data', tabName = 'exp4', icon = icon('broom2')),
+              menuItem('Tidy Data', tabName = 'exp4', icon = icon('broom')),
               menuItem('Reshaping Data', tabName = 'exp1', icon = icon('wpexplorer')),
               menuItem('Combining Data Sets', tabName = 'exp2', icon = icon('gamepad'))
               #menuItem('Creating Your Own Graph', tabName = 'exp3', icon = icon('refresh'))
@@ -69,6 +70,23 @@ body = dashboardBody(
             h4('The Protein-Protein Interaction Dataset is from the Warwick University - Molecular Organisation and Assembly in Cells.')
             ),
 
+############# Tidy Data #################
+
+  tabItem(tabName = 'exp4',
+          br(),
+          div(style = 'text-align: center',
+              h3(strong('Tidy the Original Table by Choosing the Correct Inputs'))),
+          div(style = 'text-align: center',
+              h4('gather(`1`, `2`, key = "3", value = "4")')),
+          br(),
+          
+          fluidRow(
+            box(title = '', background = "green")
+          )),
+
+        
+    
+    
 ############ Reshaping Data ############
     tabItem(tabName = 'exp1', 
             #div(style="display: inline-block;vertical-align:top;",
@@ -78,7 +96,7 @@ body = dashboardBody(
             #    circleButton("info0",icon = icon("info"), status = "myClass", size = "xs")
             #),
             tabsetPanel(type = 'tabs',
-                        tabPanel('unite',
+                        tabPanel('Unite',
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
