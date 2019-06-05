@@ -23,7 +23,7 @@ header = dashboardHeader(title = 'Data Wrangling',
 sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs',
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
-              #menuItem('Data Visualization', tabName = 'exp4', icon = icon('wpexplorer')),
+              menuItem('Tidy Data', tabName = 'exp4', icon = icon('broom2')),
               menuItem('Reshaping Data', tabName = 'exp1', icon = icon('wpexplorer')),
               menuItem('Combining Data Sets', tabName = 'exp2', icon = icon('gamepad'))
               #menuItem('Creating Your Own Graph', tabName = 'exp3', icon = icon('refresh'))
