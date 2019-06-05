@@ -35,10 +35,11 @@ shinyServer(function(input, output, session) {
   })
   
  ############## Tidy Data #################
-  
-output$original1 <- renderPlot({
-  plot(table4a)
-})
+ 
+   
+ output$original1 <- renderTable({
+   table4a
+ })
   
   
   
