@@ -81,19 +81,29 @@ body = dashboardBody(
           br(),
           
           fluidRow(
-            box(title = 'Original Table', background = "green",
-                width = 5, tableOutput("original1"))),
+            
+            # plot of original data
+            box(title = 'Original Table', background = "green", width = 5,
+                tableOutput("original1")),
+            # plot using user inputs
+            box(title = 'Your Output', background = "green", width = 5,
+                
+                conditionalPanel('input.userOp1 == "1999"',
+                                 tags$strong('R code: '),
+                                 uiOutput('table1')))
+            ),
           
+          # choices for user plot
           fluidRow(
             box(title = NULL, background = "green", width = 5,
                 
-                selectInput(inputId = 'usersOp1', label = '1', choices = c('1999', '2000'),
+                selectInput(inputId = 'userOp1', label = '1', choices = c('1999', '2000'),
                             selected = '1999'),
-                selectInput(inputId = 'usersOp2', label = '2', choices = c('1999', '2000'),
+                selectInput(inputId = 'userOp2', label = '2', choices = c('1999', '2000'),
                             selected = '1999'),
-                selectInput(inputId = 'usersOp3', label = '3', choices = c('cases', 'country', 'year', 'Brazil'),
+                selectInput(inputId = 'userOp3', label = '3', choices = c('cases', 'country', 'year', 'Brazil'),
                             selected = 'cases'),
-                selectInput(inputId = 'usersOp4', label = '4', choices = c('cases', 'country', 'year', 'Brazil'),
+                selectInput(inputId = 'userOp4', label = '4', choices = c('cases', 'country', 'year', 'Brazil'),
                             selected = 'cases')
                 
                 )
