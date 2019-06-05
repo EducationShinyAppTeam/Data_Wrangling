@@ -85,7 +85,18 @@ body = dashboardBody(
                 width = 5, tableOutput("original1"))),
           
           fluidRow(
-            box(title = NULL, background = "green", width = 5)
+            box(title = NULL, background = "green", width = 5,
+                
+                selectInput(inputId = 'usersOp1', label = '1', choices = c('1999', '2000'),
+                            selected = '1999'),
+                selectInput(inputId = 'usersOp2', label = '2', choices = c('1999', '2000'),
+                            selected = '1999'),
+                selectInput(inputId = 'usersOp3', label = '3', choices = c('cases', 'country', 'year', 'Brazil'),
+                            selected = 'cases'),
+                selectInput(inputId = 'usersOp4', label = '4', choices = c('cases', 'country', 'year', 'Brazil'),
+                            selected = 'cases')
+                
+                )
             )),
 
         
