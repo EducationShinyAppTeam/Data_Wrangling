@@ -77,10 +77,31 @@ body = dashboardBody(
           tabsetPanel(type = 'tabs',
                       tabPanel('Challenge 1',
                                br(),
+                               
+
                                div(style = 'text-align: center',
-                                   h1(strong('Tidy the Original Data'))),
+                                   titlePanel("Tidy the Original Data"),
                                #div(style = 'text-align: center',
-                               #h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
+                                 #  h1(strong('Tidy the Original Data')),
+                               #div(style = 'text-align: center',
+                               h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
+                               
+                               fluidRow(
+                                 #sidebarPanel(
+                                   div(style = 'text-align: center',
+                                       bsButton("newtable",
+                                                label = "New Table",
+                                                icon("arrow-circle-right"),
+                                                size = "medium",
+                                                style = 'background-color: #b1d078'),
+                                       bsButton("submit",
+                                                label = "Check Answer",
+                                                icon("lightbulb"),
+                                                size = "medium",
+                                                style = 'background-color: #b1d078'),
+                                              width = 1)),#),
+                               
+                               
                                fluidRow(
                                  column(6,
                                         # plot of original data

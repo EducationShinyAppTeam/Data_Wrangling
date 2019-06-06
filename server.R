@@ -41,6 +41,7 @@ shinyServer(function(input, output, session) {
    table4a
  })
   
+  # specify outputs for every choice
   output$userOut1 <- renderTable({
     if (input$userOp1 == '1999' & input$userOp2 == '1999' 
         & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
