@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
     )
   })
   observeEvent(input$go2, {
-    updateTabItems(session, 'tabs', 'exp1')
+    updateTabItems(session, 'tabs', 'exp4')
   })
   
  ############## Tidy Data #################
@@ -41,9 +41,92 @@ shinyServer(function(input, output, session) {
    table4a
  })
   
+  output$userOut1 <- renderTable({
+    if (input$userOp1 == '1999' & input$userOp2 == '1999' 
+        & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`1999`, `1999`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '1999'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`1999`, `1999`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`1999`, `1999`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`1999`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`1999`, `2000`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`1999`, `2000`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`1999`, `2000`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == '1999' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`1999`, `2000`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '1999'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`2000`, `1999`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '1999'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`2000`, `1999`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`2000`, `1999`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`2000`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`2000`, `2000`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      table4a %>%
+        gather(`2000`, `2000`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      table4a %>%
+        gather(`2000`, `2000`, key = "year", value = "cases")
+    }
+    else {
+      table4a %>%
+        gather(`2000`, `2000`, key = "year", value = "year")
+    }
+  })
   
-  
-  
+ output$userOut2 <- renderUI({
+   tags$code('table4a %>% gather(`', input$userOp1, '`,`', input$userOp2, '`,
+             key = "', input$userOp3, '", value = "', input$userOp4, '")' )
+ }) 
   
   
 ############ Reshaping Data ############

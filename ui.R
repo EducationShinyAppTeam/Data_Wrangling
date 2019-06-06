@@ -75,40 +75,51 @@ body = dashboardBody(
   tabItem(tabName = 'exp4',
           br(),
           div(style = 'text-align: center',
-              h3(strong('Tidy the Original Table by Choosing the Correct Inputs'))),
+              h3(strong('Tidy the Original Table'))),
           div(style = 'text-align: center',
-              h4('gather(`1`, `2`, key = "3", value = "4")')),
+              h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
           br(),
           
+          
           fluidRow(
-            
             # plot of original data
-            box(title = 'Original Table', background = "green", width = 5,
+            box(title = 'Original Table', background = "green", width = 6, height = 375, 
                 tableOutput("original1")),
             # plot using user inputs
-            box(title = 'Your Output', background = "green", width = 5,
+            box(title = 'Your Output', background = "teal", width = 6, height = 375, 
                 
-                conditionalPanel('input.userOp1 == "1999"',
-                                 tags$strong('R code: '),
-                                 uiOutput('table1')))
-            ),
-          
-          # choices for user plot
-          fluidRow(
-            box(title = NULL, background = "green", width = 5,
-                
-                selectInput(inputId = 'userOp1', label = '1', choices = c('1999', '2000'),
-                            selected = '1999'),
-                selectInput(inputId = 'userOp2', label = '2', choices = c('1999', '2000'),
-                            selected = '1999'),
-                selectInput(inputId = 'userOp3', label = '3', choices = c('cases', 'country', 'year', 'Brazil'),
-                            selected = 'cases'),
-                selectInput(inputId = 'userOp4', label = '4', choices = c('cases', 'country', 'year', 'Brazil'),
-                            selected = 'cases')
-                
+                mainPanel(tags$strong('R code: '),
+                          uiOutput('userOut2'),
+                          br(),
+                          #div(style = "height: 250px; width = 700px",
+                          tableOutput('userOut1')#)
                 )
-            )),
-
+            )
+          ),
+          
+          
+          fluidRow(
+            # choices for user plot
+            box(title = 'Choose the Correct Arguments', background = "green", width = 3,
+                selectInput(inputId = 'userOp1', label = '1', choices = c('1999', '2000'),
+                            selected = '1999')),
+            
+            box(title = 'Choose the Correct Arguments', background = "green", width = 3,
+                selectInput(inputId = 'userOp2', label = '2', choices = c('1999', '2000'),
+                            selected = '1999')),
+            
+            box(title = 'Choose the Correct Arguments', background = "green", width = 3,
+                selectInput(inputId = 'userOp3', label = '3', choices = c('cases', 'year'),
+                            selected = 'cases')),
+            
+            box(title = 'Choose the Correct Arguments', background = "green", width = 3,
+                selectInput(inputId = 'userOp4', label = '4', choices = c('cases', 'year'),
+                            selected = 'cases')
+                )
+            )
+          
+  ),
+          
         
     
     
