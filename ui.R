@@ -75,16 +75,18 @@ body = dashboardBody(
   tabItem(tabName = 'exp4',
           br(),
           div(style = 'text-align: center',
-              h3(strong('Tidy the Original Table'))),
+              h1(strong('Tidy the Original Table'))),
           div(style = 'text-align: center',
-              h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
+              h3('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
           br(),
           
           
           fluidRow(
             # plot of original data
-            box(title = 'Original Table', background = "green", width = 6, height = 375, 
-                tableOutput("original1")),
+            div(style = 'text-align: center',
+            box(title = 'Original Table', background = "green", width = 6, height = 375,
+                div(style = 'font-size: 175%; text-align: center; display: inline-block',
+                tableOutput("original1"))),
             # plot using user inputs
             box(title = 'Your Output', background = "teal", width = 6, height = 375, 
                 
@@ -94,7 +96,7 @@ body = dashboardBody(
                           #div(style = "height: 250px; width = 700px",
                           tableOutput('userOut1')#)
                 )
-            )
+            ))
           ),
           
           
