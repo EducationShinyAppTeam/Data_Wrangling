@@ -83,7 +83,8 @@ body = dashboardBody(
     fluidRow(
       column(6,
       # plot of original data
-      div(style = 'font-size: 135%',
+      div(style = 'font-size: 135%; text-align: center',
+          h3('Original Table'),
           wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                         tableOutput("original1"))
                     ))),
@@ -91,7 +92,8 @@ body = dashboardBody(
       column(6,
     #fluidRow(
             # plot using user inputs
-    div(style = 'font-size: 135%',
+    div(style = 'font-size: 135%; text-align: center',
+        h3('Your Table'),
           wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                         tableOutput('userOut1'))
                     )))),
@@ -122,7 +124,7 @@ body = dashboardBody(
                 selectInput(inputId = 'userOp3',
                             label = '3',
                             choices = c('cases', 'year'),
-                            selected = 'cases')),
+                            selected = 'year')),
             
             box(title = 'Choose the Correct Argument',
                 background = "green",
