@@ -13,6 +13,8 @@ library(ggplot2)
 library(ggmap)
 library(tidyr)
 
+
+
 shinyServer(function(input, output, session) {
   observeEvent(input$info0,{
     sendSweetAlert(
@@ -128,6 +130,27 @@ shinyServer(function(input, output, session) {
    tags$code('table4a %>% gather(`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )
  }) 
+ 
+ 
+ observeEvent(input$newtable, {
+   withProgress(session, min = 1, max = 15, {
+     setProgress(message = 'Generating Table',
+                 detail = '')
+     for (i in 1:10) {
+       setProgress(value = i)
+       Sys.sleep(0.05)
+     }
+   })
+ })
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   
   
 ############ Reshaping Data ############
