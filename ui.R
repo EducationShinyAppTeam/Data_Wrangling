@@ -105,43 +105,50 @@ body = dashboardBody(
                                                       uiOutput('userOut2'))
                                             ))),
                                br(),
+                               
+                               
                                fluidRow(
                                  # choices for user plot
-                                 box(title = 'Choose the Correct Argument',
-                                     background = "green",
+                                 box(div(style = 'background-color: #b8f28c',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
                                                  label = '1',
                                                  choices = c('1999', '2000'),
                                                  selected = '1999')),
-            
-                                box(title = 'Choose the Correct Argument',
-                                    background = "green",
+                                 box(div(style = 'background-color: #b8f28c',
+                                         (title = 'Choose the Correct Argument')),
+                                    style = 'background: #b8f28c',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
                                                 label = '2',
-                            choices = c('1999', '2000'),
-                            selected = '1999')),
+                                                choices = c('1999', '2000'),
+                                                selected = '1999')),
             
-            box(title = 'Choose the Correct Argument',
-                background = "green",
-                width = 3,
-                selectInput(inputId = 'userOp3',
-                            label = '3',
-                            choices = c('cases', 'year'),
-                            selected = 'year')),
-            
-            box(title = 'Choose the Correct Argument',
-                background = "green",
-                width = 3,
-                selectInput(inputId = 'userOp4',
-                            label = '4',
-                            choices = c('cases', 'year'),
-                            selected = 'cases')
-                )
-            )
-          
-  ))),
+                                 box(div(style = 'background-color: #b8f28c',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #b8f28c',
+                                     width = 3,
+                                     selectInput(inputId = 'userOp3',
+                                                 label = '3',
+                                                 choices = c('cases', 'year'),
+                                                 selected = 'year')),
+                                 
+                                 
+                                 box(div(style = 'background-color: #b8f28c',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background-color: #b8f28c',
+                                     width = 3,
+                                     selectInput(inputId = 'userOp4',
+                                                 label = '4',
+                                                 choices = c('cases', 'year'),
+                                                 selected = 'cases')
+                                     )
+                                 )
+                               )
+                      )
+          ),
           
         
     
@@ -377,15 +384,20 @@ body = dashboardBody(
                          style = 'background-color: #ffe0b2',
                          width = NULL,
                          height = NULL,
-                         dropdownButton(circle = TRUE, status = 'success', size = 'xs', icon = icon('cogs'),
-                                        up = TRUE, right = TRUE, tooltip = tooltipOptions(title = "Select Your Answer"),
+                         dropdownButton(circle = TRUE,
+                                        status = 'success',
+                                        size = 'xs',
+                                        icon = icon('cogs'),
+                                        up = TRUE,
+                                        right = TRUE,
+                                        tooltip = tooltipOptions(title = "Select Your Answer"),
                                         sliderTextInput(inputId = 'cd3',
                                                         label = 'Mutating Joins Option',
                                                         force_edges = TRUE,
                                                         grid = T,
                                                         choices = c('left join', 'right join', 'inner join', 'full join')),
-                           textOutput('cdExp3')
-                         ),
+                                        textOutput('cdExp3')
+                                        ),
                          tableOutput('cdTable3'),
                          bsButton(inputId = 'check3',
                                   label = 'Check',
