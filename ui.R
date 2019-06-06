@@ -79,35 +79,25 @@ body = dashboardBody(
               h1(strong('Tidy the Original Table'))),
           div(style = 'text-align: center',
               h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
-          br(),
-          
+
     fluidRow(
-            # plot of original data
-            div(style = 'text-align: center',
-            box(title = 'Original Table',
-                background = "green",
-                width = 6,
-                height = 400,
-                collapsible = TRUE,
-                #style = 'background-color: rgba(255, 255, 128, .5)',
-                div(style = 'font-size: 155%; text-align: center; display: inline-block;
-                    background-image: linear-gradient(to bottom, rgba(60, 242, 187, 0.5), rgba(41, 189, 56, 0.5))',
-                tableOutput("original1"))
-                ),
+      column(6,
+      # plot of original data
+      div(style = 'font-size: 135%',
+          wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
+                        tableOutput("original1"))
+                    ))),
+          
+      column(6,
+    #fluidRow(
             # plot using user inputs
-            box(title = 'Your Output',
-                background = "green",
-                width = 6,
-                height = 400, 
-                #style = 'background-color: rgba(255, 255, 128, .5)',
-                
-            mainPanel(div(style = 'font-size: 155%; text-align: center; display: inline-block;
-                                  background-image: linear-gradient(to bottom, rgba(60, 242, 187, 0.5), rgba(41, 189, 56, 0.5))',
-              tableOutput('userOut1')))
-                ))
-            ),
-          
-          
+    div(style = 'font-size: 135%',
+          wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
+                        tableOutput('userOut1'))
+                    )))),
+    
+    br(),
+
           fluidRow(
             # choices for user plot
             box(title = 'Choose the Correct Argument',
