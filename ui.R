@@ -53,6 +53,7 @@ body = dashboardBody(
             
             h3(strong('Instructions:')),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
+            h4(tags$li('In the Tidy Data section, fill in the correct arguments for 1, 2, 3, and 4 that coreectly tidies the data.')),
             h4(tags$li('In the Reshaping Data section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
             h4(tags$li('In the Combining Data Set section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
@@ -80,7 +81,7 @@ body = dashboardBody(
                                
 
                                div(style = 'text-align: center',
-                                   titlePanel("Tidy the Original Data"),
+                                   #titlePanel("Tidy the Original Data"),
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
