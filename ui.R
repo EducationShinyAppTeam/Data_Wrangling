@@ -85,37 +85,41 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h4('table4a %>% gather(`1`, `2`, key = "3", value = "4")')),
+                               h4(tags$b('Fill in the Correct Arguments: table4a %>% gather(`1`, `2`, key = "3", value = "4")'))),
                                
-                               fluidRow(
+                               #fluidRow(
                                  #sidebarPanel(
+                                 #  div(style = 'text-align: left',
+                                  #     bsButton("newtable",
+                                   #             label = "New Table",
+                                    #            icon("arrow-circle-right"),
+                                     #           size = "medium",
+                                      #          style = 'success')),
+                                 #  br(),
                                    div(style = 'text-align: center',
-                                       bsButton("newtable",
-                                                label = "New Table",
-                                                icon("arrow-circle-right"),
-                                                size = "medium",
-                                                style = 'background-color: #b1d078'),
-                                       bsButton("submit",
-                                                label = "Check Answer",
-                                                icon("lightbulb"),
-                                                size = "medium",
-                                                style = 'background-color: #b1d078'),
-                                              width = 1)),#),
+                                       uiOutput("sub")),
+                                      # bsButton("submit",
+                                       #         label = "Check Answer",
+                                        #        icon("lightbulb"),
+                                         #       size = "medium",
+                                          #      style = 'success'),
+                                              #width = 1)),#),
                                
                                
                                fluidRow(
                                  column(6,
                                         # plot of original data
                                         div(style = 'font-size: 135%; text-align: center',
-                                            h3('Original Data'),
+                                            h4('Original Data'),
                                             wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput("original1"))
                                                       ))),
+                                 
                                  column(6,
                                         #fluidRow(
                                         # plot using user inputs
                                         div(style = 'font-size: 135%; text-align: center',
-                                            h3('Your Tidy Attempt'),
+                                            h4('Your Tidy Attempt'),
                                             wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput('userOut1'))
                                                       )))),
@@ -167,7 +171,14 @@ body = dashboardBody(
                                                  choices = c('cases', 'year'),
                                                  selected = 'cases')
                                      )
-                                 )
+                                 ),
+                               
+                               wellPanel(
+                               fluidRow(
+                                 column(2,
+                                        htmlOutput("result"))
+                               ))
+                               
                                )
                       )
           ),

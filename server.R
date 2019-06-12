@@ -14,6 +14,7 @@ library(ggmap)
 library(tidyr)
 
 
+rm(list = ls())
 
 shinyServer(function(input, output, session) {
   observeEvent(input$info0,{
@@ -132,18 +133,42 @@ shinyServer(function(input, output, session) {
  }) 
  
  
- observeEvent(input$newtable, {
-   withProgress(session, min = 1, max = 15, {
-     setProgress(message = 'Generating Table',
-                 detail = '')
-     for (i in 1:10) {
-       setProgress(value = i)
-       Sys.sleep(0.05)
-     }
-   })
- })
+ #observeEvent(input$submit, {
+  # withProgress(session, min = 1, max = 15, {
+   #  setProgress(message = 'Checking Answer',
+    #             detail = '')
+     #for (i in 1:10) {
+      # setProgress(value = i)
+       #Sys.sleep(0.05)
+  #   }
+ #  })
+# })
  
+# op1save <- reactiveValues(input$userOp1 = NULL)
+# op2save <- reactiveValues(input$userOp2 = NULL)
+# op3save <- reactiveValues(input$userOp3 = NULL)
+# op4save <- reactiveValues(input$userOp4 = NULL)
  
+   output$sub <- renderUI({
+     bsButton("submit",
+              label = "Check Answer",
+              icon("lightbulb"),
+              size = "medium",
+              style = 'success')
+     })
+   
+onclick("sub", 
+        output$sub <- renderUI({
+          if(input$userOp1 == '1999' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+            tags$img(src = "correct.gif", width = 230)
+            }
+          else{
+            tags$img(src = "try.gif", width = 200)
+            }
+          })
+        )
+
  
  
  
