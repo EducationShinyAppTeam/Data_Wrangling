@@ -127,8 +127,9 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  # show code based on inputs
  output$userOut2 <- renderUI({
-   tags$code('table4a %>% gather(`', input$userOp1, '`,`', input$userOp2, '`,
+   tags$code('tidyr::gather("table4a",`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )
  }) 
  
@@ -149,6 +150,7 @@ shinyServer(function(input, output, session) {
 # op3save <- reactiveValues(input$userOp3 = NULL)
 # op4save <- reactiveValues(input$userOp4 = NULL)
  
+  # submit button
    output$sub <- renderUI({
      bsButton("submit",
               label = "Check Answer",
@@ -157,6 +159,7 @@ shinyServer(function(input, output, session) {
               style = 'success')
      })
    
+  # correct/wrong gif 
 onclick("sub", 
         output$sub <- renderUI({
           if(input$userOp1 == '1999' & input$userOp2 == '2000'
@@ -170,10 +173,39 @@ onclick("sub",
         )
 
 
- 
- 
- 
- 
+    output$reset <- renderUI({
+      bsButton("retry",
+               label = "Click to Retry",
+               icon("retweet"),
+               size = "medium",
+               style = 'success')
+      })
+    
+    # hide reset button upon opening app
+    hide("reset")
+    
+    # show reset button after submit is clicked, disable dropdown inputs
+    observeEvent(input$submit,{
+      toggle("reset")
+      disable("userOp1")
+      disable("userOp2")
+      disable("userOp3")
+      disable("userOp4")
+    })
+
+
+  observeEvent(input$retry,{
+    hide("reset")
+    enable("userOp1")
+    enable("userOp2")
+    enable("userOp3")
+    enable("userOp4")
+    
+  })
+  
+
+
+
  
   
   

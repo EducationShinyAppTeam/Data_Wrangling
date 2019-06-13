@@ -85,7 +85,7 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h4(tags$b('Fill in the Correct Arguments: tidyr::gather("table4a",`1`, `2`, key = "3", value = "4")'))),
+                               h3(tags$b('Fill in the Correct Arguments: tidyr::gather("table4a",`1`, `2`, key = "3", value = "4")'))),
                                
                                #fluidRow(
                                  #sidebarPanel(
@@ -112,7 +112,7 @@ body = dashboardBody(
                                  column(6,
                                         # plot of original data
                                         div(style = 'font-size: 135%; text-align: center',
-                                            h4('Original Data- table4a'),
+                                            h4('Original Data - table4a'),
                                             wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput("original1"))
                                                       ))),
@@ -173,13 +173,7 @@ body = dashboardBody(
                                                  choices = c('cases', 'year'),
                                                  selected = 'cases')
                                      )
-                                 ),
-                               
-                               wellPanel(
-                               fluidRow(
-                                 column(2,
-                                        htmlOutput("result"))
-                               ))
+                                 )
                                
                                )
                       )
