@@ -85,7 +85,7 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h4(tags$b('Fill in the Correct Arguments: table4a %>% gather(`1`, `2`, key = "3", value = "4")'))),
+                               h4(tags$b('Fill in the Correct Arguments: tidyr::gather("table4a",`1`, `2`, key = "3", value = "4")'))),
                                
                                #fluidRow(
                                  #sidebarPanel(
@@ -97,7 +97,9 @@ body = dashboardBody(
                                       #          style = 'success')),
                                  #  br(),
                                    div(style = 'text-align: center',
-                                       uiOutput("sub")),
+                                       uiOutput("sub"),
+                                       br(),
+                                       uiOutput("reset")),
                                       # bsButton("submit",
                                        #         label = "Check Answer",
                                         #        icon("lightbulb"),
@@ -110,7 +112,7 @@ body = dashboardBody(
                                  column(6,
                                         # plot of original data
                                         div(style = 'font-size: 135%; text-align: center',
-                                            h4('Original Data'),
+                                            h4('Original Data- table4a'),
                                             wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput("original1"))
                                                       ))),
