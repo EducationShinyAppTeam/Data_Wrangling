@@ -342,7 +342,7 @@ onclick("sub",
              label = "Check Answer",
              icon("lightbulb"),
              size = "medium",
-             style = 'background-color: #2ACEC2')
+             style = 'success')
   })
   
   # correct/wrong gif 
@@ -513,7 +513,7 @@ onclick("sub",
              label = "Check Answer",
              icon("lightbulb"),
              size = "medium",
-             style = 'background-color: #d7f87d')
+             style = 'success')
   })
   
   # correct/wrong gif 
@@ -547,7 +547,7 @@ onclick("sub",
              label = "Click to Retry",
              icon("retweet"),
              size = "medium",
-             style = 'background-color: #d7f87d')
+             style = 'success')
   })
   
   # hide reset button upon opening app

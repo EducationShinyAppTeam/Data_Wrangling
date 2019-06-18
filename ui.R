@@ -214,7 +214,7 @@ body = dashboardBody(
                                         # plot of original data
                                         div(style = 'font-size: 135%; text-align: center',
                                             h4('Original Data - table4b'),
-                                            wellPanel(div(style = 'background-image: url("ombre.png"); background-position: center',
+                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput("original2"))
                                             ))),
                                  
@@ -223,7 +223,7 @@ body = dashboardBody(
                                         # plot using user inputs
                                         div(style = 'font-size: 135%; text-align: center',
                                             h4('Your Tidy Attempt'),
-                                            wellPanel(div(style = 'background-image: url("ombre.png"); background-position: center',
+                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput('userOutA'))
                                             )))),
                                br(),
@@ -238,26 +238,26 @@ body = dashboardBody(
                                
                                fluidRow(
                                  # choices for user plot
-                                 box(div(style = 'background-color: #8ac961',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #8ac961',
+                                     style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpA',
                                                  label = '1',
                                                  choices = c('1999', '2000'),
                                                  selected = '2000')),
-                                 box(div(style = 'background-color: #8ac961',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #8ac961',
+                                     style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
                                                  label = '2',
                                                  choices = c('1999', '2000'),
                                                  selected = '1999')),
                                  
-                                 box(div(style = 'background-color: #8ac961',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #8ac961',
+                                     style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpC',
                                                  label = '3',
@@ -265,9 +265,9 @@ body = dashboardBody(
                                                  selected = 'population')),
                                  
                                  
-                                 box(div(style = 'background-color: #8ac961',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #8ac961',
+                                     style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpD',
                                                  label = '4',
@@ -315,7 +315,7 @@ body = dashboardBody(
                                         # plot of original data
                                         div(style = 'font-size: 135%; text-align: center',
                                             h4('Original Data - table2'),
-                                            wellPanel(div(style = 'background-image: url("ombre2.png"); background-position: center',
+                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput("original3"))
                                             ))),
                                  
@@ -324,7 +324,7 @@ body = dashboardBody(
                                         # plot using user inputs
                                         div(style = 'font-size: 135%; text-align: center',
                                             h4('Your Tidy Attempt'),
-                                            wellPanel(div(style = 'background-image: url("ombre2.png"); background-position: center',
+                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
                                                           tableOutput('userOutX'))
                                             )))),
                                br(),
@@ -339,17 +339,17 @@ body = dashboardBody(
                                
                                fluidRow(
                                  # choices for user plot
-                                 box(div(style = 'background-color: #d7f87d',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #d7f87d',
+                                     style = 'background: #b8f28c',
                                      width = 6,
                                      selectInput(inputId = 'userOpX',
                                                  label = '1',
                                                  choices = c('year', 'type', 'count', 'country'),
                                                  selected = 'year')),
-                                 box(div(style = 'background-color: #d7f87d',
+                                 box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
-                                     style = 'background: #d7f87d',
+                                     style = 'background: #b8f28c',
                                      width = 6,
                                      selectInput(inputId = 'userOpY',
                                                  label = '2',
