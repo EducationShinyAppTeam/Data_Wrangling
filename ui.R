@@ -85,7 +85,7 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h3(tags$b('Fill in the Correct Arguments: tidyr::gather("table4a",`1`, `2`, key = "3", value = "4")'))),
+                               h3(tags$b('Fill in the Correct Arguments: tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
                                
                                #fluidRow(
                                  #sidebarPanel(
@@ -144,7 +144,7 @@ body = dashboardBody(
                                      selectInput(inputId = 'userOp1',
                                                  label = '1',
                                                  choices = c('1999', '2000'),
-                                                 selected = '1999')),
+                                                 selected = '2000')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = 'Choose the Correct Argument')),
                                     style = 'background: #b8f28c',
@@ -175,9 +175,194 @@ body = dashboardBody(
                                      )
                                  )
                                
+                               ),
+                      
+                      tabPanel('Challenge 2',
+                               br(),
+                               
+                               
+                               div(style = 'text-align: center',
+                                   #titlePanel("Tidy the Original Data"),
+                                   #div(style = 'text-align: center',
+                                   #  h1(strong('Tidy the Original Data')),
+                                   #div(style = 'text-align: center',
+                                   h3(tags$b('Fill in the Correct Arguments: tidyr::gather(table4b,`1`, `2`, key = "3", value = "4")'))),
+                               
+                               #fluidRow(
+                               #sidebarPanel(
+                               #  div(style = 'text-align: left',
+                               #     bsButton("newtable",
+                               #             label = "New Table",
+                               #            icon("arrow-circle-right"),
+                               #           size = "medium",
+                               #          style = 'success')),
+                               #  br(),
+                               div(style = 'text-align: center',
+                                   uiOutput("bus"),
+                                   br(),
+                                   uiOutput("redo")),
+                               # bsButton("submit",
+                               #         label = "Check Answer",
+                               #        icon("lightbulb"),
+                               #       size = "medium",
+                               #      style = 'success'),
+                               #width = 1)),#),
+                               
+                               
+                               fluidRow(
+                                 column(6,
+                                        # plot of original data
+                                        div(style = 'font-size: 135%; text-align: center',
+                                            h4('Original Data - table4b'),
+                                            wellPanel(div(style = 'background-image: url("ombre.png"); background-position: center',
+                                                          tableOutput("original2"))
+                                            ))),
+                                 
+                                 column(6,
+                                        #fluidRow(
+                                        # plot using user inputs
+                                        div(style = 'font-size: 135%; text-align: center',
+                                            h4('Your Tidy Attempt'),
+                                            wellPanel(div(style = 'background-image: url("ombre.png"); background-position: center',
+                                                          tableOutput('userOutA'))
+                                            )))),
+                               br(),
+                               fluidRow(
+                                 column(12,
+                                        div(style = 'text-align: center; font-size: 125%',
+                                            wellPanel(tags$strong('Your R code: '),
+                                                      uiOutput('userOutB'))
+                                        ))),
+                               br(),
+                               
+                               
+                               fluidRow(
+                                 # choices for user plot
+                                 box(div(style = 'background-color: #8ac961',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #8ac961',
+                                     width = 3,
+                                     selectInput(inputId = 'userOpA',
+                                                 label = '1',
+                                                 choices = c('1999', '2000'),
+                                                 selected = '2000')),
+                                 box(div(style = 'background-color: #8ac961',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #8ac961',
+                                     width = 3,
+                                     selectInput(inputId = 'userOpB',
+                                                 label = '2',
+                                                 choices = c('1999', '2000'),
+                                                 selected = '1999')),
+                                 
+                                 box(div(style = 'background-color: #8ac961',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #8ac961',
+                                     width = 3,
+                                     selectInput(inputId = 'userOpC',
+                                                 label = '3',
+                                                 choices = c('population', 'year'),
+                                                 selected = 'population')),
+                                 
+                                 
+                                 box(div(style = 'background-color: #8ac961',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #8ac961',
+                                     width = 3,
+                                     selectInput(inputId = 'userOpD',
+                                                 label = '4',
+                                                 choices = c('population', 'year'),
+                                                 selected = 'year')
+                                 )
                                )
+                               
+                      ),
+                      
+                      tabPanel('Challenge 3',
+                               br(),
+                               
+                               
+                               div(style = 'text-align: center',
+                                   #titlePanel("Tidy the Original Data"),
+                                   #div(style = 'text-align: center',
+                                   #  h1(strong('Tidy the Original Data')),
+                                   #div(style = 'text-align: center',
+                                   h3(tags$b('Fill in the Correct Arguments: tidyr::spread(table2, key = "1", value = "2")'))),
+                               
+                               #fluidRow(
+                               #sidebarPanel(
+                               #  div(style = 'text-align: left',
+                               #     bsButton("newtable",
+                               #             label = "New Table",
+                               #            icon("arrow-circle-right"),
+                               #           size = "medium",
+                               #          style = 'success')),
+                               #  br(),
+                               div(style = 'text-align: center',
+                                   uiOutput("subbed"),
+                                   br(),
+                                   uiOutput("restart")),
+                               # bsButton("submit",
+                               #         label = "Check Answer",
+                               #        icon("lightbulb"),
+                               #       size = "medium",
+                               #      style = 'success'),
+                               #width = 1)),#),
+                               
+                               
+                               fluidRow(
+                                 column(6,
+                                        # plot of original data
+                                        div(style = 'font-size: 135%; text-align: center',
+                                            h4('Original Data - table2'),
+                                            wellPanel(div(style = 'background-image: url("ombre2.png"); background-position: center',
+                                                          tableOutput("original3"))
+                                            ))),
+                                 
+                                 column(6,
+                                        #fluidRow(
+                                        # plot using user inputs
+                                        div(style = 'font-size: 135%; text-align: center',
+                                            h4('Your Tidy Attempt'),
+                                            wellPanel(div(style = 'background-image: url("ombre2.png"); background-position: center',
+                                                          tableOutput('userOutX'))
+                                            )))),
+                               br(),
+                               fluidRow(
+                                 column(12,
+                                        div(style = 'text-align: center; font-size: 125%',
+                                            wellPanel(tags$strong('Your R code: '),
+                                                      uiOutput('userOutY'))
+                                        ))),
+                               br(),
+                               
+                               
+                               fluidRow(
+                                 # choices for user plot
+                                 box(div(style = 'background-color: #d7f87d',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #d7f87d',
+                                     width = 6,
+                                     selectInput(inputId = 'userOpX',
+                                                 label = '1',
+                                                 choices = c('year', 'type', 'count', 'country'),
+                                                 selected = 'year')),
+                                 box(div(style = 'background-color: #d7f87d',
+                                         (title = 'Choose the Correct Argument')),
+                                     style = 'background: #d7f87d',
+                                     width = 6,
+                                     selectInput(inputId = 'userOpY',
+                                                 label = '2',
+                                                 choices = c('year', 'type', 'count', 'country'),
+                                                 selected = 'country'))
+                                 )
+                               )
+                               
                       )
-          ),
+                      
+                      
+                      ),
+          #),
           
         
     

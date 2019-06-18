@@ -224,9 +224,361 @@ onclick("sub",
     
   })
   
+  ### Challenge 2 ###
+  
+  output$original2 <- renderTable({
+    table4b
+  })
+  
+  # specify outputs for every choice
+  output$userOutA <- renderTable({
+    if (input$userOpA == '1999' & input$userOpB == '1999' 
+        & input$userOpC == 'population' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`1999`, `1999`, key = "population", value = "population")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '1999'
+             & input$userOpC == 'population' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`1999`, `1999`, key = "population", value = "year")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '1999'
+             & input$userOpC == 'year' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`1999`, `1999`, key = "year", value = "population")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '1999'
+             & input$userOpC == 'year' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`1999`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '2000'
+             & input$userOpC == 'population' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`1999`, `2000`, key = "population", value = "population")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '2000'
+             & input$userOpC == 'population' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`1999`, `2000`, key = "population", value = "year")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '2000'
+             & input$userOpC == 'year' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`1999`, `2000`, key = "year", value = "population")
+    }
+    else if (input$userOpA == '1999' & input$userOpB == '2000'
+             & input$userOpC == 'year' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`1999`, `2000`, key = "year", value = "year")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '1999'
+             & input$userOpC == 'population' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`2000`, `1999`, key = "population", value = "population")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '1999'
+             & input$userOpC == 'population' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`2000`, `1999`, key = "population", value = "year")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '1999'
+             & input$userOpC == 'year' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`2000`, `1999`, key = "year", value = "population")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '1999'
+             & input$userOpC == 'year' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`2000`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '2000'
+             & input$userOpC == 'population' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`2000`, `2000`, key = "population", value = "population")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '2000'
+             & input$userOpC == 'population' & input$userOpD == 'year') {
+      table4b %>%
+        gather(`2000`, `2000`, key = "population", value = "year")
+    }
+    else if (input$userOpA == '2000' & input$userOpB == '2000'
+             & input$userOpC == 'year' & input$userOpD == 'population') {
+      table4b %>%
+        gather(`2000`, `2000`, key = "year", value = "population")
+    }
+    else {
+      table4b %>%
+        gather(`2000`, `2000`, key = "year", value = "year")
+    }
+  })
+  
+  # show code based on inputs
+  output$userOutB <- renderUI({
+    tags$code('tidyr::gather("table4b",`', input$userOpA, '`,`', input$userOpB, '`,
+              key = "', input$userOpC, '", value = "', input$userOpD, '")' )
+  }) 
+  
+  
+  #observeEvent(input$submit, {
+  # withProgress(session, min = 1, max = 15, {
+  #  setProgress(message = 'Checking Answer',
+  #             detail = '')
+  #for (i in 1:10) {
+  # setProgress(value = i)
+  #Sys.sleep(0.05)
+  #   }
+  #  })
+  # })
+  
+  # op1save <- reactiveValues(input$userOpA = NULL)
+  # op2save <- reactiveValues(input$userOpB = NULL)
+  # op3save <- reactiveValues(input$userOpC = NULL)
+  # op4save <- reactiveValues(input$userOpD = NULL)
+  
+  # submit button
+  output$bus <- renderUI({
+    bsButton("submitted",
+             label = "Check Answer",
+             icon("lightbulb"),
+             size = "medium",
+             style = 'background-color: #2ACEC2')
+  })
+  
+  # correct/wrong gif 
+  onclick("bus", 
+          output$bus <- renderUI({
+            if(input$userOpA == '1999' & input$userOpB == '2000'
+               & input$userOpC == 'year' & input$userOpD == 'population') {
+              tags$img(src = "correct.gif", width = 230)
+            }
+            else{
+              tags$img(src = "try.gif", width = 200)
+            }
+          })
+  )
+  
+  # trying to use sweetalert
+  #observeEvent(input$submit, {
+  #  if (input$userOpA == '1999' & input$userOpB == '2000'
+  #      & input$userOpC == 'year' & input$userOpD == 'population') {
+  #   sweetalert(imageUrl = 'correct.gif')
+  #}
+  
+  #   else{
+  #    sweetalert(imageUrl = 'try.gif')
+  # }
+  #})
+  
+  
+  
+  output$redo <- renderUI({
+    bsButton("retrying",
+             label = "Click to Retry",
+             icon("retweet"),
+             size = "medium",
+             style = 'success')
+  })
+  
+  # hide reset button upon opening app
+  hide("redo")
+  
+  # show reset button after submit is clicked, disable dropdown inputs
+  observeEvent(input$submitted,{
+    toggle("redo")
+    disable("userOpA")
+    disable("userOpB")
+    disable("userOpC")
+    disable("userOpD")
+  })
+  
+  
+  observeEvent(input$retrying,{
+    hide("redo")
+    enable("userOpA")
+    enable("userOpB")
+    enable("userOpC")
+    enable("userOpD")
+    
+  })
+  
+  observeEvent(input$retrying,{
+    reset("userOpA")
+    reset("userOpB")
+    reset("userOpC")
+    reset("userOpD")
+    
+  })
+  
 
+### Challenge 3 ###
+  
+  output$original3 <- renderTable({
+    table2
+  })
+  
+  # specify outputs for every choice
+  output$userOutX <- renderTable({
+    if (input$userOpX == 'year' & input$userOpY == 'year') {
+      table2 %>%
+        spread(key = "year", value = "year")
+    }
+    else if (input$userOpX == 'year' & input$userOpY == 'type') {
+      table2 %>%
+        spread(key = "year", value = "type")
+    }
+    else if (input$userOpX == 'year' & input$userOpY == 'country') {
+      table2 %>%
+        spread(key = "year", value = "country")
+    }
+    else if (input$userOpX == 'year' & input$userOpY == 'count') {
+      table2 %>%
+        spread(key = "year", value = "count")
+    }
+    else if (input$userOpX == 'type' & input$userOpY == 'year') {
+      table2 %>%
+        spread(key = "type", value = "year")
+    }
+    else if (input$userOpX == 'type' & input$userOpY == 'type') {
+      table2 %>%
+        spread(key = "type", value = "type")
+    }
+    else if (input$userOpX == 'type' & input$userOpY == 'country') {
+      table2 %>%
+        spread(key = "type", value = "country")
+    }
+    else if (input$userOpX == 'type' & input$userOpY == 'count') {
+      table2 %>%
+        spread(key = "type", value = "count")
+    }
+    else if (input$userOpX == 'country' & input$userOpY == 'year') {
+      table2 %>%
+        spread(key = "country", value = "year")
+    }
+    else if (input$userOpX == 'country' & input$userOpY == 'type') {
+      table2 %>%
+        spread(key = "country", value = "type")
+    }
+    else if (input$userOpX == 'country' & input$userOpY == 'country') {
+      table2 %>%
+        spread(key = "country", value = "country")
+    }
+    else if (input$userOpX == 'country' & input$userOpY == 'count') {
+      table2 %>%
+        spread(key = "country", value = "count")
+    }
+    else if (input$userOpX == 'count' & input$userOpY == 'year') {
+      table2 %>%
+        spread(key = "count", value = "year")
+    }
+    else if (input$userOpX == 'count' & input$userOpY == 'type') {
+      table2 %>%
+        spread(key = "count", value = "type")
+    }
+    else if (input$userOpX == 'count' & input$userOpY == 'country') {
+      table2 %>%
+        spread(key = "count", value = "country")
+    }
+    else {
+      table2 %>%
+        spread(key = "count", value = "count")
+    }
+  })
+  
+  # show code based on inputs
+  output$userOutY <- renderUI({
+    tags$code('tidyr::spread("table2", key = "', input$userOpX, '", value = "', input$userOpY, '")' )
+  }) 
+  
+  
+  #observeEvent(input$submit, {
+  # withProgress(session, min = 1, max = 15, {
+  #  setProgress(message = 'Checking Answer',
+  #             detail = '')
+  #for (i in 1:10) {
+  # setProgress(value = i)
+  #Sys.sleep(0.05)
+  #   }
+  #  })
+  # })
+  
+  # op1save <- reactiveValues(input$userOpX = NULL)
+  # op2save <- reactiveValues(input$userOpY = NULL)
+  # op3save <- reactiveValues(input$userOp3 = NULL)
+  # op4save <- reactiveValues(input$userOp4 = NULL)
+  
+  # submit button
+  output$subbed <- renderUI({
+    bsButton("submitting",
+             label = "Check Answer",
+             icon("lightbulb"),
+             size = "medium",
+             style = 'background-color: #d7f87d')
+  })
+  
+  # correct/wrong gif 
+  onclick("subbed", 
+          output$subbed <- renderUI({
+            if(input$userOpX == 'type' & input$userOpY == 'count') {
+              tags$img(src = "correct.gif", width = 230)
+            }
+            else{
+              tags$img(src = "try.gif", width = 200)
+            }
+          })
+  )
+  
+  # trying to use sweetalert
+  #observeEvent(input$submit, {
+  #  if (input$userOpX == '1999' & input$userOpY == '2000'
+  #      & input$userOp3 == 'year' & input$userOp4 == 'type') {
+  #   sweetalert(imageUrl = 'correct.gif')
+  #}
+  
+  #   else{
+  #    sweetalert(imageUrl = 'try.gif')
+  # }
+  #})
+  
+  
+  
+  output$restart <- renderUI({
+    bsButton("retryy",
+             label = "Click to Retry",
+             icon("retweet"),
+             size = "medium",
+             style = 'background-color: #d7f87d')
+  })
+  
+  # hide reset button upon opening app
+  hide("restart")
+  
+  # show reset button after submit is clicked, disable dropdown inputs
+  observeEvent(input$submitting,{
+    toggle("restart")
+    disable("userOpX")
+    disable("userOpY")
+  })
+  
+  
+  observeEvent(input$retryy,{
+    hide("restart")
+    enable("userOpX")
+    enable("userOpY")
 
+  })
+  
+  observeEvent(input$retryy,{
+    reset("userOpX")
+    reset("userOpY")
+
+  })
+  
+  
  
+  
+  
+  
   
   
 ############ Reshaping Data ############
