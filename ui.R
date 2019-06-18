@@ -191,7 +191,7 @@ body = dashboardBody(
             #    circleButton("info0",icon = icon("info"), status = "myClass", size = "xs")
             #),
             tabsetPanel(type = 'tabs',
-                        tabPanel('Unite',
+                        tabPanel(div(style = 'font-size: 125%', 'Unite'),
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
@@ -210,7 +210,7 @@ body = dashboardBody(
                                      )
                                  ),
                         
-                        tabPanel('gather',
+                        tabPanel(div(style = 'font-size: 125%', 'Gather'),
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
@@ -236,7 +236,7 @@ body = dashboardBody(
                         #              tableOutput('dwTable4')
                         #              )
                         #          ),
-                        tabPanel('spread',
+                        tabPanel(div(style = 'font-size: 125%', 'Spread'),
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
@@ -253,7 +253,7 @@ body = dashboardBody(
                                      )
                                  ),
                        
-                        tabPanel('arrange',
+                        tabPanel(div(style = 'font-size: 125%', 'Arrange'),
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,

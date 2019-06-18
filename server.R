@@ -172,6 +172,19 @@ onclick("sub",
           })
         )
 
+# trying to use sweetalert
+  #observeEvent(input$submit, {
+  #  if (input$userOp1 == '1999' & input$userOp2 == '2000'
+  #      & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+   #   sweetalert(imageUrl = 'correct.gif')
+    #}
+    
+ #   else{
+  #    sweetalert(imageUrl = 'try.gif')
+   # }
+  #})
+
+
 
     output$reset <- renderUI({
       bsButton("retry",
@@ -203,7 +216,14 @@ onclick("sub",
     
   })
   
-
+  observeEvent(input$retry,{
+    reset("userOp1")
+    reset("userOp2")
+    reset("userOp3")
+    reset("userOp4")
+    
+  })
+  
 
 
  
