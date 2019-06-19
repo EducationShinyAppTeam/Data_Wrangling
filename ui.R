@@ -109,23 +109,17 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 column(6,
-                                        # plot of original data
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Original Data - table4a'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput("original1"))
-                                                      ))),
-                                 
-                                 column(6,
-                                        #fluidRow(
-                                        # plot using user inputs
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Your Tidy Attempt'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput('userOut1'))
-                                                      )))),
-                               br(),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Original Data - table4a')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     div(style = 'display: inline-block', (uiOutput("original1")))),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Your Tidy Attempt')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     div(style = 'display: inline-block', (uiOutput("userOut1"))))),
+                                 br(),
                                fluidRow(
                                  column(12,
                                         div(style = 'text-align: center; font-size: 125%',
@@ -177,6 +171,8 @@ body = dashboardBody(
                                
                                ),
                       
+                      ### Challenge 2 ###
+                      
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 2'),
                                br(),
                                
@@ -210,22 +206,16 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 column(6,
-                                        # plot of original data
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Original Data - table4b'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput("original2"))
-                                            ))),
-                                 
-                                 column(6,
-                                        #fluidRow(
-                                        # plot using user inputs
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Your Tidy Attempt'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput('userOutA'))
-                                            )))),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Original Data - table4b')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     uiOutput("original2")),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Your Tidy Attempt')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     uiOutput("userOutA"))),
                                br(),
                                fluidRow(
                                  column(12,
@@ -311,22 +301,16 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 column(6,
-                                        # plot of original data
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Original Data - table2'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput("original3"))
-                                            ))),
-                                 
-                                 column(6,
-                                        #fluidRow(
-                                        # plot using user inputs
-                                        div(style = 'font-size: 100%; text-align: center',
-                                            h4('Your Tidy Attempt'),
-                                            wellPanel(div(style = 'background-image: url("green.png"); background-position: center',
-                                                          tableOutput('userOutX'))
-                                            )))),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Original Data - table2')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     uiOutput("original3")),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                         (title = 'Your Tidy Attempt')),
+                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     width = 6,
+                                     uiOutput("userOutX"))),
                                br(),
                                fluidRow(
                                  column(12,
