@@ -85,7 +85,8 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h3(tags$b('Fill in the Correct Arguments: tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
+                               h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data'))),
+                          #     h4(tags$code('tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
                                
                                #fluidRow(
                                  #sidebarPanel(
@@ -109,25 +110,24 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Original Data - table4a')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
-                                     div(style = 'display: inline-block', (uiOutput("original1")))),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                     uiOutput("original1")),
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Your Tidy Attempt')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
-                                     div(style = 'display: inline-block', (uiOutput("userOut1"))))),
+                                     uiOutput("userOut1"),
+                                     div(style = 'font-size: 135%; font-weight: bold', (textOutput("change"))))),
                                  br(),
                                fluidRow(
-                                 box(div(style = 'text-align: center; font-size: 125%',
-                                         (tags$strong('Your R code: '))),
-                                         style = "success",
-                                         width = 12,
-                                          div(style = 'font-size: 125%; text-align:center', (uiOutput('userOut2'))))
-                                     ),
-                               br(),
+                                 column(12,
+                                        div(style = 'text-align: center; font-size: 125%',
+                                            wellPanel(tags$strong('Your R code: '),
+                                                      uiOutput('userOut2'))))),
+                                 br(),
                                
                                
                                fluidRow(
@@ -138,16 +138,16 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
                                                  label = 'Argument 1',
-                                                 choices = c('1999', '2000'),
-                                                 selected = '1999')),
+                                                 choices = c('1999', '2000', 'Argument 1'),
+                                                 selected = 'Argument 1')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                     style = 'background: #b8f28c',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
                                                 label = 'Arguent 2',
-                                                choices = c('1999', '2000'),
-                                                selected = '1999')),
+                                                choices = c('1999', '2000', 'Argument 2'),
+                                                selected = 'Argument 2')),
             
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
@@ -155,8 +155,8 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp3',
                                                  label = 'Argument 3',
-                                                 choices = c('cases', 'year'),
-                                                 selected = 'year')),
+                                                 choices = c('cases', 'year', 'Argument 3'),
+                                                 selected = 'Argument 3')),
                                  
                                  
                                  box(div(style = 'background-color: #b8f28c',
@@ -165,8 +165,8 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp4',
                                                  label = 'Argument 4',
-                                                 choices = c('cases', 'year'),
-                                                 selected = 'cases')
+                                                 choices = c('cases', 'year', 'Argument 4'),
+                                                 selected = 'Argument 4')
                                      )
                                  )
                                
@@ -183,8 +183,9 @@ body = dashboardBody(
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h3(tags$b('Fill in the Correct Arguments: tidyr::gather(table4b,`1`, `2`, key = "3", value = "4")'))),
-                               
+                                   h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data')),
+                                   h4(tags$code('tidyr::gather(table4b,`1`, `2`, key = "3", value = "4")'))),
+
                                #fluidRow(
                                #sidebarPanel(
                                #  div(style = 'text-align: left',
@@ -207,12 +208,12 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Original Data - table4b')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original2")),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Your Tidy Attempt')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
@@ -278,8 +279,9 @@ body = dashboardBody(
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h3(tags$b('Fill in the Correct Arguments: tidyr::spread(table2, key = "1", value = "2")'))),
-                               
+                                   h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data')),
+                                   h4(tags$code('tidyr::spread(table2, key = "1", value = "2")'))),
+
                                #fluidRow(
                                #sidebarPanel(
                                #  div(style = 'text-align: left',
@@ -302,12 +304,12 @@ body = dashboardBody(
                                
                                
                                fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Original Data - table2')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original3")),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: center; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Your Tidy Attempt')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
