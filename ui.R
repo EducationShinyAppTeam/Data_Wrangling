@@ -121,11 +121,12 @@ body = dashboardBody(
                                      div(style = 'display: inline-block', (uiOutput("userOut1"))))),
                                  br(),
                                fluidRow(
-                                 column(12,
-                                        div(style = 'text-align: center; font-size: 125%',
-                                            wellPanel(tags$strong('Your R code: '),
-                                                      uiOutput('userOut2'))
-                                            ))),
+                                 box(div(style = 'text-align: center; font-size: 125%',
+                                         (tags$strong('Your R code: '))),
+                                         style = "success",
+                                         width = 12,
+                                          div(style = 'font-size: 125%; text-align:center', (uiOutput('userOut2'))))
+                                     ),
                                br(),
                                
                                
