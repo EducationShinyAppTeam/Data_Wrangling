@@ -23,6 +23,7 @@ header = dashboardHeader(title = 'Data Wrangling',
 
 sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs',
+              menuItem('Prerequisite', tabName = 'prereq', icon = icon('book')),
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
               menuItem('Tidy Data', tabName = 'exp4', icon = icon('broom')),
               menuItem('Reshaping Data', tabName = 'exp1', icon = icon('wpexplorer')),
@@ -41,14 +42,17 @@ body = dashboardBody(
   useShinyjs(),
   
   tabItems(
+    tabItem(tabName = 'prereq',
+            h4('Please refer to the', a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet'), 'for all the information needed.'),
+            tags$a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
+    
     tabItem(tabName = 'overview',
             tags$a(href='http://stat.psu.edu/', tags$img(src = 'psu_icon.jpg', align = "left", width = 180)),
             br(),
             br(),
             br(),
             h3(strong('About:')),
-            h4('This app illustrates R code for data visulization, reshaping and combining data. Please refer to the',
-               a(href='https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet'), 'for all the information needed.'),
+            h4('This app illustrates R code for tidying, reshaping and combining data.'),
             br(),
             
             h3(strong('Instructions:')),
@@ -429,7 +433,7 @@ body = dashboardBody(
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
-                                     style = 'background-color: #b2dfdb; color: black',
+                                     style = 'background-color: #b2dfdb',
                                      sliderTextInput(inputId = 'dwSTI2',
                                                      label = 'Select Your Sorting Option',
                                                      choices = c('Random', 'Low to High', 'High to Low'),
