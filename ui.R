@@ -81,16 +81,23 @@ body = dashboardBody(
   tabItem(tabName = 'exp4',
           tabsetPanel(type = 'tabs',
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 1'),
-                               br(),
-                               
 
-                               div(style = 'text-align: center; font-size: 85%',
+                               
+                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data'))),
-                          #     h4(tags$code('tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
+                               
+                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
+                               h4(tags$code('tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
+                               
+                               div(style = 'text-align: left; display: inline-block',
+                                         uiOutput("sub"),
+                                         br(),
+                                         uiOutput("reset")),
+                                 
+
                                
                                #fluidRow(
                                  #sidebarPanel(
@@ -101,10 +108,6 @@ body = dashboardBody(
                                      #           size = "medium",
                                       #          style = 'success')),
                                  #  br(),
-                                   div(style = 'text-align: center',
-                                       uiOutput("sub"),
-                                       br(),
-                                       uiOutput("reset")),
                                       # bsButton("submit",
                                        #         label = "Check Answer",
                                         #        icon("lightbulb"),
@@ -128,7 +131,7 @@ body = dashboardBody(
                                  br(),
                                fluidRow(
                                  column(12,
-                                        div(style = 'text-align: center; font-size: 125%',
+                                        div(style = 'text-align: left; font-size: 125%',
                                             wellPanel(tags$strong('Your R code: '),
                                                       uiOutput('userOut2'))))),
                                  br(),
@@ -142,16 +145,16 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
                                                  label = 'Argument 1',
-                                                 choices = c('1999', '2000', 'Argument 1'),
-                                                 selected = 'Argument 1')),
+                                                 choices = c('1999', '2000'),
+                                                 selected = '1999')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                     style = 'background: #b8f28c',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
                                                 label = 'Arguent 2',
-                                                choices = c('1999', '2000', 'Argument 2'),
-                                                selected = 'Argument 2')),
+                                                choices = c('1999', '2000'),
+                                                selected = '1999')),
             
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
@@ -159,8 +162,8 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp3',
                                                  label = 'Argument 3',
-                                                 choices = c('cases', 'year', 'Argument 3'),
-                                                 selected = 'Argument 3')),
+                                                 choices = c('cases', 'year'),
+                                                 selected = 'year')),
                                  
                                  
                                  box(div(style = 'background-color: #b8f28c',
@@ -169,12 +172,11 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp4',
                                                  label = 'Argument 4',
-                                                 choices = c('cases', 'year', 'Argument 4'),
-                                                 selected = 'Argument 4')
+                                                 choices = c('cases', 'year'),
+                                                 selected = 'cases')
                                      )
-                                 )
-                               
-                               ),
+                                 ),
+                               width = 12)),
                       
                       ### Challenge 2 ###
                       
