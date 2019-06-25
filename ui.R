@@ -156,7 +156,7 @@ body = dashboardBody(
                                     style = 'background: #b8f28c',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
-                                                label = 'Arguent 2',
+                                                label = 'Argument 2',
                                                 choices = c('1999', '2000'),
                                                 selected = '1999')),
             
@@ -185,15 +185,14 @@ body = dashboardBody(
                       ### Challenge 2 ###
                       
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 2'),
-                               br(),
+
                                
-                               
-                               div(style = 'text-align: center',
+                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data')),
+                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
                                    h4(tags$code('tidyr::gather(table4b,`1`, `2`, key = "3", value = "4")'))),
 
                                #fluidRow(
@@ -205,10 +204,13 @@ body = dashboardBody(
                                #           size = "medium",
                                #          style = 'success')),
                                #  br(),
-                               div(style = 'text-align: center',
+                               div(style = 'text-align: right; left: 250px; display: inline-block; position: relative',
                                    uiOutput("bus"),
                                    br(),
                                    uiOutput("redo")),
+                               div(style = 'text-align: center',
+                                   uiOutput('cor'),
+                                   uiOutput('wro')),
                                # bsButton("submit",
                                #         label = "Check Answer",
                                #        icon("lightbulb"),
@@ -231,7 +233,7 @@ body = dashboardBody(
                                br(),
                                fluidRow(
                                  column(12,
-                                        div(style = 'text-align: center; font-size: 125%',
+                                        div(style = 'text-align: left; font-size: 125%',
                                             wellPanel(tags$strong('Your R code: '),
                                                       uiOutput('userOutB'))
                                         ))),
@@ -276,20 +278,19 @@ body = dashboardBody(
                                                  choices = c('population', 'year'),
                                                  selected = 'year')
                                  )
-                               )
+                               ),
+                               width = 12)),
                                
-                      ),
-                      
+
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 3'),
-                               br(),
+
                                
-                               
-                               div(style = 'text-align: center',
+                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h3(tags$b('Fill in the Correct Arguments for the Code Below to Tidy the Data')),
+                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
                                    h4(tags$code('tidyr::spread(table2, key = "1", value = "2")'))),
 
                                #fluidRow(
@@ -301,10 +302,13 @@ body = dashboardBody(
                                #           size = "medium",
                                #          style = 'success')),
                                #  br(),
-                               div(style = 'text-align: center',
+                               div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
                                    uiOutput("subbed"),
                                    br(),
                                    uiOutput("restart")),
+                               div(style = 'position: relative; text-align: center',
+                                   uiOutput('cort'),
+                                   uiOutput('rong')),
                                # bsButton("submit",
                                #         label = "Check Answer",
                                #        icon("lightbulb"),
@@ -327,7 +331,7 @@ body = dashboardBody(
                                br(),
                                fluidRow(
                                  column(12,
-                                        div(style = 'text-align: center; font-size: 125%',
+                                        div(style = 'text-align: left; font-size: 125%',
                                             wellPanel(tags$strong('Your R code: '),
                                                       uiOutput('userOutY'))
                                         ))),
@@ -352,8 +356,8 @@ body = dashboardBody(
                                                  label = 'Argument 2',
                                                  choices = c('year', 'type', 'count', 'country'),
                                                  selected = 'country'))
-                                 )
-                               )
+                                 ),
+                               width = 12))
                                
                       )
                       

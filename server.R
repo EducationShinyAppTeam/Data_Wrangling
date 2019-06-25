@@ -187,7 +187,7 @@ shinyServer(function(input, output, session) {
    
     output$reset <- renderUI({
       bsButton("retry",
-               label = "Click to Retry",
+               label = "Click to Reset",
                icon("retweet"),
                size = "medium",
                style = 'success')
@@ -195,7 +195,18 @@ shinyServer(function(input, output, session) {
     
     # hide reset button upon opening app
     hide("reset")
+    hide("correct")
+    hide("wrong")
     
+    
+    output$correct <- renderUI({
+      tags$img(src = "correct.gif", width = 200)
+    })
+      
+      output$wrong <- renderUI({
+        tags$img(src = "try.gif", width = 200)
+      })
+        
 
 
     
@@ -209,13 +220,12 @@ shinyServer(function(input, output, session) {
       disable("submit")
       if(input$userOp1 == '1999' & input$userOp2 == '2000'
          & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-        output$correct <- renderUI({
-          tags$img(src = "correct.gif", width = 200)
-        })}
+        showElement("correct")
+      }
       else{
-        output$wrong <- renderUI({
-          tags$img(src = "try.gif", width = 200)
-        })}
+        showElement("wrong")
+      }
+      
 
     })
 
@@ -233,14 +243,7 @@ shinyServer(function(input, output, session) {
     enable("submit")
     hide("correct")
     hide("wrong")
-    if(input$userOp1 == '1999' & input$userOp2 == '2000'
-       & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-      showElement("correct")
-      }
-    else{
-      showElement("wrong")
-    }
-    
+
   })
   
   observeEvent(input$retry,{
@@ -374,19 +377,6 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
-  # correct/wrong gif 
-  onclick("bus", 
-          output$bus <- renderUI({
-            if(input$userOpA == '1999' & input$userOpB == '2000'
-               & input$userOpC == 'year' & input$userOpD == 'population') {
-              tags$img(src = "correct.gif", width = 230)
-            }
-            else{
-              tags$img(src = "try.gif", width = 200)
-            }
-          })
-  )
-  
   # trying to use sweetalert
   #observeEvent(input$submit, {
   #  if (input$userOpA == '1999' & input$userOpB == '2000'
@@ -411,6 +401,18 @@ shinyServer(function(input, output, session) {
   
   # hide reset button upon opening app
   hide("redo")
+  hide("cor")
+  hide("wro")
+  
+  
+  output$cor <- renderUI({
+    tags$img(src = "correct.gif", width = 200)
+  })
+  
+  output$wro <- renderUI({
+    tags$img(src = "try.gif", width = 200)
+  })
+  
   
   # show reset button after submit is clicked, disable dropdown inputs
   observeEvent(input$submitted,{
@@ -419,6 +421,15 @@ shinyServer(function(input, output, session) {
     disable("userOpB")
     disable("userOpC")
     disable("userOpD")
+    disable("submitted")
+    if(input$userOp1 == '1999' & input$userOp2 == '2000'
+       & input$userOp3 == 'year' & input$userOp4 == 'population') {
+      showElement("cor")
+    }
+    else{
+      showElement("wro")
+    }
+    
   })
   
   
@@ -428,6 +439,10 @@ shinyServer(function(input, output, session) {
     enable("userOpB")
     enable("userOpC")
     enable("userOpD")
+    showElement("submitted")
+    enable("submitted")
+    hide("cor")
+    hide("wro")
     
   })
   
@@ -436,6 +451,8 @@ shinyServer(function(input, output, session) {
     reset("userOpB")
     reset("userOpC")
     reset("userOpD")
+    showElement("submitted")
+    enable("submitted")
     
   })
   
@@ -545,18 +562,7 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
-  # correct/wrong gif 
-  onclick("subbed", 
-          output$subbed <- renderUI({
-            if(input$userOpX == 'type' & input$userOpY == 'count') {
-              tags$img(src = "correct.gif", width = 230)
-            }
-            else{
-              tags$img(src = "try.gif", width = 200)
-            }
-          })
-  )
-  
+
   # trying to use sweetalert
   #observeEvent(input$submit, {
   #  if (input$userOpX == '1999' & input$userOpY == '2000'
@@ -581,12 +587,34 @@ shinyServer(function(input, output, session) {
   
   # hide reset button upon opening app
   hide("restart")
+  hide("cort")
+  hide("rong")
+  
+  
+  output$cort <- renderUI({
+    tags$img(src = "correct.gif", width = 200)
+  })
+  
+  output$rong <- renderUI({
+    tags$img(src = "try.gif", width = 200)
+  })
+  
   
   # show reset button after submit is clicked, disable dropdown inputs
   observeEvent(input$submitting,{
     toggle("restart")
     disable("userOpX")
     disable("userOpY")
+    disable("submitting")
+    if(input$userOp1 == '1999' & input$userOp2 == '2000'
+       & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      showElement("cort")
+    }
+    else{
+      showElement("rong")
+    }
+    
+    
   })
   
   
@@ -594,12 +622,18 @@ shinyServer(function(input, output, session) {
     hide("restart")
     enable("userOpX")
     enable("userOpY")
+    showElement("submitting")
+    enable("submitting")
+    hide("cort")
+    hide("rong")
 
   })
   
   observeEvent(input$retryy,{
     reset("userOpX")
     reset("userOpY")
+    showElement("submitting")
+    enable("submit")
 
   })
   
