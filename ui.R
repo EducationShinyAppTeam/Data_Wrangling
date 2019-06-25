@@ -474,11 +474,11 @@ body = dashboardBody(
            
             fluidRow(
               column(width = 12,
-                     box(title = NULL,
-                         style = 'background-color: #b2dfdb',
+                     box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose an answer!')),
+                         style = 'text-align: left',
                          width = NULL,
                          height = NULL,
-                         tags$h2('Data Wrangling --- Combining Data Sets'),
+                         tags$img(src = 'combine.png', width = '300px', height = NULL),
                          
                          #div(style="display: inline-block;vertical-align:top;",
                           #   tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 19))
@@ -486,17 +486,10 @@ body = dashboardBody(
                          #div(style="display: inline-block;vertical-align:top;",
                         #     circleButton("info1",icon = icon("info"), status = "myClass",size = "xs")
                          #),
-                         bsPopover(id = 'info1',
-                                   title = " ",
-                                   content = 'Exercise! Within each box is a transformed dataset.
-                                   Click on the green label on the upper left corner to select the correct transformation.',
-                                   placement = 'buttom'),
-                         div(style = 'text-align: center', tags$img(src = 'cds.png', width = '300px', height = NULL)),
-                         br(),
-                         br()
-                         )
-                     )
-            ),
+                     
+              
+            br(),
+            br(),
             
             fluidRow(#theme = "bootstrap.css",
               column(width = 6,
@@ -507,7 +500,7 @@ body = dashboardBody(
                          dropdownButton(circle = TRUE,
                                         status = 'success',
                                         size = 'xs',
-                                        icon = icon('cogs'),
+                                        icon = icon('lightbulb'),
                                         up = TRUE,
                                         right = TRUE,
                                         tooltip = tooltipOptions(title = "Select Your Answer"),
@@ -532,7 +525,7 @@ body = dashboardBody(
                          dropdownButton(circle = TRUE,
                                         status = 'success',
                                         size = 'xs',
-                                        icon = icon('cogs'),
+                                        icon = icon('lightbulb'),
                                         up = TRUE,
                                         right = TRUE,
                                         tooltip = tooltipOptions(title = "Select Your Answer"),
@@ -558,7 +551,7 @@ body = dashboardBody(
                          dropdownButton(circle = TRUE,
                                         status = 'success',
                                         size = 'xs',
-                                        icon = icon('cogs'),
+                                        icon = icon('lightbulb'),
                                         up = TRUE,
                                         right = TRUE,
                                         tooltip = tooltipOptions(title = "Select Your Answer"),
@@ -580,7 +573,7 @@ body = dashboardBody(
                          dropdownButton(circle = TRUE,
                                         status = 'success',
                                         size = 'xs',
-                                        icon = icon('cogs'),
+                                        icon = icon('lightbulb'),
                                         up = TRUE,
                                         right = TRUE,
                                         tooltip = tooltipOptions(title = "Select Your Answer"),
@@ -604,7 +597,7 @@ body = dashboardBody(
                          dropdownButton(circle = TRUE,
                                         status = 'success',
                                         size = 'xs',
-                                        icon = icon('cogs'),
+                                        icon = icon('lightbulb'),
                                         up = TRUE,
                                         right = TRUE,
                                         tooltip = tooltipOptions(title = "Select Your Answer"),
@@ -648,7 +641,7 @@ body = dashboardBody(
                          bsButton(inputId = 'check4',
                                   label = 'Check',
                                   size = 'median')
-                         )
+                         ))))
                      )
             )
             )))
