@@ -422,8 +422,8 @@ shinyServer(function(input, output, session) {
     disable("userOpC")
     disable("userOpD")
     disable("submitted")
-    if(input$userOp1 == '1999' & input$userOp2 == '2000'
-       & input$userOp3 == 'year' & input$userOp4 == 'population') {
+    if(input$userOpA == '1999' & input$userOpB == '2000'
+       & input$userOpC == 'year' & input$userOpD == 'population') {
       showElement("cor")
     }
     else{
@@ -606,8 +606,7 @@ shinyServer(function(input, output, session) {
     disable("userOpX")
     disable("userOpY")
     disable("submitting")
-    if(input$userOp1 == '1999' & input$userOp2 == '2000'
-       & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+    if(input$userOpX == 'type' & input$userOpY == 'count') {
       showElement("cort")
     }
     else{
