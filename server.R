@@ -172,17 +172,6 @@ shinyServer(function(input, output, session) {
      })
    
   # correct/wrong gif 
-onclick("sub", 
-        output$sub <- renderUI({
-          if(input$userOp1 == '1999' & input$userOp2 == '2000'
-             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-            tags$img(src = "correct.gif", width = 230)
-            }
-          else{
-            tags$img(src = "try.gif", width = 200)
-            }
-          })
-        )
 
 # trying to use sweetalert
   #observeEvent(input$submit, {
@@ -195,9 +184,7 @@ onclick("sub",
   #    sweetalert(imageUrl = 'try.gif')
    # }
   #})
-
-
-
+   
     output$reset <- renderUI({
       bsButton("retry",
                label = "Click to Retry",
@@ -209,6 +196,9 @@ onclick("sub",
     # hide reset button upon opening app
     hide("reset")
     
+
+
+    
     # show reset button after submit is clicked, disable dropdown inputs
     observeEvent(input$submit,{
       toggle("reset")
@@ -216,7 +206,21 @@ onclick("sub",
       disable("userOp2")
       disable("userOp3")
       disable("userOp4")
+      disable("submit")
+      if(input$userOp1 == '1999' & input$userOp2 == '2000'
+         & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+        output$correct <- renderUI({
+          tags$img(src = "correct.gif", width = 200)
+        })}
+      else{
+        output$wrong <- renderUI({
+          tags$img(src = "try.gif", width = 200)
+        })}
+
     })
+
+
+    
 
 
   observeEvent(input$retry,{
@@ -225,6 +229,17 @@ onclick("sub",
     enable("userOp2")
     enable("userOp3")
     enable("userOp4")
+    showElement("submit")
+    enable("submit")
+    hide("correct")
+    hide("wrong")
+    if(input$userOp1 == '1999' & input$userOp2 == '2000'
+       & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      showElement("correct")
+      }
+    else{
+      showElement("wrong")
+    }
     
   })
   
@@ -233,6 +248,8 @@ onclick("sub",
     reset("userOp2")
     reset("userOp3")
     reset("userOp4")
+    showElement("submit")
+    enable("submit")
     
   })
   

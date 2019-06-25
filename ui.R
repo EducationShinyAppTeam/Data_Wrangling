@@ -92,10 +92,14 @@ body = dashboardBody(
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
                                h4(tags$code('tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
                                
-                               div(style = 'text-align: left; display: inline-block',
-                                         uiOutput("sub"),
-                                         br(),
-                                         uiOutput("reset")),
+                               div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
+                                   uiOutput("sub"),
+                                   br(),
+                                   uiOutput("reset")),
+                               div(style = 'z-index: 1000; position: relative; text-align: center',
+                                   uiOutput('correct'),
+                                   uiOutput('wrong')),
+                               
                                  
 
                                
