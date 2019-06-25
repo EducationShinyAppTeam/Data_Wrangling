@@ -501,7 +501,7 @@ body = dashboardBody(
             fluidRow(#theme = "bootstrap.css",
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffe0b2',
+                         style = 'background-color: #b8f28c',
                          width = NULL,
                          height = '220px',
                          dropdownButton(circle = TRUE,
@@ -526,7 +526,7 @@ body = dashboardBody(
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffe0b2',
+                         style = 'background-color: #b8f28c',
                          width = NULL,
                          height = '220px',
                          dropdownButton(circle = TRUE,
@@ -552,7 +552,7 @@ body = dashboardBody(
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffccbc',
+                         style = 'background-color: #b2dfdb',
                          width = NULL,
                          height = '180px',
                          dropdownButton(circle = TRUE,
@@ -574,7 +574,7 @@ body = dashboardBody(
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffccbc',
+                         style = 'background-color: #b2dfdb',
                          width = NULL,
                          height = '180px',
                          dropdownButton(circle = TRUE,
@@ -598,7 +598,7 @@ body = dashboardBody(
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffe0b2',
+                         style = 'background-color: #b8f28c',
                          width = NULL,
                          height = NULL,
                          dropdownButton(circle = TRUE,
@@ -624,7 +624,7 @@ body = dashboardBody(
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #ffe0b2',
+                         style = 'background-color: #b8f28c',
                          width = NULL,
                          height = NULL,
                          dropdownButton(
