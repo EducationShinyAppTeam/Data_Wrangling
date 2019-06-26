@@ -128,18 +128,9 @@ shinyServer(function(input, output, session) {
   })
   
   
-  output$change <- renderText({
-    if (input$userOp1 == 'Argument 1' || input$userOp2 == 'Argument 2' || input$userOp3 == 'Argument 3' || input$userOp4 == 'Argument 4') {
-      show("change")
-    }
-    else {
-      hide("change")
-    }
-    paste0("Change the Arguments!")
-  })
   
   
-  # show code based on inputs
+  # dynamic code based on user inputs
  output$userOut2 <- renderUI({
    tags$code('tidyr::gather("table4a",`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )

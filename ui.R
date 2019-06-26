@@ -131,7 +131,7 @@ body = dashboardBody(
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("userOut1"),
-                                     div(style = 'font-size: 135%; font-weight: bold', (textOutput("change"))))),
+                                     div(style = 'font-size: 135%; font-weight: bold'))),
                                  br(),
                                fluidRow(
                                  column(12,
