@@ -89,7 +89,7 @@ body = dashboardBody(
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
                                
-                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
+                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a Year in a Country')),
                                h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
                                
                                div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
