@@ -25,8 +25,8 @@ sidebar = dashboardSidebar(
   sidebarMenu(id = 'tabs',
               menuItem('Prerequisite', tabName = 'prereq', icon = icon('book')),
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
-              menuItem('Tidy Data', tabName = 'exp4', icon = icon('broom')),
-              menuItem('Reshaping Data', tabName = 'exp1', icon = icon('wpexplorer')),
+              menuItem('Explore Data Wrangling', tabName = 'exp1', icon = icon('wpexplorer')),
+              menuItem('Tidy Data Challenge', tabName = 'exp4', icon = icon('broom')),
               menuItem('Combining Data Sets', tabName = 'exp2', icon = icon('gamepad'))
               #menuItem('Creating Your Own Graph', tabName = 'exp3', icon = icon('refresh'))
   )
@@ -149,7 +149,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
                                                  label = 'Arg 1',
-                                                 choices = c('country', '1999', 'Afghanistan', '2000', 'China'),
+                                                 choices = c('country', '1999', 'Afghanistan', '2000'),
                                                  selected = 'country')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
@@ -157,7 +157,7 @@ body = dashboardBody(
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
                                                 label = 'Arg 2',
-                                                choices = c('country', '1999', 'Afghanistan', '2000', 'Brazil'),
+                                                choices = c('country', '1999', 'Afghanistan', '2000'),
                                                 selected = '1999')),
             
                                  box(div(style = 'background-color: #b8f28c',
@@ -166,7 +166,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp3',
                                                  label = 'Arg 3',
-                                                 choices = c('cases', 'year'),
+                                                 choices = c('1999', 'cases', 'year', 'China'),
                                                  selected = 'year')),
                                  
                                  
@@ -176,7 +176,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOp4',
                                                  label = 'Arg 4',
-                                                 choices = c('cases', 'year'),
+                                                 choices = c('1999', 'cases', 'year', 'China'),
                                                  selected = 'cases')
                                      )
                                  ),
@@ -248,7 +248,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOpA',
                                                  label = 'Arg 1',
-                                                 choices = c('1999', '2000'),
+                                                 choices = c('country', '1999', '2000', 'Afghanistan'),
                                                  selected = '1999')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
@@ -256,7 +256,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
                                                  label = 'Arg 2',
-                                                 choices = c('1999', '2000'),
+                                                 choices = c('country', '1999', '2000', 'Afghanistan'),
                                                  selected = '1999')),
                                  
                                  box(div(style = 'background-color: #b8f28c',
@@ -265,7 +265,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOpC',
                                                  label = 'Arg 3',
-                                                 choices = c('population', 'year'),
+                                                 choices = c('population', 'country', 'Brazil', 'year'),
                                                  selected = 'population')),
                                  
                                  
@@ -275,7 +275,7 @@ body = dashboardBody(
                                      width = 3,
                                      selectInput(inputId = 'userOpD',
                                                  label = 'Arg 4',
-                                                 choices = c('population', 'year'),
+                                                 choices = c('population', 'country', 'Brazil', 'year'),
                                                  selected = 'year')
                                  )
                                ),
