@@ -57,7 +57,7 @@ body = dashboardBody(
             
             h3(strong('Instructions:')),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
-            h4(tags$li('In the Tidy Data section, fill in the correct arguments for 1, 2, 3, and 4 that coreectly tidies the data.')),
+            h4(tags$li('In the Tidy Data section, fill in the correct arguments that coreectly tidies the data.')),
             h4(tags$li('In the Reshaping Data section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
             h4(tags$li('In the Combining Data Set section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
@@ -90,7 +90,7 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                               h4(tags$code('tidyr::gather(table4a,`1`, `2`, key = "3", value = "4")'))),
+                               h4(tags$code('tidyr::gather(table4a,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
                                
                                div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
                                    uiOutput("sub"),
@@ -148,16 +148,16 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
-                                                 label = 'Argument 1',
-                                                 choices = c('1999', '2000'),
-                                                 selected = '1999')),
+                                                 label = 'Arg 1',
+                                                 choices = c('country', '1999', 'Afghanistan', '2000', 'China'),
+                                                 selected = 'country')),
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                     style = 'background: #b8f28c',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
-                                                label = 'Argument 2',
-                                                choices = c('1999', '2000'),
+                                                label = 'Arg 2',
+                                                choices = c('country', '1999', 'Afghanistan', '2000', 'Brazil'),
                                                 selected = '1999')),
             
                                  box(div(style = 'background-color: #b8f28c',
@@ -165,7 +165,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOp3',
-                                                 label = 'Argument 3',
+                                                 label = 'Arg 3',
                                                  choices = c('cases', 'year'),
                                                  selected = 'year')),
                                  
@@ -175,7 +175,7 @@ body = dashboardBody(
                                      style = 'background-color: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOp4',
-                                                 label = 'Argument 4',
+                                                 label = 'Arg 4',
                                                  choices = c('cases', 'year'),
                                                  selected = 'cases')
                                      )
@@ -193,7 +193,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::gather(table4b,`1`, `2`, key = "3", value = "4")'))),
+                                   h4(tags$code('tidyr::gather(table4b,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
 
                                #fluidRow(
                                #sidebarPanel(
@@ -247,7 +247,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpA',
-                                                 label = 'Argument 1',
+                                                 label = 'Arg 1',
                                                  choices = c('1999', '2000'),
                                                  selected = '1999')),
                                  box(div(style = 'background-color: #b8f28c',
@@ -255,7 +255,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
-                                                 label = 'Argument 2',
+                                                 label = 'Arg 2',
                                                  choices = c('1999', '2000'),
                                                  selected = '1999')),
                                  
@@ -264,7 +264,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpC',
-                                                 label = 'Argument 3',
+                                                 label = 'Arg 3',
                                                  choices = c('population', 'year'),
                                                  selected = 'population')),
                                  
@@ -274,7 +274,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 3,
                                      selectInput(inputId = 'userOpD',
-                                                 label = 'Argument 4',
+                                                 label = 'Arg 4',
                                                  choices = c('population', 'year'),
                                                  selected = 'year')
                                  )
@@ -291,7 +291,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::spread(table2, key = "1", value = "2")'))),
+                                   h4(tags$code('tidyr::spread(table2, key = "Arg 1", value = "Arg 2")'))),
 
                                #fluidRow(
                                #sidebarPanel(
@@ -345,7 +345,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 6,
                                      selectInput(inputId = 'userOpX',
-                                                 label = 'Argument 1',
+                                                 label = 'Arg 1',
                                                  choices = c('year', 'type', 'count', 'country'),
                                                  selected = 'year')),
                                  box(div(style = 'background-color: #b8f28c',
@@ -353,7 +353,7 @@ body = dashboardBody(
                                      style = 'background: #b8f28c',
                                      width = 6,
                                      selectInput(inputId = 'userOpY',
-                                                 label = 'Argument 2',
+                                                 label = 'Arg 2',
                                                  choices = c('year', 'type', 'count', 'country'),
                                                  selected = 'country'))
                                  ),

@@ -128,11 +128,9 @@ shinyServer(function(input, output, session) {
   })
   
   
-  
-  
   # dynamic code based on user inputs
  output$userOut2 <- renderUI({
-   tags$code('tidyr::gather("table4a",`', input$userOp1, '`,`', input$userOp2, '`,
+   tags$code('tidyr::gather(table4a,`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )
  }) 
  
@@ -338,7 +336,7 @@ shinyServer(function(input, output, session) {
   
   # show code based on inputs
   output$userOutB <- renderUI({
-    tags$code('tidyr::gather("table4b",`', input$userOpA, '`,`', input$userOpB, '`,
+    tags$code('tidyr::gather(table4b,`', input$userOpA, '`,`', input$userOpB, '`,
               key = "', input$userOpC, '", value = "', input$userOpD, '")' )
   }) 
   
@@ -524,7 +522,7 @@ shinyServer(function(input, output, session) {
   
   # show code based on inputs
   output$userOutY <- renderUI({
-    tags$code('tidyr::spread("table2", key = "', input$userOpX, '", value = "', input$userOpY, '")' )
+    tags$code('tidyr::spread(table2, key = "', input$userOpX, '", value = "', input$userOpY, '")' )
   }) 
   
   
