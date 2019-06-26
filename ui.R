@@ -90,7 +90,7 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                               h4(tags$code('tidyr::gather(table4a,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                               h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
                                
                                div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
                                    uiOutput("sub"),
@@ -122,7 +122,7 @@ body = dashboardBody(
                                
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'Original Data - table4a')),
+                                         (title = 'RawData')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original1")),
@@ -193,7 +193,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::gather(table4b,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                   h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
 
                                #fluidRow(
                                #sidebarPanel(
@@ -221,7 +221,7 @@ body = dashboardBody(
                                
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'Original Data - table4b')),
+                                         (title = 'RawData2')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original2")),
@@ -291,7 +291,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::spread(table2, key = "Arg 1", value = "Arg 2")'))),
+                                   h4(tags$code('tidyr::spread(RawData3, key = "Arg 1", value = "Arg 2")'))),
 
                                #fluidRow(
                                #sidebarPanel(
@@ -319,7 +319,7 @@ body = dashboardBody(
                                
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'Original Data - table2')),
+                                         (title = 'RawData3')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original3")),

@@ -38,91 +38,93 @@ shinyServer(function(input, output, session) {
   })
   
  ############## Tidy Data #################
+  
+  RawData <- table4a
  
    
  output$original1 <- renderTable({
-   table4a
+   RawData
  })
   
   # specify outputs for every choice
   output$userOut1 <- renderTable({
     if (input$userOp1 == '1999' & input$userOp2 == '1999' 
         & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `1999`, key = "cases", value = "cases")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '1999'
              & input$userOp3 == 'cases' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `1999`, key = "cases", value = "year")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '1999'
              & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `1999`, key = "year", value = "cases")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '1999'
              & input$userOp3 == 'year' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `1999`, key = "year", value = "year")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `2000`, key = "cases", value = "cases")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `2000`, key = "cases", value = "year")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '2000'
              & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `2000`, key = "year", value = "cases")
     }
     else if (input$userOp1 == '1999' & input$userOp2 == '2000'
              & input$userOp3 == 'year' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`1999`, `2000`, key = "year", value = "year")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '1999'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `1999`, key = "cases", value = "cases")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '1999'
              & input$userOp3 == 'cases' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `1999`, key = "cases", value = "year")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '1999'
              & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `1999`, key = "year", value = "cases")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '1999'
              & input$userOp3 == 'year' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `1999`, key = "year", value = "year")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `2000`, key = "cases", value = "cases")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'year') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `2000`, key = "cases", value = "year")
     }
     else if (input$userOp1 == '2000' & input$userOp2 == '2000'
              & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `2000`, key = "year", value = "cases")
     }
     else {
-      table4a %>%
+      RawData %>%
         gather(`2000`, `2000`, key = "year", value = "year")
     }
   })
@@ -130,7 +132,7 @@ shinyServer(function(input, output, session) {
   
   # dynamic code based on user inputs
  output$userOut2 <- renderUI({
-   tags$code('tidyr::gather(table4a,`', input$userOp1, '`,`', input$userOp2, '`,
+   tags$code('tidyr::gather(RawData,`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )
  }) 
  
@@ -247,96 +249,98 @@ shinyServer(function(input, output, session) {
   
   ### Challenge 2 ###
   
+  RawData2 <- table4b
+  
   output$original2 <- renderTable({
-    table4b
+    RawData2
   })
   
   # specify outputs for every choice
   output$userOutA <- renderTable({
     if (input$userOpA == '1999' & input$userOpB == '1999' 
         & input$userOpC == 'population' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `1999`, key = "population", value = "population")
     }
     else if (input$userOpA == '1999' & input$userOpB == '1999'
              & input$userOpC == 'population' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `1999`, key = "population", value = "year")
     }
     else if (input$userOpA == '1999' & input$userOpB == '1999'
              & input$userOpC == 'year' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `1999`, key = "year", value = "population")
     }
     else if (input$userOpA == '1999' & input$userOpB == '1999'
              & input$userOpC == 'year' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `1999`, key = "year", value = "year")
     }
     else if (input$userOpA == '1999' & input$userOpB == '2000'
              & input$userOpC == 'population' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `2000`, key = "population", value = "population")
     }
     else if (input$userOpA == '1999' & input$userOpB == '2000'
              & input$userOpC == 'population' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `2000`, key = "population", value = "year")
     }
     else if (input$userOpA == '1999' & input$userOpB == '2000'
              & input$userOpC == 'year' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `2000`, key = "year", value = "population")
     }
     else if (input$userOpA == '1999' & input$userOpB == '2000'
              & input$userOpC == 'year' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`1999`, `2000`, key = "year", value = "year")
     }
     else if (input$userOpA == '2000' & input$userOpB == '1999'
              & input$userOpC == 'population' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `1999`, key = "population", value = "population")
     }
     else if (input$userOpA == '2000' & input$userOpB == '1999'
              & input$userOpC == 'population' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `1999`, key = "population", value = "year")
     }
     else if (input$userOpA == '2000' & input$userOpB == '1999'
              & input$userOpC == 'year' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `1999`, key = "year", value = "population")
     }
     else if (input$userOpA == '2000' & input$userOpB == '1999'
              & input$userOpC == 'year' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `1999`, key = "year", value = "year")
     }
     else if (input$userOpA == '2000' & input$userOpB == '2000'
              & input$userOpC == 'population' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `2000`, key = "population", value = "population")
     }
     else if (input$userOpA == '2000' & input$userOpB == '2000'
              & input$userOpC == 'population' & input$userOpD == 'year') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `2000`, key = "population", value = "year")
     }
     else if (input$userOpA == '2000' & input$userOpB == '2000'
              & input$userOpC == 'year' & input$userOpD == 'population') {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `2000`, key = "year", value = "population")
     }
     else {
-      table4b %>%
+      RawData2 %>%
         gather(`2000`, `2000`, key = "year", value = "year")
     }
   })
   
   # show code based on inputs
   output$userOutB <- renderUI({
-    tags$code('tidyr::gather(table4b,`', input$userOpA, '`,`', input$userOpB, '`,
+    tags$code('tidyr::gather(RawData2,`', input$userOpA, '`,`', input$userOpB, '`,
               key = "', input$userOpC, '", value = "', input$userOpD, '")' )
   }) 
   
@@ -448,81 +452,83 @@ shinyServer(function(input, output, session) {
 
 ### Challenge 3 ###
   
+  RawData3 <- table2
+  
   output$original3 <- renderTable({
-    table2
+    RawData3
   })
   
   # specify outputs for every choice
   output$userOutX <- renderTable({
     if (input$userOpX == 'year' & input$userOpY == 'year') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "year", value = "year")
     }
     else if (input$userOpX == 'year' & input$userOpY == 'type') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "year", value = "type")
     }
     else if (input$userOpX == 'year' & input$userOpY == 'country') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "year", value = "country")
     }
     else if (input$userOpX == 'year' & input$userOpY == 'count') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "year", value = "count")
     }
     else if (input$userOpX == 'type' & input$userOpY == 'year') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "type", value = "year")
     }
     else if (input$userOpX == 'type' & input$userOpY == 'type') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "type", value = "type")
     }
     else if (input$userOpX == 'type' & input$userOpY == 'country') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "type", value = "country")
     }
     else if (input$userOpX == 'type' & input$userOpY == 'count') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "type", value = "count")
     }
     else if (input$userOpX == 'country' & input$userOpY == 'year') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "country", value = "year")
     }
     else if (input$userOpX == 'country' & input$userOpY == 'type') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "country", value = "type")
     }
     else if (input$userOpX == 'country' & input$userOpY == 'country') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "country", value = "country")
     }
     else if (input$userOpX == 'country' & input$userOpY == 'count') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "country", value = "count")
     }
     else if (input$userOpX == 'count' & input$userOpY == 'year') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "count", value = "year")
     }
     else if (input$userOpX == 'count' & input$userOpY == 'type') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "count", value = "type")
     }
     else if (input$userOpX == 'count' & input$userOpY == 'country') {
-      table2 %>%
+      RawData3 %>%
         spread(key = "count", value = "country")
     }
     else {
-      table2 %>%
+      RawData3 %>%
         spread(key = "count", value = "count")
     }
   })
   
   # show code based on inputs
   output$userOutY <- renderUI({
-    tags$code('tidyr::spread(table2, key = "', input$userOpX, '", value = "', input$userOpY, '")' )
+    tags$code('tidyr::spread(RawData3, key = "', input$userOpX, '", value = "', input$userOpY, '")' )
   }) 
   
   
