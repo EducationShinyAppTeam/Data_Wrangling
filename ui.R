@@ -83,7 +83,8 @@ body = dashboardBody(
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 1'),
 
                                
-                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
+                               box(
+                                 wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
@@ -98,7 +99,7 @@ body = dashboardBody(
                                    uiOutput("reset")),
                                div(style = 'z-index: 1000; position: relative; text-align: center',
                                    uiOutput('correct'),
-                                   uiOutput('wrong')),
+                                   uiOutput('wrong'))),
                                
                                  
 
@@ -187,7 +188,7 @@ body = dashboardBody(
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 2'),
 
                                
-                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
+                               box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
@@ -210,7 +211,7 @@ body = dashboardBody(
                                    uiOutput("redo")),
                                div(style = 'text-align: center',
                                    uiOutput('cor'),
-                                   uiOutput('wro')),
+                                   uiOutput('wro'))),
                                # bsButton("submit",
                                #         label = "Check Answer",
                                #        icon("lightbulb"),
@@ -280,12 +281,13 @@ body = dashboardBody(
                                  )
                                ),
                                width = 12)),
-                               
+                      
+                 ### Challenge 3         
 
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 3'),
 
                                
-                               box(div(style = 'text-align: left; font-size: 85%; display: inline-block',
+                               box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
@@ -308,7 +310,7 @@ body = dashboardBody(
                                    uiOutput("restart")),
                                div(style = 'position: relative; text-align: center',
                                    uiOutput('cort'),
-                                   uiOutput('rong')),
+                                   uiOutput('rong'))),
                                # bsButton("submit",
                                #         label = "Check Answer",
                                #        icon("lightbulb"),
@@ -380,8 +382,8 @@ body = dashboardBody(
                         tabPanel(div(style = 'font-size: 125%', 'Unite'),
                                  br(),
                                  box(title = 'View An Example',
-                                     width = 7,
-                                     style = 'background-color: #b8f28c',
+                                     width = NULL,
+                                     style = 'background-color: #b8f28c; display: inline-block',
                                      tableOutput('uniteOutput1'),
                                      checkboxGroupInput(inputId = 'unite1',
                                                         label = 'Select Columns to Unite',
@@ -399,8 +401,8 @@ body = dashboardBody(
                         tabPanel(div(style = 'font-size: 125%', 'Gather'),
                                  br(),
                                  box(title = 'View An Example',
-                                     width = 4,
-                                     style = 'background-color: #b8f28c',
+                                     width = NULL,
+                                     style = 'background-color: #b8f28c; display: inline-block',
                                      materialSwitch(inputId = 'dw1',
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
@@ -425,8 +427,8 @@ body = dashboardBody(
                         tabPanel(div(style = 'font-size: 125%', 'Spread'),
                                  br(),
                                  box(title = 'View An Example',
-                                     width = 4,
-                                     style = 'background-color: #b8f28c',
+                                     width = NULL,
+                                     style = 'background-color: #b8f28c; display: inline-block',
                                      materialSwitch(inputId = 'dw3',
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
@@ -442,8 +444,8 @@ body = dashboardBody(
                         tabPanel(div(style = 'font-size: 125%', 'Arrange'),
                                  br(),
                                  box(title = 'View An Example',
-                                     width = 7,
-                                     style = 'background-color: #b8f28c',
+                                     width = NULL,
+                                     style = 'background-color: #b8f28c; display: inline-block',
                                      sliderTextInput(inputId = 'dwSTI2',
                                                      label = 'Select Your Sorting Option',
                                                      choices = c('Random', 'Low to High', 'High to Low'),
