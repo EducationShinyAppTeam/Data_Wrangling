@@ -34,7 +34,7 @@ shinyServer(function(input, output, session) {
     )
   })
   observeEvent(input$go2, {
-    updateTabItems(session, 'tabs', 'exp4')
+    updateTabItems(session, 'tabs', 'exp1')
   })
   
  ############## Tidy Data #################
@@ -178,7 +178,7 @@ shinyServer(function(input, output, session) {
    
     output$reset <- renderUI({
       bsButton("retry",
-               label = "Click to Reset",
+               label = "Try Again",
                icon("retweet"),
                size = "medium",
                style = 'success')
@@ -386,7 +386,7 @@ shinyServer(function(input, output, session) {
   
   output$redo <- renderUI({
     bsButton("retrying",
-             label = "Click to Retry",
+             label = "Try Again",
              icon("retweet"),
              size = "medium",
              style = 'success')
@@ -574,7 +574,7 @@ shinyServer(function(input, output, session) {
   
   output$restart <- renderUI({
     bsButton("retryy",
-             label = "Click to Retry",
+             label = "Try Again",
              icon("retweet"),
              size = "medium",
              style = 'success')
