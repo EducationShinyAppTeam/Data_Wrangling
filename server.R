@@ -472,7 +472,7 @@ shinyServer(function(input, output, session) {
           gather(`2000`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
       }
       
-      ### coutry
+      ### country
       
       else if (input$userOp1 == 'country' & input$userOp2 == 'country' 
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
@@ -721,6 +721,28 @@ shinyServer(function(input, output, session) {
              & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
       RawData %>%
         gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
+    }
+    
+    # adding country
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country' 
+             & input$userOp3 == '1999' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `country`, key = "1999", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country'
+             & input$userOp3 == '1999' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `country`, key = "1999", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `country`, key = "Afghanistan", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `country`, key = "Afghanistan", value = "Afghanistan")
     }
     
     
