@@ -783,6 +783,18 @@ shinyServer(function(input, output, session) {
               style = 'success')
      })
    
+   observeEvent(input$submit,{
+     withProgress(session, min = 1, max = 15, {
+       setProgress(message = 'Checking Answer',
+                   detail = '')
+       for (i in 1:13) {
+         setProgress(value = i)
+         Sys.sleep(0.05)
+       }
+     })
+   })
+   
+   
   # correct/wrong gif 
 
 # trying to use sweetalert
