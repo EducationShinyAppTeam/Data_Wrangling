@@ -555,6 +555,175 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`country`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
       }
+    
+    ### Afghanistan
+    
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan' 
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "year", value = "year")
+    }
+    #added
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000' 
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "year", value = "year")
+    }
+    
+    ## first half
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan' 
+             & input$userOp3 == '1999' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == '1999' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == '1999' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "1999", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == '1999' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "1999", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "Afghanistan", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '1999'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `1999`, key = "Afghanistan", value = "Afghanistan")
+    }
+    #added
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000' 
+             & input$userOp3 == '1999' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "1999", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == '1999' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "1999", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "Afghanistan", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `2000`, key = "Afghanistan", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == '1999' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == '1999' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "Afghanistan")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == '1999') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "1999")
+    }
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
+             & input$userOp3 == 'Afghanistan' & input$userOp4 == 'Afghanistan') {
+      RawData %>%
+        gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
+    }
+    
+    
       
 
   })
