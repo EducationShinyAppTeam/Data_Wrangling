@@ -123,10 +123,92 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`2000`, `2000`, key = "year", value = "cases")
     }
-    else {
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
       RawData %>%
         gather(`2000`, `2000`, key = "year", value = "year")
     }
+    if (input$userOp1 == 'country' & input$userOp2 == 'country' 
+        & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`country`, `country`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == 'country'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`country`, `country`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == 'country'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`country`, `country`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == 'country'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`country`, `country`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`country`, `2000`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`country`, `2000`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`country`, `2000`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == 'country' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`country`, `2000`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == 'country'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`2000`, `country`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == 'country'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`2000`, `country`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == 'country'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`2000`, `country`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == 'country'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`2000`, `country`, key = "year", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`2000`, `2000`, key = "cases", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'cases' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`2000`, `2000`, key = "cases", value = "year")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      RawData %>%
+        gather(`2000`, `2000`, key = "year", value = "cases")
+    }
+    else if (input$userOp1 == '2000' & input$userOp2 == '2000'
+             & input$userOp3 == 'year' & input$userOp4 == 'year') {
+      RawData %>%
+        gather(`2000`, `2000`, key = "year", value = "year")
+    }
+    
   })
   
   
