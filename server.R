@@ -855,6 +855,7 @@ shinyServer(function(input, output, session) {
       disable("userOp4")
       disable("submit")
       if(input$userOp1 == '1999' & input$userOp2 == '2000'
+         & input$userOp3 == 'year' & input$userOp4 == 'cases' || input$userOp1 == '2000' & input$userOp2 == '1999'
          & input$userOp3 == 'year' & input$userOp4 == 'cases') {
         showElement("correct")
       }
