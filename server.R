@@ -817,6 +817,18 @@ shinyServer(function(input, output, session) {
                style = 'success')
       })
     
+    observeEvent(input$retry,{
+      withProgress(session, min = 1, max = 15, {
+        setProgress(message = 'Resetting',
+                    detail = '')
+        for (i in 1:13) {
+          setProgress(value = i)
+          Sys.sleep(0.05)
+        }
+      })
+    })
+    
+    
     # hide reset button upon opening app
     hide("reset")
     hide("correct")

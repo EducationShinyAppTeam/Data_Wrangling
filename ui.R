@@ -80,7 +80,7 @@ body = dashboardBody(
 
   tabItem(tabName = 'exp4',
           tabsetPanel(type = 'tabs',
-                      tabPanel(div(style = 'font-size: 125%', 'Challenge 1'),
+                      tabPanel(div(style = 'font-size: 125%', 'Gather 1'),
 
                                
                                box(
@@ -284,7 +284,7 @@ body = dashboardBody(
                       
                  ### Challenge 3         
 
-                      tabPanel(div(style = 'font-size: 125%', 'Challenge 3'),
+                      tabPanel(div(style = 'font-size: 125%', 'Spread 1'),
 
                                
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
