@@ -61,7 +61,7 @@ table3 <-
 
 merge(table3, tidy4a, by = 'year',  by.x = 'years', by.y = 'yeard')
 
-left_join(table3, tidy4a)
+left_join(table3, tidy4a, "years"="yeard")
 
 
 ```
