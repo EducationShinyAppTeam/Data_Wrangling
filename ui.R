@@ -196,7 +196,7 @@ body = dashboardBody(
                                                  #div(style = 'text-align: center',
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a CASE is the capital of a country in a specific year')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a country in a year')),
                                                  h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
                                              
                                              #fluidRow(
@@ -287,7 +287,7 @@ body = dashboardBody(
                       
                       #### Spread 1 #### 
                       
-                      tabPanel(div(style = 'font-size: 125%', 'Challenge 2'),
+                      tabPanel(div(style = 'font-size: 125%', 'Spread 1'),
 
                                
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
