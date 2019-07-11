@@ -79,6 +79,8 @@ body = dashboardBody(
 
 ############# Tidy Data #################
 
+#### Gather 1 ####
+
   tabItem(tabName = 'exp4',
           tabsetPanel(type = 'tabs',
                       tabPanel(div(style = 'font-size: 125%', 'Gather 1'),
@@ -184,7 +186,106 @@ body = dashboardBody(
                                  ),
                                width = 12)),
                       
-                      ### Challenge 2 ###
+                      #### Gather 2 ####         
+                      
+                      tabPanel(div(style = 'font-size: 125%', 'Gather 2'),
+                               
+                               
+                               box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
+                                                 #titlePanel("Tidy the Original Data"),
+                                                 #div(style = 'text-align: center',
+                                                 #  h1(strong('Tidy the Original Data')),
+                                                 #div(style = 'text-align: center',
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a CASE is the capital of a country in a specific year')),
+                                                 h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                             
+                                             #fluidRow(
+                                             #sidebarPanel(
+                                             #  div(style = 'text-align: left',
+                                             #     bsButton("newtable",
+                                             #             label = "New Table",
+                                             #            icon("arrow-circle-right"),
+                                             #           size = "medium",
+                                             #          style = 'success')),
+                                             #  br(),
+                                             div(style = 'text-align: right; display: inline-block; position: relative; left: 185px',
+                                                 uiOutput("subbed"),
+                                                 br(),
+                                                 uiOutput("restart")),
+                                             div(style = 'position: relative; text-align: center',
+                                                 uiOutput('cort'),
+                                                 uiOutput('rong'))),
+                                   # bsButton("submit",
+                                   #         label = "Check Answer",
+                                   #        icon("lightbulb"),
+                                   #       size = "medium",
+                                   #      style = 'success'),
+                                   #width = 1)),#),
+                                   
+                                   
+                                   fluidRow(
+                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                             (title = 'RawData3')),
+                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         width = 6,
+                                         uiOutput("original3")),
+                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                             (title = 'Your Tidy Attempt')),
+                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         width = 6,
+                                         uiOutput("userOutX"))),
+                                   br(),
+                                   fluidRow(
+                                     column(12,
+                                            div(style = 'text-align: left; font-size: 125%',
+                                                wellPanel(tags$strong('Your R code: '),
+                                                          uiOutput('userOutY'))
+                                            ))),
+                                   br(),
+                                   
+                                   
+                                   fluidRow(
+                                     # choices for user plot
+                                     box(div(style = 'background-color: #b8f28c',
+                                             (title = '')),
+                                         style = 'background: #b8f28c',
+                                         width = 3,
+                                         selectInput(inputId = 'userOp5',
+                                                     label = 'Arg 1',
+                                                     choices = c('country', '1999', 'Afghanistan', '2000'),
+                                                     selected = 'country')),
+                                     box(div(style = 'background-color: #b8f28c',
+                                             (title = '')),
+                                         style = 'background: #b8f28c',
+                                         width = 3,
+                                         selectInput(inputId = 'userOp6',
+                                                     label = 'Arg 2',
+                                                     choices = c('country', '1999', 'Afghanistan', '2000'),
+                                                     selected = '1999')),
+                                     
+                                     box(div(style = 'background-color: #b8f28c',
+                                             (title = '')),
+                                         style = 'background: #b8f28c',
+                                         width = 3,
+                                         selectInput(inputId = 'userOp7',
+                                                     label = 'Arg 3',
+                                                     choices = c('1999', 'cases', 'year', 'China'),
+                                                     selected = 'year')),
+                                     
+                                     
+                                     box(div(style = 'background-color: #b8f28c',
+                                             (title = '')),
+                                         style = 'background-color: #b8f28c',
+                                         width = 3,
+                                         selectInput(inputId = 'userOp8',
+                                                     label = 'Arg 4',
+                                                     choices = c('1999', 'cases', 'year', 'China'),
+                                                     selected = 'cases')
+                                     )
+                                   ),
+                                   width = 12)),
+                      
+                      #### Spread 1 #### 
                       
                       tabPanel(div(style = 'font-size: 125%', 'Challenge 2'),
 
@@ -282,87 +383,9 @@ body = dashboardBody(
                                  )
                                ),
                                width = 12)),
-                      
-                 ### Challenge 3         
-
-                      tabPanel(div(style = 'font-size: 125%', 'Spread 1'),
-
-                               
-                               box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                   #titlePanel("Tidy the Original Data"),
-                                   #div(style = 'text-align: center',
-                                   #  h1(strong('Tidy the Original Data')),
-                                   #div(style = 'text-align: center',
-                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::spread(RawData3, key = "Arg 1", value = "Arg 2")'))),
-
-                               #fluidRow(
-                               #sidebarPanel(
-                               #  div(style = 'text-align: left',
-                               #     bsButton("newtable",
-                               #             label = "New Table",
-                               #            icon("arrow-circle-right"),
-                               #           size = "medium",
-                               #          style = 'success')),
-                               #  br(),
-                               div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
-                                   uiOutput("subbed"),
-                                   br(),
-                                   uiOutput("restart")),
-                               div(style = 'position: relative; text-align: center',
-                                   uiOutput('cort'),
-                                   uiOutput('rong'))),
-                               # bsButton("submit",
-                               #         label = "Check Answer",
-                               #        icon("lightbulb"),
-                               #       size = "medium",
-                               #      style = 'success'),
-                               #width = 1)),#),
-                               
-                               
-                               fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'RawData3')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
-                                     width = 6,
-                                     uiOutput("original3")),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'Your Tidy Attempt')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
-                                     width = 6,
-                                     uiOutput("userOutX"))),
-                               br(),
-                               fluidRow(
-                                 column(12,
-                                        div(style = 'text-align: left; font-size: 125%',
-                                            wellPanel(tags$strong('Your R code: '),
-                                                      uiOutput('userOutY'))
-                                        ))),
-                               br(),
-                               
-                               
-                               fluidRow(
-                                 # choices for user plot
-                                 box(div(style = 'background-color: #b8f28c',
-                                         (title = '')),
-                                     style = 'background: #b8f28c',
-                                     width = 6,
-                                     selectInput(inputId = 'userOpX',
-                                                 label = 'Arg 1',
-                                                 choices = c('year', 'type', 'count', 'country'),
-                                                 selected = 'year')),
-                                 box(div(style = 'background-color: #b8f28c',
-                                         (title = '')),
-                                     style = 'background: #b8f28c',
-                                     width = 6,
-                                     selectInput(inputId = 'userOpY',
-                                                 label = 'Arg 2',
-                                                 choices = c('year', 'type', 'count', 'country'),
-                                                 selected = 'country'))
-                                 ),
-                               width = 12)),
+                    
                  
-                 ### Shiny Ace ###
+                 #### Shiny Ace ####
                  
                  tabPanel(div(style = 'font-size: 125%', 'Live Code'),
                           
