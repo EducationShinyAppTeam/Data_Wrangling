@@ -893,7 +893,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  ### Spread 1 ###
+  #### Spread 1 ####
   
    RawData2 <- table4b
   
@@ -983,6 +983,8 @@ shinyServer(function(input, output, session) {
         gather(`2000`, `2000`, key = "year", value = "year")
     }
   })
+  
+  #### Bottom of options ####
   
   # show code based on inputs
   output$userOutB <- renderUI({
@@ -1094,6 +1096,216 @@ shinyServer(function(input, output, session) {
     enable("submitted")
     
   })
+  
+  
+  #### Spread 2 ####
+  
+  capital <- c("Kabul", "Brasília", "Beijing")
+  
+  table4b$capital <- capital
+  
+  RawData4 <- table4b
+  
+  output$original4 <- renderTable({
+    RawData4
+  })
+  
+  # specify outputs for every choice
+  output$userOut3 <- renderTable({
+    if (input$userOpJ == '1999' & input$userOpK == '1999' 
+        & input$userOpL == 'population' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`1999`, `1999`, key = "population", value = "population")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '1999'
+             & input$userOpL == 'population' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`1999`, `1999`, key = "population", value = "year")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '1999'
+             & input$userOpL == 'year' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`1999`, `1999`, key = "year", value = "population")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '1999'
+             & input$userOpL == 'year' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`1999`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '2000'
+             & input$userOpL == 'population' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`1999`, `2000`, key = "population", value = "population")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '2000'
+             & input$userOpL == 'population' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`1999`, `2000`, key = "population", value = "year")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '2000'
+             & input$userOpL == 'year' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`1999`, `2000`, key = "year", value = "population")
+    }
+    else if (input$userOpJ == '1999' & input$userOpK == '2000'
+             & input$userOpL == 'year' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`1999`, `2000`, key = "year", value = "year")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '1999'
+             & input$userOpL == 'population' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`2000`, `1999`, key = "population", value = "population")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '1999'
+             & input$userOpL == 'population' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`2000`, `1999`, key = "population", value = "year")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '1999'
+             & input$userOpL == 'year' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`2000`, `1999`, key = "year", value = "population")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '1999'
+             & input$userOpL == 'year' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`2000`, `1999`, key = "year", value = "year")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '2000'
+             & input$userOpL == 'population' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`2000`, `2000`, key = "population", value = "population")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '2000'
+             & input$userOpL == 'population' & input$userOpM == 'year') {
+      RawData4 %>%
+        gather(`2000`, `2000`, key = "population", value = "year")
+    }
+    else if (input$userOpJ == '2000' & input$userOpK == '2000'
+             & input$userOpL == 'year' & input$userOpM == 'population') {
+      RawData4 %>%
+        gather(`2000`, `2000`, key = "year", value = "population")
+    }
+    else {
+      RawData4 %>%
+        gather(`2000`, `2000`, key = "year", value = "year")
+    }
+  })
+  
+  #### Bottom of options ####
+  
+  # show code based on inputs
+  output$userOut4 <- renderUI({
+    tags$code('tidyr::gather(RawData4,`', input$userOpJ, '`,`', input$userOpK, '`,
+              key = "', input$userOpL, '", value = "', input$userOpM, '")' )
+  }) 
+  
+  
+  #observeEvent(input$submit, {
+  # withProgress(session, min = 1, max = 15, {
+  #  setProgress(message = 'Checking Answer',
+  #             detail = '')
+  #for (i in 1:10) {
+  # setProgress(value = i)
+  #Sys.sleep(0.05)
+  #   }
+  #  })
+  # })
+  
+  # op1save <- reactiveValues(input$userOpJ = NULL)
+  # op2save <- reactiveValues(input$userOpK = NULL)
+  # op3save <- reactiveValues(input$userOpL = NULL)
+  # op4save <- reactiveValues(input$userOpM = NULL)
+  
+  # submit button
+  output$buss <- renderUI({
+    bsButton("submitteds",
+             label = "Check Answer",
+             icon("lightbulb"),
+             size = "medium",
+             style = 'success')
+  })
+  
+  # trying to use sweetalert
+  #observeEvent(input$submit, {
+  #  if (input$userOpJ == '1999' & input$userOpK == '2000'
+  #      & input$userOpL == 'year' & input$userOpM == 'population') {
+  #   sweetalert(imageUrl = 'correct.gif')
+  #}
+  
+  #   else{
+  #    sweetalert(imageUrl = 'try.gif')
+  # }
+  #})
+  
+  
+  
+  output$redos <- renderUI({
+    bsButton("retryings",
+             label = "Try Again",
+             icon("retweet"),
+             size = "medium",
+             style = 'success')
+  })
+  
+  # hide reset button upon opening app
+  hide("redos")
+  hide("cors")
+  hide("wros")
+  
+  
+  output$cors <- renderUI({
+    tags$img(src = "correct.gif", width = 200)
+  })
+  
+  output$wros <- renderUI({
+    tags$img(src = "try.gif", width = 200)
+  })
+  
+  
+  # show reset button after submit is clicked, disable dropdown inputs
+  observeEvent(input$submitteds,{
+    toggle("redos")
+    disable("userOpJ")
+    disable("userOpK")
+    disable("userOpL")
+    disable("userOpM")
+    disable("submitteds")
+    if(input$userOpJ == '1999' & input$userOpK == '2000'
+       & input$userOpL == 'year' & input$userOpM == 'population') {
+      showElement("cors")
+    }
+    else{
+      showElement("wros")
+    }
+    
+  })
+  
+  
+  observeEvent(input$retryings,{
+    hide("redos")
+    enable("userOpJ")
+    enable("userOpK")
+    enable("userOpL")
+    enable("userOpM")
+    showElement("submitteds")
+    enable("submitteds")
+    hide("cors")
+    hide("wros")
+    
+  })
+  
+  observeEvent(input$retryings,{
+    reset("userOpJ")
+    reset("userOpK")
+    reset("userOpL")
+    reset("userOpM")
+    showElement("submitteds")
+    enable("submitteds")
+    
+  })
+  
   
 
 #### Gather 2 ####
