@@ -423,7 +423,7 @@ body = dashboardBody(
                                    
                                    fluidRow(
                                      box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                             (title = 'RawData2')),
+                                             (title = 'RawData4')),
                                          style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                          width = 6,
                                          uiOutput("original4")),
@@ -448,7 +448,7 @@ body = dashboardBody(
                                              (title = '')),
                                          style = 'background: #b8f28c',
                                          width = 3,
-                                         selectInput(inputId = 'userOpK',
+                                         selectInput(inputId = 'userOpJ',
                                                      label = 'Arg 1',
                                                      choices = c('country', '1999', '2000', 'Afghanistan'),
                                                      selected = '1999')),
