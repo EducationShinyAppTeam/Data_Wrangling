@@ -197,7 +197,7 @@ body = dashboardBody(
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a country in a year')),
-                                                 h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                                 h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
                                              
                                              #fluidRow(
                                              #sidebarPanel(
@@ -296,7 +296,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                   h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
 
                                #fluidRow(
                                #sidebarPanel(
