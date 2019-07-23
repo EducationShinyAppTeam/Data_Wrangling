@@ -18,6 +18,13 @@ library(shinycssloaders)
 library(devtools)
 library(knitr)
 library(rlocker)
+library(rcfss)
+
+
+
+bank <- read.csv("questionbank.csv")
+bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
+
 
 source("helpers.R")
 
@@ -491,7 +498,7 @@ body = dashboardBody(
                       
                     
                  
-################# Shiny Ace ##################
+################# ShinyAce ##################
                  
                  tabPanel(div(style = 'font-size: 125%', 'Live Code'),
                           
@@ -563,39 +570,16 @@ body = dashboardBody(
                                      ##########end#############
                                      
                                      h3("Try Your Code"),  
-                                     aceEditor("rmd", mode = "markdown", value = 'This is some markdown text. It may also have embedded R code
-which will be executed. Please also read the output 
-message for more hints.
-                                               
-you can add a new code chuck with following two lines
-```{r}
-```
-```{r}
-#structure on datasets we used in previous cases
-str(cars)
-str(trees)
-str(iris)
-```
-It can even include graphical elements.
-```{r}
-#ggplot with one variable
-#ggplot(aes(x=dist), data=cars)+geom_histogram()
-```
-```{r}
-#ggplot with two variable
-#ggplot(aes(x=Sepal.Length, y=Petal.Length), data=iris)+
-#geom_line()
-```
-```{r}
-#Rplot with one variable
-plot(cars$speed)
-```
-'),
+                                     uiOutput('editor'),
                                           column(6,
                                                  withBusyIndicatorUI(
                                                  actionButton("eval", "Run")))
                                           )),
                                    br(),
+                            h3("Original Table"),
+                            column(6,
+                                   uiOutput('tableinfo'),
+                                   uiOutput('acetable')),
                                    column(6,
                                           h2("Knitted Output"),
                                           htmlOutput("knitDoc")

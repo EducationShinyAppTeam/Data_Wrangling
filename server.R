@@ -2196,6 +2196,59 @@ shinyServer(function(input, output, session) {
   })
   
   
+  
+  output$acetable <- renderTable({
+    if(bank[value$index, 2] == bank[2, 2] || bank[value$index, 2] == bank[3, 2]) {
+      race
+    } else if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
+      results
+    } else if (bank[value$index, 2] == bank[6, 2] || bank[value$index, 2] == bank[7, 2]) {
+      grades
+    } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
+      table5
+    }
+  })
+  
+  output$tableinfo <- renderUI({
+    # race data info
+    if (bank[value$index, 2] == bank[2, 2] || bank[value$index, 2] == bank[3, 2]) {
+      tags$li('This table depicts times and scores on a running race.')
+      tags$li('Column names define different lengths of time')
+      tags$li('Cell values are scores associated with each name and length of time')
+      
+      # results data info
+      } else if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
+        tags$li('This table depicts clinical trial data')
+        tags$li('Ind - individual participating in the experiment')
+        tags$li('Treatment - trial type (Treat or Cont)')
+        tags$li('value - result of experiment') 
+        
+        # grades data info
+      } else if (bank[value$index, 2] == bank[6, 2] || bank[value$index, 2] == bank[7, 2]) {
+        tags$li('This table depicts student test score data')
+        tags$li('A tidy case is one individual during one quarter in a given year.')
+        tags$li('Each test is unique and should be treated as two separate variables.')}
+
+        # table 5 data ifo
+     # } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
+
+        
+    })
+  
+  
+  
+  output$editor <- renderUI({
+    aceEditor("rmd", mode = "markdown",
+              if(bank[value$index, 2] == bank[1, 2]) {
+              value = 'Here you can interact with the questions being asked and test out code!
+              Uncomment one line from each section at a time and hit "Run" to see its effect!'
+              } else {
+                value = 'Yo wassup'
+                }
+              )
+  })
+  
+  
   observeEvent(input$answer,{
     req(input$answer, input$answer !='')
     answer <- isolate(input$answer)
