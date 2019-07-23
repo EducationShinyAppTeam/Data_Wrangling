@@ -1,0 +1,100 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+
+library(tidyr)
+library(devtools)
+library(rcfss)
+# install_github("uc-cfss/rcfss")
+
+```
+
+
+```{r}
+# view
+race
+
+# solution
+race %>%
+  gather(key = Time, value = Score, -Name, convert = TRUE) %>%
+  arrange(Name, Time)
+
+```
+
+```{r}
+
+results
+
+# solution
+results %>%
+  spread(key = Treatment, value = value)
+
+
+
+```
+
+```{r}
+library(stringr)
+
+grades
+
+grades %>%
+  gather(key = Quarter, value = Score, Fall:Winter) %>%
+  mutate(Test = str_c("Test", Test)) %>%
+  ## stop here for exercise
+  spread(key = Test, value = Score) %>%
+  arrange(ID, Year, Quarter)
+
+```
+
+
+```{r}
+
+# view
+activities
+
+# solution
+activities %>%
+  gather(key = key, value = value, -id, -trt) %>%
+  separate(key, into = c("location", "time")) %>%
+  arrange(id, trt, time) %>%
+  # stop here for ex
+  spread(key = location, value = value)
+```
+
+
+```{r}
+
+library(datasets)
+
+pressure
+
+presidential
+
+
+cars
+
+```
+
+
+
+```{r}
+
+
+bank <- read.csv("questionbank.csv")
+bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
+
+
+bank
+
+bank[2,2]
+
+bank[7,2]
+
+```
+
+
