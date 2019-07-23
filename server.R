@@ -18,7 +18,7 @@ library(datasets)
 library(rmarkdown)
 library(learnr)
 
-
+################# Top ##################
 
 bank <- read.csv("questionbank.csv")
 bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
@@ -49,7 +49,7 @@ shinyServer(function(input, output, session) {
     
   
   
- ############## Tidy Data #################
+  ################# Tidy Data #################
   
   RawData <- table4a
  
@@ -2163,8 +2163,10 @@ shinyServer(function(input, output, session) {
   })
   
   
+  
+  
   #### question bank ####
-  value <- reactiveValues(index =  1, mistake = 0,correct = 0)
+  value <- reactiveValues(index =  1, mistake = 0, correct = 0)
   ans <- as.matrix(bank[1:9, 6])
   #ans <- data.frame(ans)
   index_list <- reactiveValues(list = 1:9)
@@ -2209,13 +2211,14 @@ shinyServer(function(input, output, session) {
           
         ),
         result = list(
-          success = any(answer == ans[value$index,1]),
+          success = any(answer == ans[value$index, 1]),
           response = paste(getResponseText(value$index, answer), 
                            as.character(Sys.time()))
         )
       )
     )
     
+
     # Store statement in locker and return status
     status <- rlocker::store(session, interacted_statement)
     
