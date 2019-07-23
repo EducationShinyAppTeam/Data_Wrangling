@@ -16,6 +16,8 @@ library(shinyAce)
 library(devtools)
 library(shinycssloaders)
 library(devtools)
+library(knitr)
+library(rlocker)
 
 source("helpers.R")
 
@@ -501,8 +503,8 @@ body = dashboardBody(
                                        style = "background-color: #b8f28c",
                                        tags$div(
                                          tags$li("Attempt the questions!"),
-                                         tags$li("Run your code with the following R script
-                                                 box with the RMarkDown output on the right side"),
+                                         tags$li("Run your code in the R script
+                                                 box below and see the output on the right"),
                                          tags$li("Uncomment the sample code to explore.")
                                          ,
                                          style = "background-color: #b8f28c")),
@@ -512,7 +514,7 @@ body = dashboardBody(
                                                uiOutput("question")%>% withSpinner(color="#1E7B14"),
                                                uiOutput("options"),
                                                br(),
-                                               selectInput("answer", "pick an answer from below", c("","A", "B", "C")),
+                                               selectInput("answer", "Answer:", c("","A", "B", "C")),
                                                uiOutput("mark"),
                                                tags$style(type='text/css', '#question{font-size: 15px;
                                                           background-color: #b8f28c;color: black;}',
@@ -552,35 +554,35 @@ body = dashboardBody(
                                      ),
                                      ##########end#############
                                      
-                                     h2("Try Your Code"),  
+                                     h3("Try Your Code"),  
                                      aceEditor("rmd", mode="markdown", value='This is some markdown text. It may also have embedded R code
-                                               which will be executed. Please also read the output 
-                                               message for more hints.
+which will be executed. Please also read the output 
+message for more hints.
                                                
-                                               you can add a new code chuck with following two lines
-                                               ```{r}
-                                               ```
-                                               ```{r}
-                                               #structure on datasets we used in previous cases
-                                               str(cars)
-                                               str(trees)
-                                               str(iris)
-                                               ```
-                                               It can even include graphical elements.
-                                               ```{r}
-                                               #ggplot with one variable
-                                               #ggplot(aes(x=dist), data=cars)+geom_histogram()
-                                               ```
-                                               ```{r}
-                                               #ggplot with two variable
-                                               #ggplot(aes(x=Sepal.Length, y=Petal.Length), data=iris)+
-                                               #geom_line()
-                                               ```
-                                               ```{r}
-                                               #Rplot with one variable
-                                               plot(cars$speed)
-                                               ```
-                                               '),
+you can add a new code chuck with following two lines
+```{r}
+```
+```{r}
+#structure on datasets we used in previous cases
+str(cars)
+str(trees)
+str(iris)
+```
+It can even include graphical elements.
+```{r}
+#ggplot with one variable
+#ggplot(aes(x=dist), data=cars)+geom_histogram()
+```
+```{r}
+#ggplot with two variable
+#ggplot(aes(x=Sepal.Length, y=Petal.Length), data=iris)+
+#geom_line()
+```
+```{r}
+#Rplot with one variable
+plot(cars$speed)
+```
+'),
                                           column(6,
                                                  withBusyIndicatorUI(
                                                  actionButton("eval", "Run")))

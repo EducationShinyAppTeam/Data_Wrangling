@@ -1,10 +1,21 @@
-ID,Question,A,B,C,Answer
-1,Which is a requirement for tidy data?,"Column headers are values, not variable names.",Variables are stored in both rows and columns.,Each value must have its own cell.,C
-2,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,B
-3,Why is this table untidy?,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,One variable is spread across multiple columns,C
-4,Why is this table untidy?,Observations are spread across multiple rows,One variable is spread across multiple columns,One variable is spread across multiple columns,A
-5,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,A
-6,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,A
-7,Why is this table untidy?,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B
-8,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,C
-9,Which is the correct step for uniting 'century' and 'year' into 'new'?,"table5 %>% unite(col = new, century, year)","table5 %>% unite(col = new, century, year, sep = """")","table5 %>% unite(col = year, century, year)",B
+﻿ID,Question,A,B,C,Answer,,,,
+1,Which is a requirement for tidy data?,"Column headers are values, not variable names.",Variables are stored in both rows and columns.,Each value must have its own cell.,C,,,,
+2,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,B,,,,
+3,Why is this table untidy?,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,One variable is spread across multiple columns,C,,,,
+4,Why is this table untidy?,Observations are spread across multiple rows,One variable is spread across multiple columns,One variable is spread across multiple columns,A,,,,
+5,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,A,,,,
+6,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,A,,,,
+7,Why is this table untidy?,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B,,,,
+8,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,C,,,,
+9,Which is the correct step for uniting 'century' and 'year' into 'new'?,"table5 %>% unite(col = new, century, year)","table5 %>% unite(col = new, century, year, sep = """")","table5 %>% unite(col = year, century, year)",B,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

@@ -12,6 +12,12 @@ library(plotly)
 library(ggplot2)
 library(ggmap)
 library(tidyr)
+library(knitr)
+library(rlocker)
+library(datasets)
+library(rmarkdown)
+library(learnr)
+
 
 
 bank <- read.csv("questionbank.csv")
@@ -2296,7 +2302,61 @@ shinyServer(function(input, output, session) {
     })
   })  
   
+  # Initialize Learning Locker connection
+  connection <- rlocker::connect(session, list(
+    base_url = "https://learning-locker.stat.vmhost.psu.edu/",
+    auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
+    agent = rlocker::createAgent()
+  ))
   
+  # Setup demo app and user.
+  currentUser <- 
+    connection$agent
+  
+  if(connection$status != 200){
+    warning(paste(connection$status, "\nTry checking your auth token.")) 
+  }
+  
+  
+  # Setup demo app and user.
+  
+  output$Previewcar<-
+    renderTable({
+      head(cars, 4)
+    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+  
+  output$Previewtree<-
+    renderTable({
+      head(trees, 4)
+    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+  
+  output$Previewiris<-
+    renderTable({
+      head(iris, 4)
+    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+  
+  ###########KNITR############
+  observeEvent(input$eval,{
+    withBusyIndicatorServer("eval",{
+      output$knitDoc <- renderUI({
+        return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))
+      })
+      
+      output$output <- renderPrint({
+        return(isolate(eval(parse(text=input$code))))
+      })  
+    })
+  })
+  
+  output$knitDoc <- renderUI({
+    input$eval
+    return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))
+  })
+  
+  output$output <- renderPrint({
+    input$eval
+    return(isolate(eval(parse(text=input$code))))
+  })
   
   
 ############ Reshaping Data ############
