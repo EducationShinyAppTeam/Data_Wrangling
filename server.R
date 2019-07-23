@@ -14,7 +14,10 @@ library(ggmap)
 library(tidyr)
 
 
-rm(list = ls())
+bank <- read.csv("questionbank.csv")
+bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
+
+source("helpers.R")
 
 shinyServer(function(input, output, session) {
   observeEvent(input$info0,{
@@ -36,6 +39,9 @@ shinyServer(function(input, output, session) {
   observeEvent(input$go2, {
     updateTabItems(session, 'tabs', 'exp1')
   })
+  
+    
+  
   
  ############## Tidy Data #################
   
@@ -2139,81 +2145,156 @@ shinyServer(function(input, output, session) {
   
   
   
-  ##### Shiny Ace #####
+  ###############Shiny Ace#################
   
-  # dataset Selection
-  dataset <- reactive({
-    eval(parse(text = input$dataset))
+  observeEvent(input$nextq, {
+    # updateButton(session, "submit", disabled = FALSE)
+    # updateButton(session, "nextq", disabled = TRUE)
+    updateSelectInput(session,"answer", "pick an answer from below", c("","A", "B", "C"))
+    output$mark <- renderUI({
+      img(src = NULL,width = 30)
+    })
   })
   
-  output$table <- renderDataTable({
-    dataset()
+  
+  #### question bank ####
+  value <- reactiveValues(index =  1, mistake = 0,correct = 0)
+  ans <- as.matrix(bank[1:9,6])
+  #ans <- data.frame(ans)
+  index_list<-reactiveValues(list=1:9)
+  
+  observeEvent(input$nextq,{
+    value$answerbox <- value$index
+    index_list$list=index_list$list[-1]   
+    value$index<-index_list$list[1]
+    value$answerbox<-value$index
+    
+    updateButton(session, "nextq", disabled = TRUE)
+    updateButton(session,"submit", disabled = FALSE)
   })
   
-  # auto completion
-  observe({
-    autoComplete <- if (input$enableAutocomplete) {
-      if (input$enableLiveCompletion) "live" else "enabled"
+  output$question <- renderUI({
+    h4(bank[value$index, 2])
+    # radioButtons(inputId = bank[value$index,1], label= bank[value$index, 2], 
+    #              choiceNames=c(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]), 
+    #              choiceValues = c("A", "B", "C"))
+  })
+  
+  output$options <- renderUI({
+    str1 <- paste("A.", bank[value$index, 3])
+    str2 <- paste("B.", bank[value$index, 4])
+    str3 <- paste("C.", bank[value$index, 5])
+    HTML(paste(str1, str2, str3, sep = '<br/>'))
+  })
+  
+  
+  observeEvent(input$answer,{
+    req(input$answer, input$answer!='')
+    answer<-isolate(input$answer)
+    interacted_statement <- rlocker::createStatement(
+      list(
+        verb = list(
+          display = "selected"
+        ),
+        object = list(
+          id = paste0(getCurrentAddress(session), "#", value$index),
+          name = paste('Question', value$index),
+          description = bank[value$index, 2]
+          
+        ),
+        result = list(
+          success = any(answer == ans[value$index,1]),
+          response = paste(getResponseText(value$index, answer), 
+                           as.character(Sys.time()))
+        )
+      )
+    )
+    
+    # Store statement in locker and return status
+    status <- rlocker::store(session, interacted_statement)
+    
+    print(interacted_statement) # remove me
+    print(status) # remove me
+  })
+  
+  
+  getResponseText <- function(index, answer){
+    if(answer == 'A'){
+      key = 3
+    } else if(answer == 'B'){
+      key = 4
     } else {
-      "disabled"
+      key = 5
+    }
+    return(bank[index, key])
+  }
+  
+  observeEvent(input$submit,{
+    if(length(index_list$list) == 1){
+      updateButton(session, "nextq", disabled = TRUE)
+      updateButton(session,"submit", disabled = TRUE)
+      updateButton(session, "reset", disabled = FALSE)
+    }
+    else{
+      updateButton(session, "nextq", disabled = FALSE)
+      updateButton(session,"submit", disabled = TRUE)
+      updateButton(session, "reset", disabled = FALSE)
     }
     
-    updateAceEditor(session, "mutate", autoComplete = autoComplete)
-    updateAceEditor(session, "plot", autoComplete = autoComplete)
-  })
-  
-  # update static auto complete list according to dataset
-  observe({
-    req(input$enableNameCompletion)
-    comps <- list()
-    comps[[input$dataset]] <- colnames(dataset())
-    updateAceEditor(session, "mutate", autoCompleteList = comps)
-    updateAceEditor(session, "plot", autoCompleteList = list(one = "one"))
-  })
-  
-  # enable/disable R code completion
-  mutateOb <- aceAutocomplete("mutate")
-  plotOb <- aceAutocomplete("plot")
-  observe({
-    if (input$enableRCompletion) {
-      mutateOb$resume()
-      plotOb$resume()
-    } else {
-      mutateOb$suspend()
-      plotOb$suspend()
-    }
-  })
-  
-  # enable/disable completers
-  observe({
-    completers <- c()
-    if (input$enableLocalCompletion) {
-      completers <- c(completers, "text")
-    }
-    if (input$enableNameCompletion) {
-      completers <- c(completers, "static")
-    }
-    if (input$enableRCompletion) {
-      completers <- c(completers, "rlang")
-    }
-    updateAceEditor(session, "mutate", autoCompleters = completers)
-    updateAceEditor(session, "plot", autoCompleters = completers)
-  })
-  
-  output$plot <- renderPlot({ 
-    input$eval
-    tryCatch({
-      # clear error
-      output$error <- renderPrint(invisible())
-      code1 <- gsub("\\s+$", "", isolate(input$mutate))
-      code2 <- gsub("\\s+$", "", isolate(input$plot))
-      eval(parse(text = isolate(paste(input$dataset, "%>%", code1, "%>% {", code2, "}"))))
-    }, error = function(ex) {
-      output$error <- renderPrint(ex)
-      NULL
+    # output$progress<-renderUI({
+    #   paste("You are currently on problem", 11-length(index_list$list), "/10")
+    # })
+    
+    answer<-isolate(input$answer)
+    
+    statement <- rlocker::createStatement(
+      list(
+        verb = list(
+          display = "answered"
+        ),
+        object = list(
+          id = paste0(getCurrentAddress(session), "#", value$index),
+          name = paste('Question', value$index),
+          description = bank[value$index, 2]
+        ),
+        result = list(
+          success = any(answer == ans[value$index,1]),
+          response = paste(getResponseText(value$index, answer), 
+                           as.character(Sys.time()))
+        )
+      )
+    )
+    
+    # Store statement in locker and return status
+    status <- rlocker::store(session, statement)
+    
+    print(statement) # remove me
+    print(status) # remove me
+    
+    output$mark <- renderUI({
+      if (any(answer == ans[value$index,1])){
+        img(src = "correct.png",width = 30)
+      }
+      else{
+        ig<-img(src = "incorrect.png",width = 30)
+        w<-paste("You picked", answer, ", The correct answer is", ans[value$index, 1])
+        HTML(paste(ig, w), sep = ' ')
+      }
     })
-  }) 
+  })
   
+  observeEvent(input$reset,{
+    updateButton(session, "submit", disabled = FALSE)
+    updateButton(session,"reset",disable =TRUE)
+    updateSelectInput(session,"answer", "pick an answer from below", c("","A", "B", "C"))
+    index_list$list<-c(index_list$list,1:9)
+    value$index <- 1
+    value$answerbox = value$index
+    ans <- as.matrix(bank[1:9,9])
+    output$mark <- renderUI({
+      img(src = NULL,width = 30)
+    })
+  })  
   
   
   

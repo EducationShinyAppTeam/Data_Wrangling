@@ -13,7 +13,11 @@ library(plot3D)
 library(ggmap)
 library(tidyr)
 library(shinyAce)
+library(devtools)
+library(shinycssloaders)
+library(devtools)
 
+source("helpers.R")
 
 header = dashboardHeader(title = 'Data Wrangling',
                          tags$li(class = "dropdown",
@@ -485,46 +489,114 @@ body = dashboardBody(
                       
                     
                  
-                 #### Shiny Ace ####
+################# Shiny Ace ##################
                  
                  tabPanel(div(style = 'font-size: 125%', 'Live Code'),
                           
-                          titlePanel("shinyAce auto completion demo"),
-                          sidebarLayout(
-                            sidebarPanel(
-                              helpText("Modify the code chunks below and click Eval to see the plot update. 
-                                       Use Ctrl+Space for code completion when enabled."),
-                              radioButtons("dataset", "Dataset: ", c("mtcars", "airquality"), inline = TRUE),
-                              tags$pre("  %>%"),
-                              aceEditor("mutate", mode = "r", value = "select(wt, mpg) \n", height = "50px"),
-                              tags$pre("  %>% {"),
-                              aceEditor("plot", mode = "r", value = "plot(.) \n", height = "50px"),
-                              tags$pre("  }"),
-                              div(actionButton("eval", "Eval"), class = "pull-right"), br(),
-                              checkboxInput("enableAutocomplete", "Enable AutoComplete", TRUE),
-                              conditionalPanel(
-                                "input.enableAutocomplete", 
-                                wellPanel(
-                                  checkboxInput("enableLiveCompletion", "Live auto completion", TRUE),
-                                  checkboxInput("enableNameCompletion", list("Dataset column names completion in", tags$i("mutate")), TRUE),
-                                  checkboxInput("enableRCompletion", "R code completion", TRUE),
-                                  checkboxInput("enableLocalCompletion", "Local text completion", TRUE)
-                                )
-                              ),
-                              textOutput("error")
-                              ),
-                            mainPanel(
-                              plotOutput("plot"),
-                              dataTableOutput("table")
-                            )
-                          )
+                          fluidRow(
+                            column(6,
+                                   verticalLayout(
+                                     h3("Instructions"),
+                                     wellPanel(
+                                       style = "background-color: #b8f28c",
+                                       tags$div(
+                                         tags$li("Attempt the questions!"),
+                                         tags$li("Run your code with the following R script
+                                                 box with the RMarkDown output on the right side"),
+                                         tags$li("Uncomment the sample code to explore.")
+                                         ,
+                                         style = "background-color: #b8f28c")),
+                                     h3("Exercises"),
+                                     uiOutput('progress'),
+                                     wellPanel(style = "background-color: #b8f28c",
+                                               uiOutput("question")%>% withSpinner(color="#1E7B14"),
+                                               uiOutput("options"),
+                                               br(),
+                                               selectInput("answer", "pick an answer from below", c("","A", "B", "C")),
+                                               uiOutput("mark"),
+                                               tags$style(type='text/css', '#question{font-size: 15px;
+                                                          background-color: #b8f28c;color: black;}',
+                                                          '.well { padding: 10px; margin-bottom: 15px; max-width: 1000px; }')
+                                               
+                                     ),
+                                     fluidPage(
+                                       tags$head(
+                                         tags$style(HTML('#submit{background-color:#5a992b; color:white}')),
+                                         tags$style(HTML('#eval{background-color:#5a992b; color:white}')),
+                                         tags$style(HTML('#nextq{background-color:#5a992b; color:white}'))
+                                       ),
+                                       fluidRow(
+                                         column(12, align="center",
+                                                div(style="display: inline-block", actionButton(inputId = 'submit', label = 'Submit', style="success")),
+                                                div(style="display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
+                                                div(style="display: inline-block", bsButton(inputId = "nextq",label = "Next", disabled = TRUE)),
+                                                div(style="display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
+                                                div(style="display: inline-block", bsButton(inputId = "reset",label = "Restart", style="danger", disabled = TRUE)))
+                                       )),
+                                     
+                                     
+                                     # column(3,
+                                     #        actionButton(inputId = 'submit', label = 'Submit', style="success")
+                                     # ),
+                                     # column(3,
+                                     #        bsButton(inputId = "nextq",label = "Next", style='warning', disabled = TRUE)
+                                     # ),
+                                     # column(3,
+                                     #        bsButton(inputId = "reset",label = "Restart", style="danger", )
+                                     # )),
+                                     br(),
+                                     
+                                     ##########try rlocker statement#########
+                                     tags$samp(
+                                       htmlOutput("statements")
+                                     ),
+                                     ##########end#############
+                                     
+                                     h2("Try Your Code"),  
+                                     aceEditor("rmd", mode="markdown", value='This is some markdown text. It may also have embedded R code
+                                               which will be executed. Please also read the output 
+                                               message for more hints.
+                                               
+                                               you can add a new code chuck with following two lines
+                                               ```{r}
+                                               ```
+                                               ```{r}
+                                               #structure on datasets we used in previous cases
+                                               str(cars)
+                                               str(trees)
+                                               str(iris)
+                                               ```
+                                               It can even include graphical elements.
+                                               ```{r}
+                                               #ggplot with one variable
+                                               #ggplot(aes(x=dist), data=cars)+geom_histogram()
+                                               ```
+                                               ```{r}
+                                               #ggplot with two variable
+                                               #ggplot(aes(x=Sepal.Length, y=Petal.Length), data=iris)+
+                                               #geom_line()
+                                               ```
+                                               ```{r}
+                                               #Rplot with one variable
+                                               plot(cars$speed)
+                                               ```
+                                               '),
+                                          column(6,
+                                                 withBusyIndicatorUI(
+                                                 actionButton("eval", "Run")))
+                                          )),
+                                   br(),
+                                   column(6,
+                                          h2("Knitted Output"),
+                                          htmlOutput("knitDoc")
+                                         )
+                                 )
+                        )
+            )
+    
                                           
-                          )
+                          ),
                                
-                      )
-                      
-                      
-                      ),
           #),
           
         
