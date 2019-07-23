@@ -511,12 +511,13 @@ body = dashboardBody(
                                      h3("Exercises"),
                                      uiOutput('progress'),
                                      wellPanel(style = "background-color: #b8f28c",
-                                               uiOutput("question")%>% withSpinner(color="#1E7B14"),
+                                               uiOutput("question") %>% 
+                                                 withSpinner(color = "#1E7B14"),
                                                uiOutput("options"),
                                                br(),
                                                selectInput("answer", "Answer:", c("","A", "B", "C")),
                                                uiOutput("mark"),
-                                               tags$style(type='text/css', '#question{font-size: 15px;
+                                               tags$style(type = 'text/css', '#question{font-size: 15px;
                                                           background-color: #b8f28c;color: black;}',
                                                           '.well { padding: 10px; margin-bottom: 15px; max-width: 1000px; }')
                                                
@@ -528,12 +529,19 @@ body = dashboardBody(
                                          tags$style(HTML('#nextq{background-color:#5a992b; color:white}'))
                                        ),
                                        fluidRow(
-                                         column(12, align="center",
-                                                div(style="display: inline-block", actionButton(inputId = 'submit', label = 'Submit', style="success")),
-                                                div(style="display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
-                                                div(style="display: inline-block", bsButton(inputId = "nextq",label = "Next", disabled = TRUE)),
-                                                div(style="display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
-                                                div(style="display: inline-block", bsButton(inputId = "reset",label = "Restart", style="danger", disabled = TRUE)))
+                                         column(12, align = "center",
+                                                div(style = "display: inline-block", actionButton(inputId = 'submit',
+                                                                                                  label = 'Submit',
+                                                                                                  style = "success")),
+                                                div(style = "display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
+                                                div(style = "display: inline-block", bsButton(inputId = "nextq", 
+                                                                                              label = "Next",
+                                                                                              disabled = TRUE)),
+                                                div(style = "display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
+                                                div(style = "display: inline-block", bsButton(inputId = "reset", 
+                                                                                              label = "Restart",
+                                                                                              style="danger", 
+                                                                                              disabled = TRUE)))
                                        )),
                                      
                                      
@@ -555,7 +563,7 @@ body = dashboardBody(
                                      ##########end#############
                                      
                                      h3("Try Your Code"),  
-                                     aceEditor("rmd", mode="markdown", value='This is some markdown text. It may also have embedded R code
+                                     aceEditor("rmd", mode = "markdown", value = 'This is some markdown text. It may also have embedded R code
 which will be executed. Please also read the output 
 message for more hints.
                                                
@@ -592,15 +600,11 @@ plot(cars$speed)
                                           h2("Knitted Output"),
                                           htmlOutput("knitDoc")
                                          )
-                                 )
-                        )
-            )
-    
-                                          
-                          ),
+                            )
+                          )
+)
+),
                                
-          #),
-          
         
     
     
