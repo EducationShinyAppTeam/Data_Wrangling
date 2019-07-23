@@ -2156,27 +2156,27 @@ shinyServer(function(input, output, session) {
   observeEvent(input$nextq, {
     # updateButton(session, "submit", disabled = FALSE)
     # updateButton(session, "nextq", disabled = TRUE)
-    updateSelectInput(session,"answer", "pick an answer from below", c("","A", "B", "C"))
+    updateSelectInput(session, "answer", "pick an answer from below", c("","A", "B", "C"))
     output$mark <- renderUI({
-      img(src = NULL,width = 30)
+      img(src = NULL, width = 30)
     })
   })
   
   
   #### question bank ####
   value <- reactiveValues(index =  1, mistake = 0,correct = 0)
-  ans <- as.matrix(bank[1:9,6])
+  ans <- as.matrix(bank[1:9, 6])
   #ans <- data.frame(ans)
-  index_list<-reactiveValues(list=1:9)
+  index_list <- reactiveValues(list = 1:9)
   
   observeEvent(input$nextq,{
     value$answerbox <- value$index
-    index_list$list=index_list$list[-1]   
-    value$index<-index_list$list[1]
-    value$answerbox<-value$index
+    index_list$list = index_list$list[-1]   
+    value$index <- index_list$list[1]
+    value$answerbox <- value$index
     
     updateButton(session, "nextq", disabled = TRUE)
-    updateButton(session,"submit", disabled = FALSE)
+    updateButton(session, "submit", disabled = FALSE)
   })
   
   output$question <- renderUI({
@@ -2195,8 +2195,8 @@ shinyServer(function(input, output, session) {
   
   
   observeEvent(input$answer,{
-    req(input$answer, input$answer!='')
-    answer<-isolate(input$answer)
+    req(input$answer, input$answer !='')
+    answer <- isolate(input$answer)
     interacted_statement <- rlocker::createStatement(
       list(
         verb = list(
@@ -2251,7 +2251,7 @@ shinyServer(function(input, output, session) {
     #   paste("You are currently on problem", 11-length(index_list$list), "/10")
     # })
     
-    answer<-isolate(input$answer)
+    answer <- isolate(input$answer)
     
     statement <- rlocker::createStatement(
       list(
@@ -2282,8 +2282,8 @@ shinyServer(function(input, output, session) {
         img(src = "correct.png",width = 30)
       }
       else{
-        ig<-img(src = "incorrect.png",width = 30)
-        w<-paste("You picked", answer, ", The correct answer is", ans[value$index, 1])
+        ig <- img(src = "incorrect.png",width = 30)
+        w <- paste("You picked", answer, ", The correct answer is", ans[value$index, 1])
         HTML(paste(ig, w), sep = ' ')
       }
     })
@@ -2291,9 +2291,9 @@ shinyServer(function(input, output, session) {
   
   observeEvent(input$reset,{
     updateButton(session, "submit", disabled = FALSE)
-    updateButton(session,"reset",disable =TRUE)
+    updateButton(session,"reset",disable = TRUE)
     updateSelectInput(session,"answer", "pick an answer from below", c("","A", "B", "C"))
-    index_list$list<-c(index_list$list,1:9)
+    index_list$list <- c(index_list$list,1:9)
     value$index <- 1
     value$answerbox = value$index
     ans <- as.matrix(bank[1:9,9])
@@ -2343,7 +2343,7 @@ shinyServer(function(input, output, session) {
       })
       
       output$output <- renderPrint({
-        return(isolate(eval(parse(text=input$code))))
+        return(isolate(eval(parse(text = input$code))))
       })  
     })
   })
@@ -2355,7 +2355,7 @@ shinyServer(function(input, output, session) {
   
   output$output <- renderPrint({
     input$eval
-    return(isolate(eval(parse(text=input$code))))
+    return(isolate(eval(parse(text = input$code))))
   })
   
   
