@@ -790,14 +790,14 @@ shinyServer(function(input, output, session) {
  
   # submit button
    output$sub <- renderUI({
-     bsButton("submit",
+     bsButton("submitcc",
               label = "Check Answer",
               icon("lightbulb"),
               size = "medium",
               style = 'success')
      })
    
-   observeEvent(input$submit,{
+   observeEvent(input$submitcc,{
      withProgress(session, min = 1, max = 15, {
        setProgress(message = 'Checking Answer',
                    detail = '')
@@ -823,7 +823,7 @@ shinyServer(function(input, output, session) {
    # }
   #})
    
-    output$reset <- renderUI({
+    output$resetcc <- renderUI({
       bsButton("retry",
                label = "Try Again",
                icon("retweet"),
@@ -844,7 +844,7 @@ shinyServer(function(input, output, session) {
     
     
     # hide reset button upon opening app
-    hide("reset")
+    hide("resetcc")
     hide("correct")
     hide("wrong")
     
@@ -861,13 +861,13 @@ shinyServer(function(input, output, session) {
 
     
     # show reset button after submit is clicked, disable dropdown inputs
-    observeEvent(input$submit,{
-      toggle("reset")
+    observeEvent(input$submitcc,{
+      toggle("resetcc")
       disable("userOp1")
       disable("userOp2")
       disable("userOp3")
       disable("userOp4")
-      disable("submit")
+      disable("submitcc")
       if(input$userOp1 == '1999' & input$userOp2 == '2000'
          & input$userOp3 == 'year' & input$userOp4 == 'cases' || input$userOp1 == '2000' & input$userOp2 == '1999'
          & input$userOp3 == 'year' & input$userOp4 == 'cases') {
@@ -882,13 +882,13 @@ shinyServer(function(input, output, session) {
 
 
   observeEvent(input$retry,{
-    hide("reset")
+    hide("resetcc")
     enable("userOp1")
     enable("userOp2")
     enable("userOp3")
     enable("userOp4")
-    showElement("submit")
-    enable("submit")
+    showElement("submitcc")
+    enable("submitcc")
     hide("correct")
     hide("wrong")
 
@@ -899,8 +899,8 @@ shinyServer(function(input, output, session) {
     reset("userOp2")
     reset("userOp3")
     reset("userOp4")
-    showElement("submit")
-    enable("submit")
+    showElement("submitcc")
+    enable("submitcc")
     
   })
   
@@ -2145,7 +2145,7 @@ shinyServer(function(input, output, session) {
     reset("userOp7")
     reset("userOp8")
     showElement("submitting")
-    enable("submit")
+    enable("submitting")
 
   })
   
@@ -2198,9 +2198,7 @@ shinyServer(function(input, output, session) {
   
   
   output$acetable <- renderTable({
-    if(bank[value$index, 2] == bank[2, 2] || bank[value$index, 2] == bank[3, 2]) {
-      race
-    } else if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
+    if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
       results
     } else if (bank[value$index, 2] == bank[6, 2] || bank[value$index, 2] == bank[7, 2]) {
       grades
@@ -2238,7 +2236,8 @@ shinyServer(function(input, output, session) {
   
   
   output$editor <- renderUI({
-    aceEditor("rmd", mode = "markdown",
+    aceEditor("rmd",
+              mode = "markdown",
               if(bank[value$index, 2] == bank[1, 2]) {
               value = 'Here you can interact with the questions being asked and test out code!
               Uncomment one line from each section at a time and hit "Run" to see its effect!'
@@ -2249,20 +2248,17 @@ shinyServer(function(input, output, session) {
   })
   
   
-  observeEvent(input$answer,{
+  observeEvent(input$answer, {
     req(input$answer, input$answer !='')
     answer <- isolate(input$answer)
     interacted_statement <- rlocker::createStatement(
       list(
         verb = list(
-          display = "selected"
-        ),
+          display = "selected"),
         object = list(
           id = paste0(getCurrentAddress(session), "#", value$index),
           name = paste('Question', value$index),
-          description = bank[value$index, 2]
-          
-        ),
+          description = bank[value$index, 2]),
         result = list(
           success = any(answer == ans[value$index, 1]),
           response = paste(getResponseText(value$index, answer), 
@@ -2314,18 +2310,15 @@ shinyServer(function(input, output, session) {
         verb = list(
           display = "answered"
         ),
-        object = list(
-          id = paste0(getCurrentAddress(session), "#", value$index),
-          name = paste('Question', value$index),
-          description = bank[value$index, 2]
-        ),
-        result = list(
-          success = any(answer == ans[value$index,1]),
-          response = paste(getResponseText(value$index, answer), 
-                           as.character(Sys.time()))
+        object = list(id = paste0(getCurrentAddress(session), "#", value$index),
+                      name = paste('Question', value$index),
+                      description = bank[value$index, 2]),
+        result = list(success = any(answer == ans[value$index,1]),
+                      response = paste(getResponseText(value$index, answer), 
+                                       as.character(Sys.time()))
+                      )
         )
       )
-    )
     
     # Store statement in locker and return status
     status <- rlocker::store(session, statement)
@@ -2334,8 +2327,8 @@ shinyServer(function(input, output, session) {
     print(status) # remove me
     
     output$mark <- renderUI({
-      if (any(answer == ans[value$index,1])){
-        img(src = "correct.png",width = 30)
+      if (any(answer == ans[value$index, 1])){
+        img(src = "correct.png", width = 30)
       }
       else{
         ig <- img(src = "incorrect.png",width = 30)
@@ -2345,14 +2338,14 @@ shinyServer(function(input, output, session) {
     })
   })
   
-  observeEvent(input$reset,{
+  observeEvent(input$reset, {
     updateButton(session, "submit", disabled = FALSE)
-    updateButton(session,"reset",disable = TRUE)
-    updateSelectInput(session,"answer", "pick an answer from below", c("","A", "B", "C"))
-    index_list$list <- c(index_list$list,1:9)
+    updateButton(session,"reset", disable = TRUE)
+    updateSelectInput(session, "answer", "Answer:", c("","A", "B", "C"))
+    index_list$list <- c(index_list$list, 1:9)
     value$index <- 1
     value$answerbox = value$index
-    ans <- as.matrix(bank[1:9,9])
+    ans <- as.matrix(bank[1:9, 9])
     output$mark <- renderUI({
       img(src = NULL,width = 30)
     })
@@ -2379,21 +2372,22 @@ shinyServer(function(input, output, session) {
   output$Previewcar<-
     renderTable({
       head(cars, 4)
-    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+    }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
   
   output$Previewtree<-
     renderTable({
       head(trees, 4)
-    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+    }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
   
   output$Previewiris<-
     renderTable({
       head(iris, 4)
-    }, striped = TRUE, hover=TRUE, bordered = TRUE, spacing = 'xs')
+    }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
   
   ###########KNITR############
+  
   observeEvent(input$eval,{
-    withBusyIndicatorServer("eval",{
+    withBusyIndicatorServer("eval", {
       output$knitDoc <- renderUI({
         return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))
       })

@@ -112,7 +112,7 @@ body = dashboardBody(
                                div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
                                    uiOutput("sub"),
                                    br(),
-                                   uiOutput("reset")),
+                                   uiOutput("resetcc")),
                                div(style = 'z-index: 1000; position: relative; text-align: center',
                                    uiOutput('correct'),
                                    uiOutput('wrong'))),
