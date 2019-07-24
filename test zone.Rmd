@@ -102,7 +102,28 @@ bank[7,2]
 
 
 ```{r}
-''
+
+bank <- read.csv("questionbank.csv")
+bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
+
+
+
+  value <- reactiveValues(index =  1, mistake = 0, correct = 0)
+  ans <- as.matrix(bank[1:9, 6])
+  #ans <- data.frame(ans)
+  index_list <- reactiveValues(list = 1:9)
+  
+  observeEvent(input$nextq,{
+    value$answerbox <- value$index
+    index_list$list = index_list$list[-1]   
+    value$index <- index_list$list[1]
+    value$answerbox <- value$index
+  })
+
+bank[value$index, 2]
+
+
+
 
 
 
