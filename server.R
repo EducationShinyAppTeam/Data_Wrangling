@@ -17,6 +17,8 @@ library(rlocker)
 library(datasets)
 library(rmarkdown)
 library(learnr)
+library(rcfss)
+
 
 ################# Top ##################
 
@@ -2156,7 +2158,7 @@ shinyServer(function(input, output, session) {
   observeEvent(input$nextq, {
     # updateButton(session, "submit", disabled = FALSE)
     # updateButton(session, "nextq", disabled = TRUE)
-    updateSelectInput(session, "answer", "pick an answer from below", c("","A", "B", "C"))
+    updateSelectInput(session, "answer", "Answer:", c("","A", "B", "C"))
     output$mark <- renderUI({
       img(src = NULL, width = 30)
     })
@@ -2196,23 +2198,32 @@ shinyServer(function(input, output, session) {
   })
   
   
-  
+ ## change table based on question 
   output$acetable <- renderTable({
-    if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
+    if (bank[value$index, 2] == bank[2, 2] | bank[value$index, 2] == bank[3, 2]) {
+      
+      race
+      
+    } else if (bank[value$index, 2] == bank[4, 2] | bank[value$index, 2] == bank[5, 2]) {
+      
       results
-    } else if (bank[value$index, 2] == bank[6, 2] || bank[value$index, 2] == bank[7, 2]) {
+      
+      } else if (bank[value$index, 2] == bank[6, 2] | bank[value$index, 2] == bank[7, 2]) {
+        
       grades
-    } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
-      table5
-    }
-  })
+        
+        } else if (bank[value$index, 2] == bank[8, 2] | bank[value$index, 2] == bank[9, 2]) {
+          
+          table5
+          }
+    })
   
   output$tableinfo <- renderUI({
     # race data info
-    if (bank[value$index, 2] == bank[2, 2] || bank[value$index, 2] == bank[3, 2]) {
-      tags$li('This table depicts times and scores on a running race.')
-      tags$li('Column names define different lengths of time')
-      tags$li('Cell values are scores associated with each name and length of time')
+    if (bank[value$index, 2] == bank[1, 2] || bank[value$index, 2] == bank[3, 2]) {
+      tags$h4('This table depicts times and scores on a running race.')
+      tags$h4('Column names define different lengths of time')
+      tags$h4('Cell values are scores associated with each name and length of time')
       
       # results data info
       } else if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {

@@ -579,11 +579,11 @@ body = dashboardBody(
                             h3("Original Table"),
                             column(6,
                                    uiOutput('tableinfo'),
-                                   uiOutput('acetable')),
-                                   column(6,
-                                          h2("Knitted Output"),
-                                          htmlOutput("knitDoc")
-                                         )
+                                   uiOutput('acetable'))#,
+                           # column(6,
+                            #       h2("Knitted Output"),
+                             #      htmlOutput("knitDoc")
+                              #     )
                             )
                           )
 )
