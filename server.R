@@ -2345,8 +2345,20 @@ shinyServer(function(input, output, session) {
               else if (bank[value$index, 2] == bank[4, 2]) {
                       value = 'Hellooooooo'
               }
-              else {
+              else if (bank[value$index, 2] == bank[5, 2]) {
                 value = 'byeeee'
+              }
+              else if (value$index == 6) {
+                value = 'WOWWW'
+              }
+              else if (bank[value$index, 2] == bank[7, 2]) {
+                value = 'NEVER AGAIN'
+              }
+              else if (bank[value$index, 2] == bank[8, 2]) {
+                value = 'one more time please'
+              }
+              else {
+                value = 'be back soon!!'
               }
               )
   })
@@ -2417,7 +2429,7 @@ shinyServer(function(input, output, session) {
         object = list(id = paste0(getCurrentAddress(session), "#", value$index),
                       name = paste('Question', value$index),
                       description = bank[value$index, 2]),
-        result = list(success = any(answer == ans[value$index,1]),
+        result = list(success = any(answer == ans[value$index, 1]),
                       response = paste(getResponseText(value$index, answer), 
                                        as.character(Sys.time()))
                       )
