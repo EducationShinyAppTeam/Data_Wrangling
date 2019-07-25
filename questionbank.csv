@@ -1,10 +1,10 @@
 ﻿ID,Question,A,B,C,Answer
 1,Which is a requirement for tidy data?,"Column headers are values, not variable names.",Variables are stored in both rows and columns.,Each value must have its own cell.,C
-2,Why is this table untidy? Race,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,One variable is spread across multiple columns,C
-3,"Does this table need to be spread, gathered, or united? Race",Spread,Gathered,United,B
-4,Why is this table untidy? Results,Observations are spread across multiple rows,One variable is spread across multiple columns,One variable is spread across multiple columns,A
-5,"Does this table need to be spread, gathered, or united in order to be tidy? Results",Spread,Gathered,United,A
-6,Why is this table untidy? Grades,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B
-7,"Does this table need to be spread, gathered, or united in order to be tidy? Grades",Spread,Gathered,United,A
-8,"Does this table need to be spread, gathered, or united? Table5",Spread,Gathered,United,C
-9,Which is the correct step for uniting 'century' and 'year' into 'new'? Table5,"table5 %>% unite(col = new, century, year)","table5 %>% unite(col = new, century, year, sep = """")","table5 %>% unite(col = year, century, year)",B
+2,Why is this table untidy? Race 1,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,One variable is spread across multiple columns,C
+3,"Does this table need to be spread, gathered, or united? Race 2",Spread,Gathered,United,B
+4,Why is this table untidy? Results 1,Observations are spread across multiple rows,One variable is spread across multiple columns,One variable is spread across multiple columns,A
+5,"Does this table need to be spread, gathered, or united in order to be tidy? Results 2",Spread,Gathered,United,A
+6,Why is this table untidy? Grades 1,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B
+7,"Does this table need to be spread, gathered, or united in order to be tidy? Grades 2",Spread,Gathered,United,A
+8,"Does this table need to be spread, gathered, or united? Table5 1",Spread,Gathered,United,C
+9,Which is the correct step for uniting 'century' and 'year' into 'new'? Table5 2,"table5 %>% unite(col = new, century, year)","table5 %>% unite(col = new, century, year, sep = """")","table5 %>% unite(col = year, century, year)",B
