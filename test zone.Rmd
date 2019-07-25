@@ -11,6 +11,7 @@ library(devtools)
 library(rcfss)
 # install_github("uc-cfss/rcfss")
 
+rm(list = ls())
 ```
 
 
@@ -131,6 +132,35 @@ bank[value$index, 2]
 ```
 
 
+```{r}
+
+
+bank <- read.csv("questionbank.csv")
+bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
+
+
+value <- reactiveValues(index =  1, mistake = 0, correct = 0)
+ans <- as.matrix(bank[1:9, 6])
+index_list <- reactiveValues(list = 1:9)
+
+
+value
+
+ans
+
+## rows, columns
+
+bank[1:9, 2]
+
+index_list
+
+seq(from = 1, to = 9, by = 1)
+
+list = seq(from = 1, to = 9, by = 1)
+
+list
+
+```
 
 
 

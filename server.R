@@ -2249,7 +2249,7 @@ shinyServer(function(input, output, session) {
   value <- reactiveValues(index =  1, mistake = 0, correct = 0)
   ans <- as.matrix(bank[1:9, 6])
   #ans <- data.frame(ans)
-  index_list <- reactiveValues(list = 1:9)
+  index_list <- reactiveValues(list = sample(2:9, 8, replace = FALSE))
   
   observeEvent(input$nextq,{
     value$answerbox <- value$index
@@ -2304,26 +2304,28 @@ shinyServer(function(input, output, session) {
   
   output$tableinfo <- renderUI({
     # race data info
-    if (bank[value$index, 2] == bank[1, 2] || bank[value$index, 2] == bank[2, 2]) {
+    if (bank[value$index, 2] == bank[2, 2] | bank[value$index, 2] == bank[3, 2]) {
       tags$h4('This table depicts times and scores on a running race.')
-      tags$h4('Column names define different lengths of time')
-      tags$h4('Cell values are scores associated with each name and length of time')
+     # tags$h4('Column names define different lengths of time')
+    #  tags$h4('Cell values are scores associated with each name and length of time')
       
       # results data info
-      } else if (bank[value$index, 2] == bank[4, 2] || bank[value$index, 2] == bank[5, 2]) {
+      } else if (bank[value$index, 2] == bank[4, 2] | bank[value$index, 2] == bank[5, 2]) {
         tags$li('This table depicts clinical trial data')
-        tags$li('Ind - individual participating in the experiment')
-        tags$li('Treatment - trial type (Treat or Cont)')
-        tags$li('value - result of experiment') 
+       # tags$li('Ind - individual participating in the experiment')
+      #  tags$li('Treatment - trial type (Treat or Cont)')
+      #  tags$li('value - result of experiment') 
         
         # grades data info
-      } else if (bank[value$index, 2] == bank[6, 2] || bank[value$index, 2] == bank[7, 2]) {
+      } else if (bank[value$index, 2] == bank[6, 2] | bank[value$index, 2] == bank[7, 2]) {
         tags$li('This table depicts student test score data')
-        tags$li('A tidy case is one individual during one quarter in a given year.')
-        tags$li('Each test is unique and should be treated as two separate variables.')}
+      #  tags$li('A tidy case is one individual during one quarter in a given year.')
+      #  tags$li('Each test is unique and should be treated as two separate variables.')
 
         # table 5 data ifo
-     # } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
+      } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
+        tags$li('This table shows the population and rate of different countries.')
+      }
 
         
     })
@@ -2335,30 +2337,30 @@ shinyServer(function(input, output, session) {
               mode = "markdown",
               if(bank[value$index, 2] == bank[1, 2]) {
               value = 'Here you can interact with the questions being asked and test out code!
-              Uncomment one line from each section at a time and hit "Run" to see its effect!'
+Uncomment one line from each section at a time and hit "Run" to see its effect!'
               } else if (bank[value$index, 2] == bank[2, 2]) {
-                value = 'Yo wassup'
+                value = 'race 1'
                 }
               else if (bank[value$index, 2] == bank[3, 2]) {
-                    value = 'Hiiiiii'
+                    value = 'race 2'
                   }
               else if (bank[value$index, 2] == bank[4, 2]) {
-                      value = 'Hellooooooo'
+                      value = 'results 1'
               }
               else if (bank[value$index, 2] == bank[5, 2]) {
-                value = 'byeeee'
+                value = 'results 2'
               }
-              else if (value$index == 6) {
-                value = 'WOWWW'
+              else if (bank[value$index, 2] == bank[6, 2]) {
+                value = 'grades 1'
               }
               else if (bank[value$index, 2] == bank[7, 2]) {
-                value = 'NEVER AGAIN'
+                value = 'grades 2'
               }
               else if (bank[value$index, 2] == bank[8, 2]) {
-                value = 'one more time please'
+                value = 'table 5 (1)'
               }
               else {
-                value = 'be back soon!!'
+                value = 'table 5 (2)'
               }
               )
   })
@@ -2447,7 +2449,7 @@ shinyServer(function(input, output, session) {
         img(src = "correct.png", width = 30)
       }
       else{
-        ig <- img(src = "incorrect.png",width = 30)
+        ig <- img(src = "incorrect.png", width = 30)
         w <- paste("You picked", answer, ", The correct answer is", ans[value$index, 1])
         HTML(paste(ig, w), sep = ' ')
       }
@@ -2458,7 +2460,7 @@ shinyServer(function(input, output, session) {
     updateButton(session, "submit", disabled = FALSE)
     updateButton(session,"reset", disable = TRUE)
     updateSelectInput(session, "answer", "Answer:", c("","A", "B", "C"))
-    index_list$list <- c(index_list$list, 1:9)
+    index_list$list <- c(index_list$list, sample(2:9, 8, replace = FALSE))
     value$index <- 1
     value$answerbox = value$index
     ans <- as.matrix(bank[1:9, 6])
