@@ -2449,7 +2449,7 @@ shinyServer(function(input, output, session) {
     index_list$list <- c(index_list$list, 1:9)
     value$index <- 1
     value$answerbox = value$index
-    ans <- as.matrix(bank[1:9, 9])
+    ans <- as.matrix(bank[1:9, 6])
     output$mark <- renderUI({
       img(src = NULL,width = 30)
     })
