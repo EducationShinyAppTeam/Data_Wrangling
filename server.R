@@ -53,6 +53,8 @@ shinyServer(function(input, output, session) {
   
   ################# Tidy Data #################
   
+  ##### Gather 1 #####
+  
   RawData <- table4a
  
    
@@ -799,6 +801,8 @@ shinyServer(function(input, output, session) {
               style = 'success')
      })
    
+   
+   # delay submit button
    observeEvent(input$submitcc,{
      withProgress(session, min = 1, max = 15, {
        setProgress(message = 'Checking Answer',
@@ -833,6 +837,7 @@ shinyServer(function(input, output, session) {
                style = 'success')
       })
     
+    # delay retry button
     observeEvent(input$retry,{
       withProgress(session, min = 1, max = 15, {
         setProgress(message = 'Resetting',
@@ -852,11 +857,11 @@ shinyServer(function(input, output, session) {
     
     
     output$correct <- renderUI({
-      tags$img(src = "correct.gif", width = 200)
+      tags$img(src = "correct.gif", width = 150)
     })
       
       output$wrong <- renderUI({
-        tags$img(src = "try.gif", width = 200)
+        tags$img(src = "try.gif", width = 150)
       })
         
 
@@ -1032,6 +1037,18 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  observeEvent(input$submitted,{
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Checking Answer',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
+  
   # trying to use sweetalert
   #observeEvent(input$submit, {
   #  if (input$userOpA == '1999' & input$userOpB == '2000'
@@ -1054,6 +1071,19 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  # delay retry button
+  observeEvent(input$retrying, {
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Resetting',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
+  
   # hide reset button upon opening app
   hide("redo")
   hide("cor")
@@ -1061,11 +1091,11 @@ shinyServer(function(input, output, session) {
   
   
   output$cor <- renderUI({
-    tags$img(src = "correct.gif", width = 200)
+    tags$img(src = "correct.gif", width = 150)
   })
   
   output$wro <- renderUI({
-    tags$img(src = "try.gif", width = 200)
+    tags$img(src = "try.gif", width = 150)
   })
   
   
@@ -1241,6 +1271,17 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  observeEvent(input$submitteds,{
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Checking Answer',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
   # trying to use sweetalert
   #observeEvent(input$submit, {
   #  if (input$userOpJ == '1999' & input$userOpK == '2000'
@@ -1263,6 +1304,19 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  # delay retry button
+  observeEvent(input$retryings, {
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Resetting',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
+  
   # hide reset button upon opening app
   hide("redos")
   hide("cors")
@@ -1270,11 +1324,11 @@ shinyServer(function(input, output, session) {
   
   
   output$cors <- renderUI({
-    tags$img(src = "correct.gif", width = 200)
+    tags$img(src = "correct.gif", width = 150)
   })
   
   output$wros <- renderUI({
-    tags$img(src = "try.gif", width = 200)
+    tags$img(src = "try.gif", width = 150)
   })
   
   
@@ -2069,6 +2123,17 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  observeEvent(input$submitting,{
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Checking Answer',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
 
   # trying to use sweetalert
   #observeEvent(input$submit, {
@@ -2092,6 +2157,19 @@ shinyServer(function(input, output, session) {
              style = 'success')
   })
   
+  # delay retry button
+  observeEvent(input$retryy,{
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Resetting',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
+  
   # hide reset button upon opening app
   hide("restart")
   hide("cort")
@@ -2099,11 +2177,11 @@ shinyServer(function(input, output, session) {
   
   
   output$cort <- renderUI({
-    tags$img(src = "correct.gif", width = 200)
+    tags$img(src = "correct.gif", width = 150)
   })
   
   output$rong <- renderUI({
-    tags$img(src = "try.gif", width = 200)
+    tags$img(src = "try.gif", width = 150)
   })
   
   

@@ -107,36 +107,11 @@ body = dashboardBody(
                                #div(style = 'text-align: center',
                                
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a Year in a Country')),
-                               h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
-                               
-                               div(style = 'text-align: right; display: inline-block; position: relative; left: 250px',
-                                   uiOutput("sub"),
-                                   br(),
-                                   uiOutput("resetcc")),
-                               div(style = 'z-index: 1000; position: relative; text-align: center',
-                                   uiOutput('correct'),
-                                   uiOutput('wrong'))),
+                               h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                
                                  
 
-                               
-                               #fluidRow(
-                                 #sidebarPanel(
-                                 #  div(style = 'text-align: left',
-                                  #     bsButton("newtable",
-                                   #             label = "New Table",
-                                    #            icon("arrow-circle-right"),
-                                     #           size = "medium",
-                                      #          style = 'success')),
-                                 #  br(),
-                                      # bsButton("submit",
-                                       #         label = "Check Answer",
-                                        #        icon("lightbulb"),
-                                         #       size = "medium",
-                                          #      style = 'success'),
-                                              #width = 1)),#),
-                               
-                               
+                            
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'RawData')),
@@ -197,7 +172,21 @@ body = dashboardBody(
                                                  selected = 'cases')
                                      )
                                  ),
-                               width = 12)),
+                               width = 10),
+                               
+                               fluidRow(
+                               div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
+                                   uiOutput("sub"),
+                                   br(),
+                                   uiOutput("resetcc")),
+                               
+                               br(),
+                               br(),
+                               
+                               div(style = 'display: inline-block; position: relative; text-align: right',
+                                   uiOutput('correct'),
+                                   uiOutput('wrong')))
+                      ),
                       
                       #### Gather 2 ####         
                       
@@ -210,7 +199,7 @@ body = dashboardBody(
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a country in a year')),
-                                                 h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                                 h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                              
                                              #fluidRow(
                                              #sidebarPanel(
@@ -221,13 +210,6 @@ body = dashboardBody(
                                              #           size = "medium",
                                              #          style = 'success')),
                                              #  br(),
-                                             div(style = 'text-align: right; display: inline-block; position: relative; left: 185px',
-                                                 uiOutput("subbed"),
-                                                 br(),
-                                                 uiOutput("restart")),
-                                             div(style = 'position: relative; text-align: center',
-                                                 uiOutput('cort'),
-                                                 uiOutput('rong'))),
                                    # bsButton("submit",
                                    #         label = "Check Answer",
                                    #        icon("lightbulb"),
@@ -296,7 +278,19 @@ body = dashboardBody(
                                                      selected = 'cases')
                                      )
                                    ),
-                                   width = 12)),
+                                   width = 10),
+                               
+                               fluidRow(
+                               div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
+                                   uiOutput("subbed"),
+                                   br(),
+                                   uiOutput("restart")),
+                               br(),
+                               br(),
+                               div(style = 'display: inline-block; position: relative; text-align: right',
+                                   uiOutput('cort'),
+                                   uiOutput('rong')))
+                      ),
                       
                       #### Spread 1 #### 
                       
@@ -309,7 +303,7 @@ body = dashboardBody(
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                   h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                   h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
 
                                #fluidRow(
                                #sidebarPanel(
@@ -320,13 +314,6 @@ body = dashboardBody(
                                #           size = "medium",
                                #          style = 'success')),
                                #  br(),
-                               div(style = 'text-align: right; left: 250px; display: inline-block; position: relative',
-                                   uiOutput("bus"),
-                                   br(),
-                                   uiOutput("redo")),
-                               div(style = 'text-align: center',
-                                   uiOutput('cor'),
-                                   uiOutput('wro'))),
                                # bsButton("submit",
                                #         label = "Check Answer",
                                #        icon("lightbulb"),
@@ -395,7 +382,19 @@ body = dashboardBody(
                                                  selected = 'year')
                                  )
                                ),
-                               width = 12)),
+                               width = 10),
+                               
+                               fluidRow(
+                                 div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
+                                     uiOutput("bus"),
+                                     br(),
+                                     uiOutput("redo")),
+                                 br(),
+                                 br(),
+                                 div(style = 'display: inline-block; position: relative; text-align: right',
+                                     uiOutput('cor'),
+                                     uiOutput('wro'))
+                               )),
                       
                       #### Spread 2 ####
                       
@@ -408,7 +407,7 @@ body = dashboardBody(
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
-                                                 h4(tags$code('tidyr::gather(RawData4,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")'))),
+                                                 h4(tags$code('tidyr::gather(RawData4,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                              
                                              #fluidRow(
                                              #sidebarPanel(
@@ -419,13 +418,6 @@ body = dashboardBody(
                                              #           size = "medium",
                                              #          style = 'success')),
                                              #  br(),
-                                             div(style = 'text-align: right; left: 250px; display: inline-block; position: relative',
-                                                 uiOutput("buss"),
-                                                 br(),
-                                                 uiOutput("redos")),
-                                             div(style = 'text-align: center',
-                                                 uiOutput('cors'),
-                                                 uiOutput('wros'))),
                                    # bsButton("submit",
                                    #         label = "Check Answer",
                                    #        icon("lightbulb"),
@@ -494,7 +486,19 @@ body = dashboardBody(
                                                      selected = 'year')
                                      )
                                    ),
-                                   width = 12)),
+                                   width = 10),
+                               
+                               fluidRow(
+                                 div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
+                                     uiOutput("buss"),
+                                     br(),
+                                     uiOutput("redos")),
+                                 br(),
+                                 br(),
+                                 div(style = 'display: inline-block; position: relative; text-align: right',
+                                     uiOutput('cors'),
+                                     uiOutput('wros'))
+                               )),
                       
                     
                  
@@ -636,16 +640,7 @@ body = dashboardBody(
                                      tableOutput('dwTable2')
                                      )
                                  ),
-                        # tabPanel('separate',
-                        #          br(),
-                        #          box(title = 'View An Example', width = NULL, style = 'background-color: #4dd0e1',
-                        #              materialSwitch(inputId = 'dw2', label = 'View the Transformed Data Set', value = FALSE),
-                        #              tableOutput('dwTable3'),
-                        #              tags$code('Separate one column into several.'),
-                        #              br(),
-                        #              tableOutput('dwTable4')
-                        #              )
-                        #          ),
+                        
                         tabPanel(div(style = 'font-size: 125%', 'Spread'),
                                  br(),
                                  box(title = 'View An Example',
@@ -703,14 +698,7 @@ body = dashboardBody(
                          width = NULL,
                          height = NULL,
                          tags$img(src = 'combine.png', width = '300px', height = NULL),
-                         
-                         #div(style="display: inline-block;vertical-align:top;",
-                          #   tags$a(href='https://shinyapps.science.psu.edu/',tags$img(src='homebut.PNG', width = 19))
-                         #),
-                         #div(style="display: inline-block;vertical-align:top;",
-                        #     circleButton("info1",icon = icon("info"), status = "myClass",size = "xs")
-                         #),
-                     
+
               
             br(),
             br(),
