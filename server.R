@@ -2342,7 +2342,18 @@ Uncomment one line from each section at a time and hit "Run" to see its effect!'
                 value = 'race 1'
                 }
               else if (bank[value$index, 2] == bank[3, 2]) {
-                    value = 'race 2'
+                    value = '
+```{r}
+tidyRace <-
+  race %>%
+#  spread(key = Time, value = Score, -Name, convert = TRUE) %>%
+#  gather(key = Time, value = Score, -Name, convert = TRUE) %>%
+#  unite(key = Time, value = Score, -Name, convert = TRUE) %>%
+  arrange(Name, Time)
+
+tidyRace
+```
+'
                   }
               else if (bank[value$index, 2] == bank[4, 2]) {
                       value = 'results 1'
@@ -2354,7 +2365,21 @@ Uncomment one line from each section at a time and hit "Run" to see its effect!'
                 value = 'grades 1'
               }
               else if (bank[value$index, 2] == bank[7, 2]) {
-                value = 'grades 2'
+                value = '```{r}
+library(stringr)
+
+tidyGrades <-
+  grades %>%
+  gather(key = Quarter, value = Score, Fall:Winter) %>%
+  mutate(Test = str_c("Test", Test)) %>%
+
+  #spread(key = Test, value = Score) %>%
+  #gather(key = Test, value = Score) %>%
+  arrange(ID, Year, Quarter)
+
+tidyGrades
+```
+'
               }
               else if (bank[value$index, 2] == bank[8, 2]) {
                 value = 'table 5 (1)'

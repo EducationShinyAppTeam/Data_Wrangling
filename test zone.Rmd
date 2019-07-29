@@ -16,13 +16,13 @@ rm(list = ls())
 
 
 ```{r}
-# view
+
 race
 
-# solution
 race %>%
-  gather(key = Time, value = Score, -Name, convert = TRUE) %>%
+  spread(key = Time, value = Score, -Name, convert = TRUE) %>%
   arrange(Name, Time)
+  
 
 ```
 
@@ -41,7 +41,6 @@ results %>%
 ```{r}
 library(stringr)
 
-grades
 
 grades %>%
   gather(key = Quarter, value = Score, Fall:Winter) %>%
@@ -163,6 +162,22 @@ list
 ```
 
 
+```{r}
+
+race1 (no code)
+
+race2
+
+race %>%
+  spread()
+
+
+
+
+
+
+
+```
 
 
 
