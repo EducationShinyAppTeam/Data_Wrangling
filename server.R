@@ -2359,7 +2359,16 @@ tidyRace
                       value = 'results 1'
               }
               else if (bank[value$index, 2] == bank[5, 2]) {
-                value = 'results 2'
+                value = '```{r}
+tidyResults <-
+  results %>%
+  #spread(key = Treatment, value = value)
+  #gather(key = Treatment, value = value)
+  #unite(key = Treatment, value = value)
+
+tidyResults                
+```
+                '
               }
               else if (bank[value$index, 2] == bank[6, 2]) {
                 value = 'grades 1'
@@ -2382,10 +2391,30 @@ tidyGrades
 '
               }
               else if (bank[value$index, 2] == bank[8, 2]) {
-                value = 'table 5 (1)'
+                value = '```{r}
+library(tidyr)
+
+tidyTable5 <-
+  table5 %>%
+  #spread(key = century, value = year)
+  #gather(key = century, value = year)
+  #unite(col = new, century, year, sep = "")
+  
+tidyTable5
+```
+'
               }
               else {
-                value = 'table 5 (2)'
+                value = '```{r}
+nextStep <-
+  table5 %>%
+  #table5 %>% unite(col = new, century, year)
+  #table5 %>% unite(col = new, century, year, sep = "")
+  #table5 %>% unite(col = year, century, year)
+                
+nextStep
+```
+'
               }
               )
   })

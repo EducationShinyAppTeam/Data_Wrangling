@@ -16,25 +16,42 @@ rm(list = ls())
 
 
 ```{r}
+tidyTable5 <-
+  table5 %>%
+  #spread(key = century, value = year)
+  #gather(key = century, value = year)
+  #unite(col = new, century, year, sep = "")
+  
+tidyTable5
+```
+
+```{r}
+nextStep <-
+  table5 %>%
+  #table5 %>% unite(col = new, century, year)
+  #table5 %>% unite(col = new, century, year, sep = "")
+  #table5 %>% unite(col = year, century, year)
+
+nextStep
+```
+
+
+```{r}
 
 race
 
 race %>%
-  spread(key = Time, value = Score, -Name, convert = TRUE) %>%
-  arrange(Name, Time)
-  
+  spread(key = Time, value = Score, -Name, convert = TRUE) 
 
 ```
 
 ```{r}
 
-results
-
-# solution
-results %>%
-  spread(key = Treatment, value = value)
-
-
+tidyResults <-
+  results %>%
+  #spread(key = Treatment, value = value)
+  #gather(key = Treatment, value = value)
+  #unite(key = Treatment, value = value)
 
 ```
 
