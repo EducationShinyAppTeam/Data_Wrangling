@@ -41,7 +41,7 @@ sidebar = dashboardSidebar(
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
               menuItem('Explore Data Wrangling', tabName = 'exp1', icon = icon('wpexplorer')),
               menuItem('Tidy Data Challenge', tabName = 'exp4', icon = icon('broom')),
-              menuItem('Combining Data Sets', tabName = 'exp2', icon = icon('gamepad'))
+              menuItem('Combining Data Challenge', tabName = 'exp2', icon = icon('gamepad'))
               #menuItem('Creating Your Own Graph', tabName = 'exp3', icon = icon('refresh'))
   )
 )
@@ -71,9 +71,9 @@ body = dashboardBody(
             
             h3(strong('Instructions:')),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
-            h4(tags$li('In the Tidy Data section, fill in the correct arguments that coreectly tidies the data.')),
-            h4(tags$li('In the Reshaping Data section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
-            h4(tags$li('In the Combining Data Set section, click on the green button to select the transformation corresponding to each data table generated.')),
+            h4(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
+            h4(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidies the data.')),
+            h4(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
             div(style = 'text-align: center',
                 bsButton(inputId = 'go2',
