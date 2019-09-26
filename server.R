@@ -2336,8 +2336,11 @@ shinyServer(function(input, output, session) {
     aceEditor("rmd",
               mode = "markdown",
               if(bank[value$index, 2] == bank[1, 2]) {
-              value = 'Here you can interact with the questions being asked and test out code!
-Uncomment one line from each section at a time and hit "Run" to see its effect!'
+              value = 'Here you can test out the answer choices before choosing an answer!
+
+Uncomment one line from each section at a time and hit "Run" to see its effect!
+
+Note: If the code does not display/change data, it probably is not the correct answer.'
               } else if (bank[value$index, 2] == bank[2, 2]) {
                 value = 'No interactive R code for this question!'
                 }
@@ -2348,9 +2351,9 @@ library(rcfss)
 
 tidyRace <-
   race %>%
-#  spread(key = Time, value = Score, -Name, convert = TRUE) %>%
-#  gather(key = Time, value = Score, -Name, convert = TRUE) %>%
-#  unite(key = Time, value = Score, -Name, convert = TRUE) %>%
+  # spread(key = Time, value = Score, -Name, convert = TRUE) %>%
+  # gather(key = Time, value = Score, -Name, convert = TRUE) %>%
+  # unite(key = Time, value = Score, -Name, convert = TRUE) %>%
   arrange(Name, Time)
 
 tidyRace
@@ -2366,9 +2369,9 @@ library(rcfss)
 
 tidyResults <-
   results %>%
-  #spread(key = Treatment, value = value)
-  gather(key = Treatment, value = value)
-  #unite(key = Treatment, value = value)
+  # spread(key = Treatment, value = value)
+  # gather(key = Treatment, value = value)
+  # unite(key = Treatment, value = value)
 
 tidyResults                
 ```
@@ -2387,8 +2390,8 @@ tidyGrades <-
   gather(key = Quarter, value = Score, Fall:Winter) %>%
   mutate(Test = str_c("Test", Test)) %>%
 
-  #spread(key = Test, value = Score) %>%
-  #gather(key = Test, value = Score) %>%
+  # spread(key = Test, value = Score) %>%
+  # gather(key = Test, value = Score) %>%
   arrange(ID, Year, Quarter)
 
 tidyGrades
@@ -2401,9 +2404,9 @@ library(tidyr)
 
 tidyTable5 <-
   table5 %>%
-  #spread(key = century, value = year)
-  #gather(key = century, value = year)
-  #unite(col = new, century, year, sep = "")
+  # spread(key = century, value = year)
+  # gather(key = century, value = year)
+  # unite(col = new, century, year, sep = "")
   
 tidyTable5
 ```
