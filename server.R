@@ -1108,7 +1108,8 @@ shinyServer(function(input, output, session) {
     disable("userOpD")
     disable("submitted")
     if(input$userOpA == '1999' & input$userOpB == '2000'
-       & input$userOpC == 'year' & input$userOpD == 'population') {
+       & input$userOpC == 'year' & input$userOpD == 'population' || 
+       input$userOpA == '2000' & input$userOpB == '1999' & input$userOpC == 'year' & input$userOpD == 'population' ) {
       showElement("cor")
     }
     else{
@@ -1341,7 +1342,9 @@ shinyServer(function(input, output, session) {
     disable("userOpM")
     disable("submitteds")
     if(input$userOpJ == '1999' & input$userOpK == '2000'
-       & input$userOpL == 'year' & input$userOpM == 'population') {
+       & input$userOpL == 'year' & input$userOpM == 'population' ||
+       input$userOpJ == '2000' & input$userOpK == '1999' & 
+       input$userOpL == 'year' & input$userOpM == 'population') {
       showElement("cors")
     }
     else{
@@ -2340,7 +2343,9 @@ shinyServer(function(input, output, session) {
 
 Uncomment one line from each section at a time and hit "Run" to see its effect!
 
-Note: If the code does not display/change data, it probably is not the correct answer.'
+Note: If the code does not display/change data, it probably is not the correct answer.
+              
+There is no interactive R code for this question!'
               } else if (bank[value$index, 2] == bank[2, 2]) {
                 value = 'No interactive R code for this question!'
                 }
@@ -2674,7 +2679,7 @@ nextStep
 ############
   observeEvent(input$check1, {
     if (input$cd1 == 'left join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
@@ -2682,7 +2687,7 @@ nextStep
   })
   observeEvent(input$check2, {
     if (input$cd2 == 'inner join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
@@ -2690,7 +2695,7 @@ nextStep
   })
   observeEvent(input$check3, {
     if (input$cd3 == 'full join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
@@ -2698,7 +2703,7 @@ nextStep
   })
   observeEvent(input$check4, {
     if (input$cd4 == 'right join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
@@ -2706,7 +2711,7 @@ nextStep
   })
   observeEvent(input$check5, {
     if (input$cd5 == 'anti join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
@@ -2714,7 +2719,7 @@ nextStep
   })
   observeEvent(input$check6, {
     if (input$cd6 == 'semi join') {
-      sendSweetAlert(session, title = NULL, text = 'Congratulations', type = 'success', closeOnClickOutside = TRUE)
+      sendSweetAlert(session, title = NULL, text = 'Correct!', type = 'success', closeOnClickOutside = TRUE)
     }
     else {
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)

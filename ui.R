@@ -106,7 +106,7 @@ body = dashboardBody(
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
                                
-                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a Year in a Country')),
+                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                
                                  
@@ -198,7 +198,7 @@ body = dashboardBody(
                                                  #div(style = 'text-align: center',
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a Case is a country in a year')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                                  h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                              
                                              #fluidRow(
@@ -220,7 +220,7 @@ body = dashboardBody(
                                    
                                    fluidRow(
                                      box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                             (title = 'RawData3')),
+                                             (title = 'RawData2')),
                                          style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                          width = 6,
                                          uiOutput("original3")),
@@ -302,7 +302,7 @@ body = dashboardBody(
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
+                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                    h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
 
                                #fluidRow(
@@ -324,7 +324,7 @@ body = dashboardBody(
                                
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
-                                         (title = 'RawData2')),
+                                         (title = 'RawData3')),
                                      style = 'background-image: url("green.png"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original2")),
@@ -406,7 +406,7 @@ body = dashboardBody(
                                                  #div(style = 'text-align: center',
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                                  h4(tags$code('tidyr::gather(RawData4,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                              
                                              #fluidRow(
@@ -693,7 +693,7 @@ body = dashboardBody(
            
             fluidRow(
               column(width = 12,
-                     box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose an answer!')),
+                     box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose the correct join function corresponding to the displayed data!')),
                          style = 'text-align: left',
                          width = NULL,
                          height = NULL,
