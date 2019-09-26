@@ -2339,11 +2339,13 @@ shinyServer(function(input, output, session) {
               value = 'Here you can interact with the questions being asked and test out code!
 Uncomment one line from each section at a time and hit "Run" to see its effect!'
               } else if (bank[value$index, 2] == bank[2, 2]) {
-                value = 'race 1'
+                value = 'No interactive R code for this question!'
                 }
               else if (bank[value$index, 2] == bank[3, 2]) {
                     value = '
 ```{r}
+library(rcfss)
+
 tidyRace <-
   race %>%
 #  spread(key = Time, value = Score, -Name, convert = TRUE) %>%
@@ -2356,14 +2358,16 @@ tidyRace
 '
                   }
               else if (bank[value$index, 2] == bank[4, 2]) {
-                      value = 'results 1'
+                      value = 'No interactive R code for this question!'
               }
               else if (bank[value$index, 2] == bank[5, 2]) {
                 value = '```{r}
+library(rcfss)
+
 tidyResults <-
   results %>%
   #spread(key = Treatment, value = value)
-  #gather(key = Treatment, value = value)
+  gather(key = Treatment, value = value)
   #unite(key = Treatment, value = value)
 
 tidyResults                
@@ -2371,11 +2375,12 @@ tidyResults
                 '
               }
               else if (bank[value$index, 2] == bank[6, 2]) {
-                value = 'grades 1'
+                value = 'No interactive R code for this question!'
               }
               else if (bank[value$index, 2] == bank[7, 2]) {
                 value = '```{r}
 library(stringr)
+library(rcfss)
 
 tidyGrades <-
   grades %>%
@@ -2406,11 +2411,13 @@ tidyTable5
               }
               else {
                 value = '```{r}
+library(tidyr)
+
 nextStep <-
   table5 %>%
-  #table5 %>% unite(col = new, century, year)
-  #table5 %>% unite(col = new, century, year, sep = "")
-  #table5 %>% unite(col = year, century, year)
+  # unite(col = new, century, year)
+  # unite(col = new, century, year, sep = "")
+  # unite(col = year, century, year)
                 
 nextStep
 ```

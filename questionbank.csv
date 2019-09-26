@@ -7,4 +7,4 @@
 6,Why is this table untidy? Grades 1,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B
 7,"Does this table need to be spread, gathered, or united in order to be tidy? Grades 2",Spread,Gathered,United,A
 8,"Does this table need to be spread, gathered, or united? Table5 1",Spread,Gathered,United,C
-9,Which is the correct step for uniting 'century' and 'year' into 'new'? Table5 2,"table5 %>% unite(col = new, century, year)","table5 %>% unite(col = new, century, year, sep = """")","table5 %>% unite(col = year, century, year)",B
+9,Which is the correct step for uniting 'century' and 'year' into 'new'? Table5 2,"unite(col = new, century, year)","unite(col = new, century, year, sep = """")","unite(col = year, century, year)",B
