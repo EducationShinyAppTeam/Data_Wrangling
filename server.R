@@ -1049,19 +1049,6 @@ shinyServer(function(input, output, session) {
   })
   
   
-  # trying to use sweetalert
-  #observeEvent(input$submit, {
-  #  if (input$userOpA == '1999' & input$userOpB == '2000'
-  #      & input$userOpC == 'year' & input$userOpD == 'population') {
-  #   sweetalert(imageUrl = 'correct.gif')
-  #}
-  
-  #   else{
-  #    sweetalert(imageUrl = 'try.gif')
-  # }
-  #})
-  
-  
   
   output$redo <- renderUI({
     bsButton("retrying",
@@ -1283,19 +1270,7 @@ shinyServer(function(input, output, session) {
     })
   })
   
-  # trying to use sweetalert
-  #observeEvent(input$submit, {
-  #  if (input$userOpJ == '1999' & input$userOpK == '2000'
-  #      & input$userOpL == 'year' & input$userOpM == 'population') {
-  #   sweetalert(imageUrl = 'correct.gif')
-  #}
-  
-  #   else{
-  #    sweetalert(imageUrl = 'try.gif')
-  # }
-  #})
-  
-  
+
   
   output$redos <- renderUI({
     bsButton("retryings",
