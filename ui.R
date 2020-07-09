@@ -2,23 +2,24 @@ library(shiny)
 library(shinydashboard)
 library(shinyBS)
 library(shinyjs)
-library(shinyDND)
+#library(shinyDND) #No match
 library(shinyWidgets)
-library(dplyr)
-library(mosaic)
-library(plotly)
-library(ggplot2)
+#library(dplyr) #just %>% though I think others not seen
+#library(mosaic) #nothing detected but tends to throw errors
+#library(plotly) # just %>%, think can be deleted
+#library(ggplot2) #think can be deleted
 library(EDAWR)
-library(plot3D)
-library(ggmap)
-library(tidyr)
-library(shinyAce)
-library(devtools)
-library(shinycssloaders)
-library(devtools)
-library(knitr)
-library(rlocker)
-library(rcfss)
+#library(plot3D) #nothing
+#library(ggmap) #just %>%
+library(tidyr) #just %>% could have more problems
+library(shinyAce) #nothing, but labeled as header in live code section
+#library(devtools) #nothing
+library(shinycssloaders) 
+#library(knitr) #nothing
+library(rlocker) #think this is for later
+#library(rcfss)   #input
+library(boastUtils) #should keep
+
 
 
 
@@ -27,53 +28,51 @@ bank = data.frame(lapply(bank, as.character), stringsAsFactors = FALSE)
 
 
 source("helpers.R")
-
-header = dashboardHeader(title = 'Data Wrangling',
-                         tags$li(class = "dropdown",
-                                 tags$a(href = "https://shinyapps.science.psu.edu/",
-                                        icon("home"))),
-                         tags$li(class = "dropdown",
-                                 actionLink("info", icon("info"), class = "myClass")))
-
-sidebar = dashboardSidebar(
-  sidebarMenu(id = 'tabs',
-              menuItem('Prerequisite', tabName = 'prereq', icon = icon('book')),
+ui <- list(
+  dashboardPage(
+    skin = "green",
+      dashboardHeader(title = 'Data Wrangling',
+                      titleWidth = 250,
+                      tags$li(class = "dropdown",tags$a(href = "https://shinyapps.science.psu.edu/",icon("home"))),
+                      tags$li(class = "dropdown",actionLink("info", icon("info"), class = "myClass"))),
+        
+    dashboardSidebar(
+      width = 250,
+      sidebarMenu(id = 'tabs',
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
+              menuItem('Prerequisites', tabName = 'prereq', icon = icon('book')),
               menuItem('Explore Data Wrangling', tabName = 'exp1', icon = icon('wpexplorer')),
-              menuItem('Tidy Data Challenge', tabName = 'exp4', icon = icon('broom')),
-              menuItem('Combining Data Challenge', tabName = 'exp2', icon = icon('gamepad'))
+              menuItem('Tidy Data Challenge', tabName = 'exp4', icon = icon('gears')),
+              menuItem('Combining Data Challenge', tabName = 'exp2', icon = icon('gamepad')),
+              menuItem('References', tabName = "References", icon = icon("leanpub"))
               #menuItem('Creating Your Own Graph', tabName = 'exp3', icon = icon('refresh'))
-  )
-)
+      ),
+      #PSU logo
+      tags$div(class = "sidebar-logo",
+               boastUtils::psu_eberly_logo("reversed"))
+    ),
 
-body = dashboardBody(
-  tags$head( 
-    tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css")
-  ),
-  tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
-  #tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css")),
-  
-  useShinyjs(),
-  
-  tabItems(
-    tabItem(tabName = 'prereq',
-            h4('Please refer to the', a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet'), 'for all the information needed.'),
-            tags$a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
-    
-    tabItem(tabName = 'overview',
-            tags$a(href='http://stat.psu.edu/', tags$img(src = 'psu_icon.jpg', align = "left", width = 180)),
+    dashboardBody(
+      tags$head(
+        tags$link(rel = "stylesheet", type = "text/css",href = "https://educationshinyappteam.github.io/Style_Guide/theme/boast.css"),
+      ),
+      tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
+      #tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css")),
+      
+      useShinyjs(),
+      
+      tabItems(
+        tabItem(tabName = 'overview',
+            h1('Data Wrangling App'),
             br(),
-            br(),
-            br(),
-            h3(strong('About:')),
-            h4('This app illustrates R code for tidying, reshaping and combining data.'),
+            p('This app illustrates R code for tidying, reshaping and combining data.'),
             br(),
             
-            h3(strong('Instructions:')),
+            h2('Instructions'),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
-            h4(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
-            h4(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidies the data.')),
-            h4(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
+            p(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
+            p(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidies the data.')),
+            p(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
             div(style = 'text-align: center',
                 bsButton(inputId = 'go2',
@@ -83,22 +82,28 @@ body = dashboardBody(
                          style = "success",
                          class = "circle grow")),
             br(),
-            h3(strong('Acknowledgements:')),
-            h4('This application was coded and developed by Anna (Yinqi) Zhang and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou for being incredibly helpful with programming issues.'),
-            h4('The cheat sheet is provided by RStudio.'),
-            h4('Packages used: dplyr, EDAWR, ggmap, mosaic, plotly, ggplot2, plot3D.'),
-            h4('The Protein-Protein Interaction Dataset is from the Warwick University - Molecular Organisation and Assembly in Cells.')
+            h2(strong('Acknowledgements:')),
+            p('This application was coded and developed by Anna (Yinqi) Zhang and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou for being incredibly helpful with programming issues.'),
+            p('The cheat sheet is provided by RStudio.'),
+            p('Packages used: dplyr, EDAWR, ggmap, mosaic, plotly, ggplot2, plot3D.'),
+            div(class = "updated", "Last Update: 06/23/2020 by EJW.")
             ),
-
+        
+        tabItem(tabName = 'prereq',
+            p('Please refer to the', a(href = 'https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet', target="_blank"), 'for all the information needed. 
+              This includes many examples of data wrangling tools for reshaping data and joins.'),
+            p('After clicking on the link a seporate tab will open that contains the cheat sheet.'),
+            tags$a(href = 'https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
+    
 ############# Tidy Data #################
 
-#### Gather 1 ####
+
 
   tabItem(tabName = 'exp4',
-          tabsetPanel(type = 'tabs',
-                      tabPanel(div(style = 'font-size: 125%', 'Gather 1'),
+          tabsetPanel(type = 'tabs', id = 'questionTabs',
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_longer 1'), value = "pivot_longer1",
 
-                               
+      ###################### pivot_longer 1 ###########
                                box(
                                  wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
@@ -106,68 +111,72 @@ body = dashboardBody(
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
                                
-                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
-                               h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
                                
-                                 
+                            ##### The statement in the top box ############
+                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
+                               h4(tags$code('tidyr::pivot_longer(RawData, cols = c("Arg 1", "Arg 2"), names_to = "Arg 3", values_to = "Arg 4")')))),
+                               
+                               #pivot_longer(df,cols = c('1999','2000'), names_to = 'years', values_to = 'cases')
 
-                            
+                               textOutput("tester"),
+                           ###### two parellel boxees, first for raw data second for Tidy Attempt ##########
                                fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'RawData')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original1")),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Your Tidy Attempt')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("userOut1"),
                                      div(style = 'font-size: 135%; font-weight: bold'))),
                                  br(),
+                          ####### Your R Code based on inputs #########
                                fluidRow(
                                  column(12,
                                         div(style = 'text-align: left; font-size: 125%',
                                             wellPanel(tags$strong('Your R code: '),
-                                                      uiOutput('userOut2'))))),
+                                                      uiOutput('tidyAttemptTable'))))),
                                  br(),
                                
                                
                                fluidRow(
                                  # choices for user plot
-                                 box(div(style = 'background-color: #b8f28c',
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                     style = 'background: #b8f28c',
+                                     style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOp1',
-                                                 label = 'Arg 1',
+                                                 label = 'cols[1]=',
                                                  choices = c('country', '1999', 'Afghanistan', '2000'),
                                                  selected = 'country')),
-                                 box(div(style = 'background-color: #b8f28c',
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                    style = 'background: #b8f28c',
+                                    style = 'background: #ffffff',
                                     width = 3,
                                     selectInput(inputId = 'userOp2',
-                                                label = 'Arg 2',
+                                                label = 'cols[2]=',
                                                 choices = c('country', '1999', 'Afghanistan', '2000'),
                                                 selected = '1999')),
             
-                                 box(div(style = 'background-color: #b8f28c',
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                     style = 'background: #b8f28c',
+                                     style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOp3',
-                                                 label = 'Arg 3',
+                                                 label = 'names_to = ',
                                                  choices = c('1999', 'cases', 'year', 'China'),
                                                  selected = 'year')),
                                  
                                  
-                                 box(div(style = 'background-color: #b8f28c',
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                     style = 'background-color: #b8f28c',
+                                     style = 'background-color: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOp4',
-                                                 label = 'Arg 4',
+                                                 label = 'values_to = ',
                                                  choices = c('1999', 'cases', 'year', 'China'),
                                                  selected = 'cases')
                                      )
@@ -178,7 +187,8 @@ body = dashboardBody(
                                div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                    uiOutput("sub"),
                                    br(),
-                                   uiOutput("resetcc")),
+                                   uiOutput("resetcc"),
+                                   uiOutput("nextQuestion1")),
                                
                                br(),
                                br(),
@@ -188,28 +198,29 @@ body = dashboardBody(
                                    uiOutput('wrong')))
                       ),
                       
-                      #### Gather 2 ####         
+       ################## pivot_longer 2 ###################
                       
-                      tabPanel(div(style = 'font-size: 125%', 'Gather 2'),
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_longer 2'), value = "pivot_longer2", #Ethan 7/8
                                
-                               
+                          ######## Fill in the correct Argument across top###############
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
-                                                 h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
-                                             
+                                                 h4(tags$code('tidyr::pivot_longer(RawData2, cols = c("Arg 1", "Arg 2", "Arg 3"), names_to = "Arg 4", values_to = "Arg 5")')))),
+                          ########## Raw Data Table ###########       
 
                                    fluidRow(
-                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                     box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                              (title = 'RawData2')),
-                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                          width = 6,
                                          uiOutput("original3")),
-                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                     box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                              (title = 'Your Tidy Attempt')),
-                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                          width = 6,
-                                         uiOutput("userOutX"))),
+                                         uiOutput("tidyAttempt2"))),
                                    br(),
+                          ######## Tidy Attempt #############
                                    fluidRow(
                                      column(12,
                                             div(style = 'text-align: left; font-size: 125%',
@@ -218,44 +229,51 @@ body = dashboardBody(
                                             ))),
                                    br(),
                                    
-                                   
+                              ############# The 5  Input values ##############3
                                    fluidRow(
                                      # choices for user plot
-                                     box(div(style = 'background-color: #b8f28c',
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOp5',
-                                                     label = 'Arg 1',
-                                                     choices = c('country', '1999', 'Afghanistan', '2000'),
-                                                     selected = 'country')),
-                                     box(div(style = 'background-color: #b8f28c',
+                                                     label = 'cols[1] =',
+                                                     choices = c('John','MonTips','Age','Name'),
+                                                     selected = 'John')),
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOp6',
-                                                     label = 'Arg 2',
-                                                     choices = c('country', '1999', 'Afghanistan', '2000'),
-                                                     selected = '1999')),
-                                     
-                                     box(div(style = 'background-color: #b8f28c',
+                                                     label = 'cols[2] =',
+                                                     choices = c('Tim','MonTips','TueTips','21'),
+                                                     selected = 'Tim')),
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOp7',
-                                                     label = 'Arg 3',
-                                                     choices = c('1999', 'cases', 'year', 'China'),
-                                                     selected = 'year')),
-                                     
-                                     
-                                     box(div(style = 'background-color: #b8f28c',
+                                                     label = 'cols[3] =',
+                                                     choices = c('Age', 'Name', '7', 'WedTips'),
+                                                     selected = 'Age')),
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background-color: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOp8',
-                                                     label = 'Arg 4',
-                                                     choices = c('1999', 'cases', 'year', 'China'),
-                                                     selected = 'cases')
+                                                     label = 'names_to =',
+                                                     choices = c('21','MonTips','Tips','Day'),
+                                                     selected = '21')),
+                                     
+                                     
+                                     box(div(style = 'background-color: #ffffff',
+                                             (title = '')),
+                                         style = 'background-color: #ffffff',
+                                         width = 3,
+                                         selectInput(inputId = 'userOp9',
+                                                     label = 'values_to',
+                                                     choices = c('8','Age','Day','Tips'),
+                                                     selected = '8')
                                      )
                                    ),
                                    width = 10),
@@ -272,33 +290,35 @@ body = dashboardBody(
                                    uiOutput('rong')))
                       ),
                       
-                      #### Spread 1 #### 
+######################### Pivot Wider 1 ######################################
                       
-                      tabPanel(div(style = 'font-size: 125%', 'Spread 1'),
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 1'),
 
-                               
+                            ############ Fill in sample argument
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
-                                   h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
+                                   h4(tags$code('tidyr::pivot_wider(RawData3, names_from = "Arg 1", values_from = "Arg 2")')))), 
 
 
-                               
+                    ######### Raw Data and Tidy Attempt  ##########  
                                fluidRow(
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                 box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'RawData3')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("original2")),
-                                 box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                    ######### Your Tidy Attempt ##############
+                                 box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'Your Tidy Attempt')),
-                                     style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                     style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                      width = 6,
                                      uiOutput("userOutA"))),
                                br(),
+                    ####### R code based on blanks #######
                                fluidRow(
                                  column(12,
                                         div(style = 'text-align: left; font-size: 125%',
@@ -307,45 +327,26 @@ body = dashboardBody(
                                         ))),
                                br(),
                                
-                               
+                        #######Drop Down selections
                                fluidRow(
                                  # choices for user plot
-                                 box(div(style = 'background-color: #b8f28c',
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                     style = 'background: #b8f28c',
+                                     style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOpA',
-                                                 label = 'Arg 1',
-                                                 choices = c('country', '1999', '2000', 'Afghanistan'),
-                                                 selected = '1999')),
-                                 box(div(style = 'background-color: #b8f28c',
+                                                 label = 'names_from =',
+                                                 choices = c('2000', 'cases', 'country', 'year'),
+                                                 selected = '2000')),
+                                 box(div(style = 'background-color: #ffffff',
                                          (title = '')),
-                                     style = 'background: #b8f28c',
+                                     style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
-                                                 label = 'Arg 2',
-                                                 choices = c('country', '1999', '2000', 'Afghanistan'),
-                                                 selected = '1999')),
+                                                 label = 'values_from',
+                                                 choices = c('country', 'cases', '2000', 'Afghanistan'),
+                                                 selected = 'country')),
                                  
-                                 box(div(style = 'background-color: #b8f28c',
-                                         (title = '')),
-                                     style = 'background: #b8f28c',
-                                     width = 3,
-                                     selectInput(inputId = 'userOpC',
-                                                 label = 'Arg 3',
-                                                 choices = c('population', 'country', 'Brazil', 'year'),
-                                                 selected = 'population')),
-                                 
-                                 
-                                 box(div(style = 'background-color: #b8f28c',
-                                         (title = '')),
-                                     style = 'background: #b8f28c',
-                                     width = 3,
-                                     selectInput(inputId = 'userOpD',
-                                                 label = 'Arg 4',
-                                                 choices = c('population', 'country', 'Brazil', 'year'),
-                                                 selected = 'year')
-                                 )
                                ),
                                width = 10),
                                
@@ -363,7 +364,7 @@ body = dashboardBody(
                       
                       #### Spread 2 ####
                       
-                      tabPanel(div(style = 'font-size: 125%', 'Spread 2'),
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 2'),
                                
                                
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
@@ -372,19 +373,19 @@ body = dashboardBody(
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
-                                                 h4(tags$code('tidyr::gather(RawData4,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
+                                                 h4(tags$code('tidyr::gather(RawData4,"Arg 1", "Arg 2", names_to = "Arg 3", values_to = "Arg 4")')))),
                                              
 
                                    
                                    fluidRow(
-                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                     box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                              (title = 'RawData4')),
-                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                          width = 6,
                                          uiOutput("original4")),
-                                     box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
+                                     box(div(style = 'background-image: url("white.jpeg"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                              (title = 'Your Tidy Attempt')),
-                                         style = 'background-image: url("green.png"); background-position: center; text-align: center',
+                                         style = 'background-image: url("white.jpeg"); background-position: center; text-align: center',
                                          width = 6,
                                          uiOutput("userOut3"))),
                                    br(),
@@ -399,39 +400,39 @@ body = dashboardBody(
                                    
                                    fluidRow(
                                      # choices for user plot
-                                     box(div(style = 'background-color: #b8f28c',
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOpJ',
-                                                     label = 'Arg 1',
+                                                     label = 'cols[1]',
                                                      choices = c('country', '1999', '2000', 'Afghanistan'),
                                                      selected = '1999')),
-                                     box(div(style = 'background-color: #b8f28c',
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOpK',
-                                                     label = 'Arg 2',
+                                                     label = 'cols[2]',
                                                      choices = c('country', '1999', '2000', 'Afghanistan'),
                                                      selected = '1999')),
                                      
-                                     box(div(style = 'background-color: #b8f28c',
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOpL',
-                                                     label = 'Arg 3',
+                                                     label = 'names_to',
                                                      choices = c('population', 'country', 'Brazil', 'year'),
                                                      selected = 'population')),
                                      
                                      
-                                     box(div(style = 'background-color: #b8f28c',
+                                     box(div(style = 'background-color: #ffffff',
                                              (title = '')),
-                                         style = 'background: #b8f28c',
+                                         style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOpM',
-                                                     label = 'Arg 4',
+                                                     label = 'values_to',
                                                      choices = c('population', 'country', 'Brazil', 'year'),
                                                      selected = 'year')
                                      )
@@ -461,35 +462,34 @@ body = dashboardBody(
                                    verticalLayout(
                                      h3("Instructions"),
                                      wellPanel(
-                                       style = "background-color: #b8f28c",
+                                       style = "background-color: #ffffff",
                                        tags$div(
                                          tags$li("Attempt the questions!"),
                                          tags$li("Run your code in the R script
                                                  box below and see the output on the right"),
-                                         tags$li("Uncomment the sample code to explore.")
-                                         ,
-                                         style = "background-color: #b8f28c")),
+                                         tags$li("Uncomment the sample code to explore."),
+                                         style = "background-color: #ffffff")),
                                      h3("Exercises"),
-                                     uiOutput('progress'),
-                                     wellPanel(style = "background-color: #b8f28c",
+                                     #uiOutput('progress'), does not appear to serve any purpose
+                                     wellPanel(style = "background-color: #ffffff", #This panel is where the question and options go
                                                uiOutput("question") %>% 
-                                                 withSpinner(color = "#1E7B14"),
-                                               uiOutput("options"),
+                                                 withSpinner(color = "#ffffff"),
+                                               uiOutput("options"),  #Outputs all of the possible answers, however this should be output with multiple choice.
                                                br(),
-                                               selectInput("answer", "Answer:", c("","A", "B", "C")),
-                                               uiOutput("mark"),
+                                               #selectInput("answer", "Answer:", c("","A", "B", "C")), #Ethan
+                                               uiOutput("mark"),   #Shows symbol, what was picked and what should have been picked
                                                tags$style(type = 'text/css', '#question{font-size: 15px;
-                                                          background-color: #b8f28c;color: black;}',
+                                                          background-color: #ffffff;color: black;}',
                                                           '.well { padding: 10px; margin-bottom: 15px; max-width: 1000px; }')
                                                
                                      ),
                                      fluidPage(
-                                       tags$head(
-                                         tags$style(HTML('#submit{background-color:#5a992b; color:white}')),
-                                         tags$style(HTML('#eval{background-color:#5a992b; color:white}')),
-                                         tags$style(HTML('#nextq{background-color:#5a992b; color:white}'))
-                                       ),
-                                       fluidRow(
+                                       # tags$head(
+                                       #   tags$style(HTML('#submit{background-color:#ffffff; color:white}')),
+                                       #   tags$style(HTML('#eval{background-color:#ffffff; color:white}')),      removing this actually made code work better.
+                                       #   tags$style(HTML('#nextq{background-color:#ffffff; color:white}'))
+                                       # ),
+                                       fluidRow(     #These are the 3 buttons on the bottom
                                          column(12, align = "center",
                                                 div(style = "display: inline-block", actionButton(inputId = 'submit',
                                                                                                   label = 'Submit',
@@ -542,7 +542,7 @@ body = dashboardBody(
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
-                                     style = 'background-color: #b8f28c; display: inline-block',
+                                     style = 'background-color: #ffffff; display: inline-block',
                                      tableOutput('uniteOutput1'),
                                      checkboxGroupInput(inputId = 'unite1',
                                                         label = 'Select Columns to Unite',
@@ -561,7 +561,7 @@ body = dashboardBody(
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
-                                     style = 'background-color: #b8f28c; display: inline-block',
+                                     style = 'background-color: #ffffff; display: inline-block',
                                      materialSwitch(inputId = 'dw1',
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
@@ -578,12 +578,12 @@ body = dashboardBody(
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
-                                     style = 'background-color: #b8f28c; display: inline-block',
+                                     style = 'background-color: #ffffff; display: inline-block',
                                      materialSwitch(inputId = 'dw3',
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
                                      tableOutput('dwTable5'),
-                                     tags$strong(div('Spread rows into columns.', style = 'color: green')),
+                                     tags$strong(div('Spread rows into columns.', style = 'color: white')),
                                      tags$code('tidyr::spread(pollution, size, amount)'),
                                      br(),
                                      br(),
@@ -595,7 +595,7 @@ body = dashboardBody(
                                  br(),
                                  box(title = 'View An Example',
                                      width = NULL,
-                                     style = 'background-color: #b8f28c; display: inline-block',
+                                     style = 'background-color: #ffffff; display: inline-block',
                                      sliderTextInput(inputId = 'dwSTI2',
                                                      label = 'Select Your Sorting Option',
                                                      choices = c('Random', 'Low to High', 'High to Low'),
@@ -629,8 +629,13 @@ body = dashboardBody(
                      box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose the correct join function corresponding to the displayed data!')),
                          style = 'text-align: left',
                          width = NULL,
-                         height = NULL,
-                         tags$img(src = 'combine.png', width = '300px', height = NULL),
+                         height = NULL,    #Ethan Wright
+                         div(style="display:inline-block", tableOutput('titleTableA')),
+                         div(style="display:inline-block", p('    +     ')),
+                         div(style="display:inline-block", tableOutput('titleTableB')),
+                         div(style="display:inline-block", p(' = ')),
+                             
+                         #tags$img(src = 'combine.png', width = '300px', height = NULL),
 
               
             br(),
@@ -639,157 +644,222 @@ body = dashboardBody(
             fluidRow(#theme = "bootstrap.css",
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #b8f28c',
+                         style = 'background-color: #ffffff',
                          width = NULL,
-                         height = '220px',
-                         dropdownButton(circle = TRUE,
-                                        status = 'success',
-                                        size = 'xs',
-                                        icon = icon('lightbulb'),
-                                        up = TRUE,
-                                        right = TRUE,
-                                        tooltip = tooltipOptions(title = "Select Your Answer"),
-                                        sliderTextInput(inputId = 'cd1',
-                                                        label = 'Mutating Joins Option',
-                                                        force_edges = TRUE,
-                                                        grid = TRUE,
-                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
-                                        textOutput('cdExp1')),
+                         height = '330px',
+                         
+                         radioButtons(inputId = "cd1", label = "Mutating Joins Option",
+                                     c('left join', 'right join', 'inner join', 'full join'),
+                                     selected = character(0)),
+                         
+                         
+                         #Ethan
                          tableOutput('cdTable1'),
-                         bsButton(inputId = 'check1',
-                                  label = 'Check',
-                                  size = 'median')
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check1',
+                                    label = 'Check',
+                                    size = 'median')),
+                           column(4,(uiOutput('checkOrX1')), offset = 1))
                          )
                      ),
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #b8f28c',
+                         style = 'background-color: #ffffff',
                          width = NULL,
-                         height = '220px',
-                         dropdownButton(circle = TRUE,
-                                        status = 'success',
-                                        size = 'xs',
-                                        icon = icon('lightbulb'),
-                                        up = TRUE,
-                                        right = TRUE,
-                                        tooltip = tooltipOptions(title = "Select Your Answer"),
-                                        sliderTextInput(inputId = 'cd2',
-                                                        label = 'Mutating Joins Option',
-                                                        force_edges = TRUE,
-                                                        grid = TRUE,
-                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
-                           textOutput('cdExp2')),
+                         height = '330px',
+                         radioButtons(inputId = "cd2", label = "Mutating Joins Option",
+                                      c('left join', 'right join', 'inner join', 'full join'),
+                                      selected = character(0)),
+                         # Old method
+                         # dropdownButton(circle = TRUE,
+                         #                status = 'success',
+                         #                size = 'xs',
+                         #                icon = icon('lightbulb'),
+                         #                up = TRUE,
+                         #                right = TRUE,
+                         #                tooltip = tooltipOptions(title = "Select Your Answer"),
+                         #                sliderTextInput(inputId = 'cd2',
+                         #                                label = 'Mutating Joins Option',
+                         #                                force_edges = TRUE,
+                         #                                grid = TRUE,
+                         #                                choices = c('left join', 'right join', 'inner join', 'full join')),
+                         #   textOutput('cdExp2')),
                          tableOutput('cdTable2'),
-                         br(),
-                         bsButton(inputId = 'check2',
-                                  label = 'Check',
-                                  size = 'median')
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check2',
+                                             label = 'Check',
+                                             size = 'median')),
+                           column(4,(uiOutput('checkOrX2')), offset = 1))
                          )
               ),
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #b2dfdb',
+                         style = 'background-color: #ffffff',
                          width = NULL,
-                         height = '180px',
-                         dropdownButton(circle = TRUE,
-                                        status = 'success',
-                                        size = 'xs',
-                                        icon = icon('lightbulb'),
-                                        up = TRUE,
-                                        right = TRUE,
-                                        tooltip = tooltipOptions(title = "Select Your Answer"),
-                                        sliderTextInput(inputId = 'cd5',
-                                                        label = 'Filtering Joins Option',
-                                                        force_edges = TRUE,
-                                                        choices = c('semi join', 'anti join'))),
-                         tableOutput('cdTable5'),
-                         br(),
-                         bsButton(inputId = 'check5', label = 'Check', size = 'median')
-                         )
-                     ),
-              
-              column(width = 6,
-                     box(title = NULL,
-                         style = 'background-color: #b2dfdb',
-                         width = NULL,
-                         height = '180px',
-                         dropdownButton(circle = TRUE,
-                                        status = 'success',
-                                        size = 'xs',
-                                        icon = icon('lightbulb'),
-                                        up = TRUE,
-                                        right = TRUE,
-                                        tooltip = tooltipOptions(title = "Select Your Answer"),
-                                        sliderTextInput(inputId = 'cd6',
-                                                        label = 'Filtering Joins Option',
-                                                        force_edges = TRUE,
-                                                        choices = c('semi join', 'anti join'))
-                         ),
-                         tableOutput('cdTable6'),
-                         bsButton(inputId = 'check6',
-                                  label = 'Check',
-                                  size = 'median')
-                         )
-                     ),
-              
-              column(width = 6,
-                     box(title = NULL,
-                         style = 'background-color: #b8f28c',
-                         width = NULL,
-                         height = NULL,
-                         dropdownButton(circle = TRUE,
-                                        status = 'success',
-                                        size = 'xs',
-                                        icon = icon('lightbulb'),
-                                        up = TRUE,
-                                        right = TRUE,
-                                        tooltip = tooltipOptions(title = "Select Your Answer"),
-                                        sliderTextInput(inputId = 'cd3',
-                                                        label = 'Mutating Joins Option',
-                                                        force_edges = TRUE,
-                                                        grid = T,
-                                                        choices = c('left join', 'right join', 'inner join', 'full join')),
-                                        textOutput('cdExp3')
-                                        ),
+                         height = '270px',
+                         radioButtons(inputId = "cd3", label = "Filtering Joins Option",
+                                      c('semi join', 'anti join'), selected = character(0)),
                          tableOutput('cdTable3'),
-                         bsButton(inputId = 'check3',
-                                  label = 'Check',
-                                  size = 'median')
-                         )
+                         br(),
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check3',
+                                             label = 'Check',
+                                             size = 'median')),
+                           column(4,(uiOutput('checkOrX3')), offset = 1)))
                      ),
               
               column(width = 6,
                      box(title = NULL,
-                         style = 'background-color: #b8f28c',
+                         style = 'background-color: #ffffff',
+                         width = NULL,
+                         height = '270px',
+                         radioButtons(inputId = "cd4", label = "Filtering Joins Option",
+                         c('semi join', 'anti join'), selected = character(0)),
+                         tableOutput('cdTable4'),
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check4',
+                                             label = 'Check',
+                                             size = 'median')),
+                           column(4,(uiOutput('checkOrX4')), offset = 1)))
+                     ),
+              
+              column(width = 6,
+                     box(title = NULL,
+                         style = 'background-color: #ffffff',
                          width = NULL,
                          height = NULL,
-                         dropdownButton(
-                           circle = TRUE,
-                           status = 'success',
-                           size = 'xs',
-                           icon = icon('adjust'),
-                           up = TRUE,
-                           right = TRUE,
-                           tooltip = tooltipOptions(title = "Select Your Answer"),
-                           sliderTextInput(inputId = 'cd4',
-                                           label = 'Mutating Joins Option',
-                                           force_edges = TRUE,
-                                           grid = T,
-                                           choices = c('left join', 'right join', 'inner join', 'full join')
-                                           ),
-                           textOutput('cdExp4')
-                         ),
-                         tableOutput('cdTable4'),
-                         br(),
-                         bsButton(inputId = 'check4',
-                                  label = 'Check',
-                                  size = 'median')
+                         radioButtons(inputId = "cd5", label = "Filtering Joins Option",
+                                      c('left join', 'right join', 'inner join', 'full join'),
+                                      selected = character(0)),
+                         tableOutput('cdTable5'),
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check5',
+                                             label = 'Check',
+                                             size = 'median')),
+                           column(4,(uiOutput('checkOrX5')), offset = 1)))
+                     ),
+              
+              column(width = 6,
+                     box(title = NULL,
+                         style = 'background-color: #ffffff',
+                         width = NULL,
+                         height = NULL,
+                         radioButtons(inputId = "cd6", label = "Mutating Joins Option",
+                                      c('left join', 'right join', 'inner join', 'full join'),
+                                      selected = character(0)),
+                         tableOutput('cdTable6'),
+                         fixedRow(
+                           column(1,bsButton(inputId = 'check6',
+                                             label = 'Check',
+                                             size = 'median')),
+                           column(4,(uiOutput('checkOrX6')), offset = 1))
                          ))))
                      )
             )
-            )))
+            ),
+#######Referencees Tab ###############
+        tabItem(
+          tabName = "References",
+          withMathJax(),
+          h2("References"),
+          p(class = "hangingindent",
+            "Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie and Jonathan
+  McPherson (2020). shiny: Web Application Framework for R. R package
+  version 1.4.0.2. https://CRAN.R-project.org/package=shiny"),
+          p(class = "hangingindent",
+            "Winston Chang and Barbara Borges Ribeiro (2018). shinydashboard: Create
+  Dashboards with 'Shiny'. R package version 0.7.1.
+  https://CRAN.R-project.org/package=shinydashboard"),
+          p(class = "hangingindent",
+            "Eric Bailey (2015). shinyBS: Twitter Bootstrap Components for Shiny. R package
+  version 0.61. https://CRAN.R-project.org/package=shinyBS"),
+          p(class = "hangingindent",
+            "Dean Attali (2020). shinyjs: Easily Improve the User Experience of Your Shiny
+  Apps in Seconds. R package version 1.1.
+  https://CRAN.R-project.org/package=shinyjs"),
+          p(class = "hangingindent",
+            "Victor Perrier, Fanny Meyer and David Granjon (2020). shinyWidgets: Custom
+  Inputs Widgets for Shiny. R package version 0.5.3.
+  https://CRAN.R-project.org/package=shinyWidgets"),
+          p(class = "hangingindent",
+            "'Garrett Grolemund' (2020). EDAWR: Expert Data Analysis with R. R package
+  version 0.1. http://github.com/rstudio/EDAWR"),
+          p(class = "hangingindent",
+            "Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package
+  version 1.1.0. https://CRAN.R-project.org/package=tidyr"),
+          p(class = "hangingindent",
+            "Vincent Nijs, Forest Fang, Trestle Technology, LLC and Jeff Allen (2019).
+  shinyAce: Ace Editor Bindings for Shiny. R package version 0.4.1.
+  https://CRAN.R-project.org/package=shinyAce"),
+          p(class = "hangingindent",
+            "Andras Sali and Dean Attali (2020). shinycssloaders: Add CSS Loading
+  Animations to 'shiny' Outputs. R package version 0.3.
+  https://CRAN.R-project.org/package=shinycssloaders"),
+          p(class = "hangingindent",
+            "Robert Carey (2019). rlocker: Learning Locker for Shiny. R package version
+  0.2.3. https://github.com/rpc5102/rlocker"),
+          p(class = "hangingindent",
+            "Robert Carey and Neil Hatfield (2020). boastUtils: BOAST Utilities. R package
+  version 0.1.4. https://github.com/EducationShinyAppTeam/boastUtils"),
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          # Repeat as needed
+        )
+        
+)) ))
 
 
-shinyUI(dashboardPage(skin = 'green', header, sidebar, body))
+
+
+
+
+# 
+# 
+# library(shiny)
+# library(shinydashboard)
+# library(shinyBS)
+# library(shinyjs)
+# #library(shinyDND) #No match
+# library(shinyWidgets)
+# #library(dplyr) #just %>% though I think others not seen
+# #library(mosaic) #nothing detected but tends to throw errors
+# #library(plotly) # just %>%, think can be deleted
+# #library(ggplot2) #think can be deleted
+# library(EDAWR)
+# #library(plot3D) #nothing
+# #library(ggmap) #just %>%
+# library(tidyr) #just %>% could have more problems
+# library(shinyAce) #nothing, but labeled as header in live code section
+# #library(devtools) #nothing
+# library(shinycssloaders) 
+# #library(knitr) #nothing
+# library(rlocker) #think this is for later
+# library(rcfss)   #input
+# library(boastUtils) #should keep
