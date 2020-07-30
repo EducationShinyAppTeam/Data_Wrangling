@@ -2,23 +2,19 @@ library(shiny)
 library(shinydashboard)
 library(shinyBS)
 library(shinyjs)
-#library(shinyDND) #No match
 library(shinyWidgets)
-#library(dplyr) #just %>% though I think others not seen
-#library(mosaic) #nothing detected but tends to throw errors
-#library(plotly) # just %>%, think can be deleted
-#library(ggplot2) #think can be deleted
+library(dplyr)
 library(EDAWR)
-#library(plot3D) #nothing
-#library(ggmap) #just %>%
-library(tidyr) #just %>% could have more problems
-library(shinyAce) #nothing, but labeled as header in live code section
-#library(devtools) #nothing
+library(tidyr) 
+library(shinyAce) 
+library(knitr) 
+library(rlocker) 
+library(datasets)
+library(rmarkdown)
+library(learnr)
+library(rcfss)
 library(shinycssloaders) 
-#library(knitr) #nothing
-library(rlocker) #think this is for later
-#library(rcfss)   #input
-library(boastUtils) #should keep
+library(boastUtils) 
 
 
 
@@ -33,8 +29,8 @@ ui <- list(
     skin = "green",
       dashboardHeader(title = 'Data Wrangling',
                       titleWidth = 250,
-                      tags$li(class = "dropdown",tags$a(href = "https://shinyapps.science.psu.edu/",icon("home"))),
-                      tags$li(class = "dropdown",actionLink("info", icon("info"), class = "myClass"))),
+                      tags$li(class = "dropdown",actionLink("info", icon("info"), class = "myClass")),
+                      tags$li(class = "dropdown",tags$a(href = "https://shinyapps.science.psu.edu/",icon("home")))),
         
     dashboardSidebar(
       width = 250,
@@ -95,6 +91,100 @@ ui <- list(
             p('After clicking on the link a seporate tab will open that contains the cheat sheet.'),
             tags$a(href = 'https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
     
+        
+        
+        ############ Reshaping Data ############
+        tabItem(tabName = 'exp1', 
+                tabsetPanel(type = 'tabs',
+                            tabPanel(div(style = 'font-size: 125%', 'Unite'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         tableOutput('uniteOutput1'),
+                                         checkboxGroupInput(inputId = 'unite1',
+                                                            label = 'Select Columns to Unite',
+                                                            inline = T,
+                                                            choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec', 'vs', 'am', 'gear', 'carb')),
+                                         materialSwitch(inputId = 'unite3',
+                                                        label = 'View the Transformed Data Set',
+                                                        value = FALSE),
+                                         uiOutput('uniteUI'),
+                                         br(),
+                                         tableOutput('uniteOutput2')
+                                     )
+                            ),
+                            
+                            tabPanel(div(style = 'font-size: 125%', 'pivot_longer'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         materialSwitch(inputId = 'dw1',
+                                                        label = 'View the Transformed Data Set',
+                                                        value = FALSE),
+                                         tableOutput('dwTable1'),
+                                         tags$strong(div('Gather columns into rows.', style = 'color: purple')),
+                                         tags$code('tidyr::pivot_longer(cols = c("2011","2012","2013"), names_to = "year", values_to = "n")'),
+                                         br(),
+                                         br(),
+                                         tableOutput('dwTable2')
+                                     )
+                            ),
+                            
+                            tabPanel(div(style = 'font-size: 125%', 'pivot_wider'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         materialSwitch(inputId = 'dw3',
+                                                        label = 'View the Transformed Data Set',
+                                                        value = FALSE),
+                                         tableOutput('dwTable5'),
+                                         tags$strong(div('Spread rows into columns.', style = 'color: white')),
+                                         tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
+                                         br(),
+                                         br(),
+                                         tableOutput('dwTable6')
+                                     )
+                            ),
+                            
+                            tabPanel(div(style = 'font-size: 125%', 'Arrange'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         fluidRow(
+                                           column(4,
+                                           selectInput(inputId = "dwSTI2", 
+                                                        label = "Select Your Sorting Option",
+                                                        choices = c('Random', 'Low to High', 'High to Low'),
+                                                        selected = character(0),
+                                                        width = '300px'),
+                                           ),
+                                           column(8,
+                                           selectInput(inputId = "dwSTI1", 
+                                                        label = "Mutating Joins Option",
+                                                        choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec'),
+                                                        selected = character(0),
+                                                        width = '300px'))
+                                         ),
+                                         
+                                         tags$strong('R code: '),
+                                         tags$li('Order rows by values of a column (low to high)'),
+                                         uiOutput('code1'),
+                                         br(),
+                                         tags$li('Order rows by values of a column (high to low)'),
+                                         uiOutput('code2'),
+                                         br(),
+                                         br(),
+                                         tableOutput('dwTable8'))
+                            )
+                )
+        ),
+        
+        
+        
 ############# Tidy Data #################
 
 
@@ -159,7 +249,7 @@ ui <- list(
                                     selectInput(inputId = 'userOp2',
                                                 label = 'cols[2]=',
                                                 choices = c('country', '1999', 'Afghanistan', '2000'),
-                                                selected = '1999')),
+                                                selected = 'country')),
             
                                  box(div(style = 'background-color: #ffffff',
                                          (title = '')),
@@ -168,7 +258,7 @@ ui <- list(
                                      selectInput(inputId = 'userOp3',
                                                  label = 'names_to = ',
                                                  choices = c('1999', 'cases', 'year', 'China'),
-                                                 selected = 'year')),
+                                                 selected = '1999')),
                                  
                                  
                                  box(div(style = 'background-color: #ffffff',
@@ -178,7 +268,7 @@ ui <- list(
                                      selectInput(inputId = 'userOp4',
                                                  label = 'values_to = ',
                                                  choices = c('1999', 'cases', 'year', 'China'),
-                                                 selected = 'cases')
+                                                 selected = '1999')
                                      )
                                  ),
                                width = 10),
@@ -188,7 +278,8 @@ ui <- list(
                                    uiOutput("sub"),
                                    br(),
                                    uiOutput("resetcc"),
-                                   uiOutput("nextQuestion1")),
+                                   #uiOutput("nextQuestion1")
+                                   ),
                                
                                br(),
                                br(),
@@ -204,7 +295,7 @@ ui <- list(
                                
                           ######## Fill in the correct Argument across top###############
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a person and their tips in a day')),
                                                  h4(tags$code('tidyr::pivot_longer(RawData2, cols = c("Arg 1", "Arg 2", "Arg 3"), names_to = "Arg 4", values_to = "Arg 5")')))),
                           ########## Raw Data Table ###########       
 
@@ -246,7 +337,7 @@ ui <- list(
                                          width = 3,
                                          selectInput(inputId = 'userOp6',
                                                      label = 'cols[2] =',
-                                                     choices = c('Tim','MonTips','TueTips','21'),
+                                                     choices = c('Tim','Age','TueTips','21'),
                                                      selected = 'Tim')),
                                      box(div(style = 'background-color: #ffffff',
                                              (title = '')),
@@ -282,7 +373,9 @@ ui <- list(
                                div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                    uiOutput("subbed"),
                                    br(),
-                                   uiOutput("restart")),
+                                   uiOutput("restart"),
+                                   #uiOutput("nextQuestion2")
+                                   ),
                                br(),
                                br(),
                                div(style = 'display: inline-block; position: relative; text-align: right',
@@ -292,9 +385,9 @@ ui <- list(
                       
 ######################### Pivot Wider 1 ######################################
                       
-                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 1'),
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 1'), value = "pivot_wider1",
 
-                            ############ Fill in sample argument
+                            ############ Fill in sample argument ##########
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
@@ -323,7 +416,7 @@ ui <- list(
                                  column(12,
                                         div(style = 'text-align: left; font-size: 125%',
                                             wellPanel(tags$strong('Your R code: '),
-                                                      uiOutput('userOutB'))
+                                                      uiOutput(paste0('userOutB')))
                                         ))),
                                br(),
                                
@@ -343,7 +436,7 @@ ui <- list(
                                      style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
-                                                 label = 'values_from',
+                                                 label = 'values_from =',
                                                  choices = c('country', 'cases', '2000', 'Afghanistan'),
                                                  selected = 'country')),
                                  
@@ -354,7 +447,9 @@ ui <- list(
                                  div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                      uiOutput("bus"),
                                      br(),
-                                     uiOutput("redo")),
+                                     uiOutput("redo"),
+                                     #uiOutput("nextQuestion3")
+                                     ),
                                  br(),
                                  br(),
                                  div(style = 'display: inline-block; position: relative; text-align: right',
@@ -362,9 +457,9 @@ ui <- list(
                                      uiOutput('wro'))
                                )),
                       
-                      #### Spread 2 ####
+ ####################### pivot_wider 2 #######################
                       
-                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 2'),
+                      tabPanel(div(style = 'font-size: 125%', 'pivot_wider 2'), value = "pivot_wider2",
                                
                                
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
@@ -372,8 +467,8 @@ ui <- list(
                                                  #div(style = 'text-align: center',
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
-                                                 h4(tags$code('tidyr::gather(RawData4,"Arg 1", "Arg 2", names_to = "Arg 3", values_to = "Arg 4")')))),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a person and their tips in a day')),
+                                                 h4(tags$code('tidyr::pivot_wider(RawData4, names_from = "Arg 1", values_from = "Arg 2")')))),
                                              
 
                                    
@@ -404,38 +499,18 @@ ui <- list(
                                              (title = '')),
                                          style = 'background: #ffffff',
                                          width = 3,
-                                         selectInput(inputId = 'userOpJ',
-                                                     label = 'cols[1]',
-                                                     choices = c('country', '1999', '2000', 'Afghanistan'),
-                                                     selected = '1999')),
+                                         selectInput(inputId = 'userOpC',
+                                                     label = 'names_from =',
+                                                     choices = c('22', 'Day', 'MonTips', 'Tips'),
+                                                     selected = '22')),
                                      box(div(style = 'background-color: #ffffff',
                                              (title = '')),
                                          style = 'background: #ffffff',
                                          width = 3,
-                                         selectInput(inputId = 'userOpK',
-                                                     label = 'cols[2]',
-                                                     choices = c('country', '1999', '2000', 'Afghanistan'),
-                                                     selected = '1999')),
-                                     
-                                     box(div(style = 'background-color: #ffffff',
-                                             (title = '')),
-                                         style = 'background: #ffffff',
-                                         width = 3,
-                                         selectInput(inputId = 'userOpL',
-                                                     label = 'names_to',
-                                                     choices = c('population', 'country', 'Brazil', 'year'),
-                                                     selected = 'population')),
-                                     
-                                     
-                                     box(div(style = 'background-color: #ffffff',
-                                             (title = '')),
-                                         style = 'background: #ffffff',
-                                         width = 3,
-                                         selectInput(inputId = 'userOpM',
-                                                     label = 'values_to',
-                                                     choices = c('population', 'country', 'Brazil', 'year'),
-                                                     selected = 'year')
-                                     )
+                                         selectInput(inputId = 'userOpD',
+                                                     label = 'values_from',
+                                                     choices = c('Tim', '9', 'Day', 'Tips'),
+                                                     selected = 'Tim'))
                                    ),
                                    width = 10),
                                
@@ -464,9 +539,9 @@ ui <- list(
                                      wellPanel(
                                        style = "background-color: #ffffff",
                                        tags$div(
-                                         tags$li("Attempt the questions!"),
+                                         tags$li("Attempt the questions."),
                                          tags$li("Run your code in the R script
-                                                 box below and see the output on the right"),
+                                                 box below and see the output on the right."),
                                          tags$li("Uncomment the sample code to explore."),
                                          style = "background-color: #ffffff")),
                                      h3("Exercises"),
@@ -474,7 +549,7 @@ ui <- list(
                                      wellPanel(style = "background-color: #ffffff", #This panel is where the question and options go
                                                uiOutput("question") %>% 
                                                  withSpinner(color = "#ffffff"),
-                                               uiOutput("options"),  #Outputs all of the possible answers, however this should be output with multiple choice.
+                                               #uiOutput("options"),  #Outputs all of the possible answers, however this should be output with multiple choice.
                                                br(),
                                                #selectInput("answer", "Answer:", c("","A", "B", "C")), #Ethan
                                                uiOutput("mark"),   #Shows symbol, what was picked and what should have been picked
@@ -533,100 +608,13 @@ ui <- list(
 ),
                                
         
-    
-    
-############ Reshaping Data ############
-    tabItem(tabName = 'exp1', 
-            tabsetPanel(type = 'tabs',
-                        tabPanel(div(style = 'font-size: 125%', 'Unite'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     tableOutput('uniteOutput1'),
-                                     checkboxGroupInput(inputId = 'unite1',
-                                                        label = 'Select Columns to Unite',
-                                                        inline = T,
-                                                        choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec', 'vs', 'am', 'gear', 'carb')),
-                                     materialSwitch(inputId = 'unite3',
-                                                    label = 'View the Transformed Data Set',
-                                                    value = FALSE),
-                                     uiOutput('uniteUI'),
-                                     br(),
-                                     tableOutput('uniteOutput2')
-                                     )
-                                 ),
-                        
-                        tabPanel(div(style = 'font-size: 125%', 'Gather'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     materialSwitch(inputId = 'dw1',
-                                                    label = 'View the Transformed Data Set',
-                                                    value = FALSE),
-                                     tableOutput('dwTable1'),
-                                     tags$strong(div('Gather columns into rows.', style = 'color: purple')),
-                                     tags$code('tidyr::gather(cases, "year", "n", 2:4)'),
-                                     br(),
-                                     br(),
-                                     tableOutput('dwTable2')
-                                     )
-                                 ),
-                        
-                        tabPanel(div(style = 'font-size: 125%', 'Spread'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     materialSwitch(inputId = 'dw3',
-                                                    label = 'View the Transformed Data Set',
-                                                    value = FALSE),
-                                     tableOutput('dwTable5'),
-                                     tags$strong(div('Spread rows into columns.', style = 'color: white')),
-                                     tags$code('tidyr::spread(pollution, size, amount)'),
-                                     br(),
-                                     br(),
-                                     tableOutput('dwTable6')
-                                     )
-                                 ),
-                       
-                        tabPanel(div(style = 'font-size: 125%', 'Arrange'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     sliderTextInput(inputId = 'dwSTI2',
-                                                     label = 'Select Your Sorting Option',
-                                                     choices = c('Random', 'Low to High', 'High to Low'),
-                                                     grid = TRUE,
-                                                     width = '200px',
-                                                     force_edges = TRUE),
-                                     sliderTextInput(inputId = 'dwSTI1',
-                                                     label = 'Select the Variable to Sort By', 
-                                                     choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec'), 
-                                                     grid = TRUE,
-                                                     width = '400px',
-                                                     force_edges = TRUE),
-                                     tags$strong('R code: '),
-                                     tags$li('Order rows by values of a column (low to high)'),
-                                     uiOutput('code1'),
-                                     br(),
-                                     tags$li('Order rows by values of a column (high to low)'),
-                                     uiOutput('code2'),
-                                     br(),
-                                     br(),
-                                     tableOutput('dwTable8'))
-                                 )
-                        )
-            ),
 
 ############ Combining Data Sets ############    
     tabItem(tabName = 'exp2',
            
             fluidRow(
               column(width = 12,
-                     box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose the correct join function corresponding to the displayed data!')),
+                     box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Multiple Choice Joins Practice')),
                          style = 'text-align: left',
                          width = NULL,
                          height = NULL,    #Ethan Wright
@@ -634,128 +622,112 @@ ui <- list(
                          div(style="display:inline-block", p('    +     ')),
                          div(style="display:inline-block", tableOutput('titleTableB')),
                          div(style="display:inline-block", p(' = ')),
-                             
-                         #tags$img(src = 'combine.png', width = '300px', height = NULL),
-
+                        
               
             br(),
             br(),
             
             fluidRow(#theme = "bootstrap.css",
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
-                         style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = '330px',
+                         width = '150px',
+                         height = '400px',
                          
                          radioButtons(inputId = "cd1", label = "Mutating Joins Option",
                                      c('left join', 'right join', 'inner join', 'full join'),
                                      selected = character(0)),
-                         
-                         
                          #Ethan
                          tableOutput('cdTable1'),
-                         fixedRow(
-                           column(1,bsButton(inputId = 'check1',
+                         fluidRow(
+                           column(4,bsButton(inputId = 'check1',
                                     label = 'Check',
                                     size = 'median')),
-                           column(4,(uiOutput('checkOrX1')), offset = 1))
+                          
+                           column(8,(uiOutput('checkOrX1')), offset = 0))
                          )
                      ),
               
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
                          style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = '330px',
+                         width = '150px',
+                         height = '400px',
                          radioButtons(inputId = "cd2", label = "Mutating Joins Option",
                                       c('left join', 'right join', 'inner join', 'full join'),
                                       selected = character(0)),
-                         # Old method
-                         # dropdownButton(circle = TRUE,
-                         #                status = 'success',
-                         #                size = 'xs',
-                         #                icon = icon('lightbulb'),
-                         #                up = TRUE,
-                         #                right = TRUE,
-                         #                tooltip = tooltipOptions(title = "Select Your Answer"),
-                         #                sliderTextInput(inputId = 'cd2',
-                         #                                label = 'Mutating Joins Option',
-                         #                                force_edges = TRUE,
-                         #                                grid = TRUE,
-                         #                                choices = c('left join', 'right join', 'inner join', 'full join')),
-                         #   textOutput('cdExp2')),
+                         
                          tableOutput('cdTable2'),
-                         fixedRow(
-                           column(1,bsButton(inputId = 'check2',
+                         fluidRow(
+                           column(4,bsButton(inputId = 'check2',
                                              label = 'Check',
                                              size = 'median')),
-                           column(4,(uiOutput('checkOrX2')), offset = 1))
+                           
+                           #column(2,"jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj                          "),
+                           column(8,(uiOutput('checkOrX2')), offset = 0))
                          )
               ),
               
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
                          style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = '270px',
+                         width = '150px',
+                         height = '400px',
                          radioButtons(inputId = "cd3", label = "Filtering Joins Option",
                                       c('semi join', 'anti join'), selected = character(0)),
                          tableOutput('cdTable3'),
                          br(),
-                         fixedRow(
-                           column(1,bsButton(inputId = 'check3',
+                         fluidRow(
+                           column(4,bsButton(inputId = 'check3',
                                              label = 'Check',
                                              size = 'median')),
-                           column(4,(uiOutput('checkOrX3')), offset = 1)))
+                           column(8,(uiOutput('checkOrX3')), offset = 0)))
                      ),
               
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
                          style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = '270px',
+                         width = '150px',
+                         height = '400px',
                          radioButtons(inputId = "cd4", label = "Filtering Joins Option",
                          c('semi join', 'anti join'), selected = character(0)),
                          tableOutput('cdTable4'),
                          fixedRow(
-                           column(1,bsButton(inputId = 'check4',
+                           column(4,bsButton(inputId = 'check4',
                                              label = 'Check',
                                              size = 'median')),
-                           column(4,(uiOutput('checkOrX4')), offset = 1)))
+                           column(8,(uiOutput('checkOrX4')), offset = 0)))
                      ),
               
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
                          style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = NULL,
+                         width = '150px',
+                         height = '400px',
                          radioButtons(inputId = "cd5", label = "Filtering Joins Option",
                                       c('left join', 'right join', 'inner join', 'full join'),
                                       selected = character(0)),
                          tableOutput('cdTable5'),
-                         fixedRow(
-                           column(1,bsButton(inputId = 'check5',
+                         fluidRow(
+                           column(4,bsButton(inputId = 'check5',
                                              label = 'Check',
                                              size = 'median')),
-                           column(4,(uiOutput('checkOrX5')), offset = 1)))
+                           column(8,(uiOutput('checkOrX5')), offset = 0)))
                      ),
               
-              column(width = 6,
+              column(width = 4,
                      box(title = NULL,
                          style = 'background-color: #ffffff',
-                         width = NULL,
-                         height = NULL,
+                         width = '150px',
+                         height = '400px',
                          radioButtons(inputId = "cd6", label = "Mutating Joins Option",
                                       c('left join', 'right join', 'inner join', 'full join'),
                                       selected = character(0)),
                          tableOutput('cdTable6'),
                          fixedRow(
-                           column(1,bsButton(inputId = 'check6',
+                           column(4,bsButton(inputId = 'check6',
                                              label = 'Check',
                                              size = 'median')),
-                           column(4,(uiOutput('checkOrX6')), offset = 1))
-                         ))))
+                           column(8,(uiOutput('checkOrX6')), offset = 0))))))
                      )
             )
             ),
@@ -764,102 +736,107 @@ ui <- list(
           tabName = "References",
           withMathJax(),
           h2("References"),
+          
+          
           p(class = "hangingindent",
-            "Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie and Jonathan
-  McPherson (2020). shiny: Web Application Framework for R. R package
-  version 1.4.0.2. https://CRAN.R-project.org/package=shiny"),
+            "Attali, D. (2020). 
+  shinyjs: Easily Improve the User Experience of Your Shiny Apps in Seconds, R package. 
+  Available from https://CRAN.R-project.org/package=shinyjs"),
+          
           p(class = "hangingindent",
-            "Winston Chang and Barbara Borges Ribeiro (2018). shinydashboard: Create
-  Dashboards with 'Shiny'. R package version 0.7.1.
-  https://CRAN.R-project.org/package=shinydashboard"),
+            "Bailey E. (2015). 
+  shinyBS: Twitter Bootstrap Components for Shiny, R package.
+  Available from https://CRAN.R-project.org/package=shinyBS"),
+          
+          p(class = "hangingindent", 
+            "Barret Schloerke, JJ Allaire and Barbara Borges (2020). 
+  learnr: Interactive Tutorials for R, R package. 
+  Available from https://CRAN.R-project.org/package=learnr"),
+          
           p(class = "hangingindent",
-            "Eric Bailey (2015). shinyBS: Twitter Bootstrap Components for Shiny. R package
-  version 0.61. https://CRAN.R-project.org/package=shinyBS"),
+            "Chang, W. and Borges Ribeiro, B. (2018),
+  shinydashboard: Create Dashboards with 'Shiny', R package. 
+  Available from https://CRAN.R-project.org/package=shinydashboard"),
+          
           p(class = "hangingindent",
-            "Dean Attali (2020). shinyjs: Easily Improve the User Experience of Your Shiny
-  Apps in Seconds. R package version 1.1.
-  https://CRAN.R-project.org/package=shinyjs"),
+            "Chang, W., Cheng, J., Allaire, J., Xie, Y., and MchPherson, J. (2020),
+  shiny: Web Application Framework for R, R package.
+  Available from https://CRAN.R-project.org/package=shiny"),
+          
           p(class = "hangingindent",
-            "Victor Perrier, Fanny Meyer and David Granjon (2020). shinyWidgets: Custom
-  Inputs Widgets for Shiny. R package version 0.5.3.
-  https://CRAN.R-project.org/package=shinyWidgets"),
+            "Carey, R. and Hatfield, N. (2020). 
+  boastUtils: BOAST Utilities, R package.
+  Available from https://github.com/EducationShinyAppTeam/boastUtils"),
+          
           p(class = "hangingindent",
-            "'Garrett Grolemund' (2020). EDAWR: Expert Data Analysis with R. R package
-  version 0.1. http://github.com/rstudio/EDAWR"),
+            "Carey R. (2019). 
+  rlocker: Learning Locker for Shiny, R package. 
+  Available from https://github.com/rpc5102/rlocker"),
+          
           p(class = "hangingindent",
-            "Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package
-  version 1.1.0. https://CRAN.R-project.org/package=tidyr"),
+            "Grolemund, G. (2020). 
+  EDAWR: Expert Data Analysis with R, R package.
+  Available from http://github.com/rstudio/EDAWR"),
+          
           p(class = "hangingindent",
-            "Vincent Nijs, Forest Fang, Trestle Technology, LLC and Jeff Allen (2019).
-  shinyAce: Ace Editor Bindings for Shiny. R package version 0.4.1.
-  https://CRAN.R-project.org/package=shinyAce"),
+            "JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi
+            and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng 
+            and Winston Chang and Richard Iannone (2020). 
+  rmarkdown: Dynamic Documents for R, R package.
+  Available from URL https://rmarkdown.rstudio.com."),
+          
           p(class = "hangingindent",
-            "Andras Sali and Dean Attali (2020). shinycssloaders: Add CSS Loading
-  Animations to 'shiny' Outputs. R package version 0.3.
-  https://CRAN.R-project.org/package=shinycssloaders"),
+            "Nijs, V., Fang, F., Trestle Technology, LLC and Allen, J. (2019). 
+  shinyAce: Ace Editor Bindings for Shiny, R package.
+  Available from https://CRAN.R-project.org/package=shinyAce"),
+          
+          
           p(class = "hangingindent",
-            "Robert Carey (2019). rlocker: Learning Locker for Shiny. R package version
-  0.2.3. https://github.com/rpc5102/rlocker"),
+            "Perrier, V., Meyer, F., and Granjon, D. (2020). 
+  shinyWidgets: Custom Inputs Widgets for Shiny, R package. 
+  Available from https://CRAN.R-project.org/package=shinyWidgets"),
+          
           p(class = "hangingindent",
-            "Robert Carey and Neil Hatfield (2020). boastUtils: BOAST Utilities. R package
-  version 0.1.4. https://github.com/EducationShinyAppTeam/boastUtils"),
+            "Sali, A. and Attali, D. (2020). 
+  shinycssloaders: Add CSS Loading Animations to 'shiny' Outputs, R package.
+  Available from https://CRAN.R-project.org/package=shinycssloaders"),
           
+          p(class = "hangingindent",
+            "Soltoff, B. (2020). 
+  rcfss: Helper functions and datasets for UChicago course 
+  on Computing for the Social Sciences, R package.
+  Available from https://rdrr.io/github/uc-cfss/rcfss/"),
           
+          p(class = "hangingindent",
+            "Wickham, H. and Lionel, H. (2020), 
+  tidyr: Tidy Messy Data, R package.
+  Available from https://CRAN.R-project.org/package=tidyr"),
           
+          p(class = "hangingindent",
+            "Wickham, H., Francois, R., Henry L., and Muller K. (2020).  
+  dplyr: A Grammar of Data Manipulation, R package. 
+  Available from https://CRAN.R-project.org/package=dplyr"),
           
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          # Repeat as needed
+          p(class = "hangingindent",
+            "Xie, Y., (2020). 
+  knitr: A General-Purpose Package for Dynamic Report Generation in R, R package.
+  Available from https://cran.r-project.org/web/packages/knitr/index.html"),
         )
         
 )) ))
+# library(dplyr) 
+# library(knitr)
+# library(datasets)  
+# library(rmarkdown) 
+# library(learnr)    
+# library(rcfss)  
 
 
+#Possilble packages
 
-
-
-
-# 
-# 
-# library(shiny)
-# library(shinydashboard)
-# library(shinyBS)
-# library(shinyjs)
-# #library(shinyDND) #No match
-# library(shinyWidgets)
-# #library(dplyr) #just %>% though I think others not seen
-# #library(mosaic) #nothing detected but tends to throw errors
-# #library(plotly) # just %>%, think can be deleted
-# #library(ggplot2) #think can be deleted
-# library(EDAWR)
-# #library(plot3D) #nothing
-# #library(ggmap) #just %>%
-# library(tidyr) #just %>% could have more problems
-# library(shinyAce) #nothing, but labeled as header in live code section
-# #library(devtools) #nothing
-# library(shinycssloaders) 
-# #library(knitr) #nothing
-# library(rlocker) #think this is for later
-# library(rcfss)   #input
-# library(boastUtils) #should keep
+#library(shinyDND) #No match
+#library(mosaic) #nothing detected but tends to throw errors
+#library(plotly) # just %>%, think can be deleted
+#library(ggplot2) #think can be deleted
+#library(plot3D) #nothing
+#library(ggmap) #just %>%
