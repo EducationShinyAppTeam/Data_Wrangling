@@ -14,7 +14,7 @@ library(rmarkdown)
 library(learnr)
 library(rcfss)
 library(shinycssloaders) 
-library(boastUtils) 
+library(boastUtils)
 
 
 
@@ -66,8 +66,8 @@ ui <- list(
             
             h2('Instructions'),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
-            p(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
-            p(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidies the data.')),
+            p(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, pivot_wider, pivot_longer, and arrange.')),
+            p(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidy the data.')),
             p(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
             div(style = 'text-align: center',
@@ -79,7 +79,11 @@ ui <- list(
                          class = "circle grow")),
             br(),
             h2(strong('Acknowledgements:')),
-            p('This application was coded and developed by Anna (Yinqi) Zhang and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou for being incredibly helpful with programming issues.'),
+            p('This application was coded and developed by Anna (Yinqi) Zhang 
+              and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou 
+              for being incredibly helpful with programming issues. Bug fixes
+              and style guide along with function updates were implented 
+              by Ethan Wright (2020).'),
             p('The cheat sheet is provided by RStudio.'),
             p('Packages used: dplyr, EDAWR, ggmap, mosaic, plotly, ggplot2, plot3D.'),
             div(class = "updated", "Last Update: 06/23/2020 by EJW.")
@@ -278,7 +282,6 @@ ui <- list(
                                    uiOutput("sub"),
                                    br(),
                                    uiOutput("resetcc"),
-                                   #uiOutput("nextQuestion1")
                                    ),
                                
                                br(),
@@ -320,7 +323,7 @@ ui <- list(
                                             ))),
                                    br(),
                                    
-                              ############# The 5  Input values ##############3
+                              ############# The 5 Input values ##############3
                                    fluidRow(
                                      # choices for user plot
                                      box(div(style = 'background-color: #ffffff',
@@ -374,7 +377,6 @@ ui <- list(
                                    uiOutput("subbed"),
                                    br(),
                                    uiOutput("restart"),
-                                   #uiOutput("nextQuestion2")
                                    ),
                                br(),
                                br(),
@@ -606,8 +608,6 @@ ui <- list(
                           )
 )
 ),
-                               
-        
 
 ############ Combining Data Sets ############    
     tabItem(tabName = 'exp2',
@@ -808,7 +808,7 @@ ui <- list(
   Available from https://rdrr.io/github/uc-cfss/rcfss/"),
           
           p(class = "hangingindent",
-            "Wickham, H. and Lionel, H. (2020), 
+            "Wickham, H. and Lionel, H. (2020).
   tidyr: Tidy Messy Data, R package.
   Available from https://CRAN.R-project.org/package=tidyr"),
           

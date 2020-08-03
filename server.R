@@ -2,13 +2,13 @@ library(shiny)
 library(shinydashboard)
 library(shinyBS)
 library(shinyjs)
-library(shinyWidgets) 
+library(shinyWidgets)
 library(dplyr)
-library(EDAWR)      
+library(EDAWR)
 library(tidyr)   
 library(shinyAce)
 library(knitr)
-library(rlocker)   
+library(rlocker)
 library(datasets)  
 library(rmarkdown) 
 library(learnr)    
@@ -47,22 +47,22 @@ shinyServer(function(input, output, session) {
     updateTabItems(session, 'tabs', 'exp1')
   })
   
-    
+  
   
   
   ################# Tidy Data #################
-
-############ pivot_longer 1 #####################
+  
+  ############ pivot_longer 1 #####################
   
   RawData <- table4a
- 
-   
- output$original1 <- renderTable({
-   RawData
- })
   
-
-    ##### Specify Outputs pivot_longer1 #####
+  
+  output$original1 <- renderTable({
+    RawData
+  })
+  
+  
+  ##### Specify Outputs pivot_longer1 #####
   output$userOut1 <- renderTable({
     if(input$userOp1 == 'country')
       op1 <- 'country'
@@ -72,8 +72,8 @@ shinyServer(function(input, output, session) {
       op1 <- 'Afghanistan'
     else
       op1 <- '2000'
-
-
+    
+    
     if(input$userOp2 == 'country')
       op2 <- 'country'
     else if(input$userOp2 == '1999')
@@ -82,8 +82,8 @@ shinyServer(function(input, output, session) {
       op2 <- 'Afghanistan'
     else
       op2 <- '2000'
-
-
+    
+    
     if(input$userOp3 == '1999')
       op3 <- '1999'
     else if(input$userOp3 == 'cases')
@@ -92,8 +92,8 @@ shinyServer(function(input, output, session) {
       op3 <- 'year'
     else
       op3 <- 'China'
-
-
+    
+    
     if(input$userOp4 == '1999')
       op4 <- '1999'
     else if(input$userOp4 == 'cases')
@@ -102,185 +102,166 @@ shinyServer(function(input, output, session) {
       op4 <- 'year'
     else
       op4 <- 'China'
-
-
-    #print(RawData)
+    
+    
     RawData <- RawData %>%
-                 mutate('1999' = as.character(RawData$'1999')) %>%
-                 mutate('2000' = as.character(RawData$'2000'))
-    #print(RawData)
+      mutate('1999' = as.character(RawData$'1999')) %>%
+      mutate('2000' = as.character(RawData$'2000'))
     tryCatch({
       RawData %>%
         pivot_longer(cols = c(op1,op2), names_to =op3, values_to = op4)
     }, 
-      warning = function(war) {
-        
+    warning = function(war) {
+      
       return("warning")
-      },
-      error = function(err) {
-        return("That code would produce no output")
-      }
+    },
+    error = function(err) {
+      return("That code would produce no output")
+    }
     )
     
   })
-
+  
   
   #### Bottom of options ####
   
- #dynamic code based on user inputs 
- output$tidyAttemptTable <- renderUI({
-   tags$code(paste0('tidyr::pivot_longer(RawData, cols = c("', input$userOp1, '","', input$userOp2, '") ,
+  #dynamic code based on user inputs 
+  output$tidyAttemptTable <- renderUI({
+    tags$code(paste0('tidyr::pivot_longer(RawData, cols = c("', input$userOp1, '","', input$userOp2, '") ,
              names_to = "', input$userOp3, '", values_to = "', input$userOp4, '")' ))
- })
- 
- 
- #observeEvent(input$submit, {
+  })
+  
+  
+  #observeEvent(input$submit, {
   # withProgress(session, min = 1, max = 15, {
-   #  setProgress(message = 'Checking Answer',
-    #             detail = '')
-     #for (i in 1:10) {
-      # setProgress(value = i)
-       #Sys.sleep(0.05)
+  #  setProgress(message = 'Checking Answer',
+  #             detail = '')
+  #for (i in 1:10) {
+  # setProgress(value = i)
+  #Sys.sleep(0.05)
   #   }
- #  })
-# })
- 
-# op1save <- reactiveValues(input$userOp1 = NULL)
-# op2save <- reactiveValues(input$userOp2 = NULL)
-# op3save <- reactiveValues(input$userOp3 = NULL)
-# op4save <- reactiveValues(input$userOp4 = NULL)
- 
+  #  })
+  # })
+  
+  # op1save <- reactiveValues(input$userOp1 = NULL)
+  # op2save <- reactiveValues(input$userOp2 = NULL)
+  # op3save <- reactiveValues(input$userOp3 = NULL)
+  # op4save <- reactiveValues(input$userOp4 = NULL)
+  
   # submit button
-   output$sub <- renderUI({
-     bsButton("submitcc",
-              label = "Check Answer",
-              icon("lightbulb"),
-              size = "medium",
-              style = 'success')
-     })
-   
-   
-   # delay submit button
-   observeEvent(input$submitcc,{
-     withProgress(session, min = 1, max = 15, {
-       setProgress(message = 'Checking Answer',
-                   detail = '')
-       for (i in 1:13) {
-         setProgress(value = i)
-         Sys.sleep(0.05)
-       }
-     })
-   })
-   
-   
+  output$sub <- renderUI({
+    bsButton("submitcc",
+             label = "Check Answer",
+             icon("lightbulb"),
+             size = "medium",
+             style = 'success')
+  })
+  
+  
+  # delay submit button
+  observeEvent(input$submitcc,{
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Checking Answer',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+    })
+  })
+  
+  
   # correct/wrong gif 
-
-   
-    output$resetcc <- renderUI({
-      bsButton("retry",
-               label = "Try Again",
-               icon("retweet"),
-               size = "medium",
-               style = 'success')
-      })
-    
-    # delay retry button
-    observeEvent(input$retry,{
-      withProgress(session, min = 1, max = 15, {
-        setProgress(message = 'Resetting',
-                    detail = '')
-        for (i in 1:13) {
-          setProgress(value = i)
-          Sys.sleep(0.05)
-        }
-        somethingIsSelected <<- F
-        disable("submit")
-      })
-    })
-    
-    ######## Next Question ############
-    output$nextQuestion1 <- renderUI({
-      bsButton("next1",
-               label = "Next Question",
-               size = "medium",
-               style = 'success')
-    })
-    observeEvent(input$next1, {
-      updateTabsetPanel(session, "questionTabs",
-                        selected = "pivot_longer2")
-    })
-
-
-    
-    
-    # hide reset button upon opening app
-    hide("resetcc")
-    hide("correct")
-    hide("wrong")
-    hide("nextQuestion1")
-    
-    
-    output$correct <- renderUI({
-      tags$img(src = "correct.png", width = 30)
-    })
-      
-    output$wrong <- renderUI({
-      tags$img(src = "incorrect.png", width = 30)
-    })
-        
-
-
-    
-    # show reset button after submit is clicked, disable dropdown inputs
-    observeEvent(input$submitcc,{
-      toggle("resetcc")
-      toggle("nextQuestion1")
-      disable("userOp1")
-      disable("userOp2")
-      disable("userOp3")
-      disable("userOp4")
-      disable("userOp5")
-      disable("submitcc")
-      if(input$userOp1 == '1999' & input$userOp2 == '2000'
-         & input$userOp3 == 'year' & input$userOp4 == 'cases' || input$userOp1 == '2000' & input$userOp2 == '1999'
-         & input$userOp3 == 'year' & input$userOp4 == 'cases') {
-        showElement("correct")
-        print("Direction1")
-      }
-      else{
-        showElement("wrong")
-        print("Direction2")
-      }
-      
-
-    })
-
-
+  
+  
+  output$resetcc <- renderUI({
+    bsButton("retry",
+             label = "Try Again",
+             icon("retweet"),
+             size = "medium",
+             style = 'success')
+  })
+  
+  # delay retry button
   observeEvent(input$retry,{
-    hide("resetcc")
+    withProgress(session, min = 1, max = 15, {
+      setProgress(message = 'Resetting',
+                  detail = '')
+      for (i in 1:13) {
+        setProgress(value = i)
+        Sys.sleep(0.05)
+      }
+      somethingIsSelected <<- F
+      disable("submit")
+    })
+  })
+  
+  ######## Next Question ############
+  output$nextQuestion1 <- renderUI({
+    bsButton("next1",
+             label = "Next Question",
+             size = "medium",
+             style = 'success')
+  })
+  observeEvent(input$next1, {
+    updateTabsetPanel(session, "questionTabs",
+                      selected = "pivot_longer2")
+  })
+  
+  
+  
+  
+  # hide reset button upon opening app
+  hide("resetcc")
+  hide("correct")
+  hide("wrong")
+  hide("nextQuestion1")
+  
+  
+  output$correct <- renderUI({
+    tags$img(src = "correct.png", width = 30)
+  })
+  
+  output$wrong <- renderUI({
+    tags$img(src = "incorrect.png", width = 30)
+  })
+  
+  
+  
+  
+  # show reset button after submit is clicked, disable dropdown inputs
+  observeEvent(input$submitcc,{
+    toggle("resetcc")
+    toggle("nextQuestion1")
+    disable("userOp1")
+    disable("userOp2")
+    disable("userOp3")
+    disable("userOp4")
+    disable("submitcc")
+    if(input$userOp1 == '1999' & input$userOp2 == '2000'
+       & input$userOp3 == 'year' & input$userOp4 == 'cases' || input$userOp1 == '2000' & input$userOp2 == '1999'
+       & input$userOp3 == 'year' & input$userOp4 == 'cases') {
+      showElement("correct")
+    }
+    else{
+      showElement("wrong")
+    }
+    
+    
+  })
+  observeEvent(input$retry,{
     enable("userOp1")
     enable("userOp2")
     enable("userOp3")
     enable("userOp4")
-    enable("userOp5")
-    showElement("submitcc")
     enable("submitcc")
+    enable("sub")
+    toggle("resetcc")
     hide("correct")
     hide("wrong")
-    hide("nextQuestion1")
-
   })
   
-  observeEvent(input$retry,{
-    reset("userOp1")
-    reset("userOp2")
-    reset("userOp3")
-    reset("userOp4")
-    reset("userOp5")
-    showElement("submitcc")
-    enable("submitcc")
-    
-  })
+  
   
   ########### pivot_longer 2 ##################
   
@@ -347,7 +328,7 @@ shinyServer(function(input, output, session) {
     
     tryCatch({
       RawData2 %>%
-        pivot_longer(cols = c(op5,op6,op7), names_to =op8, values_to = op9)
+        pivot_longer(cols = c(op5,op6,op7), names_to = op8, values_to = op9)
     }, 
     warning = function(war) {
       
@@ -370,7 +351,18 @@ shinyServer(function(input, output, session) {
              names_to = "', input$userOp7, '", values_to = "', input$userOp8, '")' ))
   }) 
   
-  
+  #pivot_longer2
+  observeEvent(input$retry2,{
+    enable("userOp5")
+    enable("userOp6")
+    enable("userOp7")
+    enable("userOp8")
+    enable("userOp9")
+    enable("submitting") 
+    toggle("restart")
+    hide("cort")
+    hide("rong")
+  })
   
   
   # submit button
@@ -394,8 +386,8 @@ shinyServer(function(input, output, session) {
   })
   
   
-  output$restart <- renderUI({
-    bsButton("retry",
+  output$restart <- renderUI({#Ethan 8/3
+    bsButton("retry2",
              label = "Try Again",
              icon("retweet"),
              size = "medium",
@@ -430,17 +422,18 @@ shinyServer(function(input, output, session) {
   })
   
   
-  # show reset button after submit is clicked, disable dropdown inputs
+  # pivot_longer2 Check
   observeEvent(input$submitting,{
     toggle("restart")
     disable("userOp5")
     disable("userOp6")
     disable("userOp7")
     disable("userOp8")
+    disable("userOp9")
     disable("submitting")
-    if(input$userOp5 == '1999' & input$userOp6 == '2000'
-       & input$userOp7 == 'year' & input$userOp8 == 'cases' || input$userOp1 == '2000' & input$userOp2 == '1999'
-       & input$userOp7 == 'year' & input$userOp8 == 'cases') {
+    if(input$userOp5 == 'MonTips' & input$userOp6 == 'TueTips'
+       & input$userOp7 == 'WedTips' & input$userOp8 == 'Day' &
+       input$userOp9 == 'Tips') {
       showElement("cort")
     }
     else{
@@ -475,16 +468,16 @@ shinyServer(function(input, output, session) {
   })
   
   
-########## pivot_wider 1 ############################
+  ########## pivot_wider 1 ############################
   
-  RawData3 <- data.frame("country" = c("Afghanistan","Afghanistan","Brazil","Brazil","China","China"), "year" = c("2000","1999","2000","1999","2000","1999"), "cases" = c("2666","745","80488","37737","213766","212258"))
+  RawData3 <- data.frame("country" = c("Afghanistan","Afghanistan","Brazil","Brazil","China","China"), "key" = c("GDP","population","GDP","population","GDP","population"), "cases" = c("19","37","1434","1434","13610","1393"))
   
   output$original2 <- renderTable({
     RawData3
   })
   
   # specify outputs for every choice
-  output$userOutA <- renderTable({ #Ethan
+  output$userOutA <- renderTable({ 
     if(input$userOpA == '2000')
       op1 <- '2000'
     else if(input$userOpA == 'cases')
@@ -671,7 +664,7 @@ shinyServer(function(input, output, session) {
   
   table4b$capital <- capital
   
-  RawData4 <- RawData2 <- data.frame("Name" = c("John","John","John","Dora","Dora","Dora","Tim","Tim","Tim","Rebecca","Rebecca","Rebecca"), "Age" = c('21','21','21','19','19','19','22','22','22','21','21','21'), "Day" = c('MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips'), "Tips" = c('8','14','11','7','10','14','12','11','13','10','9','11'))
+  RawData4 <- data.frame("Name" = c("John","John","John","Dora","Dora","Dora","Tim","Tim","Tim","Rebecca","Rebecca","Rebecca"), "Age" = c('21','21','21','19','19','19','22','22','22','21','21','21'), "Day" = c('MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips'), "Tips" = c('8','14','11','7','10','14','12','11','13','10','9','11'))
   
   output$original4 <- renderTable({
     RawData4
@@ -723,7 +716,7 @@ shinyServer(function(input, output, session) {
   }) 
   
   
-
+  
   
   # op1save <- reactiveValues(input$userOpJ = NULL)
   # op2save <- reactiveValues(input$userOpK = NULL)
@@ -750,7 +743,7 @@ shinyServer(function(input, output, session) {
     })
   })
   
-
+  
   
   output$redos <- renderUI({
     bsButton("retryings",
@@ -827,8 +820,8 @@ shinyServer(function(input, output, session) {
   # })
   
   
-
-
+  
+  
   
   
   ###############Shiny Ace#################
@@ -842,18 +835,31 @@ shinyServer(function(input, output, session) {
   index_list <- reactiveValues(list = sample(2:9, 8, replace = FALSE))
   
   observeEvent(input$nextq,{
-    print("next location 2")
+    
+    
     value$answerbox <- value$index
-    index_list$list = index_list$list[-1]   
+    #Removes the value in the front of the list
+    index_list$list = index_list$list[-1]
+    
+    
     value$index <- index_list$list[1]
     value$answerbox <- value$index
     output$mark <- renderUI({
       img(src = NULL, width = 30)
     })
     somethingIsSelected <<- F
+    
     disable("submit")
     updateButton(session, "nextq", disabled = TRUE)
     updateButton(session, "submit", disabled = FALSE)
+    
+    withBusyIndicatorServer("eval", {
+      output$knitDoc <- renderUI({
+        return(isolate(HTML(knit2html(text = "Click \"Run\" to test the code", fragment.only = TRUE, quiet = FALSE))))
+      })
+      
+      
+    })
   })
   
   output$question <- renderUI({#ETHAN radio numbers
@@ -875,96 +881,119 @@ shinyServer(function(input, output, session) {
   # })
   
   
- ## change table based on question 
+  ## change table based on question 
   output$acetable <- renderTable({
-    if (bank[value$index, 2] %in% c(bank[2, 2], bank[3, 2])) {
-      
+    #new
+    if(value$index == 2 || value$index == 3)
+    {
       race
-      
-    } else { 
-      if (bank[value$index, 2] %in% c(bank[4, 2], bank[5, 2])) {
-      
-      results
-        
-        } else {
-        if (bank[value$index, 2] %in% c(bank[6, 2], bank[7, 2])) {
-        
-          grades
-        
-          } else {
-          if (bank[value$index, 2] %in% c(bank[8, 2], bank[9, 2])) {
-          
-          table5
-          }
-          }
-        }
     }
-    })
+    else if(value$index == 1)
+    {
+      
+    }
+    else if(value$index == 4 || value$index == 5)
+    {
+      results
+    }
+    else if(value$index == 6 || value$index == 7)
+    {
+      grades
+    }
+    else
+    {
+      table5
+    }
+    # #old
+    # if (bank[value$index, 2] %in% c(bank[2, 2], bank[3, 2])) {
+    #   race
+    # } 
+    # else {
+    #   if (bank[value$index, 2] %in% c(bank[4, 2], bank[5, 2])) {
+    #     results
+    #   } 
+    #   else {
+    #     if (bank[value$index, 2] %in% c(bank[6, 2], bank[7, 2])) {
+    #       grades
+    #       } 
+    #     else {
+    #         if (bank[value$index, 2] %in% c(bank[8, 2], bank[9, 2])){
+    #           table5
+    #         }
+    #       }
+    #     }
+    # }
+  })
   
   output$tableinfo <- renderUI({
     # race data info
     if (bank[value$index, 2] == bank[2, 2] | bank[value$index, 2] == bank[3, 2]) {
       tags$h4('This table depicts times and scores on a running race.')
-     # tags$h4('Column names define different lengths of time')
-    #  tags$h4('Cell values are scores associated with each name and length of time')
+      #tags$h4('Column names define different lengths of time')
+      #tags$h4('Cell values are scores associated with each name and length of time')
       
       # results data info
-      } else if (bank[value$index, 2] == bank[4, 2] | bank[value$index, 2] == bank[5, 2]) {
-        tags$li('This table depicts clinical trial data')
-       # tags$li('Ind - individual participating in the experiment')
-      #  tags$li('Treatment - trial type (Treat or Cont)')
-      #  tags$li('value - result of experiment') 
-        
-        # grades data info
-      } else if (bank[value$index, 2] == bank[6, 2] | bank[value$index, 2] == bank[7, 2]) {
-        tags$li('This table depicts student test score data')
-      #  tags$li('A tidy case is one individual during one quarter in a given year.')
-      #  tags$li('Each test is unique and should be treated as two separate variables.')
-
-        # table 5 data ifo
-      } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
-        tags$li('This table shows the population and rate of different countries.')
-      }
-
-        
-    })
+    } else if (bank[value$index, 2] == bank[4, 2] | bank[value$index, 2] == bank[5, 2]) {
+      tags$li('This table depicts clinical trial data')
+      #tags$li('Ind - individual participating in the experiment')
+      #tags$li('Treatment - trial type (Treat or Cont)')
+      #tags$li('value - result of experiment') 
+      
+      # grades data info
+    } else if (bank[value$index, 2] == bank[6, 2] | bank[value$index, 2] == bank[7, 2]) {
+      tags$li('This table depicts student test score data')
+      tags$li('A tidy case is one individual during one quarter in a given year.')
+      tags$li('Each test is unique and should be treated as two separate variables.')
+      
+      # table 5 data ifo
+    } else if (bank[value$index, 2] == bank[8, 2] || bank[value$index, 2] == bank[9, 2]) {
+      tags$li('This table shows the population and rate of different countries.')
+    }
+    
+    
+  })
   
   
   
   output$editor <- renderUI({
     aceEditor("rmd",
               mode = "markdown",
-              if(bank[value$index, 2] == bank[1, 2]) {
-              value = 'Here you can test out the answer choices before choosing an answer!
+              if(value$index == 1) {
+                print("print1")
+                value = 'Here you can test out the answer choices before choosing an answer!
 
 Uncomment one line from each section at a time and hit "Run" to see its effect!
 
 Note: If the code does not display/change data, it probably is not the correct answer.
               
 There is no interactive R code for this question!'
-              } else if (bank[value$index, 2] == bank[2, 2]) {
+              } else if (value$index == 2) {
+                print("print2")
                 value = 'No interactive R code for this question!'
-                }
-              else if (bank[value$index, 2] == bank[3, 2]) {
-                    value = '
+              }
+              else if (value$index == 3) {
+                print("print3")
+                value = '
 ```{r}
 library(rcfss)
 
 tidyRace <-
   race %>%
   # pivot_wider(names_from = "Time", values_from = "Score") %>%
-  # pivot_longer(cols = c("50","100","150","200","250","300","350"), names_to = "Time", value = "Score") %>%
-  # unite(key = Time, value = Score, -Name, convert = TRUE) %>%
-  arrange(Name, Time)
+  # pivot_longer(cols = c("50","100","150","200","250","300","350"), names_to = "Time", values_to = "Score") %>%
+  # unite(col = New, "50", "100", "150","200", sep = "", remove = TRUE) %>%
+  arrange(Name)
 
 tidyRace
 ```
 '
-                  }
-              else if (bank[value$index, 2] == bank[4, 2]) {
-                      value = 'No interactive R code for this question!'
               }
-              else if (bank[value$index, 2] == bank[5, 2]) {
+              else if (value$index == 4) {
+                print("print4")
+                value = 'No interactive R code for this question!'
+              }
+              else if (value$index == 5) {
+                print("print5")
                 value = '```{r}
 library(rcfss)
 
@@ -972,34 +1001,35 @@ tidyResults <-
   results %>%
   # pivot_wider(names_from = "Treatment", values_from = "value")
   # pivot_longer(cols = c("Treat","Cont"), names_to = "Treatment", values_to = "value")
-  # unite(key = Treatment, value = value)
+  # unite(col = new, Treatment, value, sep = "", remove = TRUE)
 
 tidyResults                
 ```
                 '
               }
-              else if (bank[value$index, 2] == bank[6, 2]) {
+              else if (value$index == 6) {
+                print("print6")
                 value = 'No interactive R code for this question!'
               }
-              else if (bank[value$index, 2] == bank[7, 2]) {
+              else if (value$index == 7) {
+                print("print7")
                 value = '```{r}
-library(stringr)
+
 library(rcfss)
 
 tidyGrades <-
   grades %>%
-  gather(key = Quarter, value = Score, Fall:Winter) %>%
-  mutate(Test = str_c("Test", Test)) %>%
-
-  # spread(key = Test, value = Score) %>%
-  # gather(key = Test, value = Score) %>%
+  # pivot_wider(names_from = "Test", values_from = "Score") %>%
+  # pivot_longer(cols = c("Fall","Spring","Winter"), names_to = "Quarter", values_to = "Score") %>%
+  # unite(col = new, Test, Year, sep = "", remove = TRUE)
   arrange(ID, Year, Quarter)
 
 tidyGrades
 ```
 '
               }
-              else if (bank[value$index, 2] == bank[8, 2]) {
+              else if (value$index == 8) {
+                print("print8")
                 value = '```{r}
 library(tidyr)
 
@@ -1007,13 +1037,14 @@ tidyTable5 <-
   table5 %>%
   # pivot_wider(key = century, value = year)
   # pivot_longer(cols = c("1999","2000"), names_to = century, values_to = year)
-  # unite(col = new, century, year, sep = "")
+  # unite(col = new, century, year, sep = "", remove = TRUE)
   
 tidyTable5
 ```
 '
               }
               else {
+                print("print9")
                 value = '```{r}
 library(tidyr)
 
@@ -1027,13 +1058,12 @@ nextStep
 ```
 '
               }
-              )
+    )
   })
   
   observeEvent(input$answer, {
     somethingIsSelected <<- T
     enable("submit")
-    print(somethingIsSelected)
   })
   
   # 
@@ -1099,7 +1129,7 @@ nextStep
       updateButton(session, "reset", disabled = FALSE)
     }
     
- 
+    
     answer <- input$answer
     
     statement <- rlocker::createStatement(
@@ -1113,9 +1143,9 @@ nextStep
         result = list(success = any(answer == ans[value$index, 1]),
                       response = paste(getResponseText(value$index, answer), 
                                        as.character(Sys.time()))
-                      )
         )
       )
+    )
     
     # Store statement in locker and return status
     status <- rlocker::store(session, statement)
@@ -1135,20 +1165,26 @@ nextStep
     
   })
   
+  
   observeEvent(input$reset, { 
     updateButton(session, "submit", disabled = FALSE)
     updateButton(session,"reset", disable = TRUE)
-    #updateSelectInput(session, "answer", "Answer:", c("","A", "B", "C"))      #cannot be this thing, Ethan
-    updateRadioButtons(session, "answer", "Another Question", choiceNames=list(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
-                       choiceValues = list("A","B","C"), selected = character(0))
-    index_list$list <- c(index_list$list, sample(2:9, 8, replace = FALSE))
+    #index_list$list[-1]
+    #This is what randomly orders the list
+    index_list$list <- c(1, sample(2:9, 8, replace = FALSE))
+    
+    #the first question will always be index 1. Then 2-9 random
     value$index <- 1
     value$answerbox = value$index
     ans <- as.matrix(bank[1:9, 6])
     output$mark <- renderUI({
       img(src = NULL,width = 30)
     })
-  })  
+    #Sets the question up
+    updateRadioButtons(session, "answer", "Another Question", choiceNames=list(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
+                       choiceValues = list("A","B","C"), selected = character(0))
+    disable("submit")
+  })
   
   # Initialize Learning Locker connection
   connection <- rlocker::connect(session, list(
@@ -1185,7 +1221,6 @@ nextStep
   
   ###########KNITR############
   observeEvent(input$eval,{ 
-    print("observe input$eval")
     runButtonWasPressed <<- T
     withBusyIndicatorServer("eval", {
       output$knitDoc <- renderUI({
@@ -1215,7 +1250,7 @@ nextStep
   })
   
   
-############ Reshaping Data ############
+  ############ Reshaping Data ############
   # observeEvent(input$knob1, {
   #   updateKnobInput(session, inputId = 'knob2', label = 'Select the Maximum Value for the First Column', value = input$knob1)
   # })
@@ -1225,7 +1260,7 @@ nextStep
   # unite
   output$uniteUI <- renderUI ({
     if (input$unite3 == T) {
-      tags$code('R code: tidyr::unite(mtcars, "New_Column_Name", c(input$unite1))') 
+      tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1,')'))
     }
   })
   
@@ -1235,7 +1270,7 @@ nextStep
   
   output$uniteOutput2 <- renderTable ({
     if (input$unite3 == T) {
-      head(tidyr::unite(mtcars, 'New_Column', c(input$unite1)))
+      head(tidyr::unite(data = mtcars, col = 'New_Column', c(input$unite1)))
     }
   })
   
@@ -1254,7 +1289,7 @@ nextStep
   
   output$code1 <- renderUI ({
     if (input$dwSTI2 == 'Low to High') {
-      tags$code(paste('Code: dplyr::arrange(mtcars, mtcars[ , ', input$dwSTI1, ']'))
+      tags$code(paste('R Code: dplyr::arrange(mtcars, mtcars[ , ', input$dwSTI1, ']'))
     }
   })
   
@@ -1264,16 +1299,9 @@ nextStep
     }
   })
   
-  # #data frame
-  # output$dfCode <- renderUI ({
-  #   tags$code('dplyr::data_frame(a =', input$knob1, ':', input$knob2, ', b =', input$knob3, ':', input$knob4, ')')
-  # })
-  # 
-  # output$dwTable7 <- renderDataTable({
-  #   dplyr::data_frame(a = input$knob1:input$knob2, b = input$knob3:input$knob4)
-  # })
   
-  #gather
+  
+  #pivot_wider
   output$dwTable1 <- renderTable({
     cases
   })
@@ -1285,7 +1313,7 @@ nextStep
     }
   })
   
-  #spread
+  #pivot_longer
   output$dwTable5 <- renderTable({
     pollution
   })
@@ -1297,7 +1325,7 @@ nextStep
     }
   })
   
-############ Combining Data Table ###################################################
+  ############ Combining Data Table ###################################################
   disable("check1")
   disable("check2")
   disable("check3")
@@ -1379,7 +1407,7 @@ nextStep
   
   
   output$cdTable1 <- renderTable({
-   
+    
     dplyr::left_join(a, b, by = "x1")
     #Ethan
     
@@ -1405,7 +1433,7 @@ nextStep
     dplyr::right_join(a, b, by = "x1")
   })
   
-
+  
   
   #cd Exp 1-6
   output$cdExp1 <- renderText ({
