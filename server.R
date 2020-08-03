@@ -470,7 +470,9 @@ shinyServer(function(input, output, session) {
   
   ########## pivot_wider 1 ############################
   
-  RawData3 <- data.frame("country" = c("Afghanistan","Afghanistan","Brazil","Brazil","China","China"), "key" = c("GDP","population","GDP","population","GDP","population"), "cases" = c("19","37","1434","1434","13610","1393"))
+  RawData3 <- data.frame("country" = c("Afghanistan","Afghanistan","Australia","Australia","China","China"),
+                         "key" = c("GDP","population","GDP","population","GDP","population"),
+                         "data" = c("19","37","1434","25","13610","1393"))
   
   output$original2 <- renderTable({
     RawData3
@@ -478,29 +480,29 @@ shinyServer(function(input, output, session) {
   
   # specify outputs for every choice
   output$userOutA <- renderTable({ 
-    if(input$userOpA == '2000')
-      op1 <- '2000'
-    else if(input$userOpA == 'cases')
+    if(input$userOpA == 'population')
+      op1 <- 'population'
+    else if(input$userOpA == '25')
+      op1 <- '25'
+    else if(input$userOpA == 'key')
+      op1 <- 'key'
+    else
       op1 <- 'cases'
-    else if(input$userOpA == 'country')
-      op1 <- 'country'
-    else
-      op1 <- 'year'
     
     
-    if(input$userOpB == 'country')
-      op2 <- 'country'
-    else if(input$userOpB == 'cases')
-      op2 <- 'cases'
-    else if(input$userOpB == '2000')
-      op2 <- '2000'
+    if(input$userOpB == 'key')
+      op2 <- 'key'
+    else if(input$userOpB == 'data')
+      op2 <- 'data'
+    else if(input$userOpB == 'GDP')
+      op2 <- 'GDP'
     else
-      op2 <- 'Afghanistan'
+      op2 <- '1393'
     
     
     tryCatch({
       RawData3 %>%
-        pivot_wider(names_from =op1, values_from = op2)
+        pivot_wider(names_from = op1, values_from = op2)
     }, 
     warning = function(war) {
       
@@ -539,7 +541,7 @@ shinyServer(function(input, output, session) {
   # op3save <- reactiveValues(input$userOpC = NULL)
   # op4save <- reactiveValues(input$userOpD = NULL)
   
-  # submit button
+  # submit button pivot_wider
   output$bus <- renderUI({
     bsButton("submitted",
              label = "Check Answer",
@@ -620,7 +622,7 @@ shinyServer(function(input, output, session) {
     disable("userOpC")
     disable("userOpD")
     disable("submitted")
-    if(input$userOpA == 'year' & input$userOpB == 'cases')
+    if(input$userOpA == 'key' & input$userOpB == 'data')
     {
       showElement("cor")
     }
@@ -644,19 +646,6 @@ shinyServer(function(input, output, session) {
     hide("nextQuestion2")
   })
   
-  observeEvent(input$retrying,{
-    reset("userOpA")
-    reset("userOpB")
-    reset("userOpC")
-    reset("userOpD")
-    showElement("submitted")
-    enable("submitted")
-    
-  })
-  
-  
-  
-  
   
   ##################### pivot_wider 2 ###################
   
@@ -664,7 +653,10 @@ shinyServer(function(input, output, session) {
   
   table4b$capital <- capital
   
-  RawData4 <- data.frame("Name" = c("John","John","John","Dora","Dora","Dora","Tim","Tim","Tim","Rebecca","Rebecca","Rebecca"), "Age" = c('21','21','21','19','19','19','22','22','22','21','21','21'), "Day" = c('MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips','MonTips','TueTips','WedTips'), "Tips" = c('8','14','11','7','10','14','12','11','13','10','9','11'))
+  RawData4 <- data.frame("Name" = c("John","John","John","Dora","Dora","Dora","Tim","Tim","Tim","Rebecca","Rebecca","Rebecca"),
+                         "Age" = c('21','21','21','19','19','19','22','22','22','21','21','21'),
+                         "Paycheck" = c('Wage','Tips','Tax','Wage','Tips','Tax','Wage','Tips','Tax','Wage','Tips','Tax'),
+                         "Dollars" = c('25','30','14','36','37','21','22','31','13','41','50','24'))
   
   output$original4 <- renderTable({
     RawData4
@@ -676,22 +668,22 @@ shinyServer(function(input, output, session) {
   output$userOut3 <- renderTable({ #Ethan
     if(input$userOpC == '22')
       op1 <- '22'
-    else if(input$userOpC == 'Day')
-      op1 <- 'Day'
-    else if(input$userOpC == 'MonTips')
-      op1 <- 'MonTips'
-    else
+    else if(input$userOpC == 'Age')
+      op1 <- 'Age'
+    else if(input$userOpC == 'Tips')
       op1 <- 'Tips'
+    else
+      op1 <- 'Paycheck'
     
     
-    if(input$userOpD == 'Tim')
-      op2 <- 'Tim'
-    else if(input$userOpD == '9')
-      op2 <- '9'
+    if(input$userOpD == 'Name')
+      op2 <- 'Name'
+    else if(input$userOpD == 'Dollars')
+      op2 <- 'Dollars'
     else if(input$userOpD == 'Day')
       op2 <- 'Day'
     else
-      op2 <- 'Tips'
+      op2 <- 'Wage'
     
     tryCatch({
       RawData4 %>%
@@ -789,7 +781,7 @@ shinyServer(function(input, output, session) {
     disable("userOpL")
     disable("userOpM")
     disable("submitteds")
-    if(input$userOpC == 'Day' & input$userOpD == 'Tips') {
+    if(input$userOpC == 'Paycheck' & input$userOpD == 'Dollars') {
       showElement("cors")
     }
     else{

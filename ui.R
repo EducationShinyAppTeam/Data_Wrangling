@@ -145,7 +145,7 @@ ui <- list(
                                                         label = 'View the Transformed Data Set',
                                                         value = FALSE),
                                          tableOutput('dwTable5'),
-                                         tags$strong(div('Spread rows into columns.', style = 'color: white')),
+                                         tags$strong(div('Spread rows into columns.', style = 'color: purple')),
                                          tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
                                          br(),
                                          br(),
@@ -207,11 +207,9 @@ ui <- list(
                                
                                
                             ##### The statement in the top box ############
-                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
+                               h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be a country in a year')),
                                h4(tags$code('tidyr::pivot_longer(RawData, cols = c("Arg 1", "Arg 2"), names_to = "Arg 3", values_to = "Arg 4")')))),
                                
-                               #pivot_longer(df,cols = c('1999','2000'), names_to = 'years', values_to = 'cases')
-
                                textOutput("tester"),
                            ###### two parellel boxees, first for raw data second for Tidy Attempt ##########
                                fluidRow(
@@ -298,7 +296,7 @@ ui <- list(
                                
                           ######## Fill in the correct Argument across top###############
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a person and their tips in a day')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be an employee on a certain day of the week')),
                                                  h4(tags$code('tidyr::pivot_longer(RawData2, cols = c("Arg 1", "Arg 2", "Arg 3"), names_to = "Arg 4", values_to = "Arg 5")')))),
                           ########## Raw Data Table ###########       
 
@@ -395,7 +393,7 @@ ui <- list(
                                    #div(style = 'text-align: center',
                                    #  h1(strong('Tidy the Original Data')),
                                    #div(style = 'text-align: center',
-                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
+                                   h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be a country')),
                                    h4(tags$code('tidyr::pivot_wider(RawData3, names_from = "Arg 1", values_from = "Arg 2")')))), 
 
 
@@ -431,16 +429,16 @@ ui <- list(
                                      width = 3,
                                      selectInput(inputId = 'userOpA',
                                                  label = 'names_from =',
-                                                 choices = c('2000', 'cases', 'country', 'year'),
-                                                 selected = '2000')),
+                                                 choices = c('population', '25', 'key', 'cases'),
+                                                 selected = 'population')),
                                  box(div(style = 'background-color: #ffffff',
                                          (title = '')),
                                      style = 'background: #ffffff',
                                      width = 3,
                                      selectInput(inputId = 'userOpB',
                                                  label = 'values_from =',
-                                                 choices = c('country', 'cases', '2000', 'Afghanistan'),
-                                                 selected = 'country')),
+                                                 choices = c('key', 'data', 'GDP', '1393'),
+                                                 selected = 'key')),
                                  
                                ),
                                width = 10),
@@ -469,7 +467,7 @@ ui <- list(
                                                  #div(style = 'text-align: center',
                                                  #  h1(strong('Tidy the Original Data')),
                                                  #div(style = 'text-align: center',
-                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a person and their tips in a day')),
+                                                 h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be an employee')),
                                                  h4(tags$code('tidyr::pivot_wider(RawData4, names_from = "Arg 1", values_from = "Arg 2")')))),
                                              
 
@@ -503,15 +501,15 @@ ui <- list(
                                          width = 3,
                                          selectInput(inputId = 'userOpC',
                                                      label = 'names_from =',
-                                                     choices = c('22', 'Day', 'MonTips', 'Tips'),
+                                                     choices = c('22', 'Age', 'Tips', 'Paycheck'),
                                                      selected = '22')),
                                      box(div(style = 'background-color: #ffffff',
                                              (title = '')),
                                          style = 'background: #ffffff',
                                          width = 3,
                                          selectInput(inputId = 'userOpD',
-                                                     label = 'values_from',
-                                                     choices = c('Tim', '9', 'Day', 'Tips'),
+                                                     label = 'values_from =',
+                                                     choices = c('Name', 'Dollars', 'Day', 'Wage'),
                                                      selected = 'Tim'))
                                    ),
                                    width = 10),
