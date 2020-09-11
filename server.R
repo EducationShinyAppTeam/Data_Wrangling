@@ -269,7 +269,11 @@ shinyServer(function(input, output, session) {
   
   table4a$capital <- capital
   
-  RawData2 <- data.frame("Name" = c("John","Dora","Tim","Rebecca"), "Age" = c('21','19','22','21'), "MonTips" = c('8','7','12','10'), "TueTips" = c('14','10','11','9'), "WedTips" = c('11','14','13','11'))
+  RawData2 <- data.frame("Name" = c("John","Dora","Tim","Rebecca"),
+                         "Age" = c('21','19','22','21'),
+                         "MonTips" = c('8','7','12','10'),
+                         "TueTips" = c('14','10','11','9'),
+                         "WedTips" = c('11','14','13','11'))
   
   output$original3 <- renderTable({
     RawData2
@@ -704,7 +708,9 @@ shinyServer(function(input, output, session) {
   
   # show code based on inputs
   output$userOut4 <- renderUI({
-    tags$code(paste0('tidyr::pivot_wider(RawData4, names_from = "', input$userOpC, '", values_from = "', input$userOpD, '")' ))
+    tags$code(paste0('tidyr::pivot_wider(RawData4, 
+                     names_from = "', input$userOpC, '", 
+                     values_from = "', input$userOpD, '")' ))
   }) 
   
   
@@ -1173,7 +1179,8 @@ nextStep
       img(src = NULL,width = 30)
     })
     #Sets the question up
-    updateRadioButtons(session, "answer", "Another Question", choiceNames=list(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
+    updateRadioButtons(session, "answer", "Another Question", 
+                       choiceNames=list(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
                        choiceValues = list("A","B","C"), selected = character(0))
     disable("submit")
   })
@@ -1229,7 +1236,9 @@ nextStep
     #input$eval
     if(runButtonWasPressed == F)
     {
-      return(isolate(HTML(knit2html(text = "Select the \"Run\" button underneath the test Your Answer to see the code output below", fragment.only = TRUE, quiet = FALSE))))
+      return(isolate(HTML(knit2html(text = "Select the \"Run\" button underneath 
+                                    the test Your Answer to see the code output below", 
+                                    fragment.only = TRUE, quiet = FALSE))))
     }
     else{
       return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))

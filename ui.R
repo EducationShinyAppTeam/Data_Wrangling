@@ -33,7 +33,7 @@ ui <- list(
                       tags$li(class = "dropdown",tags$a(href = "https://shinyapps.science.psu.edu/",icon("home")))),
         
     dashboardSidebar(
-      width = 250,
+      width = 300,
       sidebarMenu(id = 'tabs',
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
               menuItem('Prerequisites', tabName = 'prereq', icon = icon('book')),
@@ -82,11 +82,10 @@ ui <- list(
             p('This application was coded and developed by Anna (Yinqi) Zhang 
               and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou 
               for being incredibly helpful with programming issues. Bug fixes
-              and style guide along with function updates were implented 
+              and style guide along with function updates were implented
               by Ethan Wright (2020).'),
             p('The cheat sheet is provided by RStudio.'),
-            p('Packages used: dplyr, EDAWR, ggmap, mosaic, plotly, ggplot2, plot3D.'),
-            div(class = "updated", "Last Update: 06/23/2020 by EJW.")
+            div(class = "updated", "Last Update: 07/23/2020 by EJW.")
             ),
         
         tabItem(tabName = 'prereq',
@@ -145,7 +144,7 @@ ui <- list(
                                                         label = 'View the Transformed Data Set',
                                                         value = FALSE),
                                          tableOutput('dwTable5'),
-                                         tags$strong(div('Spread rows into columns.', style = 'color: purple')),
+                                         tags$strong(div('0 rows into columns.', style = 'color: purple')),
                                          tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
                                          br(),
                                          br(),
@@ -621,7 +620,6 @@ ui <- list(
                          div(style="display:inline-block", tableOutput('titleTableB')),
                          div(style="display:inline-block", p(' = ')),
                         
-              
             br(),
             br(),
             
@@ -734,7 +732,6 @@ ui <- list(
           tabName = "References",
           withMathJax(),
           h2("References"),
-          
           
           p(class = "hangingindent",
             "Attali, D. (2020). 
