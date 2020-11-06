@@ -17,6 +17,7 @@ library(shinycssloaders)
 library(boastUtils)
 
 #https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf
+# If issues develop wiht rcfss or EDAWR these may come in useful
 # remotes::install_github("uc-cfss/rcfss")
 # devtools::install_github("rstudio/EDAWR")
 ################# Top ##################
@@ -132,22 +133,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  #observeEvent(input$submit, {
-  # withProgress(session, min = 1, max = 15, {
-  #  setProgress(message = 'Checking Answer',
-  #             detail = '')
-  #for (i in 1:10) {
-  # setProgress(value = i)
-  #Sys.sleep(0.05)
-  #   }
-  #  })
-  # })
-  
-  # op1save <- reactiveValues(input$userOp1 = NULL)
-  # op2save <- reactiveValues(input$userOp2 = NULL)
-  # op3save <- reactiveValues(input$userOp3 = NULL)
-  # op4save <- reactiveValues(input$userOp4 = NULL)
-  
+
   # submit button
   output$sub <- renderUI({
     bsButton("submitcc",
@@ -343,7 +329,6 @@ shinyServer(function(input, output, session) {
     }
     )
     
-    #pivot_longer(cols = c(eval("'input$userOp1'"),eval("'input$userOp2'")), names_to = eval("'input$userOp3'"), values_to = eval("'input$userOp4'"))
   })
   
   
@@ -362,7 +347,7 @@ shinyServer(function(input, output, session) {
     enable("userOp7")
     enable("userOp8")
     enable("userOp9")
-    enable("submitting") 
+    enable("submitting")
     toggle("restart")
     hide("cort")
     hide("rong")
@@ -528,23 +513,7 @@ shinyServer(function(input, output, session) {
     tags$code(paste0('tidyr::pivot_wider(RawData3, names_from = "', input$userOpA, '", values_from = "', input$userOpB, '")' ))
   })
   
-  
-  #observeEvent(input$submit, {
-  # withProgress(session, min = 1, max = 15, {
-  #  setProgress(message = 'Checking Answer',
-  #             detail = '')
-  #for (i in 1:10) {
-  # setProgress(value = i)
-  #Sys.sleep(0.05)
-  #   }
-  #  })
-  # })
-  
-  # op1save <- reactiveValues(input$userOpA = NULL)
-  # op2save <- reactiveValues(input$userOpB = NULL)
-  # op3save <- reactiveValues(input$userOpC = NULL)
-  # op4save <- reactiveValues(input$userOpD = NULL)
-  
+
   # submit button pivot_wider
   output$bus <- renderUI({
     bsButton("submitted",
@@ -713,14 +682,6 @@ shinyServer(function(input, output, session) {
                      values_from = "', input$userOpD, '")' ))
   }) 
   
-  
-  
-  
-  # op1save <- reactiveValues(input$userOpJ = NULL)
-  # op2save <- reactiveValues(input$userOpK = NULL)
-  # op3save <- reactiveValues(input$userOpL = NULL)
-  # op4save <- reactiveValues(input$userOpM = NULL)
-  
   # submit button
   output$buss <- renderUI({
     bsButton("submitteds",
@@ -807,20 +768,7 @@ shinyServer(function(input, output, session) {
     hide("wros")
     
   })
-  
-  # observeEvent(input$retryings,{
-  #   reset("userOpJ")
-  #   reset("userOpK")
-  #   reset("userOpL")
-  #   reset("userOpM")
-  #   showElement("submitteds")
-  #   enable("submitteds")
-  # })
-  
-  
-  
-  
-  
+
   
   ###############Shiny Ace#################
   runButtonWasPressed <<- F #Used to stop error in the knitted output
@@ -829,11 +777,9 @@ shinyServer(function(input, output, session) {
   somethingIsSelected <<- F
   value <- reactiveValues(index =  1, mistake = 0, correct = 0)
   ans <- as.matrix(bank[1:9, 6])
-  #ans <- data.frame(ans)
   index_list <- reactiveValues(list = sample(2:9, 8, replace = FALSE))
   
   observeEvent(input$nextq,{
-    
     
     value$answerbox <- value$index
     #Removes the value in the front of the list
@@ -866,17 +812,7 @@ shinyServer(function(input, output, session) {
                  choiceNames=list(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
                  choiceValues = list("A","B","C"), selected = character(0))
     
-    # radioButtons(inputId = bank[value$index,1], label= bank[value$index, 2],
-    #              choiceNames=c(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
-    #              choiceValues = c("A", "B", "C"), selected = character(0))
-  })
-  
-  # output$options <- renderUI({
-  #   str1 <- paste("A.", bank[value$index, 3])
-  #   str2 <- paste("B.", bank[value$index, 4])          #Output the text, no longer needed with radio buttons
-  #   str3 <- paste("C.", bank[value$index, 5])
-  #   HTML(paste(str1, str2, str3, sep = '<br/>'))
-  # })
+    })
   
   
   ## change table based on question 
@@ -902,25 +838,6 @@ shinyServer(function(input, output, session) {
     {
       table5
     }
-    # #old
-    # if (bank[value$index, 2] %in% c(bank[2, 2], bank[3, 2])) {
-    #   race
-    # } 
-    # else {
-    #   if (bank[value$index, 2] %in% c(bank[4, 2], bank[5, 2])) {
-    #     results
-    #   } 
-    #   else {
-    #     if (bank[value$index, 2] %in% c(bank[6, 2], bank[7, 2])) {
-    #       grades
-    #       } 
-    #     else {
-    #         if (bank[value$index, 2] %in% c(bank[8, 2], bank[9, 2])){
-    #           table5
-    #         }
-    #       }
-    #     }
-    # }
   })
   
   output$tableinfo <- renderUI({
@@ -957,7 +874,6 @@ shinyServer(function(input, output, session) {
     aceEditor("rmd",
               mode = "markdown",
               if(value$index == 1) {
-                print("print1")
                 value = 'Here you can test out the answer choices before choosing an answer!
 
 Uncomment one line from each section at a time and hit "Run" to see its effect!
@@ -966,11 +882,9 @@ Note: If the code does not display/change data, it probably is not the correct a
               
 There is no interactive R code for this question!'
               } else if (value$index == 2) {
-                print("print2")
                 value = 'No interactive R code for this question!'
               }
               else if (value$index == 3) {
-                print("print3")
                 value = '
 ```{r}
 library(rcfss)
@@ -987,11 +901,9 @@ tidyRace
 '
               }
               else if (value$index == 4) {
-                print("print4")
                 value = 'No interactive R code for this question!'
               }
               else if (value$index == 5) {
-                print("print5")
                 value = '```{r}
 library(rcfss)
 
@@ -1006,11 +918,9 @@ tidyResults
                 '
               }
               else if (value$index == 6) {
-                print("print6")
                 value = 'No interactive R code for this question!'
               }
               else if (value$index == 7) {
-                print("print7")
                 value = '```{r}
 
 library(rcfss)
@@ -1027,7 +937,6 @@ tidyGrades
 '
               }
               else if (value$index == 8) {
-                print("print8")
                 value = '```{r}
 library(tidyr)
 
@@ -1042,7 +951,6 @@ tidyTable5
 '
               }
               else {
-                print("print9")
                 value = '```{r}
 library(tidyr)
 
@@ -1064,9 +972,8 @@ nextStep
     enable("submit")
   })
   
-  # 
+  # Once Rlocker works properly this may be relevant. 
   # observeEvent(input$answer, {
-  #   print('output in the observe event')
   #   req(input$answer, input$answer !='')
   #   answer <- isolate(input$answer)
   #   # interacted_statement <- rlocker::createStatement(
@@ -1106,7 +1013,6 @@ nextStep
   }
   
   observeEvent(input$submit,{
-    
     validate(
       need(input$answer != "", ""),
       errorClass = "inline"
@@ -1158,16 +1064,14 @@ nextStep
         w <- paste("You picked", answer, ", The correct answer is", ans[value$index, 1])
         HTML(paste(ig, w), sep = ' ')
       }
-      #answer <- ""
     })
-    
   })
   
   
   observeEvent(input$reset, { 
     updateButton(session, "submit", disabled = FALSE)
     updateButton(session,"reset", disable = TRUE)
-    #index_list$list[-1]
+    
     #This is what randomly orders the list
     index_list$list <- c(1, sample(2:9, 8, replace = FALSE))
     
@@ -1233,7 +1137,6 @@ nextStep
   })
   
   output$knitDoc <- renderUI({#Ethan
-    #input$eval
     if(runButtonWasPressed == F)
     {
       return(isolate(HTML(knit2html(text = "Select the \"Run\" button underneath 
@@ -1252,16 +1155,30 @@ nextStep
   
   
   ############ Reshaping Data ############
-  # observeEvent(input$knob1, {
-  #   updateKnobInput(session, inputId = 'knob2', label = 'Select the Maximum Value for the First Column', value = input$knob1)
-  # })
-  # 
-  # observe(updateKnobInput(session, inputId = 'knob4', value = input$knob3 + input$knob2 - input$knob1))
   
   # unite
   output$uniteUI <- renderUI ({
     if (input$unite3 == T) {
-      tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1,')'))
+      if(length(input$unite1) == 1)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],')'))
+      else if(length(input$unite1) == 2)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],')'))
+      else if(length(input$unite1) == 3)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],',',
+                        input$unite1[[3]],')'))
+      else if(length(input$unite1) == 4)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],',',
+                        input$unite1[[3]],',', input$unite1[[4]],')'))
+      else if(length(input$unite1) == 5)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],',',
+                        input$unite1[[3]],',', input$unite1[[4]],',', input$unite1[[5]],')'))
+      else if(length(input$unite1) == 6)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],',',
+                        input$unite1[[3]],',', input$unite1[[4]],',', input$unite1[[5]],',', input$unite1[[6]],')'))
+      else if(length(input$unite1) == 7)
+        tags$code(paste('R code: tidyr::unite(mtcars, "New_Column_Name", ',input$unite1[[1]],',', input$unite1[[2]],',',
+                        input$unite1[[3]],',', input$unite1[[4]],',', input$unite1[[5]],',', input$unite1[[6]],',', input$unite1[[7]],')'))
+      
     }
   })
   
@@ -1270,9 +1187,8 @@ nextStep
   })
   
   output$uniteOutput2 <- renderTable ({
-    if (input$unite3 == T) {
-      head(tidyr::unite(data = mtcars, col = 'New_Column', c(input$unite1)))
-    }
+    if (input$unite3 == T && length(input$unite1) != 0) {
+      head(tidyr::unite(data = mtcars, col = 'New_Column', input$unite1))}
   })
   
   # arrange: default setting is low to high
@@ -1391,7 +1307,6 @@ nextStep
     }
   })
   
-  #Ethan, Turn check available
   observeEvent(input$cd1,{enable("check1")})
   observeEvent(input$cd2,{enable("check2")})
   observeEvent(input$cd3,{enable("check3")})
@@ -1399,13 +1314,11 @@ nextStep
   observeEvent(input$cd5,{enable("check5")})
   observeEvent(input$cd6,{enable("check6")})
   
-  
   #correct answer: A, C, D, B --- left/inner/full/right
   a <- data.frame("x1" = c("A","B","C"), "x2" = c("1","2","3"))
   b <- data.frame("x1" = c("A","B","D"), "x3" = c("T","F","T"))
   output$titleTableA <- renderTable({a})
   output$titleTableB <- renderTable({b})
-  
   
   output$cdTable1 <- renderTable({
     
@@ -1434,9 +1347,6 @@ nextStep
     dplyr::right_join(a, b, by = "x1")
   })
   
-  
-  
-  #cd Exp 1-6
   output$cdExp1 <- renderText ({
     if (input$cd1 == 'left join') {
       paste('Join matching rows from b to a.')

@@ -33,7 +33,7 @@ ui <- list(
                       tags$li(class = "dropdown",tags$a(href = "https://shinyapps.science.psu.edu/",icon("home")))),
         
     dashboardSidebar(
-      width = 300,
+      width = 250,
       sidebarMenu(id = 'tabs',
               menuItem('Overview', tabName = 'overview', icon = icon("dashboard")),
               menuItem('Prerequisites', tabName = 'prereq', icon = icon('book')),
@@ -65,7 +65,6 @@ ui <- list(
             br(),
             
             h2('Instructions'),
-            #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
             p(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, pivot_wider, pivot_longer, and arrange.')),
             p(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidy the data.')),
             p(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
@@ -91,7 +90,7 @@ ui <- list(
         tabItem(tabName = 'prereq',
             p('Please refer to the', a(href = 'https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet', target="_blank"), 'for all the information needed. 
               This includes many examples of data wrangling tools for reshaping data and joins.'),
-            p('After clicking on the link a seporate tab will open that contains the cheat sheet.'),
+            p('After clicking on the link a separate tab will open that contains the cheat sheet.'),
             tags$a(href = 'https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
     
         
@@ -199,11 +198,7 @@ ui <- list(
       ###################### pivot_longer 1 ###########
                                box(
                                  wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                   #titlePanel("Tidy the Original Data"),
-                               #div(style = 'text-align: center',
-                                 #  h1(strong('Tidy the Original Data')),
-                               #div(style = 'text-align: center',
-                               
+                                 
                                
                             ##### The statement in the top box ############
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be a country in a year')),
@@ -320,7 +315,7 @@ ui <- list(
                                             ))),
                                    br(),
                                    
-                              ############# The 5 Input values ##############3
+                              ############# The 5 Input values ##############
                                    fluidRow(
                                      # choices for user plot
                                      box(div(style = 'background-color: #ffffff',
@@ -388,10 +383,6 @@ ui <- list(
 
                             ############ Fill in sample argument ##########
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                   #titlePanel("Tidy the Original Data"),
-                                   #div(style = 'text-align: center',
-                                   #  h1(strong('Tidy the Original Data')),
-                                   #div(style = 'text-align: center',
                                    h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be a country')),
                                    h4(tags$code('tidyr::pivot_wider(RawData3, names_from = "Arg 1", values_from = "Arg 2")')))), 
 
@@ -447,7 +438,6 @@ ui <- list(
                                      uiOutput("bus"),
                                      br(),
                                      uiOutput("redo"),
-                                     #uiOutput("nextQuestion3")
                                      ),
                                  br(),
                                  br(),
@@ -462,10 +452,6 @@ ui <- list(
                                
                                
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
-                                                 #titlePanel("Tidy the Original Data"),
-                                                 #div(style = 'text-align: center',
-                                                 #  h1(strong('Tidy the Original Data')),
-                                                 #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case will be an employee')),
                                                  h4(tags$code('tidyr::pivot_wider(RawData4, names_from = "Arg 1", values_from = "Arg 2")')))),
                                              
@@ -544,13 +530,10 @@ ui <- list(
                                          tags$li("Uncomment the sample code to explore."),
                                          style = "background-color: #ffffff")),
                                      h3("Exercises"),
-                                     #uiOutput('progress'), does not appear to serve any purpose
                                      wellPanel(style = "background-color: #ffffff", #This panel is where the question and options go
                                                uiOutput("question") %>% 
                                                  withSpinner(color = "#ffffff"),
-                                               #uiOutput("options"),  #Outputs all of the possible answers, however this should be output with multiple choice.
                                                br(),
-                                               #selectInput("answer", "Answer:", c("","A", "B", "C")), #Ethan
                                                uiOutput("mark"),   #Shows symbol, what was picked and what should have been picked
                                                tags$style(type = 'text/css', '#question{font-size: 15px;
                                                           background-color: #ffffff;color: black;}',
@@ -558,11 +541,6 @@ ui <- list(
                                                
                                      ),
                                      fluidPage(
-                                       # tags$head(
-                                       #   tags$style(HTML('#submit{background-color:#ffffff; color:white}')),
-                                       #   tags$style(HTML('#eval{background-color:#ffffff; color:white}')),      removing this actually made code work better.
-                                       #   tags$style(HTML('#nextq{background-color:#ffffff; color:white}'))
-                                       # ),
                                        fluidRow(     #These are the 3 buttons on the bottom
                                          column(12, align = "center",
                                                 div(style = "display: inline-block", actionButton(inputId = 'submit',
@@ -614,7 +592,7 @@ ui <- list(
                      box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Multiple Choice Joins Practice')),
                          style = 'text-align: left',
                          width = NULL,
-                         height = NULL,    #Ethan Wright
+                         height = NULL,    
                          div(style="display:inline-block", tableOutput('titleTableA')),
                          div(style="display:inline-block", p('    +     ')),
                          div(style="display:inline-block", tableOutput('titleTableB')),
@@ -727,7 +705,7 @@ ui <- list(
                      )
             )
             ),
-#######Referencees Tab ###############
+#######References Tab ###############
         tabItem(
           tabName = "References",
           withMathJax(),
@@ -819,19 +797,3 @@ ui <- list(
         )
         
 )) ))
-# library(dplyr) 
-# library(knitr)
-# library(datasets)  
-# library(rmarkdown) 
-# library(learnr)    
-# library(rcfss)  
-
-
-#Possilble packages
-
-#library(shinyDND) #No match
-#library(mosaic) #nothing detected but tends to throw errors
-#library(plotly) # just %>%, think can be deleted
-#library(ggplot2) #think can be deleted
-#library(plot3D) #nothing
-#library(ggmap) #just %>%
