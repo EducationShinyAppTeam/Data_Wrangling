@@ -1,10 +1,10 @@
 ﻿ID,Question,A,B,C,Answer
-1,Which is a requirement for tidy data?,"Column headers are values, not variable names.",Variables are stored in both rows and columns.,Each value must have its own cell.,C
-2,Why is this table untidy? ,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,One variable is spread across multiple columns,C
-3,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,B
-4,Why is this table untidy?,Observations are spread across multiple rows,One variable is spread across multiple columns,One variable is spread across multiple columns,A
-5,"Does this table need to be spread, gathered, or united in order to be tidy?",Spread,Gathered,United,A
-6,Why is this table untidy?,One variable is spread across multiple columns,Multiple variables are stored in one column.,Variables are stored in both rows and columns.,B
-7,"Does this table need to be spread, gathered, or united in order to be tidy?",Spread,Gathered,United,A
-8,"Does this table need to be spread, gathered, or united?",Spread,Gathered,United,C
-9,Which is the correct step for uniting 'century' and 'year' into 'new'? ,"unite(col = new, century, year)","unite(col = new, century, year, sep = """")","unite(col = year, century, year)",B
+1,Which is a requirement for tidy data?,"A. Column headers are values, not variable names.",B. Variables are stored in both rows and columns.,C. Each value must have its own cell.,C
+2,Why is this table untidy? ,A. Multiple variables are stored in one column.,B. Variables are stored in both rows and columns.,C. One variable is spread across multiple columns,C
+3,"Does this table need to pivot_longer, pivot_wider, or unite?",A. pivot_wider,B. pivot_longer,C. unite,B
+4,Why is this table untidy?,A. Observations are spread across multiple rows,B. One variable is spread across multiple columns,C. One variable is spread across multiple columns,A
+5,"Does this table need to pivot_longer, pivot_wider, or unite in order to be tidy?",A. pivot_wider,B. pivot_longer,C. unite,A
+6,Why is this table untidy?,A. One variable is spread across multiple columns,B. Multiple variables are stored in one column.,C. Variables are stored in both rows and columns.,A
+7,"Does this table need to pivot_longer, pivot_wider, or unite in order to be tidy?",A. pivot_wider,B. pivot_longer,C. unite,B
+8,"Does this table need to be pivot_longer, pivot_wider, or unite?",A. pivot_wider,B. pivot_longer,C. unite,C
+9,Which is the correct step for uniting 'century' and 'year' into 'new'? ,"A. unite(col = new, century, year)","B. unite(col = new, century, year, sep = """")","C. unite(col = year, century, year)",B
