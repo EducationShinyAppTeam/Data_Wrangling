@@ -17,7 +17,6 @@ library(devtools)
 library(shinycssloaders)
 library(devtools)
 library(knitr)
-library(rlocker)
 library(rcfss)
 
 
@@ -47,19 +46,19 @@ sidebar = dashboardSidebar(
 )
 
 body = dashboardBody(
-  tags$head( 
+  tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "Feature.css")
   ),
   tags$style(type = "text/css", ".content-wrapper,.right-side {background-color: white;}"),
   #tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css")),
-  
+
   useShinyjs(),
-  
+
   tabItems(
     tabItem(tabName = 'prereq',
             h4('Please refer to the', a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', 'Data Wrangling cheatsheet'), 'for all the information needed.'),
             tags$a(href = 'https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf', tags$img(src = 'cheatsheet.png', align = 'left'))),
-    
+
     tabItem(tabName = 'overview',
             tags$a(href='http://stat.psu.edu/', tags$img(src = 'psu_icon.jpg', align = "left", width = 180)),
             br(),
@@ -68,7 +67,7 @@ body = dashboardBody(
             h3(strong('About:')),
             h4('This app illustrates R code for tidying, reshaping and combining data.'),
             br(),
-            
+
             h3(strong('Instructions:')),
             #h4(tags$li('In the Data Visualization section, go through each tab including 3D plots, line plots, contour plots, and heat maps.')),
             h4(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, gather, spread, data_frame, and arrange.')),
@@ -98,20 +97,20 @@ body = dashboardBody(
           tabsetPanel(type = 'tabs',
                       tabPanel(div(style = 'font-size: 125%', 'Gather 1'),
 
-                               
+
                                box(
                                  wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                #div(style = 'text-align: center',
                                  #  h1(strong('Tidy the Original Data')),
                                #div(style = 'text-align: center',
-                               
+
                                h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                h4(tags$code('tidyr::gather(RawData,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
-                               
-                                 
 
-                            
+
+
+
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'RawData')),
@@ -131,8 +130,8 @@ body = dashboardBody(
                                             wellPanel(tags$strong('Your R code: '),
                                                       uiOutput('userOut2'))))),
                                  br(),
-                               
-                               
+
+
                                fluidRow(
                                  # choices for user plot
                                  box(div(style = 'background-color: #b8f28c',
@@ -151,7 +150,7 @@ body = dashboardBody(
                                                 label = 'Arg 2',
                                                 choices = c('country', '1999', 'Afghanistan', '2000'),
                                                 selected = '1999')),
-            
+
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                      style = 'background: #b8f28c',
@@ -160,8 +159,8 @@ body = dashboardBody(
                                                  label = 'Arg 3',
                                                  choices = c('1999', 'cases', 'year', 'China'),
                                                  selected = 'year')),
-                                 
-                                 
+
+
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                      style = 'background-color: #b8f28c',
@@ -173,30 +172,30 @@ body = dashboardBody(
                                      )
                                  ),
                                width = 10),
-                               
+
                                fluidRow(
                                div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                    uiOutput("sub"),
                                    br(),
                                    uiOutput("resetcc")),
-                               
+
                                br(),
                                br(),
-                               
+
                                div(style = 'display: inline-block; position: relative; text-align: right',
                                    uiOutput('correct'),
                                    uiOutput('wrong')))
                       ),
-                      
-                      #### Gather 2 ####         
-                      
+
+                      #### Gather 2 ####
+
                       tabPanel(div(style = 'font-size: 125%', 'Gather 2'),
-                               
-                               
+
+
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                                  h4(tags$code('tidyr::gather(RawData2,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
-                                             
+
 
                                    fluidRow(
                                      box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
@@ -217,8 +216,8 @@ body = dashboardBody(
                                                           uiOutput('userOutY'))
                                             ))),
                                    br(),
-                                   
-                                   
+
+
                                    fluidRow(
                                      # choices for user plot
                                      box(div(style = 'background-color: #b8f28c',
@@ -237,7 +236,7 @@ body = dashboardBody(
                                                      label = 'Arg 2',
                                                      choices = c('country', '1999', 'Afghanistan', '2000'),
                                                      selected = '1999')),
-                                     
+
                                      box(div(style = 'background-color: #b8f28c',
                                              (title = '')),
                                          style = 'background: #b8f28c',
@@ -246,8 +245,8 @@ body = dashboardBody(
                                                      label = 'Arg 3',
                                                      choices = c('1999', 'cases', 'year', 'China'),
                                                      selected = 'year')),
-                                     
-                                     
+
+
                                      box(div(style = 'background-color: #b8f28c',
                                              (title = '')),
                                          style = 'background-color: #b8f28c',
@@ -259,7 +258,7 @@ body = dashboardBody(
                                      )
                                    ),
                                    width = 10),
-                               
+
                                fluidRow(
                                div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                    uiOutput("subbed"),
@@ -271,12 +270,12 @@ body = dashboardBody(
                                    uiOutput('cort'),
                                    uiOutput('rong')))
                       ),
-                      
-                      #### Spread 1 #### 
-                      
+
+                      #### Spread 1 ####
+
                       tabPanel(div(style = 'font-size: 125%', 'Spread 1'),
 
-                               
+
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                    #titlePanel("Tidy the Original Data"),
                                    #div(style = 'text-align: center',
@@ -286,7 +285,7 @@ body = dashboardBody(
                                    h4(tags$code('tidyr::gather(RawData3,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
 
 
-                               
+
                                fluidRow(
                                  box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                          (title = 'RawData3')),
@@ -306,8 +305,8 @@ body = dashboardBody(
                                                       uiOutput('userOutB'))
                                         ))),
                                br(),
-                               
-                               
+
+
                                fluidRow(
                                  # choices for user plot
                                  box(div(style = 'background-color: #b8f28c',
@@ -326,7 +325,7 @@ body = dashboardBody(
                                                  label = 'Arg 2',
                                                  choices = c('country', '1999', '2000', 'Afghanistan'),
                                                  selected = '1999')),
-                                 
+
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                      style = 'background: #b8f28c',
@@ -335,8 +334,8 @@ body = dashboardBody(
                                                  label = 'Arg 3',
                                                  choices = c('population', 'country', 'Brazil', 'year'),
                                                  selected = 'population')),
-                                 
-                                 
+
+
                                  box(div(style = 'background-color: #b8f28c',
                                          (title = '')),
                                      style = 'background: #b8f28c',
@@ -348,7 +347,7 @@ body = dashboardBody(
                                  )
                                ),
                                width = 10),
-                               
+
                                fluidRow(
                                  div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                      uiOutput("bus"),
@@ -360,12 +359,12 @@ body = dashboardBody(
                                      uiOutput('cor'),
                                      uiOutput('wro'))
                                )),
-                      
+
                       #### Spread 2 ####
-                      
+
                       tabPanel(div(style = 'font-size: 125%', 'Spread 2'),
-                               
-                               
+
+
                                box(wellPanel(div(style = 'text-align: left; font-size: 85%; display: inline-block',
                                                  #titlePanel("Tidy the Original Data"),
                                                  #div(style = 'text-align: center',
@@ -373,9 +372,9 @@ body = dashboardBody(
                                                  #div(style = 'text-align: center',
                                                  h4(tags$b('Fill in the Correct Arguments to Tidy the Data - a case is a country in a year')),
                                                  h4(tags$code('tidyr::gather(RawData4,`Arg 1`, `Arg 2`, key = "Arg 3", value = "Arg 4")')))),
-                                             
 
-                                   
+
+
                                    fluidRow(
                                      box(div(style = 'background-image: url("green.png"); background-position: center; text-align: left; font-size: 115%; font-weight: bold',
                                              (title = 'RawData4')),
@@ -395,8 +394,8 @@ body = dashboardBody(
                                                           uiOutput('userOut4'))
                                             ))),
                                    br(),
-                                   
-                                   
+
+
                                    fluidRow(
                                      # choices for user plot
                                      box(div(style = 'background-color: #b8f28c',
@@ -415,7 +414,7 @@ body = dashboardBody(
                                                      label = 'Arg 2',
                                                      choices = c('country', '1999', '2000', 'Afghanistan'),
                                                      selected = '1999')),
-                                     
+
                                      box(div(style = 'background-color: #b8f28c',
                                              (title = '')),
                                          style = 'background: #b8f28c',
@@ -424,8 +423,8 @@ body = dashboardBody(
                                                      label = 'Arg 3',
                                                      choices = c('population', 'country', 'Brazil', 'year'),
                                                      selected = 'population')),
-                                     
-                                     
+
+
                                      box(div(style = 'background-color: #b8f28c',
                                              (title = '')),
                                          style = 'background: #b8f28c',
@@ -437,7 +436,7 @@ body = dashboardBody(
                                      )
                                    ),
                                    width = 10),
-                               
+
                                fluidRow(
                                  div(style = 'text-align: right; display: inline-block; position: relative; top: 10px',
                                      uiOutput("buss"),
@@ -449,13 +448,13 @@ body = dashboardBody(
                                      uiOutput('cors'),
                                      uiOutput('wros'))
                                )),
-                      
-                    
-                 
+
+
+
 ################# ShinyAce ##################
-                 
+
                  tabPanel(div(style = 'font-size: 125%', 'Live Code'),
-                          
+
                           fluidRow(
                             column(6,
                                    verticalLayout(
@@ -472,7 +471,7 @@ body = dashboardBody(
                                      h3("Exercises"),
                                      uiOutput('progress'),
                                      wellPanel(style = "background-color: #b8f28c",
-                                               uiOutput("question") %>% 
+                                               uiOutput("question") %>%
                                                  withSpinner(color = "#1E7B14"),
                                                uiOutput("options"),
                                                br(),
@@ -481,7 +480,7 @@ body = dashboardBody(
                                                tags$style(type = 'text/css', '#question{font-size: 15px;
                                                           background-color: #b8f28c;color: black;}',
                                                           '.well { padding: 10px; margin-bottom: 15px; max-width: 1000px; }')
-                                               
+
                                      ),
                                      fluidPage(
                                        tags$head(
@@ -495,24 +494,24 @@ body = dashboardBody(
                                                                                                   label = 'Submit',
                                                                                                   style = "success")),
                                                 div(style = "display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
-                                                div(style = "display: inline-block", bsButton(inputId = "nextq", 
+                                                div(style = "display: inline-block", bsButton(inputId = "nextq",
                                                                                               label = "Next",
                                                                                               disabled = TRUE)),
                                                 div(style = "display: inline-block;vertical-align:top; width: 30px;",HTML("<br>")),
-                                                div(style = "display: inline-block", bsButton(inputId = "reset", 
+                                                div(style = "display: inline-block", bsButton(inputId = "reset",
                                                                                               label = "Restart",
-                                                                                              style="danger", 
+                                                                                              style="danger",
                                                                                               disabled = TRUE)))
                                        )),
-                                     
-                                     
+
+
                                      ##########try rlocker statement#########
                                      tags$samp(
                                        htmlOutput("statements")
                                      ),
                                      ##########end#############
-                                     
-                                     h3("Test Your Answer"),  
+
+                                     h3("Test Your Answer"),
                                      uiOutput('editor'),
                                           column(6,
                                                  withBusyIndicatorUI(
@@ -531,12 +530,12 @@ body = dashboardBody(
                           )
 )
 ),
-                               
-        
-    
-    
+
+
+
+
 ############ Reshaping Data ############
-    tabItem(tabName = 'exp1', 
+    tabItem(tabName = 'exp1',
             tabsetPanel(type = 'tabs',
                         tabPanel(div(style = 'font-size: 125%', 'Unite'),
                                  br(),
@@ -556,7 +555,7 @@ body = dashboardBody(
                                      tableOutput('uniteOutput2')
                                      )
                                  ),
-                        
+
                         tabPanel(div(style = 'font-size: 125%', 'Gather'),
                                  br(),
                                  box(title = 'View An Example',
@@ -573,7 +572,7 @@ body = dashboardBody(
                                      tableOutput('dwTable2')
                                      )
                                  ),
-                        
+
                         tabPanel(div(style = 'font-size: 125%', 'Spread'),
                                  br(),
                                  box(title = 'View An Example',
@@ -590,7 +589,7 @@ body = dashboardBody(
                                      tableOutput('dwTable6')
                                      )
                                  ),
-                       
+
                         tabPanel(div(style = 'font-size: 125%', 'Arrange'),
                                  br(),
                                  box(title = 'View An Example',
@@ -603,8 +602,8 @@ body = dashboardBody(
                                                      width = '200px',
                                                      force_edges = TRUE),
                                      sliderTextInput(inputId = 'dwSTI1',
-                                                     label = 'Select the Variable to Sort By', 
-                                                     choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec'), 
+                                                     label = 'Select the Variable to Sort By',
+                                                     choices = c('mpg', 'cyl', 'disp', 'hp', 'drat', 'wt', 'qsec'),
                                                      grid = TRUE,
                                                      width = '400px',
                                                      force_edges = TRUE),
@@ -621,9 +620,9 @@ body = dashboardBody(
                         )
             ),
 
-############ Combining Data Sets ############    
+############ Combining Data Sets ############
     tabItem(tabName = 'exp2',
-           
+
             fluidRow(
               column(width = 12,
                      box(div(style = 'font-weight: bold; font-size: 140%', (title = 'Click the lightbulb to choose the correct join function corresponding to the displayed data!')),
@@ -632,10 +631,10 @@ body = dashboardBody(
                          height = NULL,
                          tags$img(src = 'combine.png', width = '300px', height = NULL),
 
-              
+
             br(),
             br(),
-            
+
             fluidRow(#theme = "bootstrap.css",
               column(width = 6,
                      box(title = NULL,
@@ -661,7 +660,7 @@ body = dashboardBody(
                                   size = 'median')
                          )
                      ),
-              
+
               column(width = 6,
                      box(title = NULL,
                          style = 'background-color: #b8f28c',
@@ -687,7 +686,7 @@ body = dashboardBody(
                                   size = 'median')
                          )
               ),
-              
+
               column(width = 6,
                      box(title = NULL,
                          style = 'background-color: #b2dfdb',
@@ -709,7 +708,7 @@ body = dashboardBody(
                          bsButton(inputId = 'check5', label = 'Check', size = 'median')
                          )
                      ),
-              
+
               column(width = 6,
                      box(title = NULL,
                          style = 'background-color: #b2dfdb',
@@ -733,7 +732,7 @@ body = dashboardBody(
                                   size = 'median')
                          )
                      ),
-              
+
               column(width = 6,
                      box(title = NULL,
                          style = 'background-color: #b8f28c',
@@ -759,7 +758,7 @@ body = dashboardBody(
                                   size = 'median')
                          )
                      ),
-              
+
               column(width = 6,
                      box(title = NULL,
                          style = 'background-color: #b8f28c',

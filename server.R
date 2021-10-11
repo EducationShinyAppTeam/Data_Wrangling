@@ -13,7 +13,6 @@ library(ggplot2)
 library(ggmap)
 library(tidyr)
 library(knitr)
-library(rlocker)
 library(datasets)
 library(rmarkdown)
 library(learnr)
@@ -47,24 +46,24 @@ shinyServer(function(input, output, session) {
   observeEvent(input$go2, {
     updateTabItems(session, 'tabs', 'exp1')
   })
-  
-    
-  
-  
+
+
+
+
   ################# Tidy Data #################
-  
+
   ##### Gather 1 #####
-  
+
   RawData <- table4a
- 
-   
+
+
  output$original1 <- renderTable({
    RawData
  })
-  
+
   # specify outputs for every choice
   output$userOut1 <- renderTable({
-    if (input$userOp1 == '1999' & input$userOp2 == '1999' 
+    if (input$userOp1 == '1999' & input$userOp2 == '1999'
         & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`1999`, `1999`, key = "cases", value = "cases")
@@ -104,9 +103,9 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`1999`, `2000`, key = "year", value = "year")
     }
-    
+
     #added
-    else if (input$userOp1 == '1999' & input$userOp2 == 'country' 
+    else if (input$userOp1 == '1999' & input$userOp2 == 'country'
         & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`1999`, `country`, key = "cases", value = "cases")
@@ -146,10 +145,10 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`1999`, `Afghanistan`, key = "year", value = "year")
     }
-    
-    
+
+
     ### 2000
-    
+
     else if (input$userOp1 == '2000' & input$userOp2 == '1999'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
@@ -190,9 +189,9 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`2000`, `2000`, key = "year", value = "year")
     }
-    
+
     #added
-    else if (input$userOp1 == '2000' & input$userOp2 == 'country' 
+    else if (input$userOp1 == '2000' & input$userOp2 == 'country'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`2000`, `country`, key = "cases", value = "cases")
@@ -232,10 +231,10 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`2000`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ### coutry
-    
-    else if (input$userOp1 == 'country' & input$userOp2 == 'country' 
+
+    else if (input$userOp1 == 'country' & input$userOp2 == 'country'
         & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`country`, `country`, key = "cases", value = "cases")
@@ -276,7 +275,7 @@ shinyServer(function(input, output, session) {
         gather(`country`, `1999`, key = "year", value = "year")
     }
     #added
-    else if (input$userOp1 == 'country' & input$userOp2 == '2000' 
+    else if (input$userOp1 == 'country' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`country`, `2000`, key = "cases", value = "cases")
@@ -316,10 +315,10 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`country`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ### SECOND HALF
-    
-      else if (input$userOp1 == '1999' & input$userOp2 == '1999' 
+
+      else if (input$userOp1 == '1999' & input$userOp2 == '1999'
           & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
           gather(`1999`, `1999`, key = "1999", value = "1999")
@@ -359,9 +358,9 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`1999`, `2000`, key = "Afghanistan", value = "Afghanistan")
       }
-      
+
       #added
-      else if (input$userOp1 == '1999' & input$userOp2 == 'country' 
+      else if (input$userOp1 == '1999' & input$userOp2 == 'country'
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
           gather(`1999`, `country`, key = "1999", value = "1999")
@@ -401,10 +400,10 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`1999`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
       }
-      
-      
+
+
       ### 2000
-      
+
       else if (input$userOp1 == '2000' & input$userOp2 == '1999'
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
@@ -445,9 +444,9 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`2000`, `2000`, key = "Afghanistan", value = "Afghanistan")
       }
-      
+
       #added
-      else if (input$userOp1 == '2000' & input$userOp2 == 'country' 
+      else if (input$userOp1 == '2000' & input$userOp2 == 'country'
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
           gather(`2000`, `country`, key = "1999", value = "1999")
@@ -487,10 +486,10 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`2000`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
       }
-      
+
       ### country
-      
-      else if (input$userOp1 == 'country' & input$userOp2 == 'country' 
+
+      else if (input$userOp1 == 'country' & input$userOp2 == 'country'
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
           gather(`country`, `country`, key = "1999", value = "1999")
@@ -531,7 +530,7 @@ shinyServer(function(input, output, session) {
           gather(`country`, `1999`, key = "Afghanistan", value = "Afghanistan")
       }
       #added
-      else if (input$userOp1 == 'country' & input$userOp2 == '2000' 
+      else if (input$userOp1 == 'country' & input$userOp2 == '2000'
                & input$userOp3 == '1999' & input$userOp4 == '1999') {
         RawData %>%
           gather(`country`, `2000`, key = "1999", value = "1999")
@@ -571,10 +570,10 @@ shinyServer(function(input, output, session) {
         RawData %>%
           gather(`country`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
       }
-    
+
     ### Afghanistan
-    
-    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan' 
+
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "cases")
@@ -615,7 +614,7 @@ shinyServer(function(input, output, session) {
         gather(`Afghanistan`, `1999`, key = "year", value = "year")
     }
     #added
-    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000' 
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
              & input$userOp3 == 'cases' & input$userOp4 == 'cases') {
       RawData %>%
         gather(`Afghanistan`, `2000`, key = "cases", value = "cases")
@@ -655,9 +654,9 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`Afghanistan`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ## first half
-    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan' 
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'Afghanistan'
              & input$userOp3 == '1999' & input$userOp4 == '1999') {
       RawData %>%
         gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "1999")
@@ -698,7 +697,7 @@ shinyServer(function(input, output, session) {
         gather(`Afghanistan`, `1999`, key = "Afghanistan", value = "Afghanistan")
     }
     #added
-    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000' 
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == '2000'
              & input$userOp3 == '1999' & input$userOp4 == '1999') {
       RawData %>%
         gather(`Afghanistan`, `2000`, key = "1999", value = "1999")
@@ -738,9 +737,9 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     # adding country
-    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country' 
+    else if (input$userOp1 == 'Afghanistan' & input$userOp2 == 'country'
              & input$userOp3 == '1999' & input$userOp4 == '1999') {
       RawData %>%
         gather(`Afghanistan`, `country`, key = "1999", value = "1999")
@@ -760,22 +759,22 @@ shinyServer(function(input, output, session) {
       RawData %>%
         gather(`Afghanistan`, `country`, key = "Afghanistan", value = "Afghanistan")
     }
-    
-    
-      
+
+
+
 
   })
-  
-  
+
+
   #### Bottom of options ####
-  
+
   # dynamic code based on user inputs
  output$userOut2 <- renderUI({
    tags$code('tidyr::gather(RawData,`', input$userOp1, '`,`', input$userOp2, '`,
              key = "', input$userOp3, '", value = "', input$userOp4, '")' )
- }) 
- 
- 
+ })
+
+
  #observeEvent(input$submit, {
   # withProgress(session, min = 1, max = 15, {
    #  setProgress(message = 'Checking Answer',
@@ -786,12 +785,12 @@ shinyServer(function(input, output, session) {
   #   }
  #  })
 # })
- 
+
 # op1save <- reactiveValues(input$userOp1 = NULL)
 # op2save <- reactiveValues(input$userOp2 = NULL)
 # op3save <- reactiveValues(input$userOp3 = NULL)
 # op4save <- reactiveValues(input$userOp4 = NULL)
- 
+
   # submit button
    output$sub <- renderUI({
      bsButton("submitcc",
@@ -800,8 +799,8 @@ shinyServer(function(input, output, session) {
               size = "medium",
               style = 'success')
      })
-   
-   
+
+
    # delay submit button
    observeEvent(input$submitcc,{
      withProgress(session, min = 1, max = 15, {
@@ -813,9 +812,9 @@ shinyServer(function(input, output, session) {
        }
      })
    })
-   
-   
-  # correct/wrong gif 
+
+
+  # correct/wrong gif
 
 # trying to use sweetalert
   #observeEvent(input$submit, {
@@ -823,12 +822,12 @@ shinyServer(function(input, output, session) {
   #      & input$userOp3 == 'year' & input$userOp4 == 'cases') {
    #   sweetalert(imageUrl = 'correct.gif')
     #}
-    
+
  #   else{
   #    sweetalert(imageUrl = 'try.gif')
    # }
   #})
-   
+
     output$resetcc <- renderUI({
       bsButton("retry",
                label = "Try Again",
@@ -836,7 +835,7 @@ shinyServer(function(input, output, session) {
                size = "medium",
                style = 'success')
       })
-    
+
     # delay retry button
     observeEvent(input$retry,{
       withProgress(session, min = 1, max = 15, {
@@ -848,25 +847,25 @@ shinyServer(function(input, output, session) {
         }
       })
     })
-    
-    
+
+
     # hide reset button upon opening app
     hide("resetcc")
     hide("correct")
     hide("wrong")
-    
-    
+
+
     output$correct <- renderUI({
       tags$img(src = "correct.gif", width = 150)
     })
-      
+
       output$wrong <- renderUI({
         tags$img(src = "try.gif", width = 150)
       })
-        
 
 
-    
+
+
     # show reset button after submit is clicked, disable dropdown inputs
     observeEvent(input$submitcc,{
       toggle("resetcc")
@@ -883,7 +882,7 @@ shinyServer(function(input, output, session) {
       else{
         showElement("wrong")
       }
-      
+
 
     })
 
@@ -900,7 +899,7 @@ shinyServer(function(input, output, session) {
     hide("wrong")
 
   })
-  
+
   observeEvent(input$retry,{
     reset("userOp1")
     reset("userOp2")
@@ -908,21 +907,21 @@ shinyServer(function(input, output, session) {
     reset("userOp4")
     showElement("submitcc")
     enable("submitcc")
-    
+
   })
-  
-  
+
+
   #### Spread 1 ####
-  
+
    RawData3 <- table4b
-  
+
   output$original2 <- renderTable({
     RawData3
   })
-  
+
   # specify outputs for every choice
   output$userOutA <- renderTable({
-    if (input$userOpA == '1999' & input$userOpB == '1999' 
+    if (input$userOpA == '1999' & input$userOpB == '1999'
         & input$userOpC == 'population' & input$userOpD == 'population') {
       RawData3 %>%
         gather(`1999`, `1999`, key = "population", value = "population")
@@ -1002,16 +1001,16 @@ shinyServer(function(input, output, session) {
         gather(`2000`, `2000`, key = "year", value = "year")
     }
   })
-  
+
   #### Bottom of options ####
-  
+
   # show code based on inputs
   output$userOutB <- renderUI({
     tags$code('tidyr::gather(RawData3,`', input$userOpA, '`,`', input$userOpB, '`,
               key = "', input$userOpC, '", value = "', input$userOpD, '")' )
-  }) 
-  
-  
+  })
+
+
   #observeEvent(input$submit, {
   # withProgress(session, min = 1, max = 15, {
   #  setProgress(message = 'Checking Answer',
@@ -1022,12 +1021,12 @@ shinyServer(function(input, output, session) {
   #   }
   #  })
   # })
-  
+
   # op1save <- reactiveValues(input$userOpA = NULL)
   # op2save <- reactiveValues(input$userOpB = NULL)
   # op3save <- reactiveValues(input$userOpC = NULL)
   # op4save <- reactiveValues(input$userOpD = NULL)
-  
+
   # submit button
   output$bus <- renderUI({
     bsButton("submitted",
@@ -1036,7 +1035,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   observeEvent(input$submitted,{
     withProgress(session, min = 1, max = 15, {
       setProgress(message = 'Checking Answer',
@@ -1047,9 +1046,9 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
-  
-  
+
+
+
   output$redo <- renderUI({
     bsButton("retrying",
              label = "Try Again",
@@ -1057,7 +1056,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   # delay retry button
   observeEvent(input$retrying, {
     withProgress(session, min = 1, max = 15, {
@@ -1069,23 +1068,23 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
-  
+
+
   # hide reset button upon opening app
   hide("redo")
   hide("cor")
   hide("wro")
-  
-  
+
+
   output$cor <- renderUI({
     tags$img(src = "correct.gif", width = 150)
   })
-  
+
   output$wro <- renderUI({
     tags$img(src = "try.gif", width = 150)
   })
-  
-  
+
+
   # show reset button after submit is clicked, disable dropdown inputs
   observeEvent(input$submitted,{
     toggle("redo")
@@ -1095,17 +1094,17 @@ shinyServer(function(input, output, session) {
     disable("userOpD")
     disable("submitted")
     if(input$userOpA == '1999' & input$userOpB == '2000'
-       & input$userOpC == 'year' & input$userOpD == 'population' || 
+       & input$userOpC == 'year' & input$userOpD == 'population' ||
        input$userOpA == '2000' & input$userOpB == '1999' & input$userOpC == 'year' & input$userOpD == 'population' ) {
       showElement("cor")
     }
     else{
       showElement("wro")
     }
-    
+
   })
-  
-  
+
+
   observeEvent(input$retrying,{
     hide("redo")
     enable("userOpA")
@@ -1116,9 +1115,9 @@ shinyServer(function(input, output, session) {
     enable("submitted")
     hide("cor")
     hide("wro")
-    
+
   })
-  
+
   observeEvent(input$retrying,{
     reset("userOpA")
     reset("userOpB")
@@ -1126,25 +1125,25 @@ shinyServer(function(input, output, session) {
     reset("userOpD")
     showElement("submitted")
     enable("submitted")
-    
+
   })
-  
-  
+
+
   #### Spread 2 ####
-  
+
   capital <- c("Kabul", "Brasília", "Beijing")
-  
+
   table4b$capital <- capital
-  
+
   RawData4 <- table4b
-  
+
   output$original4 <- renderTable({
     RawData4
   })
-  
+
   # specify outputs for every choice
   output$userOut3 <- renderTable({
-    if (input$userOpJ == '1999' & input$userOpK == '1999' 
+    if (input$userOpJ == '1999' & input$userOpK == '1999'
         & input$userOpL == 'population' & input$userOpM == 'population') {
       RawData4 %>%
         gather(`1999`, `1999`, key = "population", value = "population")
@@ -1224,16 +1223,16 @@ shinyServer(function(input, output, session) {
         gather(`2000`, `2000`, key = "year", value = "year")
     }
   })
-  
+
   #### Bottom of options ####
-  
+
   # show code based on inputs
   output$userOut4 <- renderUI({
     tags$code('tidyr::gather(RawData4,`', input$userOpJ, '`,`', input$userOpK, '`,
               key = "', input$userOpL, '", value = "', input$userOpM, '")' )
-  }) 
-  
-  
+  })
+
+
   #observeEvent(input$submit, {
   # withProgress(session, min = 1, max = 15, {
   #  setProgress(message = 'Checking Answer',
@@ -1244,12 +1243,12 @@ shinyServer(function(input, output, session) {
   #   }
   #  })
   # })
-  
+
   # op1save <- reactiveValues(input$userOpJ = NULL)
   # op2save <- reactiveValues(input$userOpK = NULL)
   # op3save <- reactiveValues(input$userOpL = NULL)
   # op4save <- reactiveValues(input$userOpM = NULL)
-  
+
   # submit button
   output$buss <- renderUI({
     bsButton("submitteds",
@@ -1258,7 +1257,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   observeEvent(input$submitteds,{
     withProgress(session, min = 1, max = 15, {
       setProgress(message = 'Checking Answer',
@@ -1269,9 +1268,9 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
 
-  
+
+
   output$redos <- renderUI({
     bsButton("retryings",
              label = "Try Again",
@@ -1279,7 +1278,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   # delay retry button
   observeEvent(input$retryings, {
     withProgress(session, min = 1, max = 15, {
@@ -1291,23 +1290,23 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
-  
+
+
   # hide reset button upon opening app
   hide("redos")
   hide("cors")
   hide("wros")
-  
-  
+
+
   output$cors <- renderUI({
     tags$img(src = "correct.gif", width = 150)
   })
-  
+
   output$wros <- renderUI({
     tags$img(src = "try.gif", width = 150)
   })
-  
-  
+
+
   # show reset button after submit is clicked, disable dropdown inputs
   observeEvent(input$submitteds,{
     toggle("redos")
@@ -1318,17 +1317,17 @@ shinyServer(function(input, output, session) {
     disable("submitteds")
     if(input$userOpJ == '1999' & input$userOpK == '2000'
        & input$userOpL == 'year' & input$userOpM == 'population' ||
-       input$userOpJ == '2000' & input$userOpK == '1999' & 
+       input$userOpJ == '2000' & input$userOpK == '1999' &
        input$userOpL == 'year' & input$userOpM == 'population') {
       showElement("cors")
     }
     else{
       showElement("wros")
     }
-    
+
   })
-  
-  
+
+
   observeEvent(input$retryings,{
     hide("redos")
     enable("userOpJ")
@@ -1339,9 +1338,9 @@ shinyServer(function(input, output, session) {
     enable("submitteds")
     hide("cors")
     hide("wros")
-    
+
   })
-  
+
   observeEvent(input$retryings,{
     reset("userOpJ")
     reset("userOpK")
@@ -1349,26 +1348,26 @@ shinyServer(function(input, output, session) {
     reset("userOpM")
     showElement("submitteds")
     enable("submitteds")
-    
+
   })
-  
-  
+
+
 
 #### Gather 2 ####
-  
+
   capital <- c("Kabul", "Brasília", "Beijing")
-  
+
   table4a$capital <- capital
-  
+
   RawData2 <- table4a
-  
+
   output$original3 <- renderTable({
     RawData2
   })
-  
+
   # specify outputs for every choice
   output$userOutX <- renderTable({
-    if (input$userOp5 == '1999' & input$userOp6 == '1999' 
+    if (input$userOp5 == '1999' & input$userOp6 == '1999'
         & input$userOp3 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`1999`, `1999`, key = "cases", value = "cases")
@@ -1408,9 +1407,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`1999`, `2000`, key = "year", value = "year")
     }
-    
+
     #added
-    else if (input$userOp5 == '1999' & input$userOp6 == 'country' 
+    else if (input$userOp5 == '1999' & input$userOp6 == 'country'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`1999`, `country`, key = "cases", value = "cases")
@@ -1450,10 +1449,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`1999`, `Afghanistan`, key = "year", value = "year")
     }
-    
-    
+
+
     ### 2000
-    
+
     else if (input$userOp5 == '2000' & input$userOp6 == '1999'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
@@ -1494,9 +1493,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`2000`, `2000`, key = "year", value = "year")
     }
-    
+
     #added
-    else if (input$userOp5 == '2000' & input$userOp6 == 'country' 
+    else if (input$userOp5 == '2000' & input$userOp6 == 'country'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`2000`, `country`, key = "cases", value = "cases")
@@ -1536,10 +1535,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`2000`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ### coutry
-    
-    else if (input$userOp5 == 'country' & input$userOp6 == 'country' 
+
+    else if (input$userOp5 == 'country' & input$userOp6 == 'country'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`country`, `country`, key = "cases", value = "cases")
@@ -1580,7 +1579,7 @@ shinyServer(function(input, output, session) {
         gather(`country`, `1999`, key = "year", value = "year")
     }
     #added
-    else if (input$userOp5 == 'country' & input$userOp6 == '2000' 
+    else if (input$userOp5 == 'country' & input$userOp6 == '2000'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`country`, `2000`, key = "cases", value = "cases")
@@ -1620,10 +1619,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`country`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ### SECOND HALF
-    
-    else if (input$userOp5 == '1999' & input$userOp6 == '1999' 
+
+    else if (input$userOp5 == '1999' & input$userOp6 == '1999'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`1999`, `1999`, key = "1999", value = "1999")
@@ -1663,9 +1662,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`1999`, `2000`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     #added
-    else if (input$userOp5 == '1999' & input$userOp6 == 'country' 
+    else if (input$userOp5 == '1999' & input$userOp6 == 'country'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`1999`, `country`, key = "1999", value = "1999")
@@ -1705,10 +1704,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`1999`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
     }
-    
-    
+
+
     ### 2000
-    
+
     else if (input$userOp5 == '2000' & input$userOp6 == '1999'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
@@ -1749,9 +1748,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`2000`, `2000`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     #added
-    else if (input$userOp5 == '2000' & input$userOp6 == 'country' 
+    else if (input$userOp5 == '2000' & input$userOp6 == 'country'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`2000`, `country`, key = "1999", value = "1999")
@@ -1791,10 +1790,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`2000`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     ### country
-    
-    else if (input$userOp5 == 'country' & input$userOp6 == 'country' 
+
+    else if (input$userOp5 == 'country' & input$userOp6 == 'country'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`country`, `country`, key = "1999", value = "1999")
@@ -1835,7 +1834,7 @@ shinyServer(function(input, output, session) {
         gather(`country`, `1999`, key = "Afghanistan", value = "Afghanistan")
     }
     #added
-    else if (input$userOp5 == 'country' & input$userOp6 == '2000' 
+    else if (input$userOp5 == 'country' & input$userOp6 == '2000'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`country`, `2000`, key = "1999", value = "1999")
@@ -1875,10 +1874,10 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`country`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     ### Afghanistan
-    
-    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'Afghanistan' 
+
+    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'Afghanistan'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`Afghanistan`, `Afghanistan`, key = "cases", value = "cases")
@@ -1919,7 +1918,7 @@ shinyServer(function(input, output, session) {
         gather(`Afghanistan`, `1999`, key = "year", value = "year")
     }
     #added
-    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == '2000' 
+    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == '2000'
              & input$userOp7 == 'cases' & input$userOp8 == 'cases') {
       RawData2 %>%
         gather(`Afghanistan`, `2000`, key = "cases", value = "cases")
@@ -1959,9 +1958,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`Afghanistan`, `Afghanistan`, key = "year", value = "year")
     }
-    
+
     ## first half
-    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'Afghanistan' 
+    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'Afghanistan'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`Afghanistan`, `Afghanistan`, key = "1999", value = "1999")
@@ -2002,7 +2001,7 @@ shinyServer(function(input, output, session) {
         gather(`Afghanistan`, `1999`, key = "Afghanistan", value = "Afghanistan")
     }
     #added
-    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == '2000' 
+    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == '2000'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`Afghanistan`, `2000`, key = "1999", value = "1999")
@@ -2042,9 +2041,9 @@ shinyServer(function(input, output, session) {
       RawData2 %>%
         gather(`Afghanistan`, `Afghanistan`, key = "Afghanistan", value = "Afghanistan")
     }
-    
+
     # adding country
-    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'country' 
+    else if (input$userOp5 == 'Afghanistan' & input$userOp6 == 'country'
              & input$userOp7 == '1999' & input$userOp8 == '1999') {
       RawData2 %>%
         gather(`Afghanistan`, `country`, key = "1999", value = "1999")
@@ -2065,17 +2064,17 @@ shinyServer(function(input, output, session) {
         gather(`Afghanistan`, `country`, key = "Afghanistan", value = "Afghanistan")
     }
     })
-  
-  #### Bottom of Options ####  
+
+  #### Bottom of Options ####
   #(convenience purpouses)
-  
+
   # show code based on inputs
   output$userOutY <- renderUI({
     tags$code('tidyr::gather(RawData2,`', input$userOp5, '`,`', input$userOp6, '`,
              key = "', input$userOp7, '", value = "', input$userOp8, '")' )
-  }) 
-  
-  
+  })
+
+
   #observeEvent(input$submit, {
   # withProgress(session, min = 1, max = 15, {
   #  setProgress(message = 'Checking Answer',
@@ -2086,12 +2085,12 @@ shinyServer(function(input, output, session) {
   #   }
   #  })
   # })
-  
+
   # op1save <- reactiveValues(input$userOpX = NULL)
   # op2save <- reactiveValues(input$userOpY = NULL)
   # op3save <- reactiveValues(input$userOp3 = NULL)
   # op4save <- reactiveValues(input$userOp4 = NULL)
-  
+
   # submit button
   output$subbed <- renderUI({
     bsButton("submitting",
@@ -2100,7 +2099,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   observeEvent(input$submitting,{
     withProgress(session, min = 1, max = 15, {
       setProgress(message = 'Checking Answer',
@@ -2111,7 +2110,7 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
+
 
   # trying to use sweetalert
   #observeEvent(input$submit, {
@@ -2119,14 +2118,14 @@ shinyServer(function(input, output, session) {
   #      & input$userOp3 == 'year' & input$userOp4 == 'type') {
   #   sweetalert(imageUrl = 'correct.gif')
   #}
-  
+
   #   else{
   #    sweetalert(imageUrl = 'try.gif')
   # }
   #})
-  
-  
-  
+
+
+
   output$restart <- renderUI({
     bsButton("retryy",
              label = "Try Again",
@@ -2134,7 +2133,7 @@ shinyServer(function(input, output, session) {
              size = "medium",
              style = 'success')
   })
-  
+
   # delay retry button
   observeEvent(input$retryy,{
     withProgress(session, min = 1, max = 15, {
@@ -2146,23 +2145,23 @@ shinyServer(function(input, output, session) {
       }
     })
   })
-  
-  
+
+
   # hide reset button upon opening app
   hide("restart")
   hide("cort")
   hide("rong")
-  
-  
+
+
   output$cort <- renderUI({
     tags$img(src = "correct.gif", width = 150)
   })
-  
+
   output$rong <- renderUI({
     tags$img(src = "try.gif", width = 150)
   })
-  
-  
+
+
   # show reset button after submit is clicked, disable dropdown inputs
   observeEvent(input$submitting,{
     toggle("restart")
@@ -2179,11 +2178,11 @@ shinyServer(function(input, output, session) {
     else{
       showElement("rong")
     }
-    
-    
+
+
   })
-  
-  
+
+
   observeEvent(input$retryy,{
     hide("restart")
     enable("userOp5")
@@ -2196,7 +2195,7 @@ shinyServer(function(input, output, session) {
     hide("rong")
 
   })
-  
+
   observeEvent(input$retryy,{
     reset("userOp5")
     reset("userOp6")
@@ -2206,11 +2205,11 @@ shinyServer(function(input, output, session) {
     enable("submitting")
 
   })
-  
-  
-  
+
+
+
   ###############Shiny Ace#################
-  
+
   observeEvent(input$nextq, {
     # updateButton(session, "submit", disabled = FALSE)
     # updateButton(session, "nextq", disabled = TRUE)
@@ -2219,81 +2218,81 @@ shinyServer(function(input, output, session) {
       img(src = NULL, width = 30)
     })
   })
-  
-  
-  
-  
+
+
+
+
   #### question bank ####
   value <- reactiveValues(index =  1, mistake = 0, correct = 0)
   ans <- as.matrix(bank[1:9, 6])
   #ans <- data.frame(ans)
   index_list <- reactiveValues(list = sample(2:9, 8, replace = FALSE))
-  
+
   observeEvent(input$nextq,{
     value$answerbox <- value$index
-    index_list$list = index_list$list[-1]   
+    index_list$list = index_list$list[-1]
     value$index <- index_list$list[1]
     value$answerbox <- value$index
-    
+
     updateButton(session, "nextq", disabled = TRUE)
     updateButton(session, "submit", disabled = FALSE)
   })
-  
+
   output$question <- renderUI({
     h4(bank[value$index, 2])
-    # radioButtons(inputId = bank[value$index,1], label= bank[value$index, 2], 
-    #              choiceNames=c(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]), 
+    # radioButtons(inputId = bank[value$index,1], label= bank[value$index, 2],
+    #              choiceNames=c(bank[value$index, 3], bank[value$index, 4], bank[value$index, 5]),
     #              choiceValues = c("A", "B", "C"))
   })
-  
+
   output$options <- renderUI({
     str1 <- paste("A.", bank[value$index, 3])
     str2 <- paste("B.", bank[value$index, 4])
     str3 <- paste("C.", bank[value$index, 5])
     HTML(paste(str1, str2, str3, sep = '<br/>'))
   })
-  
-  
- ## change table based on question 
+
+
+ ## change table based on question
   output$acetable <- renderTable({
     if (bank[value$index, 2] %in% c(bank[2, 2], bank[3, 2])) {
-      
+
       race
-      
-    } else { 
+
+    } else {
       if (bank[value$index, 2] %in% c(bank[4, 2], bank[5, 2])) {
-      
+
       results
-        
+
         } else {
         if (bank[value$index, 2] %in% c(bank[6, 2], bank[7, 2])) {
-        
+
           grades
-        
+
           } else {
           if (bank[value$index, 2] %in% c(bank[8, 2], bank[9, 2])) {
-          
+
           table5
           }
           }
         }
     }
     })
-  
+
   output$tableinfo <- renderUI({
     # race data info
     if (bank[value$index, 2] == bank[2, 2] | bank[value$index, 2] == bank[3, 2]) {
       tags$h4('This table depicts times and scores on a running race.')
      # tags$h4('Column names define different lengths of time')
     #  tags$h4('Cell values are scores associated with each name and length of time')
-      
+
       # results data info
       } else if (bank[value$index, 2] == bank[4, 2] | bank[value$index, 2] == bank[5, 2]) {
         tags$li('This table depicts clinical trial data')
        # tags$li('Ind - individual participating in the experiment')
       #  tags$li('Treatment - trial type (Treat or Cont)')
-      #  tags$li('value - result of experiment') 
-        
+      #  tags$li('value - result of experiment')
+
         # grades data info
       } else if (bank[value$index, 2] == bank[6, 2] | bank[value$index, 2] == bank[7, 2]) {
         tags$li('This table depicts student test score data')
@@ -2305,11 +2304,11 @@ shinyServer(function(input, output, session) {
         tags$li('This table shows the population and rate of different countries.')
       }
 
-        
+
     })
-  
-  
-  
+
+
+
   output$editor <- renderUI({
     aceEditor("rmd",
               mode = "markdown",
@@ -2319,7 +2318,7 @@ shinyServer(function(input, output, session) {
 Uncomment one line from each section at a time and hit "Run" to see its effect!
 
 Note: If the code does not display/change data, it probably is not the correct answer.
-              
+
 There is no interactive R code for this question!'
               } else if (bank[value$index, 2] == bank[2, 2]) {
                 value = 'No interactive R code for this question!'
@@ -2353,7 +2352,7 @@ tidyResults <-
   # gather(key = Treatment, value = value)
   # unite(key = Treatment, value = value)
 
-tidyResults                
+tidyResults
 ```
                 '
               }
@@ -2387,7 +2386,7 @@ tidyTable5 <-
   # spread(key = century, value = year)
   # gather(key = century, value = year)
   # unite(col = new, century, year, sep = "")
-  
+
 tidyTable5
 ```
 '
@@ -2401,43 +2400,43 @@ nextStep <-
   # unite(col = new, century, year)
   # unite(col = new, century, year, sep = "")
   # unite(col = year, century, year)
-                
+
 nextStep
 ```
 '
               }
               )
   })
-  
-  
-  observeEvent(input$answer, {
-    req(input$answer, input$answer !='')
-    answer <- isolate(input$answer)
-    interacted_statement <- rlocker::createStatement(
-      list(
-        verb = list(
-          display = "selected"),
-        object = list(
-          id = paste0(getCurrentAddress(session), "#", value$index),
-          name = paste('Question', value$index),
-          description = bank[value$index, 2]),
-        result = list(
-          success = any(answer == ans[value$index, 1]),
-          response = paste(getResponseText(value$index, answer), 
-                           as.character(Sys.time()))
-        )
-      )
-    )
-    
 
-    # Store statement in locker and return status
-    status <- rlocker::store(session, interacted_statement)
-    
-    print(interacted_statement) # remove me
-    print(status) # remove me
-  })
-  
-  
+
+  # observeEvent(input$answer, {
+  #   req(input$answer, input$answer !='')
+  #   answer <- isolate(input$answer)
+  #   interacted_statement <- rlocker::createStatement(
+  #     list(
+  #       verb = list(
+  #         display = "selected"),
+  #       object = list(
+  #         id = paste0(getCurrentAddress(session), "#", value$index),
+  #         name = paste('Question', value$index),
+  #         description = bank[value$index, 2]),
+  #       result = list(
+  #         success = any(answer == ans[value$index, 1]),
+  #         response = paste(getResponseText(value$index, answer),
+  #                          as.character(Sys.time()))
+  #       )
+  #     )
+  #   )
+  #
+  #
+  #   # Store statement in locker and return status
+  #   status <- rlocker::store(session, interacted_statement)
+  #
+  #   print(interacted_statement) # remove me
+  #   print(status) # remove me
+  # })
+
+
   getResponseText <- function(index, answer){
     if(answer == 'A'){
       key = 3
@@ -2448,7 +2447,7 @@ nextStep
     }
     return(bank[index, key])
   }
-  
+
   observeEvent(input$submit,{
     if(length(index_list$list) == 1){
       updateButton(session, "nextq", disabled = TRUE)
@@ -2460,34 +2459,34 @@ nextStep
       updateButton(session,"submit", disabled = TRUE)
       updateButton(session, "reset", disabled = FALSE)
     }
-    
+
     # output$progress<-renderUI({
     #   paste("You are currently on problem", 11-length(index_list$list), "/10")
     # })
-    
+
     answer <- isolate(input$answer)
-    
-    statement <- rlocker::createStatement(
-      list(
-        verb = list(
-          display = "answered"
-        ),
-        object = list(id = paste0(getCurrentAddress(session), "#", value$index),
-                      name = paste('Question', value$index),
-                      description = bank[value$index, 2]),
-        result = list(success = any(answer == ans[value$index, 1]),
-                      response = paste(getResponseText(value$index, answer), 
-                                       as.character(Sys.time()))
-                      )
-        )
-      )
-    
-    # Store statement in locker and return status
-    status <- rlocker::store(session, statement)
-    
-    print(statement) # remove me
-    print(status) # remove me
-    
+
+    # statement <- rlocker::createStatement(
+    #   list(
+    #     verb = list(
+    #       display = "answered"
+    #     ),
+    #     object = list(id = paste0(getCurrentAddress(session), "#", value$index),
+    #                   name = paste('Question', value$index),
+    #                   description = bank[value$index, 2]),
+    #     result = list(success = any(answer == ans[value$index, 1]),
+    #                   response = paste(getResponseText(value$index, answer),
+    #                                    as.character(Sys.time()))
+    #                   )
+    #     )
+    #   )
+    #
+    # # Store statement in locker and return status
+    # status <- rlocker::store(session, statement)
+    #
+    # print(statement) # remove me
+    # print(status) # remove me
+
     output$mark <- renderUI({
       if (any(answer == ans[value$index, 1])){
         img(src = "correct.png", width = 30)
@@ -2499,7 +2498,7 @@ nextStep
       }
     })
   })
-  
+
   observeEvent(input$reset, {
     updateButton(session, "submit", disabled = FALSE)
     updateButton(session,"reset", disable = TRUE)
@@ -2511,90 +2510,90 @@ nextStep
     output$mark <- renderUI({
       img(src = NULL,width = 30)
     })
-  })  
-  
+  })
+
   # Initialize Learning Locker connection
-  connection <- rlocker::connect(session, list(
-    base_url = "https://learning-locker.stat.vmhost.psu.edu/",
-    auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
-    agent = rlocker::createAgent()
-  ))
-  
+  # connection <- rlocker::connect(session, list(
+  #   base_url = "https://learning-locker.stat.vmhost.psu.edu/",
+  #   auth = "Basic ZDQ2OTNhZWZhN2Q0ODRhYTU4OTFmOTlhNWE1YzBkMjQxMjFmMGZiZjo4N2IwYzc3Mjc1MzU3MWZkMzc1ZDliY2YzOTNjMGZiNzcxOThiYWU2",
+  #   agent = rlocker::createAgent()
+  # ))
+  #
+  # # Setup demo app and user.
+  # currentUser <-
+  #   connection$agent
+  #
+  # if(connection$status != 200){
+  #   warning(paste(connection$status, "\nTry checking your auth token."))
+  # }
+
+
   # Setup demo app and user.
-  currentUser <- 
-    connection$agent
-  
-  if(connection$status != 200){
-    warning(paste(connection$status, "\nTry checking your auth token.")) 
-  }
-  
-  
-  # Setup demo app and user.
-  
+
   output$Previewcar<-
     renderTable({
       head(cars, 4)
     }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
-  
+
   output$Previewtree<-
     renderTable({
       head(trees, 4)
     }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
-  
+
   output$Previewiris<-
     renderTable({
       head(iris, 4)
     }, striped = TRUE, hover = TRUE, bordered = TRUE, spacing = 'xs')
-  
+
   ###########KNITR############
-  
+
   observeEvent(input$eval,{
     withBusyIndicatorServer("eval", {
       output$knitDoc <- renderUI({
         return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))
       })
-      
+
       output$output <- renderPrint({
         return(isolate(eval(parse(text = input$code))))
-      })  
+      })
     })
   })
-  
+
   output$knitDoc <- renderUI({
     input$eval
     return(isolate(HTML(knit2html(text = input$rmd, fragment.only = TRUE, quiet = FALSE))))
   })
-  
+
   output$output <- renderPrint({
     input$eval
     return(isolate(eval(parse(text = input$code))))
   })
-  
-  
+
+
 ############ Reshaping Data ############
   # observeEvent(input$knob1, {
   #   updateKnobInput(session, inputId = 'knob2', label = 'Select the Maximum Value for the First Column', value = input$knob1)
   # })
-  # 
+  #
   # observe(updateKnobInput(session, inputId = 'knob4', value = input$knob3 + input$knob2 - input$knob1))
-  
+
   # unite
   output$uniteUI <- renderUI ({
     if (input$unite3 == T) {
-      tags$code('R code: tidyr::unite(mtcars, "New_Column_Name", c(input$unite1))') 
+      tags$code('R code: tidyr::unite(mtcars, "New_Column_Name", c(input$unite1))')
     }
   })
-  
+
   output$uniteOutput1 <- renderTable ({
     head(mtcars)
   })
-  
+
   output$uniteOutput2 <- renderTable ({
     if (input$unite3 == T) {
       head(tidyr::unite(mtcars, 'New_Column', c(input$unite1)))
     }
   })
-  
+
   # arrange: default setting is low to high
   output$dwTable8 <- renderTable ({
     if (input$dwSTI2 == 'Low to High') {
@@ -2607,50 +2606,50 @@ nextStep
       head(head(mtcars))
     }
   })
-  
+
   output$code1 <- renderUI ({
     if (input$dwSTI2 == 'Low to High') {
       tags$code(paste('Code: dplyr::arrange(mtcars, mtcars[ , ', input$dwSTI1, ']'))
     }
   })
-  
+
   output$code2 <- renderUI ({
     if (input$dwSTI2 == 'High to Low') {
       tags$code(paste('Code: dplyr::arrange(mtcars, descmtcars[ , ', input$dwSTI1, '])'))
     }
   })
-  
+
   # #data frame
   # output$dfCode <- renderUI ({
   #   tags$code('dplyr::data_frame(a =', input$knob1, ':', input$knob2, ', b =', input$knob3, ':', input$knob4, ')')
   # })
-  # 
+  #
   # output$dwTable7 <- renderDataTable({
   #   dplyr::data_frame(a = input$knob1:input$knob2, b = input$knob3:input$knob4)
   # })
-  
+
   #gather
   output$dwTable1 <- renderTable({
     cases
   })
-  
+
   output$dwTable2 <- renderTable({
     if (input$dw1 == TRUE) {
       tidyr::gather(cases, "year", "n", 2:4)
     }
   })
-  
+
   #spread
   output$dwTable5 <- renderTable({
     pollution
   })
-  
+
   output$dwTable6 <- renderTable({
     if (input$dw3 == TRUE) {
       tidyr::spread(pollution, size, amount)
     }
   })
-  
+
 ############
   observeEvent(input$check1, {
     if (input$cd1 == 'left join') {
@@ -2700,32 +2699,32 @@ nextStep
       sendSweetAlert(session, title = NULL, text = 'Check Your Answer Again', type = 'error', closeOnClickOutside = TRUE)
     }
   })
-  
+
   #correct answer: A, C, D, B --- left/inner/full/right
   output$cdTable1 <- renderTable({
     dplyr::left_join(a, b, by = "x1")
   })
-  
+
   output$cdTable2 <- renderTable({
     dplyr::inner_join(a, b, by = "x1")
   })
-  
+
   output$cdTable3 <- renderTable({
     dplyr::full_join(a, b, by = "x1")
   })
-  
+
   output$cdTable4 <- renderTable({
     dplyr::right_join(a, b, by = "x1")
   })
-  
+
   output$cdTable5 <- renderTable({
     dplyr::anti_join(a, b, by = "x1")
   })
-  
+
   output$cdTable6 <- renderTable({
     dplyr::semi_join(a, b, by = "x1")
   })
-  
+
   #cd Exp 1-6
   output$cdExp1 <- renderText ({
     if (input$cd1 == 'left join') {
@@ -2741,7 +2740,7 @@ nextStep
       paste('Join data. Retain all values, all rows.')
     }
   })
-  
+
   output$cdExp2 <- renderText ({
     if (input$cd2 == 'left join') {
       paste('Join matching rows from b to a.')
@@ -2756,7 +2755,7 @@ nextStep
       paste('Join data. Retain all values, all rows.')
     }
   })
-  
+
   output$cdExp3 <- renderText ({
     if (input$cd3 == 'left join') {
       paste('Join matching rows from b to a.')
@@ -2771,7 +2770,7 @@ nextStep
       paste('Join data. Retain all values, all rows.')
     }
   })
-  
+
   output$cdExp4 <- renderText ({
     if (input$cd4 == 'left join') {
       paste('Join matching rows from b to a.')
@@ -2786,5 +2785,5 @@ nextStep
       paste('Join data. Retain all values, all rows.')
     }
   })
-  
+
 })
