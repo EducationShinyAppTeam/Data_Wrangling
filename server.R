@@ -13,10 +13,13 @@ library(ggplot2)
 library(ggmap)
 library(tidyr)
 library(knitr)
-library(datasets)
-library(rmarkdown)
-library(learnr)
-library(rcfss)
+library(rLocker)
+library(datasets)  
+library(rmarkdown) 
+library(learnr)    
+library(rcis)  
+library(shinycssloaders)
+library(boastUtils)
 
 
 ################# Top ##################

@@ -9,15 +9,18 @@ library(mosaic)
 library(plotly)
 library(ggplot2)
 library(EDAWR)
-library(plot3D)
-library(ggmap)
-library(tidyr)
-library(shinyAce)
-library(devtools)
-library(shinycssloaders)
-library(devtools)
-library(knitr)
-library(rcfss)
+library(tidyr) 
+library(shinyAce) 
+library(knitr) 
+library(rLocker) 
+library(datasets)
+library(rmarkdown)
+library(learnr)
+library(rcis)
+library(shinycssloaders) 
+library(boastUtils)
+
+
 
 
 
