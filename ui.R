@@ -62,7 +62,7 @@ ui <- list(
       #tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css")),
       
       useShinyjs(),
-      # Overview Page
+      # Overview Page ----
       
       tabItems(
         tabItem(tabName = 'overview',
@@ -72,7 +72,10 @@ ui <- list(
             br(),
             
             h2('Instructions'),
-            p(tags$li('In the Exploring Data Wrangling section, go through each tab including unite, pivot_wider, pivot_longer, and arrange.')),
+            p(tags$li('In the Exploring Data Wrangling section 1, go through each tab including select, group_by, filter and arrange.')),
+            p(tags$li('In the Exploring Data Wrangling section 2, go through each tab including unite, seperate, mutate and recode.')),
+            p(tags$li('In the Exploring Data Wrangling section 3 , go through each tab including pivot_wider, pivot_longer,
+                      seperate_wider_deliminate, seperate_wider_position, summarise')),
             p(tags$li('In the Tidy Data section, fill in the correct arguments that correctly tidy the data.')),
             p(tags$li('In the Combining Data section, click on the green button to select the transformation corresponding to each data table generated.')),
             br(),
@@ -107,70 +110,94 @@ ui <- list(
         # Explore Data Page 1 ----
         tabItem(tabName = 'exp1', 
                 tabsetPanel(type = 'tabs',
-                            ##### Unite -----
-                            tabPanel(div(style = 'font-size: 125%', 'Unite'),
+                            ### Select ----
+      
+                           tabPanel(div(style = 'font-size: 125%', 'Select'),
                                      br(),
                                      box(title = 'View An Example',
-                                         p("The tidyr::unite() function in R is used to combine multiple columns into a single new column in a data frame."),
-                                         width = NULL,
-                                         style = 'background-color: #ffffff; display: inline-block',
-                                         tableOutput('uniteData'),
-                                         br(),
-                                         fluidRow(
-                                           column(5,
-                                                  selectInput(inputId = "un1", 
-                                                              label = "Select Your Sorting Option",
-                                                              choices = c('First_Name, Last_Name', 'Day, Month, Year'),
-                                                              selected = character(0),
-                                                              width = '300px'),
-                                           ),
-                                         ),
-                                         uiOutput('uniteUI'),
-                                         br(),
-                                         tableOutput('uniteOutput2')
-                                     )
-                            ),
-                            ##### pivot longer -----
-                            tabPanel(div(style = 'font-size: 125%', 'Pivot_longer'),
+                                     p("The dplyr::select function is used to subset columns in a data frame, choosing only the columns you want to keep."),
                                      br(),
-                                     box(title = 'View An Example',
-                                         br(),
-                                         p('The tidyr::pivot_longer() function in R is used to gather the columns into rows.'),
-                                         br(),
-                                         width = NULL,
-                                         style = 'background-color: #ffffff; display: inline-block',
-                                         materialSwitch(inputId = 'dw1',
-                                                        label = 'View the Transformed Data Set',
-                                                        value = FALSE),
-                                         tableOutput('dwTable1'),
-                                         tags$strong(div('Gather columns into rows.', style = 'color: purple')),
-                                         tags$code('tidyr::pivot_longer(cols = c("2011","2012","2013"), names_to = "year", values_to = "n")'),
-                                         br(),
-                                         br(),
-                                         tableOutput('dwTable2')
-                                     )
-                            ),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     
+                                     tableOutput('selectData'),
+                                     
+                                     fluidRow(
+                                       column(5,
+                                              selectInput(inputId = "se1", 
+                                                          label = "Select Your Selecting Option",
+                                                          choices = c('Select columns by name', 'Select columns by excluding certain columns',
+                                                                      'Select columns by index number', 'Select columns by a range of names',
+                                                                      'Rename columns while selecting', 'Select columns that contain a certain string'),
+                                                          selected = character(0),
+                                                          width = '300px'),
+                                       ),
+                                       ),
+                                     
+                                     uiOutput('selectUI'),
+                                     br(),
+                                     tableOutput('selectOutput2')
+                                      ),
+                                      ),                 
                             
-                            tabPanel(div(style = 'font-size: 125%', 'Pivot_wider'),
-                                     br(),
-                                     box(title = 'View An Example',
-                                         br(),
-                                         p("The tidyr::pivot_wider() function in R is used to spread rows into columns."),
-                                         br(),
-                                         width = NULL,
-                                         style = 'background-color: #ffffff; display: inline-block',
-                                         materialSwitch(inputId = 'dw3',
-                                                        label = 'View the Transformed Data Set',
-                                                        value = FALSE),
-                                         tableOutput('dwTable5'),
-                                         tags$strong(div('0 rows into columns.', style = 'color: purple')),
-                                         tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
-                                         br(),
-                                         br(),
-                                         tableOutput('dwTable6')
-                                     )
-                            ),
-                           ##### Arrange ---- 
+                           ### GroupBy ----
+                           
+                           tabPanel(div(style = 'font-size: 125%', 'Group_by'),
+                                    br(),
+                                    box(title = 'View An Example',
+                                        p("The dplyr::group_by function groups a data frame by one or more variables, enabling you to perform aggregate operations on each group."),
+                                        br(),
+                                        width = NULL,
+                                        style = 'background-color: #ffffff; display: inline-block',
+                                        
+                                        tableOutput('groupData'),
+                                        
+                                        fluidRow(
+                                          column(5,
+                                                 selectInput(inputId = "gr1", 
+                                                             label = "Select Your Group_by Option",
+                                                             choices = c("Cylinders" = "cyl", "Gears" = "gear"),
+                                                             selected = "cyl",
+                                                             width = '300px'),
+                                        ),
+                                        ),
+                                        uiOutput('grCode'),
+                                        br(),
+                                        tableOutput("groupedTable")
+                                    ),
+                                    ),
+                   
+                           
+                           ### Filter ----
+                           tabPanel(div(style = 'font-size: 125%', 'Filter'),
+                                    br(),
+                                    box(title = 'View An Example',
+                                        br(),
+                                        p("The dplyr::filter function subsets rows in a data frame based on specified conditions, keeping only the rows that meet the criteria."),
+                                        br(),
+                                        width = NULL,
+                                        style = 'background-color: #ffffff; display: inline-block',
+                               
+                                        tableOutput('FilterData'),
+                                        
+                                        fluidRow(
+                                          column(5,
+                                                 selectInput(inputId = "fl1", 
+                                                             label = "Select Your Filter Option",
+                                                             choices = c("Filter cars with mpg greater than 20",
+                                                                         "Filter cars with exactly 6 cylinders",
+                                                                         "Filter cars with horsepower between 100 and 200"),
+                                                             selected = "Filter cars with mpg greater than 20",
+                                                             width = '300px'),
+                                          ),
+                                        ),
+                                        uiOutput('filterCode'),
+                                        br(),
+                                        tableOutput("filterTable")
+                                        
+                                    )
+                           ),
+                           ### Arrange ---- 
                             tabPanel(div(style = 'font-size: 125%', 'Arrange'),
                                      br(),
                                      box(title = 'View An Example',
@@ -179,6 +206,7 @@ ui <- list(
                                          br(),
                                          width = NULL,
                                          style = 'background-color: #ffffff; display: inline-block',
+                                         
                                          fluidRow(
                                            column(4,
                                            selectInput(inputId = "dwSTI2", 
@@ -211,71 +239,213 @@ ui <- list(
         # Explore Data Page 2 ----
         tabItem(tabName = 'exp2',
                 tabsetPanel(type = 'tabs',
-                                  tabPanel(div(style = 'font-size: 125%', 'Select'),
-                                           br(),
-                                           box(title = 'View An Example',
-                                               p("select function is used to choose and return specific columns from a data frame or data table."),
-                                               br(),
-                                               width = NULL,
-                                               style = 'background-color: #ffffff; display: inline-block'
-                                               ),
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
+                            ##### Unite -----
+                            tabPanel(div(style = 'font-size: 125%', 'Unite'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         p("The tidyr::unite() we function in R is used to combine multiple columns into a single new column in a data frame."),
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         tableOutput('uniteData'),
+                                         br(),
+                                         fluidRow(
+                                           column(5,
+                                                  selectInput(inputId = "un1", 
+                                                              label = "Select Your Sorting Option",
+                                                              choices = c('First_Name, Last_Name', 'Day, Month, Year'),
+                                                              selected = character(0),
+                                                              width = '300px'),
                                            ),
-                            br(),
-                                  tabPanel(div(style = 'font-size: 125%', 'Group_by'),
-                                           br(),
-                                           box(title = 'View An Example',
-                                               p("select function is used to choose and return specific columns from a data frame or data table."),
-                                               br(),
-                                               width = NULL,
-                                               style = 'background-color: #ffffff; display: inline-block'
+                                         ),
+                                         uiOutput('uniteUI'),
+                                         br(),
+                                         tableOutput('uniteOutput2')
+                                     )
+                            ),
+              
+                            
+                            ##### Mutate ----
+                            tabPanel(div(style = 'font-size: 125%', 'Mutate'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         p("The dplyr::mutate function is used to add new variables
+                                           to a data frame or modify existing ones, using existing variables for computations."),
+                                         br(),
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         tableOutput('mutateData'),
+                                         br(),
+                                         fluidRow(
+                                           column(5,
+                                                  selectInput(inputId = "mutateOption", 
+                                                              label = "Select Your Mutation Option",
+                                                              choices = c("Create New Column",
+                                                                          "Modify Existing Column" ,
+                                                                          "Use Multiple Columns",
+                                                                          "Use with Other Functions" ,
+                                                                          "Multiple Mutations",
+                                                                          "Conditional Mutations"),
+                                                              selected = "Create New Column",
+                                                              width = '300px'),
                                            ),
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
-                                           
+                                         ),
+                                         
+                                         uiOutput('mutateCode'),
+                                         br(),
+                                         tableOutput('mutateOutput')
+                                     ),
+                            ),
+                    
+                            
+                            ##### Seperate ----
+                            tabPanel(div(style = 'font-size: 125%', 'Separate'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         p("The tidyr::separate function splits a single
+                                           character column into multiple columns using a specified separator."),
+                                         br(),
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         
+                                         tableOutput("SeperateData"),
+                                         br(),
+                                         
+                                         fluidRow(
+                                           column(5,
+                                                  selectInput(inputId = "sepOption", 
+                                                              label = "Select Your Seprate Option",
+                                                              choices = c("Separate Full Name",
+                                                                          "Separate Date of Event"),
+                                                              selected = "Separate Full Name",
+                                                              width = '300px'),
                                            ),
-                            br(),
-                                  tabPanel(div(style = 'font-size: 125%', 'Summary'),
-                                           br(),
-                                           box(title = 'View An Example',
-                                               p("select function is used to choose and return specific columns from a data frame or data table."),
-                                               br(),
-                                               width = NULL,
-                                               style = 'background-color: #ffffff; display: inline-block'
+                                         ),
+                                         uiOutput("separateCode"),
+                                         br(),
+                                         tableOutput("separateOutput")
+                                         
+                                         
+                                     ),
+                            ),
+                
+                            
+                            ##### Recode ----
+                            tabPanel(div(style = 'font-size: 125%', 'recode'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         p("The dplyr::recode function changes specific values in a vector or column
+                                           based on a set of rules, useful for changing factor levels or categorical values."),
+                                         br(),
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         
+                                         tableOutput("RecodeData"),
+                                         br(),
+                                         
+                                         fluidRow(
+                                           column(5,
+                                                  selectInput(inputId = "recodeOption", 
+                                                              label = "Select Your recode Option",
+                                                              choices = c("Recode Satisfaction Level",
+                                                                          "Recode Age Group",
+                                                                          "Recode Region Code"),
+                                                              selected = "Recode Satisfaction Level",
+                                                              width = '300px'),
                                            ),
-                                  ),
-                            br(),
-                                  tabPanel(div(style = 'font-size: 125%', 'table'),
-                                           br(),
-                                           box(title = 'View An Example',
-                                               p("select function is used to choose and return specific columns from a data frame or data table."),
-                                               br(),
-                                               width = NULL,
-                                               style = 'background-color: #ffffff; display: inline-block'
-                                           ),
-                                  ))),
-                                        
+                                         ),
+                                         uiOutput("recodeUI"),
+                                         br(),
+                                         tableOutput("recodeOutput")
+                                         
+                                     )),
+                    )),
+# Explore page 3 -----    
+
+    tabItem(tabName = 'exp3', 
+            tabsetPanel(type = 'tabs',
+                        
+                        #### pivot wider ----
+                        tabPanel(div(style = 'font-size: 125%', 'Pivot_wider'),
+                                 br(),
+                                 box(title = 'View An Example',
+                                     br(),
+                                     p("The tidyr::pivot_wider() function in R is used to spread rows into columns."),
+                                     br(),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     materialSwitch(inputId = 'dw3',
+                                                    label = 'View the Transformed Data Set',
+                                                    value = FALSE),
+                                     tableOutput('dwTable5'),
+                                     tags$strong(div('0 rows into columns.', style = 'color: purple')),
+                                     tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
+                                     br(),
+                                     br(),
+                                     tableOutput('dwTable6')
+                                 )
+                        ),
+                        
+                        ##### pivot longer -----
+                        tabPanel(div(style = 'font-size: 125%', 'Pivot_longer'),
+                                 br(),
+                                 box(title = 'View An Example',
+                                     br(),
+                                     p('The tidyr::pivot_longer() function in R is used to gather the columns into rows.'),
+                                     br(),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     materialSwitch(inputId = 'dw1',
+                                                    label = 'View the Transformed Data Set',
+                                                    value = FALSE),
+                                     tableOutput('dwTable1'),
+                                     tags$strong(div('Gather columns into rows.', style = 'color: purple')),
+                                     tags$code('tidyr::pivot_longer(cols = c("2011","2012","2013"), names_to = "year", values_to = "n")'),
+                                     br(),
+                                     br(),
+                                     tableOutput('dwTable2')
+                                 )),
+                        #### seperate_wider_deliminate ----
+                        tabPanel(div(style = 'font-size: 125%', 'seperate_wider_deliminate'),
+                                 br(),
+                                 box(title = 'View An Example',
+                                     br(),
+                                     p(""),
+                                     br(),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     
+                                 )
+                        ),
+                        #### seperate_wider_position ----
+                        tabPanel(div(style = 'font-size: 125%', 'seperate_wider_position'),
+                                 br(),
+                                 box(title = 'View An Example',
+                                     br(),
+                                     p(""),
+                                     br(),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     
+                                 )
+                        ),
+                        
+                        #### summarise ----
+                        tabPanel(div(style = 'font-size: 125%', 'summarise'),
+                                 br(),
+                                 box(title = 'View An Example',
+                                     br(),
+                                     p(""),
+                                     br(),
+                                     width = NULL,
+                                     style = 'background-color: #ffffff; display: inline-block',
+                                     
+                                 )
+                        ),
+                                 
+                                 
+                        
+                      
+                        )),
         
         
        # Tidy Data Page ----

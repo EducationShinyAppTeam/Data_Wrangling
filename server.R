@@ -55,8 +55,155 @@ shinyServer(function(input, output, session) {
   
   
   
-  # Explore Data ----
+  # Explore Data 1 ----
+  ## Select ----
+  employee_data <- data.frame(
+    EmployeeID = c('101', '102', '103', '104', '105', '106', '107', '108', '109', '110'),
+    FirstName = c('John', 'Ava', 'Maria', 'James', 'Emily', 'Daniel', 'Sara', 'William', 'Sophia', 'Alex'),
+    LastName = c('Doe', 'Smith', 'Johnson', 'Brown', 'Davis', 'Miller', 'Wilson', 'Taylor', 'Anderson', 'Thomas'),
+    Department = c('HR', 'Finance', 'IT', 'Marketing', 'Sales', 'IT', 'HR', 'Sales', 'Finance', 'Marketing'),
+    Salary = c('70000', '80000', '55000', '75000', '62000', '58000', '71000', '64000', '83000', '54000'),
+    StartDate = c("2021-01-31" , "2021-02-28" , "2021-03-31" , "2021-04-30" ,"2021-05-31" ,"2021-06-30" ,"2021-07-31" , "2021-08-31" , "2021-09-30" , "2021-10-31"),
+    Age = c('29', '33', '26', '28', '42', '36', '30', '31', '29', '27')
+  )
+  output$selectData <- renderTable ({
+    employee_data
+  })
+  output$selectOutput2 <- renderTable ({
+    if (input$se1 == 'Select columns by name'){
+      select_nData <- select(employee_data, EmployeeID, FirstName, LastName)
+    } else if (input$se1 == 'Select columns by excluding certain columns'){
+      select_nData <- select(employee_data, -Department, -Age)
+    } else if (input$se1 == 'Select columns by index number'){
+      select_nData <- select(employee_data, 1:3)
+    } else if (input$se1 == 'Select columns by a range of names'){
+      select_nData <- select(employee_data, EmployeeID:Department)
+    } else if (input$se1 == 'Rename columns while selecting'){
+      select_nData <- select(employee_data, ID = EmployeeID, Dept = Department)
+    } else if (input$se1 == 'Select columns that contain a certain string'){
+      select_nData <- select(employee_data, contains("Date"))
+    }
+  })
+  ### switch 
+  output$selectUI <- renderUI({
+    if (input$se1 == "Select columns by name") {
+      tags$code("R code: dplyr::select(employee_data, EmployeeID, FirstName, LastName)")
+    } else if(input$se1 == "Select columns by excluding certain columns") {
+      tags$code("R code: dplyr::select(employee_data, -Department, -Age)")
+    } else if(input$se1 == "Select columns by index number:") {
+      tags$code("R code: dplyr::select(employee_data, 1:3)")
+    } else if(input$se1 == "Select columns by a range of names") {
+      tags$code("R code: dplyr::select(employee_data, EmployeeID:Department)")
+    } else if(input$se1 == "Rename columns while selecting") {
+      tags$code("R code: dplyr::select(employee_data, ID = EmployeeID, Dept = Department)")
+    } else if(input$se1 == "Select columns that contain a certain string") {
+      tags$code("R code: dplyr::select(employee_data, contains('Date'))")
+    } else {
+      NULL
+    }
+  })
   
+  ## Group_by ----
+  
+  # dataset 
+  
+  output$groupData <- renderTable({
+    head(mtcars, 10)
+  })
+  
+  # table output
+  output$groupedTable <- renderTable({
+    if (input$gr1 == "cyl") {
+      mtcars %>%
+        group_by(cyl) %>%
+        summarize(mean_mpg = mean(mpg), .groups = 'drop') %>%
+        head(10)  # Show only the first 10 rows for brevity
+    } else if (input$gr1 == "gear") {
+      mtcars %>%
+        group_by(gear) %>%
+        summarize(mean_mpg = mean(mpg), .groups = 'drop') %>%
+        head(10)  # Show only the first 10 rows for brevity
+    }
+  })
+  # ui
+  
+  output$grCode <- renderUI({
+    if (input$gr1 == "cyl") {
+      tags$code("R code: mtcars %>% group_by(cyl) %>% summarize(mean_mpg = mean(mpg), .groups = 'drop')")
+    } else if (input$gr1 == "gear") {
+      tags$code("R code: mtcars %>% group_by(gear) %>% summarize(mean_mpg = mean(mpg), .groups = 'drop')")
+    } else {
+      NULL
+    }
+  })
+  
+## Filter ----
+  output$FilterData <- renderTable({
+    head(mtcars, 10)
+  })
+  
+  # table output
+  output$filterTable <- renderTable({
+    if (input$fl1 == "Filter cars with mpg greater than 20") {
+      mtcars %>%
+        filter(mpg > 20) %>%
+        head(5) 
+    } else if (input$fl1 == "Filter cars with exactly 6 cylinders") {
+      mtcars %>%
+        filter(cyl == 6) %>%
+        head(5)
+    } else if (input$fl1 == "Filter cars with horsepower between 100 and 200") {
+      mtcars %>%
+        filter(hp >= 100, hp <= 200) %>%
+        head(5) 
+    } else {
+      NULL
+    }
+  })
+  
+  # code
+  output$filterCode <- renderUI({
+    if (input$fl1 == "Filter cars with mpg greater than 20") {
+      tags$code("R code: mtcars %>% filter(mpg > 20)")
+    } else if (input$fl1 == "Filter cars with exactly 6 cylinders") {
+      tags$code("R code: mtcars %>% filter(cyl == 6)")
+    } else if (input$fl1 == "Filter cars with horsepower between 100 and 200") {
+      tags$code("R code: mtcars %>% filter(hp >= 100, hp <= 200)")
+    } else {
+      tags$code("R code: mtcars") 
+    }
+  })
+  
+  
+  
+## Arrange ----
+  output$dwTable8 <- renderTable ({
+    if (input$dwSTI2 == 'Low to High') {
+      head(dplyr::arrange(mtcars, mtcars[ , input$dwSTI1]))
+    }
+    else if (input$dwSTI2 == 'High to Low') {
+      head(dplyr::arrange(mtcars, desc(mtcars[ , input$dwSTI1])))
+    }
+    else {
+      head(head(mtcars))
+    }
+  })
+  
+  output$code1 <- renderUI ({
+    if (input$dwSTI2 == 'Low to High') {
+      tags$code(paste('R Code: dplyr::arrange(mtcars, mtcars[ , ', input$dwSTI1, ']'))
+    }
+  })
+  
+  output$code2 <- renderUI ({
+    if (input$dwSTI2 == 'High to Low') {
+      tags$code(paste('Code: dplyr::arrange(mtcars, descmtcars[ , ', input$dwSTI1, '])'))
+    }
+  })
+  
+  
+  
+# Explore Data 2 ---- 
   ## unite ----
   
   birth_df<- data.frame(
@@ -89,8 +236,208 @@ shinyServer(function(input, output, session) {
       NULL
     }
   })
+  ## Mutate ----
+  output$mutateData <- renderTable({
+    head(mtcars, 7)
+  })
+  
+  output$mutateOutput <- renderTable({
+    if (input$mutateOption == "Create New Column") {
+      mutated_data <- mtcars %>% 
+        mutate(new_column = mpg * cyl) %>%
+        head(5) 
+    } else if (input$mutateOption == "Modify Existing Column") {
+      mutated_data <- mtcars %>% 
+        mutate(mpg = mpg / 2) %>%
+        head(5) 
+    } else if (input$mutateOption == "Use Multiple Columns") {
+      mutated_data <- mtcars %>% 
+        mutate(power_to_weight = hp / wt) %>%
+        head(5) 
+    } else if (input$mutateOption == "Use with Other Functions") {
+      mutated_data <- mtcars %>% 
+        mutate(log_mpg = log(mpg)) %>%
+        head(5) 
+    } else if (input$mutateOption == "Multiple Mutations") {
+      mutated_data <- mtcars %>% 
+        mutate(
+          log_mpg = log(mpg),
+          wt_kg = wt * 453.592,
+          power_to_weight = hp / wt
+        ) %>%
+        head(5) 
+    } else if (input$mutateOption == "Conditional Mutations") {
+      mutated_data <- mtcars %>% 
+        mutate(
+          efficiency = case_when(
+            mpg > 20 ~ "High",
+            mpg <= 20 ~ "Low",
+            TRUE ~ NA_character_
+          )
+        ) %>%
+        head(5) 
+    } else {
+      NULL
+    }
+    
+  })
+  
+  output$mutateCode <- renderUI({
+    if (input$mutateOption == "Create New Column") {
+      div(
+        tags$code("R code: mtcars %>% mutate(new_column = mpg * cyl)"),
+        # This R code will create a new column in the mtcars dataset by multiplying the mpg by the number of cylinders.
+        p("Creates a new column by multiplying miles per gallon (mpg) with the number of cylinders (cyl).")
+      )
+    } else if (input$mutateOption == "Modify Existing Column") {
+      div(
+        tags$code("R code: mtcars %>% mutate(mpg = mpg / 2)"),
+        # This R code will modify the existing mpg column, halving each value in the column.
+        p("Modifies the existing mpg column by dividing each value by 2.")
+      )
+    } else if (input$mutateOption == "Use Multiple Columns") {
+      div(
+        tags$code("R code: mtcars %>% mutate(power_to_weight = hp / wt)"),
+        # This R code will create a new column in the mtcars dataset that calculates the power-to-weight ratio.
+        p("Creates a new column for power-to-weight ratio by dividing horsepower (hp) by weight (wt).")
+      )
+    } else if (input$mutateOption == "Use with Other Functions") {
+      div(
+        tags$code("R code: mtcars %>% mutate(log_mpg = log(mpg))"),
+        # This R code will create a new column in the mtcars dataset that contains the logarithm of the mpg values.
+        p("Creates a new column with the natural logarithm of the miles per gallon (mpg) values.")
+      )
+    } else if (input$mutateOption == "Multiple Mutations") {
+      div(
+        tags$code("R code: mtcars %>% mutate(log_mpg = log(mpg), wt_kg = wt * 453.592, power_to_weight = hp / wt)"),
+        # This R code will perform multiple mutations on the mtcars dataset to create new columns for log_mpg, weight in kilograms, and power-to-weight ratio.
+        p("Performs multiple mutations to create new columns: log_mpg, weight in kilograms (wt_kg), and power-to-weight ratio.")
+      )
+    } else if (input$mutateOption == "Conditional Mutations") {
+      div(
+        tags$code("R code: mtcars %>% mutate(efficiency = case_when(mpg > 20 ~ 'High', mpg <= 20 ~ 'Low', TRUE ~ NA_character_))"),
+        # This R code will create a new column in the mtcars dataset that categorizes cars as 'High' or 'Low' efficiency based on mpg.
+        p("Creates a new column to categorize efficiency as 'High' or 'Low' based on mpg being greater than or equal to 20.")
+      )
+    } else {
+      NULL
+    }
+  })
+  
+## Seperate ----
+people_events <- data.frame(
+    full_name = c("John_Doe", "Jane_Smith", "Alice_Johnson", "Bob_Brown", "Eve_Davis", "Sam_Miller", "Lucy_Garcia"),
+    date_of_event = c("2021-01-05", "2021-02-15", "2021-03-25", "2021-04-10", "2021-05-20", "2021-06-30", "2021-07-15")
+  )
+
+output$SeperateData <- renderTable ({
+  people_events 
+  })
+
+output$separateOutput <- renderTable({
+  if (input$sepOption == "Separate Full Name") {
+    separated_data <- people_events %>%
+      separate(full_name, into = c("first_name", "last_name"), sep = "_")
+  } else if (input$sepOption == "Separate Date of Event") {
+    separated_data <- people_events %>%
+      separate(date_of_event, into = c("year", "month", "day"), sep = "-")
+  } else {
+   NULL
+  }
+})
+
+# Output for renderUI to show the R code
+output$separateCode <- renderUI({
+  if (input$sepOption == "Separate Full Name") {
+    tags$code("R code: people_events %>% separate(full_name, into = c('first_name', 'last_name'), sep = '_')")
+   
+  } else if (input$sepOption == "Separate Date of Event") {
+    tags$code("R code: people_events %>% separate(date_of_event, into = c('year', 'month', 'day'), sep = '-')")
+    
+  } else {
+    NULL
+  }
+})
+
+## Recode ----
+
+survey_data <- data.frame(
+  age_group = c("0-18", "19-35", "36-55", "56+", "19-35", "0-18", "36-55"),
+  satisfaction_level = c("Very Unhappy", "Unhappy", "Neutral", "Happy", "Very Happy", "Neutral", "Happy"),
+  region_code = c("R1", "R2", "R3", "R1", "R2", "R3", "R1")
+)
+
+output$RecodeData <- renderTable ({
+ survey_data
+})
+
+# Output 
+output$recodeOutput <- renderTable({
+  if (input$recodeOption == "Recode Satisfaction Level") {
+    recoded_data <- survey_data %>%
+      mutate(satisfaction_score = recode(satisfaction_level,
+                                         "Very Unhappy" = 1,
+                                         "Unhappy" = 2,
+                                         "Neutral" = 3,
+                                         "Happy" = 4,
+                                         "Very Happy" = 5))
+  } else if (input$recodeOption == "Recode Age Group") {
+    recoded_data <- survey_data %>%
+      mutate(age_group_label = recode(age_group,
+                                      "0-18" = "Youth",
+                                      "19-35" = "Young Adult",
+                                      "36-55" = "Adult",
+                                      "56+" = "Senior"))
+  } else if (input$recodeOption == "Recode Region Code") {
+    recoded_data <- survey_data %>%
+      mutate(region_name = recode(region_code,
+                                  "R1" = "North",
+                                  "R2" = "East",
+                                  "R3" = "West"))
+  } else {
+    NULL
+  }
+})
+
+# UI 
+output$recodeUI <- renderUI({
+  if (input$recodeOption == "Recode Satisfaction Level") {
+    tags$code("R code: survey_data %>% mutate(satisfaction_score = recode(satisfaction_level, 'Very Unhappy' = 1, 'Unhappy' = 2, 'Neutral' = 3, 'Happy' = 4, 'Very Happy' = 5))")
+    
+  } else if (input$recodeOption == "Recode Age Group") {
+    tags$code("R code: survey_data %>% mutate(age_group_label = recode(age_group, '0-18' = 'Youth', '19-35' = 'Young Adult', '36-55' = 'Adult', '56+' = 'Senior'))")
+    
+  } else if (input$recodeOption == "Recode Region Code") {
+    tags$code("R code: survey_data %>% mutate(region_name = recode(region_code, 'R1' = 'North', 'R2' = 'East', 'R3' = 'West'))")
+    
+  } else {
+    NULL
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
+  
+  
+  
+  
+  
+  
+  
+# Explore data 3 ----
   
   ## pivot_longer ----
   output$dwTable5 <- renderTable({
@@ -116,35 +463,11 @@ shinyServer(function(input, output, session) {
     }
   })
   
-  ## arrange ----
-  output$dwTable8 <- renderTable ({
-    if (input$dwSTI2 == 'Low to High') {
-      head(dplyr::arrange(mtcars, mtcars[ , input$dwSTI1]))
-    }
-    else if (input$dwSTI2 == 'High to Low') {
-      head(dplyr::arrange(mtcars, desc(mtcars[ , input$dwSTI1])))
-    }
-    else {
-      head(head(mtcars))
-    }
-  })
-  
-  output$code1 <- renderUI ({
-    if (input$dwSTI2 == 'Low to High') {
-      tags$code(paste('R Code: dplyr::arrange(mtcars, mtcars[ , ', input$dwSTI1, ']'))
-    }
-  })
-  
-  output$code2 <- renderUI ({
-    if (input$dwSTI2 == 'High to Low') {
-      tags$code(paste('Code: dplyr::arrange(mtcars, descmtcars[ , ', input$dwSTI1, '])'))
-    }
-  })
+ 
   
   
   
-  
-  # Tidy Data ----
+  # Tidy Data Challenge Page----
   
   ## pivot_longer 1 ----
   
