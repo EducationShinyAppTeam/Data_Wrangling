@@ -5,7 +5,6 @@ library(shinyBS)
 library(shinyjs)
 library(shinyWidgets)
 library(dplyr)
-library(EDAWR)
 library(tidyr) 
 library(shinyAce) 
 library(knitr) 
@@ -328,7 +327,7 @@ ui <- list(
                             ),
                             
                             ##### Recode ----
-                            tabPanel(div(style = 'font-size: 125%', 'recode'),
+                            tabPanel(div(style = 'font-size: 125%', 'Recode'),
                                      br(),
                                      box(title = 'View An Example',
                                          p("The dplyr::recode function changes specific values in a vector or column
@@ -404,11 +403,12 @@ ui <- list(
                                  )),
                         
                         #### summarize ----
-                        tabPanel(div(style = 'font-size: 125%', 'summarize'),
+                        tabPanel(div(style = 'font-size: 125%', 'Summarize'),
                                  br(),
                                  box(title = 'View An Example',
                                  
-                                     p(""),
+                                     p("The dplyr::summarize() function in R is used to reduce data to a single row summary 
+                                       per group or overall, applying functions to each group."),
                                      br(),
                                      width = NULL,
                                      style = 'background-color: #ffffff; display: inline-block',
@@ -844,20 +844,23 @@ ui <- list(
                          br(),
                          width = NULL,
                          height = NULL, 
-                         tags$img(
-                           class = "centerFigure",
-                           src = "cds.png",
-                           width = 300,
-                           height = 110,
-                           alt = "Picture of the table"),
-                      
-                         # div(style="display:inline-block", tableOutput('titleTableA')),
-                         # div(style="display: inline-block", "+"),
-                         # div(style="display:inline-block", tableOutput('titleTableB')),
-                         # div(style="display:inline-block", p(' = ')),
+                         # tags$img(
+                         #   class = "centerFigure",
+                         #   src = "cds.png",
+                         #   width = 300,
+                         #   height = 110,
+                         #   alt = "Picture of the table"),
+                         
+                         div(style="display:inline-block", tableOutput('titleTableA')),
+                         div(style="display: inline-block; font-size: 50px; vertical-align: middle; margin-top: -20px;", "+"),  # Increased font size and aligned vertically
+                         div(style="display:inline-block", tableOutput('titleTableB')),
+                         div(style="display:inline-block; font-size: 50px; vertical-align: middle; margin-top: -20px;", p(' = ')),
                         
             br(),
             br(),
+            p("Exercise Instructions:"),
+            p("For the exercise below, please choose the appropriate type of join that results in the table displayed. Select the option that best matches the given output."),
+            
             
             fluidRow(#theme = "bootstrap.css",
               column(width = 4,
