@@ -116,12 +116,12 @@ shinyServer(function(input, output, session) {
     if (input$gr1 == "cyl") {
       mtcars %>%
         group_by(cyl) %>%
-        summarize(mean_mpg = mean(mpg), .groups = 'drop') %>%
+        summarize(mean_mpg = mean(mpg), .groups = 'keep') %>%
         head(10)  # Show only the first 10 rows for brevity
     } else if (input$gr1 == "gear") {
       mtcars %>%
         group_by(gear) %>%
-        summarize(mean_mpg = mean(mpg), .groups = 'drop') %>%
+        summarize(mean_mpg = mean(mpg), .groups = 'keep') %>%
         head(10)  # Show only the first 10 rows for brevity
     }
   })
@@ -129,9 +129,9 @@ shinyServer(function(input, output, session) {
   
   output$grCode <- renderUI({
     if (input$gr1 == "cyl") {
-      tags$code("R code: mtcars %>% group_by(cyl) %>% summarize(mean_mpg = mean(mpg), .groups = 'drop')")
+      tags$code("R code: mtcars %>% group_by(cyl) %>% summarize(mean_mpg = mean(mpg), .groups = 'keep')")
     } else if (input$gr1 == "gear") {
-      tags$code("R code: mtcars %>% group_by(gear) %>% summarize(mean_mpg = mean(mpg), .groups = 'drop')")
+      tags$code("R code: mtcars %>% group_by(gear) %>% summarize(mean_mpg = mean(mpg), .groups = 'keep')")
     } else {
       NULL
     }
@@ -154,7 +154,7 @@ shinyServer(function(input, output, session) {
         head(5)
     } else if (input$fl1 == "Filter cars with horsepower between 100 and 200") {
       mtcars %>%
-        filter(hp >= 100, hp <= 200) %>%
+        filter(between(hp, 100, 200)) %>%
         head(5) 
     } else {
       NULL
@@ -168,7 +168,7 @@ shinyServer(function(input, output, session) {
     } else if (input$fl1 == "Filter cars with exactly 6 cylinders") {
       tags$code("R code: mtcars %>% filter(cyl == 6)")
     } else if (input$fl1 == "Filter cars with horsepower between 100 and 200") {
-      tags$code("R code: mtcars %>% filter(hp >= 100, hp <= 200)")
+      tags$code("R code: mtcars %>% filter(between(hp, 100, 200))")
     } else {
       tags$code("R code: mtcars") 
     }
@@ -415,28 +415,6 @@ output$recodeUI <- renderUI({
   }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
 # Explore data 3 ----
   
   ## pivot_longer ----
@@ -463,21 +441,68 @@ output$recodeUI <- renderUI({
     }
   })
   
+  ## Summarise ----
+  
+  sample_data <- data.frame(
+    EmployeeID = c(101, 102, 103, 104, 105, 106, 107, 108, 109, 110),
+    Age = c(29, 33, 26, 28, 42, 36, 30, 31, 29, 27),
+    Salary = c(70000, 80000, 55000, 75000, 62000, 58000, 71000, 64000, 83000, 54000),
+    Department = c("Sales", "HR", "IT", "Sales", "IT", "HR", "HR", "Sales", "IT", "Sales"),
+    YearsWithCompany = c(3, 4, 2, 5, 3, 2, 1, 5, 6, 4)
+  )
+  
+  output$SummarizeData <- renderTable ({
+    sample_data
+  })
+  
+  output$summarizeOutput <- renderTable({
+    if (input$summarizeOption == "Average Salary by Department") {
+      summarize_data <- sample_data %>%
+        group_by(Department) %>%
+        summarize(AverageSalary = mean(Salary))
+    } else if (input$summarizeOption == "Maximum Age in Each Department") {
+      summarize_data <- sample_data %>%
+        group_by(Department) %>%
+        summarize(MaxAge = max(Age))
+    } else if (input$summarizeOption == "Total Years With Company") {
+      summarize_data <- sample_data %>%
+        summarize(TotalYearsWithCompany = sum(YearsWithCompany))
+    } else if (input$summarizeOption == "Employee Count by Department") {
+      summarize_data <- sample_data %>%
+        group_by(Department) %>%
+        summarize(EmployeeCount = n())
+    } else {
+      NULL
+    }
+  })
+  
+  output$summarizeUI <- renderUI({
+    if (input$summarizeOption == "Average Salary by Department") {
+      tags$code("R code: sample_data %>% group_by(Department) %>% summarize(AverageSalary = mean(Salary))")
+      # This R code calculates the average salary for each department.
+    } else if (input$summarizeOption == "Maximum Age in Each Department") {
+      tags$code("R code: sample_data %>% group_by(Department) %>% summarize(MaxAge = max(Age))")
+      # This R code finds the maximum age of employees in each department.
+    } else if (input$summarizeOption == "Total Years With Company") {
+      tags$code("R code: sample_data %>% summarize(TotalYearsWithCompany = sum(YearsWithCompany))")
+      # This R code computes the total years employees have been with the company across all departments.
+    } else if (input$summarizeOption == "Employee Count by Department") {
+      tags$code("R code: sample_data %>% group_by(Department) %>% summarize(EmployeeCount = n())")
+      # This R code counts the number of employees in each department.
+    } else {
+      NULL
+    }
+  })
  
-  
-  
-  
   # Tidy Data Challenge Page----
   
   ## pivot_longer 1 ----
   
   RawData <- table4a
   
-  
   output$original1 <- renderTable({
     RawData
   })
-  
   
   # Specify Outputs pivot_longer1 
   output$userOut1 <- renderTable({

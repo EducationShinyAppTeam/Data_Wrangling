@@ -172,7 +172,7 @@ ui <- list(
                            tabPanel(div(style = 'font-size: 125%', 'Filter'),
                                     br(),
                                     box(title = 'View An Example',
-                                        br(),
+                            
                                         p("The dplyr::filter function subsets rows in a data frame based on specified conditions, keeping only the rows that meet the criteria."),
                                         br(),
                                         width = NULL,
@@ -201,7 +201,7 @@ ui <- list(
                             tabPanel(div(style = 'font-size: 125%', 'Arrange'),
                                      br(),
                                      box(title = 'View An Example',
-                                         br(),
+                                        
                                          p("The tidyr::arrange function in R is used to reorder rows based on specified column values."),
                                          br(),
                                          width = NULL,
@@ -230,7 +230,7 @@ ui <- list(
                                          tags$li('Order rows by values of a column (high to low)'),
                                          uiOutput('code2'),
                                          br(),
-                                         br(),
+                                       
                                          tableOutput('dwTable8'))
                             )
                 )
@@ -261,6 +261,37 @@ ui <- list(
                                          br(),
                                          tableOutput('uniteOutput2')
                                      )
+                            ),
+                            
+                            ##### Seperate ----
+                            tabPanel(div(style = 'font-size: 125%', 'Separate'),
+                                     br(),
+                                     box(title = 'View An Example',
+                                         p("The tidyr::separate function splits a single
+                                           character column into multiple columns using a specified separator."),
+                                         br(),
+                                         width = NULL,
+                                         style = 'background-color: #ffffff; display: inline-block',
+                                         
+                                         tableOutput("SeperateData"),
+                                         br(),
+                                         
+                                         fluidRow(
+                                           column(5,
+                                                  selectInput(inputId = "sepOption", 
+                                                              label = "Select Your Seprate Option",
+                                                              choices = c("Separate Full Name",
+                                                                          "Separate Date of Event"),
+                                                              selected = "Separate Full Name",
+                                                              width = '300px'),
+                                           ),
+                                         ),
+                                         uiOutput("separateCode"),
+                                         br(),
+                                         tableOutput("separateOutput")
+                                         
+                                         
+                                     ),
                             ),
               
                             
@@ -295,39 +326,6 @@ ui <- list(
                                          tableOutput('mutateOutput')
                                      ),
                             ),
-                    
-                            
-                            ##### Seperate ----
-                            tabPanel(div(style = 'font-size: 125%', 'Separate'),
-                                     br(),
-                                     box(title = 'View An Example',
-                                         p("The tidyr::separate function splits a single
-                                           character column into multiple columns using a specified separator."),
-                                         br(),
-                                         width = NULL,
-                                         style = 'background-color: #ffffff; display: inline-block',
-                                         
-                                         tableOutput("SeperateData"),
-                                         br(),
-                                         
-                                         fluidRow(
-                                           column(5,
-                                                  selectInput(inputId = "sepOption", 
-                                                              label = "Select Your Seprate Option",
-                                                              choices = c("Separate Full Name",
-                                                                          "Separate Date of Event"),
-                                                              selected = "Separate Full Name",
-                                                              width = '300px'),
-                                           ),
-                                         ),
-                                         uiOutput("separateCode"),
-                                         br(),
-                                         tableOutput("separateOutput")
-                                         
-                                         
-                                     ),
-                            ),
-                
                             
                             ##### Recode ----
                             tabPanel(div(style = 'font-size: 125%', 'recode'),
@@ -368,7 +366,7 @@ ui <- list(
                         tabPanel(div(style = 'font-size: 125%', 'Pivot_wider'),
                                  br(),
                                  box(title = 'View An Example',
-                                     br(),
+                                  
                                      p("The tidyr::pivot_wider() function in R is used to spread rows into columns."),
                                      br(),
                                      width = NULL,
@@ -377,7 +375,7 @@ ui <- list(
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
                                      tableOutput('dwTable5'),
-                                     tags$strong(div('0 rows into columns.', style = 'color: purple')),
+                                    
                                      tags$code('tidyr::pivot_wider(names_from = "size", values_from = "amount")'),
                                      br(),
                                      br(),
@@ -389,7 +387,7 @@ ui <- list(
                         tabPanel(div(style = 'font-size: 125%', 'Pivot_longer'),
                                  br(),
                                  box(title = 'View An Example',
-                                     br(),
+                                   
                                      p('The tidyr::pivot_longer() function in R is used to gather the columns into rows.'),
                                      br(),
                                      width = NULL,
@@ -398,56 +396,43 @@ ui <- list(
                                                     label = 'View the Transformed Data Set',
                                                     value = FALSE),
                                      tableOutput('dwTable1'),
-                                     tags$strong(div('Gather columns into rows.', style = 'color: purple')),
+                                    
                                      tags$code('tidyr::pivot_longer(cols = c("2011","2012","2013"), names_to = "year", values_to = "n")'),
                                      br(),
                                      br(),
                                      tableOutput('dwTable2')
                                  )),
-                        #### seperate_wider_deliminate ----
-                        tabPanel(div(style = 'font-size: 125%', 'seperate_wider_deliminate'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     br(),
-                                     p(""),
-                                     br(),
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     
-                                 )
-                        ),
-                        #### seperate_wider_position ----
-                        tabPanel(div(style = 'font-size: 125%', 'seperate_wider_position'),
-                                 br(),
-                                 box(title = 'View An Example',
-                                     br(),
-                                     p(""),
-                                     br(),
-                                     width = NULL,
-                                     style = 'background-color: #ffffff; display: inline-block',
-                                     
-                                 )
-                        ),
                         
-                        #### summarise ----
-                        tabPanel(div(style = 'font-size: 125%', 'summarise'),
+                        #### summarize ----
+                        tabPanel(div(style = 'font-size: 125%', 'summarize'),
                                  br(),
                                  box(title = 'View An Example',
-                                     br(),
+                                 
                                      p(""),
                                      br(),
                                      width = NULL,
                                      style = 'background-color: #ffffff; display: inline-block',
+                                     tableOutput("SummarizeData"),
+                                     br(),
                                      
-                                 )
-                        ),
-                                 
-                                 
-                        
-                      
-                        )),
-        
-        
+                                     fluidRow(
+                                       column(5,
+                                              selectInput(inputId = "summarizeOption", 
+                                                          label = "Select Your recode Option",
+                                                          choices = c("Average Salary by Department",
+                                                                      "Maximum Age in Each Department",
+                                                                      "Total Years With Company",
+                                                                      "Employee Count by Department"),
+                                                          selected = "Average Salary by Department",
+                                                          width = '300px'),
+                                       ),
+                                     ),
+                                     uiOutput("summarizeUI"),
+                                     br(),
+                                     tableOutput("summarizeOutput")
+                                     
+                                 )),
+            )),
        # Tidy Data Page ----
 
 
@@ -1075,7 +1060,5 @@ ui <- list(
         
 )) ))
 
-#.GROUP = "KEEP"
-# BETWEEN FUNCTION OF TIDYVERSE FOR OPTION 3 OF FILTER
-# CASE_WHEN -- .DEFAULT FOR MUTATE FUNCTION ---- 
-# CASE MATCH FOR RECODE 
+
+
