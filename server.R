@@ -12,7 +12,6 @@ library(rLocker)
 library(datasets)  
 library(rmarkdown) 
 library(learnr)    
-library(rcis)  
 library(shinycssloaders)
 library(boastUtils)
 
