@@ -1576,10 +1576,7 @@ server <- function(input, output, session) {
           lengthChange = TRUE,
           pageLength = 10,
           searching = FALSE,
-          info = TRUE#,
-          # columnDefs = list(
-          #   list(className = "dt-center", targets = 1:4)
-          # )
+          info = TRUE
         )
       )
 
