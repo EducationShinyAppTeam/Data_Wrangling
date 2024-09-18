@@ -1,0 +1,51 @@
+﻿page,tabName,choice,code
+exp1,Selecting,By Index,"iris %>% dplyr::select(2,4)"
+exp1,Selecting,By Name,"iris %>% dplyr::select(Sepal.Length, Species)"
+exp1,Selecting,By Name Range,iris %>% dplyr::select(Sepal.Length:Petal.Length)
+exp1,Selecting,By Exclusion,iris %>% dplyr::select(!Sepal.Width)
+exp1,Selecting,By Starting String,"iris %>% dplyr::select(starts_with(""Petal""))"
+exp1,Selecting,By Ending String,"iris %>% dplyr::select(ends_with(""Length""))"
+exp1,Selecting,By Substring,"iris %>% dplyr::select(contains(""l.L""))"
+exp1,Filtering,Inequalities,iris %>% filter(Sepal.Length <= 5)
+exp1,Filtering,Equal Numbers,iris %>% filter(Petal.Width == 0.3)
+exp1,Filtering,Equal Strings,"iris %>% filter(Species == ""versicolor"")"
+exp1,Filtering,Compound Inequality,"iris %>% filter(between(Sepal.Width, 2.7, 3.2))"
+exp1,Filtering,Compound Filtering,iris %>% filter(Sepal.Length > 5 & Petal.Length <= 4.2)
+exp1,Slicing,First Rows,iris %>% slice_head(n = 4)
+exp1,Slicing,Last Rows,iris %>% slice_tail(n = 3)
+exp1,Slicing,Rows with Max Values,"iris %>% slice_max(order_by = Sepal.Length, n = 2)"
+exp1,Slicing,Rows with Min Values,"iris %>% slice_min(order_by = Petal.Length,  n = 3)"
+exp1,Slicing,Random Sample,iris %>% slice_sample(n = 5)
+exp2,Grouping,Single Attribute,
+exp2,Grouping,Multiple Attributes,
+exp2,Grouping,Ungrouping,
+exp2,Arranging,Single Numeric Attribute,
+exp2,Arranging,Single Character Attribute,
+exp2,Arranging,Descending,
+exp2,Arranging,Multiple Attributes,
+exp2,Renaming,Single Variable,
+exp2,Renaming,Multiple Variables,
+exp3,Uniting,Full Name,
+exp3,Uniting,Date,
+exp3,Separating,By Fixed Position,
+exp3,Separating,By Delimiter,
+exp3,Separating,Merging Extra Columns,
+exp3,Mutating,Rescaling,
+exp3,Mutating,Conditional Transformation,
+exp3,Mutating,Recoding by Formula,
+exp3,Mutating,Recoding by Value,
+exp4,Binding,Adding Rows,
+exp4,Binding,Adding Columns,
+exp4,Joining,Inner Join,
+exp4,Joining,Left Join,
+exp4,Joining,Right Join,
+exp4,Joining,Full Join,
+exp5,Pivoting Wider,Multiple Time Points,
+exp5,Pivoting Wider,Multiple Conditions,
+exp5,Pivoting Longer,Multiple Time Points,
+exp5,Pivoting Longer,Multiple Conditions,
+exp6,Summarize,Five Number Summary,
+exp6,Summarize,Group Counts,
+exp6,Summarize,Measures of Location and Variation,
+exp6,Aggregating,Descriptive Stats for Entire Data Frame,
+exp6,Aggregating,Mean by Group,

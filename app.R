@@ -24,6 +24,9 @@ library(EDAWR)
 source("helpers.R")
 bank <- read.table(file = "questionbank.csv", header = TRUE, sep = ",")
 
+verbSelectors <- read.table(file = "verbSelectors.csv", header = TRUE, sep = ",")
+
+
 # Define UI for App ----
 ui <- list(
   dashboardPage(
@@ -59,8 +62,8 @@ ui <- list(
         menuItem("Wrangling: Part 4", tabName = "exp4", icon = icon("wpexplorer")),
         menuItem("Wrangling: Part 5", tabName = "exp5", icon = icon("wpexplorer")),
         menuItem("Wrangling: Part 6", tabName = "exp6", icon = icon("wpexplorer")),
-        menuItem("Tidy Data Challenge", tabName = "tidy", icon = icon("gears")),
-        menuItem('Combining Data Challenge', tabName = "comb", icon = icon("gears")),
+        # menuItem("Tidy Data Challenge", tabName = "tidy", icon = icon("gears")),
+        # menuItem('Combining Data Challenge', tabName = "comb", icon = icon("gears")),
         menuItem("References", tabName = "references", icon = icon("leanpub"))
       ),
       tags$div(
@@ -99,20 +102,20 @@ ui <- list(
               tags$li("In Wrangling Part 5, explore the verbs of Pivoting."),
               tags$li("In Wrangling Part 6, explore the verb of Summarizing.")
             ),
-            tags$li(
-              "When you're ready, check out the Tidy Data Challenge, to put your
-              understandings to the test by writting code to tidy some data."
-            ),
-            tags$li(
-              "When you're ready, check out the Combining Data Challenge, to put
-              your understandings of wrangling verbs to the test."
-            )
+            # tags$li(
+            #   "When you're ready, check out the Tidy Data Challenge, to put your
+            #   understandings to the test by writting code to tidy some data."
+            # ),
+            # tags$li(
+            #   "When you're ready, check out the Combining Data Challenge, to put
+            #   your understandings of wrangling verbs to the test."
+            # )
           ),
           div(
             style = "text-align: center;",
             bsButton(
               inputId = "go2",
-              label = "Explore!",
+              label = "Explore Wrangling Part 1!",
               size = "large",
               icon = icon("bolt"),
               style = "default"
@@ -124,10 +127,11 @@ ui <- list(
           h2("Acknowledgements"),
           p(
             "This application was coded and developed by Anna (Yinqi) Zhang
-              and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou
-              for being incredibly helpful with programming issues. Bug fixes
-              and style guide along with function updates were implented
-              by Ethan Wright (2020) and Aisiri Cherrimane Narendra (2023).",
+            and Oluwafunke Alliyu. Special Thanks to Grace (Yubaihe) Zhou
+            for being incredibly helpful with programming issues. Bug fixes and
+            style guide along with function updates were implented by Ethan Wright
+            (2020) and Aisiri Cherrimane Narendra (2023). App redesigned in 2024
+            by Neil Hatfield.",
             br(),
             br(),
             "Cite this app as:",
@@ -135,7 +139,7 @@ ui <- list(
             citeApp(),
             br(),
             br(),
-            div(class = "updated", "Last Update: 8/22/2024 by NJH.")
+            div(class = "updated", "Last Update: 9/18/2024 by NJH.")
           )
         ),
         ### Prerequisites Page ----
@@ -148,6 +152,10 @@ ui <- list(
           p("A", tags$strong("case"), "refers to the underlying object or living
             being about which we have observed/measured different attributes and
             recorded those values to create data."),
+          p("An", tags$strong("observation"), "refers to an instance where we
+            have measured/categorized the value of one more attributes for a
+            particular case at either a particular time or situation. We can make
+            multiple observations of the same case."),
           p("We say that a data frame is", tags$strong("tidy"), "when the data
             frame meets three conditions:"),
           tags$ol(
@@ -187,6 +195,10 @@ ui <- list(
           p("The data verbs that you'll explore here do different things. However,
             they share a common bond. Explore them and see if you can come up with
             how they are connected."),
+          p("Use the Example Selector to explore different examples and how they
+            impact the displayed data table. The original data table appears
+            below and to the left. Example code for the wrangling and a resulting
+            data frame appear to the right."),
           fluidRow(
             column(
               width = 6,
@@ -237,94 +249,21 @@ ui <- list(
                     ),
                   )
                 ),
-                p("Use the Example Selector to explore different examples and
-                  how they impact the displayed data table. Example code will
-                  appear below."),
                 selectInput(
                   inputId = "exp1Select",
                   label = "Example Selector",
                   choices = c("To be generated")
                 )
               ),
-              h3("Example Code"),
-              uiOutput(outputId = "exp1Code"),
+              DTOutput(outputId = "explorePart1")
             ),
             column(
               width = 6,
-              DTOutput(outputId = "explorePart1")
+              h3("Example Code"),
+              uiOutput(outputId = "exp1Code"),
+              DTOutput(outputId = "exp1Result")
             )
           ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?"),
-          hr(),
-          h2("OLD"),
-          tabsetPanel(
-            id = "cP-subSet",
-            type = 'tabs',
-            #### Select ----
-            tabPanel(
-              title = "Select",
-              br(),
-              p("The", tags$code("select"), "function comes from the",
-                tags$code("{dplyr}"), "package and allows us to sub-set a data
-                frame by choosing which columns we want to keep in a new output
-                data frame."),
-              p("Play around with this function with the following data frame."),
-              tableOutput('selectData'),
-              selectInput(
-                inputId = "se1",
-                label = "Choose a selecting example",
-                choices = c('Select columns by name', 'Select columns by excluding certain columns',
-                            'Select columns by index number', 'Select columns by a range of names',
-                            'Rename columns while selecting', 'Select columns that contain a certain string'),
-                selected = character(0)
-              ),
-              h3("Example R Code"),
-              uiOutput('selectUI'),
-              br(),
-              h3("Wrangling Result"),
-              tableOutput('selectOutput2')
-            ),
-            #### Filter ----
-            tabPanel(
-              title = "Filter",
-              br(),
-              p("The", tags$code("filter"), "function comes from the",
-                tags$code("{dplyr}"), "package and allows us to sub-set a data
-                frame by choosing which rows we want to keep in a new output
-                data frame. We can filter rows based on whether each row meets
-                certain conditions."),
-              p("Play around with this function with the following data frame."),
-              tableOutput('FilterData'),
-              selectInput(
-                inputId = "fl1",
-                label = "Choose a filtering example",
-                choices = c("Filter cars with mpg greater than 20",
-                            "Filter cars with exactly 6 cylinders",
-                            "Filter cars with horsepower between 100 and 200"),
-                selected = "Filter cars with mpg greater than 20"
-              ),
-              h3("Example R Code"),
-              uiOutput('filterCode'),
-              br(),
-              h3("Wrangling Result"),
-              tableOutput("filterTable")
-            ),
-            tabPanel(
-              title = "Slicing",
-              br(),
-              p("Description of slice_* family"),
-              p("Play around with this function with the following data frame."),
-              tableOutput('sliceData'),
-              p("Controls"),
-              h3("Example R Code"),
-              uiOutput('sliceCode'),
-              br(),
-              h3("Wrangling Result"),
-              tableOutput("sliceTable")
-            )
-          ),
-          hr(),
           h2("Verb Connections"),
           p("How do these data verbs connect to one another?")
         ),
@@ -1585,28 +1524,65 @@ server <- function(input, output, session) {
   )
 
   ### Explore 1 Actions ----
+  exp1Cases <- eventReactive(
+    eventExpr = input$caseP_subset,
+    valueExpr = {
+      verbSelectors %>%
+        filter(page == "exp1" & tabName == input$caseP_subset)
+    }
+  )
   observeEvent(
-    eventExpr = c(input$caseP_subset, input$exp1Select),
+    eventExpr = exp1Cases(),
     handlerExpr = {
-      #### Check Tab and update choices ----
+      choices <- exp1Cases()$choice
+      updateSelectInput(
+        session = session,
+        inputId = "exp1Select",
+        choices = choices
+      )
+    }
+  )
 
-      #### Check Example and Update modification ----
-
-      #### Update Result Table ----
-
+  observeEvent(
+    eventExpr = input$exp1Select,
+    handlerExpr = {
       #### Update Example Code ----
+      currentCase <- filter(exp1Cases(), choice == input$exp1Select)
       output$exp1Code <- renderUI(
         expr = {
           tagList(
-            p("Example code appears here"),
-            tags$pre(tags$code(
-"This is a
-    test of preformatting")),
-            p("Note: you might need to use", tags$code("dplyr::select"),
-              "due to a name conflict.")
+            tags$pre(tags$code(currentCase$code)),
+            if (input$caseP_subset == "Selecting") {
+              p("Note: you might need to use", tags$code("dplyr::select"),
+                "due to a name conflict.")
+            }
           )
         }
       )
+      #### Create Modified Table ----
+      modTable <- eval(str2lang(currentCase$code[1]))
+
+      #### Update Result Table ----
+      output$exp1Result <- renderDT(
+        expr = modTable,
+        caption = "Modified Data Table",
+        style = "bootstrap4",
+        rownames = TRUE,
+        options = list(
+          responsive = TRUE,
+          scrollX = TRUE,
+          ordering = FALSE,
+          paging = TRUE,
+          lengthChange = TRUE,
+          pageLength = 10,
+          searching = FALSE,
+          info = TRUE#,
+          # columnDefs = list(
+          #   list(className = "dt-center", targets = 1:4)
+          # )
+        )
+      )
+
     }
   )
 #
