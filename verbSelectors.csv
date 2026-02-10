@@ -1,0 +1,190 @@
+﻿page,tabName,choice,code
+exp1,Selecting,By Index,"iris |> dplyr::select(2,4)"
+exp1,Selecting,By Name,"iris |> dplyr::select(Sepal.Length, Species)"
+exp1,Selecting,By Name Range,iris |> dplyr::select(Sepal.Length:Petal.Length)
+exp1,Selecting,By Exclusion,iris |> dplyr::select(!Sepal.Width)
+exp1,Selecting,By Starting String,"iris |> dplyr::select(starts_with(""Petal""))"
+exp1,Selecting,By Ending String,"iris |> dplyr::select(ends_with(""Length""))"
+exp1,Selecting,By Substring,"iris |> dplyr::select(contains(""l.L""))"
+exp1,Filtering,Inequalities,iris |> filter(Sepal.Length <= 5)
+exp1,Filtering,Equal Numbers,iris |> filter(Petal.Width == 0.3)
+exp1,Filtering,Equal Strings,"iris |> filter(Species == ""versicolor"")"
+exp1,Filtering,Compound Inequality,"iris |> filter(between(Sepal.Width, 2.7, 3.2))"
+exp1,Filtering,Compound Filtering,iris |> filter(Sepal.Length > 5 & Petal.Length <= 4.2)
+exp1,Filtering,Filter Out,"iris |> filter_out(Species == ""setosa"")"
+exp1,Slicing,First Rows,iris |> slice_head(n = 4)
+exp1,Slicing,Last Rows,iris |> slice_tail(n = 3)
+exp1,Slicing,Rows with Max Values,"iris |> slice_max(order_by = Sepal.Length, n = 2)"
+exp1,Slicing,Rows with Min Values,"iris |> slice_min(order_by = Petal.Length,  n = 3)"
+exp1,Slicing,Random Sample,iris |> slice_sample(n = 5)
+exp2,Grouping,Single Attribute,oreoData |> group_by(Type)
+exp2,Grouping,Multiple Attributes,"oreoData |> group_by(Type, Flavor)"
+exp2,Grouping,Ungrouping,oreoData |> ungroup()
+exp2,Arranging,Single Numeric Attribute,oreoData |> arrange(Total.Mass)
+exp2,Arranging,Single Character Attribute,oreoData |> arrange(Flavor)
+exp2,Arranging,Descending,oreoData |> arrange(desc(Flavor))
+exp2,Arranging,Multiple Attributes,"oreoData |> arrange(Creme.Mass, desc(Flavor))"
+exp2,Renaming,Single Variable,oreoData |> rename(total_mass_g = Total.Mass)
+exp2,Renaming,Multiple Variables,"oreoData |> rename(creme_mass_g = Creme.Mass, filling_flavor = Flavor)"
+exp3,Uniting,Full Name,"womenTrailblazers |>
+  unite(
+    col = ""Name"",
+    given,
+    family,
+    sep = "" ""
+  )"
+exp3,Uniting,Date,"womenTrailblazers |>
+  unite(
+    col = ""Birthday"",
+    month,
+    day,
+    year,
+    sep = "" ""
+  )"
+exp3,Separating,By Fixed Position,"psuFbRoster |>
+  separate_wider_position(
+    cols = WT,
+    widths = c(""weight"" = 3, 1, ""unit"" = 3),
+    too_few = ""align_start""
+  )"
+exp3,Separating,By Delimiter,"psuFbRoster |>
+  separate_wider_delim(
+    cols = HT,
+    delim = "" "",
+    names = c(""feet"", ""inches""),
+    too_few = ""align_start""
+  )"
+exp3,Separating,Merging Extra Columns,"psuFbRoster |>
+  separate_wider_delim(
+    cols = Name,
+    delim = "" "",
+    names = c(""Given"", ""Family""),
+    too_many = ""merge"",
+    cols_remove = FALSE
+  )"
+exp3,Separating,By Regular Expression,"psuFbRoster |> separate_wider_regex(
+    cols = Name,
+    patterns = c(
+      ""Full_Name"" = ""^[:alpha:]+[:punct:]*[:alpha:]*[:punct:]*\\s*[:alpha:]+\\s*[:alpha:]*[:punct:]*[:alpha:]*[:punct:]*"",
+      ""Number"" = ""[:digit:]+$""),
+    too_few = ""align_start""
+  )"
+exp3,Mutating,Set Missing,"psuFbRoster |>
+  mutate(
+    across(
+      .cols = everything(),
+      .fns = ~ na_if(x = .x, y = ""--"")
+    )
+  )"
+exp3,Mutating,Parse Number,"psuFbRoster |>
+  mutate(
+    WT = readr::parse_number(WT, na = c(""--"", """", ""NA""))
+  )"
+exp3,Mutating,Rescaling,"psuFbRoster |>
+  mutate(
+    WT = readr::parse_number(WT, na = c(""--"", """", ""NA"")),
+    mass_kg = round(x = WT * 0.453592, digits = 2),
+    .after = WT
+  )"
+exp3,Mutating,Recoding by Value,"psuFbRoster |>
+  mutate(
+    Class = recode_values(
+      x = Class,
+      ""FR"" ~ ""First-year"",
+      ""SO"" ~ ""Sophomore"",
+      ""JR"" ~ ""Junior"",
+      ""SR"" ~ ""Senior"",
+      default = ""missing""
+    )
+  )"
+exp4,Binding,Adding Rows,"bind_rows(plainMMsA, plainMMsB)"
+exp4,Binding,Adding Columns,"bind_cols(plainMMsA, plainMMsC)"
+exp4,Joining,Inner Join,"inner_join(
+  x = dataJobs,
+  y = dataProjections,
+  by = join_by(career == occupation)
+)"
+exp4,Joining,Left Join,"left_join(
+  x = dataJobs,
+  y = dataProjections,
+  by = join_by(career == occupation)
+)"
+exp4,Joining,Right Join,"right_join(
+  x = dataJobs,
+  y = dataProjections,
+  by = join_by(career == occupation)
+)"
+exp4,Joining,Full Join,"full_join(
+  x = dataJobs,
+  y = dataProjections,
+  by = join_by(career == occupation)
+)"
+exp5,Pivoting Wider,Multiple Time Points,"paperPlanesLong |>
+  pivot_wider(
+    id_cols = plane,
+    names_from = throw,
+    values_from = dist_in
+  )"
+exp5,Pivoting Wider,Multiple Conditions,"cookieDataLong |>
+  pivot_wider(
+    id_cols = taster,
+    names_from = recipe,
+    values_from = score
+  )"
+exp5,Pivoting Longer,Multiple Time Points,"population |>
+  pivot_longer(
+    cols = !place,
+    names_to = ""year"",
+    names_transform = (year = readr::parse_number),
+    values_to = ""citizens""
+  )"
+exp5,Pivoting Longer,Multiple Conditions,"cookieDataWide |>
+  pivot_longer(
+    cols = starts_with(""Cookie""),
+    names_to = ""recipe"",
+    values_to = ""score""
+  )"
+exp6,Summarizing,Five Number Summary,"oreoData |>
+  group_by(Type, Flavor) |>
+  summarize(
+    min = min(Total.Mass),
+    Q1 = quantile(Total.Mass, probs = 0.25),
+    median = median(Total.Mass),
+    Q3 = quantile(Total.Mass, probs = 0.75),
+    max = max(Total.Mass),
+    .groups = ""drop""
+  )"
+exp6,Summarizing,Group Counts,"oreoData |>
+  group_by(Type, Flavor) |>
+  summarize(
+    counts = n(),
+    .groups = ""drop""
+  )"
+exp6,Summarizing,Measures of Location and Variation,"oreoData |>
+  group_by(Type, Flavor) |>
+  summarize(
+    across(
+      .cols = where(is.numeric),
+      .fns = list(SAM = ~mean(.x), SASD = ~sd(.x))
+    ),
+    .groups = ""drop""
+  ) |>
+  mutate(
+    across(
+      .cols = where(is.numeric),
+      .fns = ~round(.x, digits = 3)
+    )
+  )"
+exp6,Aggregating,Mean by Group,"aggregate(
+  x = oreoData[,3:5],
+  by = list(oreoData$Type, oreoData$Flavor),
+  FUN = mean
+)"
+exp6,Aggregating,Using a Formula for Summary,"aggregate(
+  x = Total.Mass ~ Type + Flavor,
+  data = oreoData,
+  FUN = summary
+) |>
+  as.data.frame.table(responseName= """") |>
+  filter(Var2 == ""Total.Mass"") |>
+  dplyr::select(!c(Var1, Var2))"
