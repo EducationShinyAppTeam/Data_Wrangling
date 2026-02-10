@@ -120,7 +120,7 @@ ui <- list(
             citeApp(),
             br(),
             br(),
-            div(class = "updated", "Last Update: 9/22/2024 by NJH.")
+            div(class = "updated", "Last Update: 2/10/2026 by NJH.")
           )
         ),
         ### Prerequisites Page ----
@@ -132,7 +132,8 @@ ui <- list(
             helpful cheatsheets/coding guides."),
           p("A", tags$strong("case"), "refers to the underlying object or living
             being about which we have observed/measured different attributes and
-            recorded those values to create data."),
+            recorded those values to create data. Depending on the context a case
+            could refer to a singluar individual or to a group of individuals."),
           p("An", tags$strong("observation"), "refers to an instance where we
             have measured/categorized the value of one more attributes for a
             particular case at either a particular time or situation. We can make
@@ -141,7 +142,7 @@ ui <- list(
             frame meets two conditions:"),
           tags$ol(
             tags$li("Each row of the data frame represents a unique case."),
-            tags$li("Each column of the data frame represents one attribute or
+            tags$li("Each column of the data frame represents a specific attribute or
                     characteristic that all cases possess.")
           ),
           p("How we think about each cell in a data frame (i.e., the intersection
@@ -184,7 +185,7 @@ ui <- list(
             wrangling and a resulting data frame appear to the right."),
           fluidRow(
             column(
-              width = 6,
+              width = 4,
               wellPanel(
                 h3("Wrangling Verb"),
                 tabsetPanel(
@@ -194,10 +195,10 @@ ui <- list(
                     title = "Selecting",
                     br(),
                     p(tags$em("Selecting"), "refers to the action of choosing
-                      which case attributes/characteristics we want to keep from
-                      an input data frame for an output data frame. For tidy data,
-                      this means that we are selecting which columns to keep and
-                      which to leave behind. The function", tags$code("select"),
+                      which case attributes (or characteristics) we want to keep
+                      from an input data frame for an output data frame. For tidy
+                      data, this means that we are selecting which columns to
+                      keep and remove. The function", tags$code("select"),
                       "from the", tags$code("{dplyr}"), "package allows us to
                       apply the selecting action."),
                     p("There are numerous ways we can select columns and we can
@@ -238,17 +239,29 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput(outputId = "explorePart1")
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
-              width = 6,
-              h3("Example Code"),
+              width = 8,
+              h3("Verb in Action"),
+              p("Check out the original data table, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput(outputId = "explorePart1"),
               uiOutput(outputId = "exp1Code"),
               DTOutput(outputId = "exp1Result")
             )
-          ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?")
+          )
         ),
         ### Explore Part 2 ----
         tabItem(
@@ -317,17 +330,29 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput(outputId = "explorePart2")
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
               width = 6,
-              h3("Example Code"),
+              h3("Verb in Action"),
+              p("Check out the original data table, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput(outputId = "explorePart2"),
               uiOutput(outputId = "exp2Code"),
               DTOutput(outputId = "exp2Result")
             )
-          ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?")
+          )
         ),
         ### Explore Part 3 ----
         tabItem(
@@ -396,17 +421,29 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput(outputId = "explorePart3"),
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
               width = 6,
-              h3("Example Code"),
+              h3("Verb in Action"),
+              p("Check out the original data table, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput(outputId = "explorePart3"),
               uiOutput(outputId = "exp3Code"),
               DTOutput(outputId = "exp3Result")
             )
-          ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?")
+          )
         ),
         ### Explore Part 4 ----
         tabItem(
@@ -486,18 +523,30 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput("explorePart4A"),
-              DTOutput("explorePart4B")
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
               width = 6,
-              h3("Example Code"),
+              h3("Verb in Action"),
+              p("Check out the original data tables, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput("explorePart4A"),
+              DTOutput("explorePart4B"),
               uiOutput(outputId = "exp4Code"),
               DTOutput(outputId = "exp4Result")
             )
-          ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?"),
+          )
         ),
         ### Explore Part 5 ----
         tabItem(
@@ -557,11 +606,25 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput(outputId = "explorePart5")
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
               width = 6,
-              h3("Example Code"),
+              h3("Verb in Action"),
+              p("Check out the original data table, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput(outputId = "explorePart5"),
               uiOutput(outputId = "exp5Code"),
               DTOutput(outputId = "exp5Result")
             )
@@ -622,17 +685,29 @@ ui <- list(
                   choices = c("To be generated")
                 )
               ),
-              DTOutput(outputId = "explorePart6")
+              h3("Verb Connections"),
+              p("How do these data verbs connect to one another? Think about what
+            these verbs all have in common when we think about the following
+            questions:"),
+              tags$ul(
+                tags$li("How are these verbs all alike in how they treat what
+                    makes up a case?"),
+                tags$li("How are these verbs all alike in how they treat values of
+                    case attributes?"),
+                tags$li("How are these verbs all alike in their general purpose of
+                    their actions?")
+              )
             ),
             column(
               width = 6,
-              h3("Example Code"),
+              h3("Verb in Action"),
+              p("Check out the original data table, the example code, and the
+                resulting/modified data table for each verb."),
+              DTOutput(outputId = "explorePart6"),
               uiOutput(outputId = "exp6Code"),
               DTOutput(outputId = "exp6Result")
             )
-          ),
-          h2("Verb Connections"),
-          p("How do these data verbs connect to one another?")
+          )
         ),
         ### References Page ----
         tabItem(
@@ -794,7 +869,7 @@ server <- function(input, output, session) {
   exp1Cases <- eventReactive(
     eventExpr = input$caseP_subset,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp1" & tabName == input$caseP_subset)
     }
   )
@@ -818,6 +893,7 @@ server <- function(input, output, session) {
       output$exp1Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code)),
             if (input$caseP_subset == "Selecting") {
               p("Note: you might need to use", tags$code("dplyr::select"),
@@ -876,7 +952,7 @@ server <- function(input, output, session) {
   exp2Cases <- eventReactive(
     eventExpr = input$caseP_strA_valP,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp2" & tabName == input$caseP_strA_valP)
     }
   )
@@ -900,6 +976,7 @@ server <- function(input, output, session) {
       output$exp2Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code)),
             if (input$caseP_strA_valP == "Grouping") {
               p("Notice that there is no visual change to the data frame when
@@ -936,7 +1013,7 @@ server <- function(input, output, session) {
   exp3Cases <- eventReactive(
     eventExpr = input$caseP_strA_valA,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp3" & tabName == input$caseP_strA_valA)
     }
   )
@@ -984,6 +1061,7 @@ server <- function(input, output, session) {
       output$exp3Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code)),
             if (input$exp3Select %in% c("Parse Number", "Rescaling")) {
               p("We used the", tags$code("parse_number"), "function from the",
@@ -1022,7 +1100,7 @@ server <- function(input, output, session) {
   exp4Cases <- eventReactive(
     eventExpr = input$caseP_strA_valN,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp4" & tabName == input$caseP_strA_valN)
     }
   )
@@ -1097,6 +1175,7 @@ server <- function(input, output, session) {
       output$exp4Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code))
           )
         }
@@ -1129,7 +1208,7 @@ server <- function(input, output, session) {
   exp5Cases <- eventReactive(
     eventExpr = input$pivots,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp5" & tabName == input$pivots)
     }
   )
@@ -1185,6 +1264,7 @@ server <- function(input, output, session) {
       output$exp5Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code))
           )
         }
@@ -1235,7 +1315,7 @@ server <- function(input, output, session) {
   exp6Cases <- eventReactive(
     eventExpr = input$caseA_summary,
     valueExpr = {
-      verbSelectors %>%
+      verbSelectors |>
         filter(page == "exp6" & tabName == input$caseA_summary)
     }
   )
@@ -1259,6 +1339,7 @@ server <- function(input, output, session) {
       output$exp6Code <- renderUI(
         expr = {
           tagList(
+            h4("Example Code"),
             tags$pre(tags$code(currentCase$code)),
             if (input$exp6Select == "Using a Formula for Summary") {
               p("The", tags$code("summary"), "function returns an array as the
